@@ -1,6 +1,6 @@
 version: "3.7"
 services:
-    app_sgp:
+    app_atual:
         build:
             args:
                 user: luanramos
@@ -21,9 +21,9 @@ services:
             - ./docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
             - ./docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
         depends_on:
-            - redis_sgp
+            - redis_atual
         networks:
-            - sgp_network
+            - atual_network
 
     npm:
         image: node:current-alpine
@@ -32,7 +32,7 @@ services:
         entrypoint: ["npm"]
         working_dir: /var/www/
         networks:
-            - sgp_network
+            - atual_network
 
     nginx:
         image: nginx:alpine
@@ -44,9 +44,9 @@ services:
             - ./:/var/www
             - ./docker/nginx/:/etc/nginx/conf.d/
         networks:
-            - sgp_network
+            - atual_network
 
-    db_sgp:
+    db_atual:
         image: mysql
 #        platform: linux/arm64/v8
         restart: unless-stopped
@@ -61,9 +61,9 @@ services:
             - 3308:3306
             - 3312:3306
         networks:
-            - sgp_network
+            - atual_network
 
-    db_sgp_test:
+    db_atual_test:
         image: mysql
 #        platform: linux/arm64/v8
         restart: unless-stopped
@@ -77,13 +77,13 @@ services:
         ports:
             - 3310:3306
         networks:
-            - sgp_network
+            - atual_network
 
-    redis_sgp:
+    redis_atual:
         image: redis:latest
         networks:
-            - sgp_network
+            - atual_network
 
 networks:
-    sgp_network:
+    atual_network:
         driver: bridge

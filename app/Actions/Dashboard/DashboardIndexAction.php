@@ -11,7 +11,6 @@ class DashboardIndexAction
 {
     public function __construct(
         protected CargoRepositoryInterface $cargoRepositoryInterface,
-        protected ServidorRepositoryInterface $servidorRepositoryInterface,
         protected UsuarioRepositoryInterface $usuarioRepositoryInterface,
         protected FornecedorRepositoryInterface $fornecedorRepositoryInterface
     ) { }
@@ -21,7 +20,6 @@ class DashboardIndexAction
         return [
             'quantitativos' => [
                 'fornecedores' => $this->fornecedorRepositoryInterface->totalQuantity(),
-                'servidores' => $this->servidorRepositoryInterface->totalQuantity(),
                 'usuarios' => $this->usuarioRepositoryInterface->totalQuantity(),
                 'cargos' => $this->cargoRepositoryInterface->totalQuantity(),
             ]

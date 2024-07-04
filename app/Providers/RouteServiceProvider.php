@@ -36,20 +36,12 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware(['web', 'auth.basic'])
                 ->group(base_path('routes/web.php'))
                 ->group(base_path('routes/app/cargo.php'))
-                ->group(base_path('routes/app/ciclo-avaliativo.php'))
-                ->group(base_path('routes/app/conceito-avaliacao.php'))
                 ->group(base_path('routes/app/departamento.php'))
                 ->group(base_path('routes/app/equipe.php'))
-                ->group(base_path('routes/app/fator-avaliacao.php'))
                 ->group(base_path('routes/app/fornecedor.php'))
-                ->group(base_path('routes/app/indicador-desempenho.php'))
-                ->group(base_path('routes/app/item-conceito-avaliacao.php'))
-                ->group(base_path('routes/app/modelo-avaliacao.php'))
                 ->group(base_path('routes/app/posto-trabalho.php'))
-                ->group(base_path('routes/app/servidor.php'))
                 ->group(base_path('routes/app/setor.php'))
-                ->group(base_path('routes/app/usuario.php'))
-                ->group(base_path('routes/app/vinculo.php'));
+                ->group(base_path('routes/app/usuario.php'));
 
             Route::middleware('web')
                 ->group(base_path('routes/app/auth.php'));

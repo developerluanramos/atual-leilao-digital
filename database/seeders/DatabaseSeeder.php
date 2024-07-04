@@ -17,15 +17,9 @@ class DatabaseSeeder extends Seeder
             CargoSeeder::class,
             UserSeeder::class,
             EquipeSeeder::class,
-            ServidorSeeder::class,
-            ModeloAvaliacaoSeeder::class,
-            ConceitoAvaliacaoSeeder::class,
-            ItemConceitoAvaliacaoSeeder::class,
             PostoTrabalhoSeeder::class,
             SetorSeeder::class,
-            DepartamentoSeeder::class,
-            CicloAvaliativoSeeder::class,
-            PeriodicidadeSeeder::class
+            DepartamentoSeeder::class
         ]);
     }
 }
