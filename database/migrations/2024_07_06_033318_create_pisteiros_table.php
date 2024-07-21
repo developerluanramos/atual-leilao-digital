@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pisteiros', function (Blueprint $table) {
+        Schema::create('pisteiro', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
             $table->string('nome');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pisteiros');
+        Schema::dropIfExists('pisteiro');
     }
 };

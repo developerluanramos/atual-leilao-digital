@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->foreignUuid('cliente_uuid')->references('uuid')->on('cliente');
-            $table->foreignUuid('lote_uuid')->references('uuid')->on('lote_item');
+            $table->foreignUuid('lote_uuid')->references('uuid')->on('lote');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vendas');
+        Schema::dropIfExists('venda');
     }
 };

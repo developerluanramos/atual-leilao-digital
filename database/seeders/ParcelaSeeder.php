@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Parcela;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class ParcelaSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Parcela::factory(60)->create();
     }
 }

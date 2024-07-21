@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('quantidade_total_parcelas');
             $table->integer('quantidade_real_parcelas');
             $table->foreignUuid('compra_uuid')->references('uuid')->on('compra');
-            $table->foreignUuid('cliente_uuid')->references('uuid')->on('client');
+            $table->foreignUuid('cliente_uuid')->references('uuid')->on('cliente');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('parcelas');
+        Schema::dropIfExists('parcela');
     }
 };

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Contato;
 use Illuminate\Database\Seeder;
 
 class ContatoSeeder extends Seeder
@@ -12,6 +12,6 @@ class ContatoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Contato::factory(20)->create();
     }
 }

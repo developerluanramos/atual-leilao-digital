@@ -23,11 +23,11 @@ return new class extends Migration
             $table->foreignUuid('plano_pagamento_uuid')->references('uuid')->on('plano_pagamento');
             $table->foreignUuid('condicao_pagamento_uuid')
                 ->references('uuid')->on('condicao_pagamento');
-            $table->foreignUuid('leilao_uuid')->references('uuid')->on('leilao');
-            $table->uuid('reca_uuid')->unsigned();
-            $table->uuid('especie_uuid')->unsigned();
+            $table->foreignUuid('lote_uuid')->references('uuid')->on('lote');
+            $table->uuid('raca_uuid');
+            $table->uuid('especie_uuid');
             $table->decimal('valor', 12, 2);
-            $table->boolean('inside_comissao_compra');
+            $table->boolean('incide_comissao_compra');
             $table->boolean('incide_comissao_venda');
             $table->timestamps();
         });
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lote_items');
+        Schema::dropIfExists('lote_item');
     }
 };

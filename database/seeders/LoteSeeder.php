@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Lote;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class LoteSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Lote::factory(20)->create();
     }
 }

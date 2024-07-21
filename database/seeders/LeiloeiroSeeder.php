@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Leiloeiro;
 use Illuminate\Database\Seeder;
 
-class LeiloiroSeeder extends Seeder
+class LeiloeiroSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        //
+        Leiloeiro::factory(10)->create();
     }
 }

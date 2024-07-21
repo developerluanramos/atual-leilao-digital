@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\PlanoPagamento;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,12 @@ class CondicaoPagamentoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'uuid' => $this->faker->uuid(),
+            'repeticoes' => $this->faker->numberBetween(1, 2),
+            'qtd_parcelas' => $this->faker->randomElement([36, 50, 60]),
+            'percentual_comissao_vendedor' => $this->faker->randomElement([true, false]),
+            'percentual_comissao_comprador' => $this->faker->randomElement([true, false]),
+            'plano_pagamento_uuid' => PlanoPagamento::inRandomOrder()->first()->uuid,
         ];
     }
 }

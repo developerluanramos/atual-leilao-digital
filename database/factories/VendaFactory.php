@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Cliente;
+use App\Models\Lote;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,12 @@ class VendaFactory extends Factory
      */
     public function definition(): array
     {
+        $lote = Lote::inRandomOrder()->first();
+
         return [
-            //
+            'uuid' => $this->faker->uuid,
+            'cliente_uuid' => Cliente::inRandomOrder()->first()->uuid,
+            'lote_uuid' => $lote->uuid,
         ];
     }
 }

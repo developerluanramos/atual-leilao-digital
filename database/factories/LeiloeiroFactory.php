@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Leiloeiro>
  */
-class LeiloiroFactory extends Factory
+class LeiloeiroFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class LeiloiroFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'uuid' => fake()->uuid(),
+            'nome' => fake()->name(),
         ];
     }
 }

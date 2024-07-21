@@ -17,7 +17,8 @@ class PlanoPagamentoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'uuid' => fake()->uuid(),
+            'descricao' => fake()->text('50'),
         ];
     }
 }

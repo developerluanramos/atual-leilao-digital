@@ -17,7 +17,8 @@ class PromotorFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'uuid' => fake()->uuid(),
+            'nome' => fake()->name(),
         ];
     }
 }

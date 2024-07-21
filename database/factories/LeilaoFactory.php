@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Leiloeiro;
+use App\Models\Promotor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,17 @@ class LeilaoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'uuid' => $this->faker->uuid(),
+            'denominacao' => $this->faker->text(150),
+            'descricao' => $this->faker->text(150),
+            'local' => $this->faker->address(),
+            'cep' => $this->faker->postcode(),
+            'uf' => 'PA',
+            'cidade' => $this->faker->city(),
+            'aberto_em' => $this->faker->dateTimeBetween('-30 days', 'now'),
+            'fechado_em' => $this->faker->dateTimeBetween('now', '+3 days'),
+            'promotor_uuid' => Promotor::inRandomOrder()->first()->uuid,
+            'leiloeiro_uuid' => Leiloeiro::inRandomOrder()->first()->uuid,
         ];
     }
 }

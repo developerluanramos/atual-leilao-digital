@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Promotor;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class PromotorSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Promotor::factory(50)->create();
     }
 }
