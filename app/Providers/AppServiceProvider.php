@@ -24,6 +24,8 @@ use App\Repositories\Equipe\EquipeEloquentRepository;
 use App\Repositories\Equipe\EquipeRepositoryInterface;
 use App\Repositories\Fornecedor\FornecedorEloquentRepository;
 use App\Repositories\Fornecedor\FornecedorRepositoryInterface;
+use App\Repositories\Leilao\LeilaoEloquentRepository;
+use App\Repositories\Leilao\LeilaoRepositoryInterface;
 use App\Repositories\PostoTrabalho\PostoTrabalhoEloquentRepository;
 use App\Repositories\PostoTrabalho\PostoTrabalhoRepositoryInterface;
 use App\Repositories\Setor\SetorEloquentRepository;
@@ -65,6 +67,9 @@ class AppServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             DepartamentoRepositoryInterface::class, DepartamentoEloquentRepository::class
+        );
+        $this->app->bind(
+            LeilaoRepositoryInterface::class, LeilaoEloquentRepository::class
         );
     }
 

@@ -3,14 +3,14 @@
 namespace App\Http\Requests\App\Cargo;
 
 use App\Enums\SituacaoCargoEnum;
-use App\Repositories\Cargo\CargoRepositoryInterface;
+use App\Repositories\Cargo\LeilaoRepositoryInterface;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CargoUpdateRequest extends FormRequest
 {
     public function __construct(
-        protected CargoRepositoryInterface $repository
+        protected LeilaoRepositoryInterface $repository
     )
     { }
     /**

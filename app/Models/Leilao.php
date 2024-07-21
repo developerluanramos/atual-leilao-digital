@@ -25,4 +25,18 @@ class Leilao extends Model
         'leiloeiro_uuid',
     ];
 
+    public function promotor()
+    {
+        return $this->hasOne(Promotor::class, 'uuid', 'promotor_uuid');
+    }
+
+    public function leiloeiro()
+    {
+        return $this->hasOne(Leiloeiro::class, 'uuid', 'leiloeiro_uuid');
+    }
+
+    public function lotes()
+    {
+        return $this->hasMany(Lote::class, 'leilao_uuid', 'uuid');
+    }
 }

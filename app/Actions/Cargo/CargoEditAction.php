@@ -4,11 +4,11 @@ namespace App\Actions\Cargo;
 
 use App\DTO\Cargo\CargoEditDTO;
 use App\Models\Cargo;
-use App\Repositories\Cargo\CargoRepositoryInterface;
+use App\Repositories\Cargo\LeilaoRepositoryInterface;
 
 class CargoEditAction {
     public function __construct(
-        protected CargoRepositoryInterface $repository
+        protected LeilaoRepositoryInterface $repository
     )
     { }
 

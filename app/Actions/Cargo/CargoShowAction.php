@@ -4,14 +4,14 @@ namespace App\Actions\Cargo;
 
 use App\DTO\Cargo\CargoShowDTO;
 use App\Models\Cargo;
-use App\Repositories\Cargo\CargoRepositoryInterface;
+use App\Repositories\Cargo\LeilaoRepositoryInterface;
 
 class CargoShowAction {
     public function __construct(
-        protected CargoRepositoryInterface $repository
+        protected LeilaoRepositoryInterface $repository
     ) { }
 
-    public function exec(CargoShowDTO $dto): Cargo 
+    public function exec(CargoShowDTO $dto): Cargo
     {
         return $this->repository->find($dto->uuid);
     }

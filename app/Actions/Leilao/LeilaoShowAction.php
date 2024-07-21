@@ -2,10 +2,19 @@
 
 namespace App\Actions\Leilao;
 
+use App\Repositories\Leilao\LeilaoRepositoryInterface;
+
 class LeilaoShowAction
 {
-    public function exec()
+    protected $repository;
+
+    public function __construct(LeilaoRepositoryInterface $leilaoRepository)
     {
-        return [];
+        $this->repository = $leilaoRepository;
+    }
+
+    public function exec($leilaoUuid)
+    {
+        return $this->repository->find($leilaoUuid);
     }
 }

@@ -10,14 +10,14 @@ class LeilaoShowController extends Controller
 {
     public function __construct() {}
 
-    public function show(Request $leilaoShowRequest, LeilaoShowAction $leilaoShowAction)
+    public function show(string $uuid, Request $leilaoShowRequest, LeilaoShowAction $leilaoShowAction)
     {
         $aba = 'dados-gerais';
         if ($leilaoShowRequest->input('aba') !== null) {
             $aba = $leilaoShowRequest->input('aba');
         }
 
-        $leilao = $leilaoShowAction->exec();
+        $leilao = $leilaoShowAction->exec($uuid);
 
         return view('app.leilao.show', [
             'leilao' => $leilao,
