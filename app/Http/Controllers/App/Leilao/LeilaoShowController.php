@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers\App\Leilao;
 
-use App\Actions\Setor\SetorCreateAction;
+use App\Actions\Leilao\LeilaoShowAction;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class LeilaoShowController extends Controller
 {
     public function __construct() {}
 
-    public function show(Request $leilaoShowRequest)
+    public function show(Request $leilaoShowRequest, LeilaoShowAction $leilaoShowAction)
     {
-        return view('app.leilao.show');
+        $aba = 'dados-gerais';
+        if ($leilaoShowRequest->input('aba') !== null) {
+            $aba = $leilaoShowRequest->input('aba');
+        }
+
+        $leilao = $leilaoShowAction->exec();
+
+        return view('app.leilao.show', [
+            'leilao' => $leilao,
+            'aba' => $aba
+        ]);
     }
 }
