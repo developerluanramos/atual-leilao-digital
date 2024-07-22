@@ -15,7 +15,7 @@
 
 @section('title', 'Visualizar Leilão')
 
-<x-layouts.headers.create-header :title="'Leilão 123'"/>
+<x-layouts.headers.create-header :title="'Leilão ' . $leilao->uuid"/>
 
 @section('content')
     @include('components.alerts.form-success')
