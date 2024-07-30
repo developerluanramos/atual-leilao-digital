@@ -2,12 +2,12 @@
 
 namespace App\Actions\Cargo;
 
-use App\Repositories\Cargo\LeilaoRepositoryInterface;
+use App\Repositories\Cargo\CargoRepositoryInterface;
 
 class CargoCreateAction
 {
     public function __construct(
-        protected LeilaoRepositoryInterface $cargoRepository
+        protected CargoRepositoryInterface $cargoRepository
     ) { }
 
     public function exec(): array

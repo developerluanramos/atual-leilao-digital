@@ -3,7 +3,7 @@
 namespace App\Http\Requests\App\Cargo;
 
 use App\Enums\SituacaoCargoEnum;
-use App\Repositories\Cargo\LeilaoRepositoryInterface;
+use App\Repositories\Cargo\CargoRepositoryInterface;
 use Exception;
 use Illuminate\Foundation\Http\FormRequest;
 

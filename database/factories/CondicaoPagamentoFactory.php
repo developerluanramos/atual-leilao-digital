@@ -19,6 +19,7 @@ class CondicaoPagamentoFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid(),
+            'descricao' => $this->faker->word(),
             'repeticoes' => $this->faker->numberBetween(1, 2),
             'qtd_parcelas' => $this->faker->randomElement([36, 50, 60]),
             'percentual_comissao_vendedor' => $this->faker->randomElement([true, false]),

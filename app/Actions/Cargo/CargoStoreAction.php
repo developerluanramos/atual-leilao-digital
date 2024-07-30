@@ -4,12 +4,12 @@ namespace App\Actions\Cargo;
 
 use App\DTO\Cargo\CargoStoreDTO;
 use App\Models\Cargo;
-use App\Repositories\Cargo\LeilaoRepositoryInterface;
+use App\Repositories\Cargo\CargoRepositoryInterface;
 
 class CargoStoreAction {
 
     public function __construct(
-        protected LeilaoRepositoryInterface $repository
+        protected CargoRepositoryInterface $repository
     ) { }
 
     public function exec(CargoStoreDTO $dto): Cargo

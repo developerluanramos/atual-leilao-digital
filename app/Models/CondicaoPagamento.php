@@ -13,6 +13,7 @@ class CondicaoPagamento extends Model
 
     protected $fillable = [
         'uuid',
+        'descricao',
         'repeticoes',
         'qtd_parcelas',
         'percentual_comissao_vendedor',

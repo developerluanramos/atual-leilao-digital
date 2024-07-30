@@ -8,7 +8,6 @@ use App\Enums\SituacaoCargoEnum;
 use App\Models\Cargo;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
-use Illuminate\Support\Facades\DB;
 
 class CargoEloquentRepository implements CargoRepositoryInterface
 {

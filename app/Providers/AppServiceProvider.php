@@ -127,7 +127,6 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Blade::directive('money', function (string $amount) {
-            error_log('valor'.$amount);
             return 'R$ ' . number_format((float)$amount, 2, '.', ',');
         });
     }

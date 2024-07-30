@@ -4,7 +4,7 @@
 
 @include('components.alerts.form-errors')
 
-<form action="{{ route('cargo.store') }}" method="POST">
+<form action="{{ route('leilao.lote.store', ['uuid' => $leilao->uuid]) }}" method="POST">
     @csrf
     @include('app.leilao.lotes.partials.form')
 </form>

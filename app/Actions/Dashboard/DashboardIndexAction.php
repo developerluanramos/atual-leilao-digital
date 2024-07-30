@@ -2,7 +2,7 @@
 
 namespace App\Actions\Dashboard;
 
-use App\Repositories\Cargo\LeilaoRepositoryInterface;
+use App\Repositories\Cargo\CargoRepositoryInterface;
 use App\Repositories\Fornecedor\FornecedorRepositoryInterface;
 use App\Repositories\Servidor\ServidorRepositoryInterface;
 use App\Repositories\Usuario\UsuarioRepositoryInterface;
@@ -10,7 +10,7 @@ use App\Repositories\Usuario\UsuarioRepositoryInterface;
 class DashboardIndexAction
 {
     public function __construct(
-        protected LeilaoRepositoryInterface     $cargoRepositoryInterface,
+        protected CargoRepositoryInterface     $cargoRepositoryInterface,
         protected UsuarioRepositoryInterface    $usuarioRepositoryInterface,
         protected FornecedorRepositoryInterface $fornecedorRepositoryInterface
     ) { }

@@ -4,7 +4,7 @@
     </label>
     <div class="relative">
         <select wire:model="{{$model}}" wire:change="{{$change}}" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-black py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="{{$name}}" name="{{$name}}">
-            <option value="">Escolha um {{$label}}</option>
+            <option value="">Selecione</option>
             @foreach($data as $item)
                 @if (isset($value) && !is_null($value))
                     @php

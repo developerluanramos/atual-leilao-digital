@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('condicao_pagamento', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
+            $table->string('descricao');
             $table->decimal('repeticoes', 12, 2);
             $table->decimal('qtd_parcelas', 12, 2);
             $table->decimal('percentual_comissao_vendedor', 12, 2);

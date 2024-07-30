@@ -3,31 +3,44 @@
 namespace App\Actions\Leilao\Lote;
 
 use App\Models\Lote;
+use App\Repositories\CondicaoPagamento\CondicaoPagamentoRepositoryInterface;
+use App\Repositories\Especie\EspecieRepositoryInterface;
 use App\Repositories\Leilao\LeilaoRepositoryInterface;
 use App\Repositories\Lote\LoteRepositoryInterface;
+use App\Repositories\PlanoPagamento\PlanoPagamentoRepositoryInterface;
+use App\Repositories\Raca\RacaRepositoryInterface;
 
 class LoteCreateAction
 {
     protected $leilaoRepository;
-//    protected $loteRepository;
+    protected $racaRepository;
+    protected $especieRepository;
+    protected $planoPagamentoRepository;
+    protected $condPagamentoRepository;
 
     public function __construct(
         LeilaoRepositoryInterface $leilaoRepository,
-//        LoteRepositoryInterface $loteRepository
+        RacaRepositoryInterface $racaRepository,
+        EspecieRepositoryInterface $especieRepository,
+        PlanoPagamentoRepositoryInterface $planoPagamentoRepository,
+        CondicaoPagamentoRepositoryInterface $condPagamentoRepository,
     )
     {
         $this->leilaoRepository = $leilaoRepository;
-//        $this->loteRepository = $loteRepository;
+        $this->racaRepository = $racaRepository;
+        $this->especieRepository = $especieRepository;
+        $this->planoPagamentoRepository = $planoPagamentoRepository;
+        $this->condPagamentoRepository = $condPagamentoRepository;
     }
 
-    public function execute(string $leilaoUuid)
+    public function execute(string $leilaoUuid) : array
     {
-        $leilao = $this->leilaoRepository->find($leilaoUuid);
-        // $lotes = $this->loteRepository->paginateByLeilaoUuid($page, $totalPerPage, $filter, $leilaoUuid);
-
         return [
-            'leilao' => $leilao,
-//            'lotes' => $lotes
+            'leilao' => $this->leilaoRepository->find($leilaoUuid),
+            'racas' => $this->racaRepository->all(),
+            'especies' => $this->especieRepository->all(),
+            'planos_pagamentos' => $this->planoPagamentoRepository->all(),
+            'condicoes_pagamentos' => $this->condPagamentoRepository->all(),
         ];
     }
 }
