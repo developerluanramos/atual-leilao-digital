@@ -26,12 +26,15 @@ use App\Repositories\Fornecedor\FornecedorEloquentRepository;
 use App\Repositories\Fornecedor\FornecedorRepositoryInterface;
 use App\Repositories\Leilao\LeilaoEloquentRepository;
 use App\Repositories\Leilao\LeilaoRepositoryInterface;
+use App\Repositories\Lote\LoteEloquentRepository;
+use App\Repositories\Lote\LoteRepositoryInterface;
 use App\Repositories\PostoTrabalho\PostoTrabalhoEloquentRepository;
 use App\Repositories\PostoTrabalho\PostoTrabalhoRepositoryInterface;
 use App\Repositories\Setor\SetorEloquentRepository;
 use App\Repositories\Setor\SetorRepositoryInterface;
 use App\Repositories\Usuario\UsuarioEloquentRepository;
 use App\Repositories\Usuario\UsuarioRepositoryInterface;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -71,6 +74,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             LeilaoRepositoryInterface::class, LeilaoEloquentRepository::class
         );
+        $this->app->bind(
+            LoteRepositoryInterface::class, LoteEloquentRepository::class
+        );
     }
 
 
@@ -98,6 +104,11 @@ class AppServiceProvider extends ServiceProvider
 
         Validator::extend('notFutureDate', function ($attribute, $value, $parameters, $validator) {
             return now()->gte(now()->parse($value));
+        });
+
+        Blade::directive('money', function (string $amount) {
+            error_log('valor'.$amount);
+            return 'R$ ' . number_format((float)$amount, 2, '.', ',');
         });
     }
 }
