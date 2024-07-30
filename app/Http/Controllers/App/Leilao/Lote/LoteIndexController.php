@@ -18,6 +18,7 @@ class LoteIndexController extends Controller
 
         return view('app.leilao.show', [
             'aba' => 'lotes',
+            'action' => 'index',
             'leilao' => $dataCreate['leilao'],
             'lotes' => $dataCreate['lotes']
         ]);

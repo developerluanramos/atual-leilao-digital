@@ -116,11 +116,11 @@
                         </svg>
                         <a href="#">
                             <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                                Status
+                                Valor Total
                             </h5>
                         </a>
                         <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">
-                            teste
+                            {{Akaunting\Money\Money::BRL($leilao->lotes->sum('valor'), true)}}
                         </p>
                     </div>
                 </div>
@@ -129,15 +129,19 @@
         @endif
 
         @if($aba === 'lotes')
-            <div class="">
-                <b class="uppercase">{{$lotes->total()}} Lotes</b> |
-                <x-layouts.buttons.action-button
-                    text="Criar"
-                    action="criar"
-                    color="success"
-                    :route="route('leilao.lote.create', ['uuid' => $leilao->uuid])"/>
-            </div>
-            @include('app.leilao.lotes.index', ['leilao' => $leilao, 'lotes' => $lotes, 'aba' => $aba])
+            @if($action == 'index')
+                <div class="">
+                    <b class="uppercase">{{$lotes->total()}} Lotes</b> |
+                    <x-layouts.buttons.action-button
+                        text="Criar"
+                        action="criar"
+                        color="success"
+                        :route="route('leilao.lote.create', ['uuid' => $leilao->uuid])"/>
+                </div>
+                @include('app.leilao.lotes.index', ['leilao' => $leilao, 'lotes' => $lotes])
+            @elseif($action == 'create')
+                @include('app.leilao.lotes.create', ['leilao' => $leilao, 'formData' => $formData])
+            @endif
         @endif
 
         @if($aba === 'contratos')

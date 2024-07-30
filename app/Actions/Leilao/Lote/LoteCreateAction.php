@@ -2,31 +2,32 @@
 
 namespace App\Actions\Leilao\Lote;
 
+use App\Models\Lote;
 use App\Repositories\Leilao\LeilaoRepositoryInterface;
 use App\Repositories\Lote\LoteRepositoryInterface;
 
-class LoteIndexAction
+class LoteCreateAction
 {
     protected $leilaoRepository;
-    protected $loteRepository;
+//    protected $loteRepository;
 
     public function __construct(
         LeilaoRepositoryInterface $leilaoRepository,
-        LoteRepositoryInterface              $loteRepository
+//        LoteRepositoryInterface $loteRepository
     )
     {
         $this->leilaoRepository = $leilaoRepository;
-        $this->loteRepository = $loteRepository;
+//        $this->loteRepository = $loteRepository;
     }
 
-    public function execute(int $page = 1, int $totalPerPage = 10, string $filter = null, string $leilaoUuid)
+    public function execute(string $leilaoUuid)
     {
         $leilao = $this->leilaoRepository->find($leilaoUuid);
-        $lotes = $this->loteRepository->paginateByLeilaoUuid($page, $totalPerPage, $filter, $leilaoUuid);
+        // $lotes = $this->loteRepository->paginateByLeilaoUuid($page, $totalPerPage, $filter, $leilaoUuid);
 
         return [
             'leilao' => $leilao,
-            'lotes' => $lotes
+//            'lotes' => $lotes
         ];
     }
 }

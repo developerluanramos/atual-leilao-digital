@@ -22,14 +22,22 @@ use App\Repositories\Departamento\DepartamentoEloquentRepository;
 use App\Repositories\Departamento\DepartamentoRepositoryInterface;
 use App\Repositories\Equipe\EquipeEloquentRepository;
 use App\Repositories\Equipe\EquipeRepositoryInterface;
+use App\Repositories\Especie\EspecieEloquentRepository;
+use App\Repositories\Especie\EspecieRepositoryInterface;
 use App\Repositories\Fornecedor\FornecedorEloquentRepository;
 use App\Repositories\Fornecedor\FornecedorRepositoryInterface;
+use App\Repositories\CondicaoPagamento\CondicaoPagamentoEloquentRepository;
+use App\Repositories\CondicaoPagamento\CondicaoPagamentoRepositoryInterface;
 use App\Repositories\Leilao\LeilaoEloquentRepository;
 use App\Repositories\Leilao\LeilaoRepositoryInterface;
 use App\Repositories\Lote\LoteEloquentRepository;
 use App\Repositories\Lote\LoteRepositoryInterface;
+use App\Repositories\PlanoPagamento\PlanoPagamentoEloquentRepository;
+use App\Repositories\PlanoPagamento\PlanoPagamentoRepositoryInterface;
 use App\Repositories\PostoTrabalho\PostoTrabalhoEloquentRepository;
 use App\Repositories\PostoTrabalho\PostoTrabalhoRepositoryInterface;
+use App\Repositories\Raca\RacaEloquentRepository;
+use App\Repositories\Raca\RacaRepositoryInterface;
 use App\Repositories\Setor\SetorEloquentRepository;
 use App\Repositories\Setor\SetorRepositoryInterface;
 use App\Repositories\Usuario\UsuarioEloquentRepository;
@@ -76,6 +84,18 @@ class AppServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             LoteRepositoryInterface::class, LoteEloquentRepository::class
+        );
+        $this->app->bind(
+            EspecieRepositoryInterface::class, EspecieEloquentRepository::class
+        );
+        $this->app->bind(
+            RacaRepositoryInterface::class, RacaEloquentRepository::class
+        );
+        $this->app->bind(
+            PlanoPagamentoRepositoryInterface::class, PlanoPagamentoEloquentRepository::class
+        );
+        $this->app->bind(
+            CondicaoPagamentoRepositoryInterface::class, CondicaoPagamentoEloquentRepository::class
         );
     }
 

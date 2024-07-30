@@ -1,6 +1,6 @@
 <x-layouts.tables.simple-table
     :headers="[
-        'Código',
+//        'Código',
         'Plano Pagamento',
         'Condição Pagamento',
         'Comissão Venda',
@@ -16,7 +16,7 @@
     @section('table-content')
         @foreach($lotes->items() as $index => $lote)
             <tr>
-                <td>{{$lote->uuid}}</td>
+{{--                <td>{{$lote->uuid}}</td>--}}
                 <td>{{$lote->plano_pagamento['descricao']}}</td>
                 <td>{{$lote->condicao_pagamento_uuid}}</td>
                 <td class="text-center">
