@@ -16,10 +16,7 @@ class Lote extends Model
         'uuid',
         'leilao_uuid',
         'plano_pagamento_uuid',
-        'condicao_pagamento_uuid',
-        'reca_uuid',
-        'especie_uuid',
-        'valor',
+        'valor_estimado',
         'incide_comissao_compra',
         'incide_comissao_venda',
     ];
@@ -43,10 +40,5 @@ class Lote extends Model
     public function plano_pagamento()
     {
        return $this->hasOne(PlanoPagamento::class, 'uuid', 'plano_pagamento_uuid');
-    }
-
-    public function condicao_pagamento()
-    {
-        return $this->hasOne(CondicaoPagamento::class, 'uuid', 'condicao_pagamento_uuid');
     }
 }

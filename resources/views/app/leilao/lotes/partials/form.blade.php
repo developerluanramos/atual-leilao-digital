@@ -15,8 +15,8 @@
         :value="$lote->plano_pagamento_uuid ?? old('plano_pagamento_uuid')"
     />
     <x-layouts.inputs.input-normal-text
-        label="Valor do lote"
-        name="valor"
+        label="Valor Estimado"
+        name="valor_estimado"
         lenght="3/12"
         :value="$lote->valor ?? old('valor')"
     />

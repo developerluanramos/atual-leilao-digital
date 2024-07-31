@@ -16,21 +16,18 @@ class LoteCreateAction
     protected $racaRepository;
     protected $especieRepository;
     protected $planoPagamentoRepository;
-    protected $condPagamentoRepository;
 
     public function __construct(
         LeilaoRepositoryInterface $leilaoRepository,
         RacaRepositoryInterface $racaRepository,
         EspecieRepositoryInterface $especieRepository,
         PlanoPagamentoRepositoryInterface $planoPagamentoRepository,
-        CondicaoPagamentoRepositoryInterface $condPagamentoRepository,
     )
     {
         $this->leilaoRepository = $leilaoRepository;
         $this->racaRepository = $racaRepository;
         $this->especieRepository = $especieRepository;
         $this->planoPagamentoRepository = $planoPagamentoRepository;
-        $this->condPagamentoRepository = $condPagamentoRepository;
     }
 
     public function execute(string $leilaoUuid) : array
@@ -40,7 +37,6 @@ class LoteCreateAction
             'racas' => $this->racaRepository->all(),
             'especies' => $this->especieRepository->all(),
             'planos_pagamentos' => $this->planoPagamentoRepository->all(),
-            'condicoes_pagamentos' => $this->condPagamentoRepository->all(),
         ];
     }
 }

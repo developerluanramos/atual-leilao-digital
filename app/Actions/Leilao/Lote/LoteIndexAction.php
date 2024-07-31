@@ -12,7 +12,7 @@ class LoteIndexAction
 
     public function __construct(
         LeilaoRepositoryInterface $leilaoRepository,
-        LoteRepositoryInterface              $loteRepository
+        LoteRepositoryInterface $loteRepository
     )
     {
         $this->leilaoRepository = $leilaoRepository;

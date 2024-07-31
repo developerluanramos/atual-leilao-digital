@@ -19,10 +19,6 @@ return new class extends Migration
             $table->string('quantidade_femea');
             $table->string('quantidade_outros');
             $table->string('descricao');
-            // - colunas repetidas do leilão (iremos tirar essa duvida ainda)
-            $table->foreignUuid('plano_pagamento_uuid')->references('uuid')->on('plano_pagamento');
-            $table->foreignUuid('condicao_pagamento_uuid')
-                ->references('uuid')->on('condicao_pagamento');
             $table->foreignUuid('lote_uuid')->references('uuid')->on('lote');
             $table->uuid('raca_uuid');
             $table->uuid('especie_uuid');

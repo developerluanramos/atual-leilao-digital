@@ -49,7 +49,7 @@ class LoteEloquentRepository implements LoteRepositoryInterface
 
     public function paginateByLeilaoUuid(int $page = 1, int $totalPerPage = 10, string $filter = null, $leilaoUuid): PaginationInterface
     {
-        $query = $this->model->query()->with('condicao_pagamento', 'plano_pagamento');
+        $query = $this->model->query()->with('plano_pagamento');
 
 //        if(!is_null($filter)) {
 //            $query->where("nome", "like", "%".$filter."%");

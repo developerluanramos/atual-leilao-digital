@@ -16,11 +16,7 @@ return new class extends Migration
             $table->uuid()->unique();
             $table->foreignUuid('leilao_uuid')->references('uuid')->on('leilao');
             $table->foreignUuid('plano_pagamento_uuid')->references('uuid')->on('plano_pagamento');
-            $table->foreignUuid('condicao_pagamento_uuid')
-                ->references('uuid')->on('condicao_pagamento');
-            $table->uuid('raca_uuid');
-            $table->uuid('especie_uuid');
-            $table->decimal('valor', 12, 2);
+            $table->decimal('valor_estimado', 12, 2);
             $table->boolean('incide_comissao_compra');
             $table->boolean('incide_comissao_venda');
             $table->timestamps();

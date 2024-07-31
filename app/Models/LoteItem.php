@@ -18,8 +18,6 @@ class LoteItem extends Model
         'quantidade_macho',
         'quantidade_femea',
         'quantidade_outros',
-        'plano_pagamento_uuid',
-        'condicao_pagamento_uuid',
         'lote_uuid',
         'raca_uuid',
         'especie_uuid',
