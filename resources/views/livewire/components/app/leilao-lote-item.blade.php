@@ -35,40 +35,37 @@
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <x-layouts.inputs.input-normal-number-livewire
-                        label="Quantidade total"
-                        name="item.quantidade"
-                        model="item.quantidade"
-                        blur="default"
-                        change="default"
-                        lenght="3/12"
-                        :value="$lote->quantidade ?? old('quantidade')"
-                    />
-                    <x-layouts.inputs.input-normal-number-livewire
                         label="Quantidade Machos"
                         name="item.quantidade_macho"
                         model="item.quantidade_macho"
-                        blur="default"
-                        change="default"
+                        blur="calcQuantidadeTotalItens"
+                        change="calcQuantidadeTotalItens"
                         lenght="3/12"
-                        :value="$lote->quantidade_macho ?? old('quantidade_macho')"
                     />
                     <x-layouts.inputs.input-normal-number-livewire
                         label="Quantidade Fêmeas"
                         name="item.quantidade_femea"
                         model="item.quantidade_femea"
-                        blur="default"
-                        change="default"
+                        blur="calcQuantidadeTotalItens"
+                        change="calcQuantidadeTotalItens"
                         lenght="3/12"
-                        :value="$lote->quantidade_femea ?? old('quantidade_femea')"
                     />
                     <x-layouts.inputs.input-normal-number-livewire
                         label="Quantidade Outros"
                         name="item.quantidade_outros"
                         model="item.quantidade_outros"
-                        blur="default"
+                        blur="calcQuantidadeTotalItens"
+                        change="calcQuantidadeTotalItens"
+                        lenght="3/12"
+                    />
+                    <x-layouts.inputs.input-normal-number-livewire
+                        label="Quantidade total"
+                        readonly="readonly"
+                        name="item.quantidade"
+                        model="item.quantidade"
+                        blur="calcQuantidadeTotalItens"
                         change="default"
                         lenght="3/12"
-                        :value="$lote->quantidade ?? old('quantidade')"
                     />
 {{--                    @livewire('components.inputs.number', [--}}
 {{--                        "params" => [--}}
@@ -151,7 +148,7 @@
                 <b>
                     <x-layouts.badges.info-money
                         textLength="lg"
-                        :value="array_sum(array_column($itens, 'valor'))"
+                        :value="$this->valorTotal"
                     />
                 </b>
             </h3>

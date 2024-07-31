@@ -25,7 +25,12 @@ class LeilaoLoteItem extends Component
 
     public function mount(array $formData)
     {
+        $this->itens = [];
         $this->item = new LoteItem();
+        $this->item->quantidade = 0;
+        $this->item->quantidade_macho = 0;
+        $this->item->quantidade_femea = 0;
+        $this->item->quantidade_outros = 0;
         $this->formData = $formData;
     }
 
@@ -72,8 +77,13 @@ class LeilaoLoteItem extends Component
 
     public function getValorTotalProperty()
     {
-        return array_sum(array_map(function($item) {
-            return $item->valor;
-        }, $this->itens));
+        return array_sum(array_column($this->itens, 'valor'));
+    }
+
+    public function calcQuantidadeTotalItens()
+    {
+        $this->item->quantidade = $this->item->quantidade_macho
+            + $this->item->quantidade_femea
+            + $this->item->quantidade_outros;
     }
 }
