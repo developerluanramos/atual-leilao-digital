@@ -17,6 +17,7 @@ class LeilaoLoteItem extends Component
         'item.especie_uuid' => 'required|string',
         'item.raca_uuid' => 'required|string',
         'item.quantidade' => 'required|number',
+        'item.valor' => 'required|number',
         'item.quantidade_macho' => 'required|number',
         'item.quantidade_femea' => 'required|number',
         'item.quantidade_outros' => 'required|number'
@@ -48,6 +49,7 @@ class LeilaoLoteItem extends Component
             'descricao' => $this->item->descricao,
             'especie_uuid' => $this->item->especie_uuid,
             'raca_uuid' => $this->item->raca_uuid,
+            'valor' => $this->item->valor,
             'quantidade' => $this->item->quantidade,
             'quantidade_macho' => $this->item->quantidade_macho,
             'quantidade_femea' => $this->item->quantidade_femea,

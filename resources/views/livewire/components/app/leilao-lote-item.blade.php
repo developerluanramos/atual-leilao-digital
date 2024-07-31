@@ -79,6 +79,17 @@
 {{--                        ]--}}
 {{--                    ])--}}
                 </div>
+                <div class="flex flex-wrap -mx-3 mb-2">
+                    <x-layouts.inputs.input-normal-number-livewire
+                        label="Valor do Item"
+                        name="item.valor"
+                        model="item.valor"
+                        blur="default"
+                        change="default"
+                        lenght="3/12"
+                        :value="$lote->valor ?? old('valor')"
+                    />
+                </div>
                 <div class="flex flex-wrap -mx-3 mb-2 ml-1">
                     <button wire:click="add" type="button" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
                         Adicionar
@@ -110,10 +121,10 @@
                             </div>
                             <div class="items-center truncate text-base font-semibold text-gray-900 dark:text-white">
                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    Neil Sims
-                                </p>
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    Neil Sims
+                                    <x-layouts.badges.info-money
+                                        textLength="sm"
+                                        :value="$item['valor']"
+                                    />
                                 </p>
                                 <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                     <button
@@ -137,7 +148,12 @@
                 </div>
             @endforelse
             <h3 class="text-right text-blue-900">
-                <b>R$ 1.234,23</b>
+                <b>
+                    <x-layouts.badges.info-money
+                        textLength="lg"
+                        :value="array_sum(array_column($itens, 'valor'))"
+                    />
+                </b>
             </h3>
         </ul>
         <input type="hidden" name="lote_itens" value="{{json_encode($itens)}}">

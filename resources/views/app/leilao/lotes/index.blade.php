@@ -27,7 +27,12 @@
                 </td>
                 <td class="text-center">{{$lote->created_at_for_humans}}</td>
                 <td class="text-center">{{$lote->updated_at_for_humans}}</td>
-                <td class="text-right"> <b>{{Akaunting\Money\Money::BRL($lote->valor)}}</b> </td>
+                <td class="text-right">
+                    <x-layouts.badges.info-money
+                        textLength="sm"
+                        :value="$lote->valor"
+                    />
+                </td>
                 <td class="text-right">
                     <x-layouts.buttons.action-button
                         text="Ver"
