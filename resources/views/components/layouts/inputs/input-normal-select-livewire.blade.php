@@ -19,9 +19,6 @@
                 @endif
             @endforeach
         </select>
-        <div wire:loading>
-            <small style="color: #0c214e">Atualizando...</small>
-        </div>
         @error($name)
             <small class="text-red-500">{{ $message }}</small>
         @enderror
