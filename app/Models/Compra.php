@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Manny\Manny;
 
 class Compra extends Model
 {
@@ -16,4 +17,8 @@ class Compra extends Model
         'cliente_uuid',
         'lote_uuid',
     ];
+
+    function teste() {
+
+    }
 }

@@ -34,49 +34,6 @@
                     />
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
-{{--                    <x-layouts.inputs.input-normal-number-livewire--}}
-{{--                        label="Quantidade Machos"--}}
-{{--                        name="item.quantidade_macho"--}}
-{{--                        model="item.quantidade_macho"--}}
-{{--                        blur="calcQuantidadeTotalItens"--}}
-{{--                        change="calcQuantidadeTotalItens"--}}
-{{--                        lenght="3/12"--}}
-{{--                    />--}}
-{{--                    <x-layouts.inputs.input-normal-number-livewire--}}
-{{--                        label="Quantidade Fêmeas"--}}
-{{--                        name="item.quantidade_femea"--}}
-{{--                        model="item.quantidade_femea"--}}
-{{--                        blur="calcQuantidadeTotalItens"--}}
-{{--                        change="calcQuantidadeTotalItens"--}}
-{{--                        lenght="3/12"--}}
-{{--                    />--}}
-{{--                    <x-layouts.inputs.input-normal-number-livewire--}}
-{{--                        label="Quantidade Outros"--}}
-{{--                        name="item.quantidade_outros"--}}
-{{--                        model="item.quantidade_outros"--}}
-{{--                        blur="calcQuantidadeTotalItens"--}}
-{{--                        change="calcQuantidadeTotalItens"--}}
-{{--                        lenght="3/12"--}}
-{{--                    />--}}
-{{--                    <x-layouts.inputs.input-normal-number-livewire--}}
-{{--                        label="Quantidade total"--}}
-{{--                        readonly="readonly"--}}
-{{--                        name="item.quantidade"--}}
-{{--                        model="item.quantidade"--}}
-{{--                        blur="calcQuantidadeTotalItens"--}}
-{{--                        change="default"--}}
-{{--                        lenght="3/12"--}}
-{{--                    />--}}
-{{--                    @livewire('components.inputs.number', [--}}
-{{--                        "params" => [--}}
-{{--                            "quantidade_outros",--}}
-{{--                            "length" => "3/12",--}}
-{{--                            "name" => "quantidade_outros",--}}
-{{--                            "label" => "quantidade_outros"--}}
-{{--                        ]--}}
-{{--                    ])--}}
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-2">
                     <x-layouts.inputs.input-normal-select-enum-livewire
                         :data="\App\Enums\GeneroLoteItemEnum::asSelectArray()"
                         label="Gênero"
