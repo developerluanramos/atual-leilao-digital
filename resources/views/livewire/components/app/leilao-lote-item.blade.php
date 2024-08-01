@@ -34,39 +34,39 @@
                     />
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
-                    <x-layouts.inputs.input-normal-number-livewire
-                        label="Quantidade Machos"
-                        name="item.quantidade_macho"
-                        model="item.quantidade_macho"
-                        blur="calcQuantidadeTotalItens"
-                        change="calcQuantidadeTotalItens"
-                        lenght="3/12"
-                    />
-                    <x-layouts.inputs.input-normal-number-livewire
-                        label="Quantidade Fêmeas"
-                        name="item.quantidade_femea"
-                        model="item.quantidade_femea"
-                        blur="calcQuantidadeTotalItens"
-                        change="calcQuantidadeTotalItens"
-                        lenght="3/12"
-                    />
-                    <x-layouts.inputs.input-normal-number-livewire
-                        label="Quantidade Outros"
-                        name="item.quantidade_outros"
-                        model="item.quantidade_outros"
-                        blur="calcQuantidadeTotalItens"
-                        change="calcQuantidadeTotalItens"
-                        lenght="3/12"
-                    />
-                    <x-layouts.inputs.input-normal-number-livewire
-                        label="Quantidade total"
-                        readonly="readonly"
-                        name="item.quantidade"
-                        model="item.quantidade"
-                        blur="calcQuantidadeTotalItens"
-                        change="default"
-                        lenght="3/12"
-                    />
+{{--                    <x-layouts.inputs.input-normal-number-livewire--}}
+{{--                        label="Quantidade Machos"--}}
+{{--                        name="item.quantidade_macho"--}}
+{{--                        model="item.quantidade_macho"--}}
+{{--                        blur="calcQuantidadeTotalItens"--}}
+{{--                        change="calcQuantidadeTotalItens"--}}
+{{--                        lenght="3/12"--}}
+{{--                    />--}}
+{{--                    <x-layouts.inputs.input-normal-number-livewire--}}
+{{--                        label="Quantidade Fêmeas"--}}
+{{--                        name="item.quantidade_femea"--}}
+{{--                        model="item.quantidade_femea"--}}
+{{--                        blur="calcQuantidadeTotalItens"--}}
+{{--                        change="calcQuantidadeTotalItens"--}}
+{{--                        lenght="3/12"--}}
+{{--                    />--}}
+{{--                    <x-layouts.inputs.input-normal-number-livewire--}}
+{{--                        label="Quantidade Outros"--}}
+{{--                        name="item.quantidade_outros"--}}
+{{--                        model="item.quantidade_outros"--}}
+{{--                        blur="calcQuantidadeTotalItens"--}}
+{{--                        change="calcQuantidadeTotalItens"--}}
+{{--                        lenght="3/12"--}}
+{{--                    />--}}
+{{--                    <x-layouts.inputs.input-normal-number-livewire--}}
+{{--                        label="Quantidade total"--}}
+{{--                        readonly="readonly"--}}
+{{--                        name="item.quantidade"--}}
+{{--                        model="item.quantidade"--}}
+{{--                        blur="calcQuantidadeTotalItens"--}}
+{{--                        change="default"--}}
+{{--                        lenght="3/12"--}}
+{{--                    />--}}
 {{--                    @livewire('components.inputs.number', [--}}
 {{--                        "params" => [--}}
 {{--                            "quantidade_outros",--}}
@@ -77,14 +77,23 @@
 {{--                    ])--}}
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
+                    <x-layouts.inputs.input-normal-select-enum-livewire
+                        :data="\App\Enums\GeneroLoteItemEnum::asSelectArray()"
+                        label="Gênero"
+                        change="default"
+                        name="item.genero"
+                        model="item.genero"
+                        lenght="4/12"
+                    />
+
                     <x-layouts.inputs.input-normal-number-livewire
-                        label="Valor do Item"
-                        name="item.valor"
-                        model="item.valor"
+                        label="Valor Estimado"
+                        name="item.valor_estimado"
+                        model="item.valor_estimado"
                         blur="default"
                         change="default"
-                        lenght="3/12"
-                        :value="$lote->valor ?? old('valor')"
+                        lenght="4/12"
+                        :value="$lote->valor_estimado ?? old('valor_estimado')"
                     />
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2 ml-1">
@@ -107,22 +116,22 @@
                                     {{$item['descricao']}}
                                 </p>
                                 <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                    <small>Gênero: </small> {{ \App\Enums\GeneroLoteItemEnum::getDescription((int)$item['genero']) }}
+                                </p>
+                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                     <small>Espécie: </small> {{$item['especie_uuid']}}
                                 </p>
                                 <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                     <small>Raça: </small> {{$item['raca_uuid']}}
                                 </p>
-                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                    <small>Machos: </small> {{$item['quantidade_macho']}} | <small>Fêmeas: </small> {{$item['quantidade_femea']}} | <small>Outros: </small> {{$item['quantidade_outros']}}  | <small>Total: </small> {{$item['quantidade']}}
+                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <small>Valor estimado: </small> <x-layouts.badges.info-money
+                                        textLength="sm"
+                                        :value="$item['valor_estimado']"
+                                    />
                                 </p>
                             </div>
                             <div class="items-center truncate text-base font-semibold text-gray-900 dark:text-white">
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    <x-layouts.badges.info-money
-                                        textLength="sm"
-                                        :value="$item['valor']"
-                                    />
-                                </p>
                                 <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                     <button
                                         wire:click="remove({{$index}})"
@@ -145,6 +154,9 @@
                 </div>
             @endforelse
             <h3 class="text-right text-blue-900">
+                <small>Machos: <b>{{$this->quantidadeMacho}}</b></small>
+                <small>Fêmeas: <b>{{$this->quantidadeFemea}}</b></small>
+                <small>Outros: <b>{{$this->quantidadeOutro}}</b></small>
                 <b>
                     <x-layouts.badges.info-money
                         textLength="lg"

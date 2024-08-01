@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\App;
 
+use App\Enums\GeneroLoteItemEnum;
 use App\Models\LoteItem;
 use Livewire\Component;
 
@@ -16,21 +17,16 @@ class LeilaoLoteItem extends Component
         'item.descricao' => 'required|string',
         'item.especie_uuid' => 'required|string',
         'item.raca_uuid' => 'required|string',
-        'item.quantidade' => 'required|number',
-        'item.valor' => 'required|number',
-        'item.quantidade_macho' => 'required|number',
-        'item.quantidade_femea' => 'required|number',
-        'item.quantidade_outros' => 'required|number'
+        'item.valor_estimado' => 'required|number',
+        'item.genero' => 'required|number',
     ];
 
     public function mount(array $formData)
     {
         $this->itens = [];
         $this->item = new LoteItem();
-        $this->item->quantidade = 0;
-        $this->item->quantidade_macho = 0;
-        $this->item->quantidade_femea = 0;
-        $this->item->quantidade_outros = 0;
+        $this->item->valor_estimado = 0;
+//        $this->item->genero = GeneroLoteItemEnum::MACHO;
         $this->formData = $formData;
     }
 
@@ -41,10 +37,13 @@ class LeilaoLoteItem extends Component
 
     public function add()
     {
+        $this->errorMessage = '';
+        sleep(1);
         if(
             is_null($this->item->descricao)
             || is_null($this->item->especie_uuid)
             || is_null($this->item->raca_uuid)
+            || is_null($this->item->genero)
         ) {
             $this->errorMessage = 'Preencha o formulário corretamente para continuar';
             return false;
@@ -54,11 +53,8 @@ class LeilaoLoteItem extends Component
             'descricao' => $this->item->descricao,
             'especie_uuid' => $this->item->especie_uuid,
             'raca_uuid' => $this->item->raca_uuid,
-            'valor' => $this->item->valor,
-            'quantidade' => $this->item->quantidade,
-            'quantidade_macho' => $this->item->quantidade_macho,
-            'quantidade_femea' => $this->item->quantidade_femea,
-            'quantidade_outros' => $this->item->quantidade_outros,
+            'valor_estimado' => $this->item->valor_estimado,
+            'genero' => $this->item->genero,
         ];
         $this->item = new LoteItem();
         $this->errorMessage = '';
@@ -77,13 +73,27 @@ class LeilaoLoteItem extends Component
 
     public function getValorTotalProperty()
     {
-        return array_sum(array_column($this->itens, 'valor'));
+        return array_sum(array_column($this->itens, 'valor_estimado'));
     }
 
-    public function calcQuantidadeTotalItens()
+    public function getQuantidadeMachoProperty()
     {
-        $this->item->quantidade = $this->item->quantidade_macho
-            + $this->item->quantidade_femea
-            + $this->item->quantidade_outros;
+        return count(array_filter($this->itens, function ($n) {
+            return (int)$n['genero'] == GeneroLoteItemEnum::MACHO;
+        }));
+    }
+
+    public function getQuantidadeFemeaProperty()
+    {
+        return count(array_filter($this->itens, function ($n) {
+            return (int)$n['genero'] == GeneroLoteItemEnum::FEMEA;
+        }));
+    }
+
+    public function getQuantidadeOutroProperty()
+    {
+        return count(array_filter($this->itens, function ($n) {
+            return (int)$n['genero'] == GeneroLoteItemEnum::OUTRO;
+        }));
     }
 }

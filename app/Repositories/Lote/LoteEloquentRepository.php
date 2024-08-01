@@ -27,7 +27,7 @@ class LoteEloquentRepository implements LoteRepositoryInterface
     public function find(string $uuid): Lote
     {
         return $this->model
-            ->with('promotor', 'leiloeiro', 'lotes')
+            ->with('plano_pagamento.condicoes_pagamento', 'itens.especie', 'itens.raca')
             ->where('uuid', $uuid)->firstOrFail();
     }
 

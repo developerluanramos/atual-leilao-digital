@@ -14,9 +14,14 @@ class Lote extends Model
 
     protected $fillable = [
         'uuid',
+        'descricao',
         'leilao_uuid',
         'plano_pagamento_uuid',
         'valor_estimado',
+        'quantidade',
+        'quantidade_macho',
+        'quantidade_femea',
+        'quantidade_outro',
         'incide_comissao_compra',
         'incide_comissao_venda',
     ];
@@ -40,5 +45,10 @@ class Lote extends Model
     public function plano_pagamento()
     {
        return $this->hasOne(PlanoPagamento::class, 'uuid', 'plano_pagamento_uuid');
+    }
+
+    public function itens()
+    {
+        return $this->hasMany(LoteItem::class, 'lote_uuid', 'uuid');
     }
 }

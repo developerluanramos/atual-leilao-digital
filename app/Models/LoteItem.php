@@ -14,15 +14,22 @@ class LoteItem extends Model
     protected $fillable = [
         'uuid',
         'descricao',
-        'quantidade',
-        'quantidade_macho',
-        'quantidade_femea',
-        'quantidade_outros',
+        'genero',
         'lote_uuid',
         'raca_uuid',
         'especie_uuid',
-        'valor',
+        'valor_estimado',
         'inside_comissao_compra',
         'incide_comissao_venda',
     ];
+
+    public function raca()
+    {
+        return $this->hasOne(Raca::class, 'uuid', 'raca_uuid');
+    }
+
+    public function especie()
+    {
+        return $this->hasOne(Especie::class, 'uuid', 'especie_uuid');
+    }
 }

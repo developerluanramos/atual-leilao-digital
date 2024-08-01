@@ -11,7 +11,7 @@ interface LeilaoRepositoryInterface
 
     public function totalQuantity() : int;
 
-    public function find(string $uuid): Leilao;
+    public function find(string $uuid, array $with): Leilao;
 
     public function paginate(int $page = 1, int $totalPerPage = 10, string $filter = null): PaginationInterface;
 }

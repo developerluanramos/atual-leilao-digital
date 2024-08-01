@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('lote', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
+            $table->string('descricao');
             $table->foreignUuid('leilao_uuid')->references('uuid')->on('leilao');
             $table->foreignUuid('plano_pagamento_uuid')->references('uuid')->on('plano_pagamento');
+            $table->decimal('quantidade', 12, 2);
+            $table->decimal('quantidade_macho', 12, 2);
+            $table->decimal('quantidade_femea', 12, 2);
+            $table->decimal('quantidade_outro', 12, 2);
             $table->decimal('valor_estimado', 12, 2);
             $table->boolean('incide_comissao_compra');
             $table->boolean('incide_comissao_venda');

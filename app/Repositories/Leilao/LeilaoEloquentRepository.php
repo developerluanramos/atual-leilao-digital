@@ -24,10 +24,10 @@ class LeilaoEloquentRepository implements LeilaoRepositoryInterface
         return $this->model->count();
     }
 
-    public function find(string $uuid): Leilao
+    public function find(string $uuid, array $with = []): Leilao
     {
         return $this->model
-            ->with('promotor', 'leiloeiro', 'lotes')
+            ->with($with)
             ->where('uuid', $uuid)->firstOrFail();
     }
 

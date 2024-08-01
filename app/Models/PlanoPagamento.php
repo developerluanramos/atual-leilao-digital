@@ -15,4 +15,9 @@ class PlanoPagamento extends Model
         'uuid',
         'descricao'
     ];
+
+    public function condicoes_pagamento()
+    {
+        return $this->hasMany(CondicaoPagamento::class, 'plano_pagamento_uuid', 'uuid');
+    }
 }
