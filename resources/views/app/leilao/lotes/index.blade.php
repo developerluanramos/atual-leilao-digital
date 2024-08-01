@@ -22,10 +22,10 @@
                     {{$lote->plano_pagamento['descricao']}}
                 </td>
                 <td class="text-center">
-                    <x-layouts.badges.sim-nao :status="$lote->incide_comissao_compra"></x-layouts.badges.sim-nao>
+                    <x-layouts.badges.sim-nao :status="$lote->incide_comissao_venda"></x-layouts.badges.sim-nao>
                 </td>
                 <td class="text-center">
-                    <x-layouts.badges.sim-nao :status="$lote->incide_comissao_venda"></x-layouts.badges.sim-nao>
+                    <x-layouts.badges.sim-nao :status="$lote->incide_comissao_compra"></x-layouts.badges.sim-nao>
                 </td>
                 <td class="text-center">
                     {{$lote->created_at_for_humans}}
@@ -36,6 +36,7 @@
                 <td class="text-right">
                     <x-layouts.badges.info-money
                         textLength="sm"
+                        :convert="false"
                         :value="$lote->valor_estimado"
                     />
                 </td>
