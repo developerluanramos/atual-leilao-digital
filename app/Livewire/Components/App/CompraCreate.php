@@ -4,6 +4,9 @@ namespace App\Livewire\Components\App;
 
 use Akaunting\Money\Currency;
 use Akaunting\Money\Money;
+use App\Actions\Cliente\ClienteSearchAction;
+use App\Models\Cliente;
+use App\Repositories\Cliente\ClienteEloquentRepository;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -11,6 +14,7 @@ class CompraCreate extends Component
 {
     public array $formData;
     public string $search;
+    public array $compradores;
     public string $valorLance;
 
     public array $searchResult;
@@ -24,9 +28,12 @@ class CompraCreate extends Component
         $this->searchResult = [];
         $this->valorLance = $this->formData['lote']['valor_estimado'];
         $this->parcelas = [];
+        $this->compradores = [];
         $this->incideComissaoVenda = $this->formData['lote']['incide_comissao_venda'];
         $this->incideComissaoCompra = $this->formData['lote']['incide_comissao_compra'];
-        $this->updatedValorLance();
+        if(!empty($this->compradores)) {
+            $this->updatedValorLance();
+        }
     }
 
     public function render()
@@ -43,7 +50,7 @@ class CompraCreate extends Component
         foreach ($condicoesPagamento as $key => $condicaoPagamento)
         {
             for($i = 0; $i <= $condicaoPagamento['qtd_parcelas']; $i++) {
-                $valor = $condicaoPagamento['repeticoes'] * $this->valorLance;
+                $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * count($this->formData['lote']['itens']))) / $this->getQuantidadeCompradoresProperty();
                 $valorComissaoComprador = $this->incideComissaoCompra
                     ? ($condicaoPagamento['percentual_comissao_comprador'] / 100) * $valor : 0;
                 $valorComissaoVendedor = $this->incideComissaoVenda
@@ -52,6 +59,7 @@ class CompraCreate extends Component
                 $this->parcelas[] = [
                     'valor_original' => $this->valorLance,
                     'valor' => $valor,
+                    'repeticoes' => $condicaoPagamento['repeticoes'],
                     'data_pagamento' => $carbonHoje->addMonth()->toDateString(),
                     'incide_comissao_compra' => $this->incideComissaoCompra,
                     'incide_comissao_venda' => $this->incideComissaoVenda,
@@ -68,7 +76,26 @@ class CompraCreate extends Component
     {
         if (!empty($this->search))
         {
-            // TODO logic of search
+            $this->searchResult = (new ClienteSearchAction(
+                new ClienteEloquentRepository(new Cliente())
+            ))->execute($this->search);
+        }
+    }
+
+    public function addComprador($comprador)
+    {
+        $this->compradores[] = $comprador;
+        $this->searchResult = [];
+        $this->search = "";
+        $this->updatedValorLance();
+    }
+
+    public function removerCliente($index)
+    {
+        array_splice($this->compradores, $index, 1);
+        if(!empty($this->compradores))
+        {
+            $this->updatedValorLance();
         }
     }
 
@@ -95,5 +122,10 @@ class CompraCreate extends Component
     public function getDiferencaValorEstimadoPercentualProperty()
     {
         return $this->valorTotalLote - $this->formData['lote']['valor_estimado'];
+    }
+
+    public function getQuantidadeCompradoresProperty()
+    {
+        return count($this->compradores);
     }
 }

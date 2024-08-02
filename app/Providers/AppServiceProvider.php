@@ -18,6 +18,8 @@ use App\Observers\SetorObserver;
 use App\Observers\UsuarioObserver;
 use App\Repositories\Cargo\CargoEloquentRepository;
 use App\Repositories\Cargo\CargoRepositoryInterface;
+use App\Repositories\Cliente\ClienteEloquentRepository;
+use App\Repositories\Cliente\ClienteRepositoryInterface;
 use App\Repositories\Departamento\DepartamentoEloquentRepository;
 use App\Repositories\Departamento\DepartamentoRepositoryInterface;
 use App\Repositories\Equipe\EquipeEloquentRepository;
@@ -96,6 +98,9 @@ class AppServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             CondicaoPagamentoRepositoryInterface::class, CondicaoPagamentoEloquentRepository::class
+        );
+        $this->app->bind(
+            ClienteRepositoryInterface::class, ClienteEloquentRepository::class
         );
     }
 
