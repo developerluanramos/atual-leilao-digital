@@ -1,5 +1,6 @@
 <x-layouts.tables.simple-table
     :headers="[
+        'uuid',
         'Descrição',
         'Promotor',
         'Leiloeiro',
@@ -13,6 +14,7 @@
     @section('table-content')
         @foreach($leiloes->items() as $index => $leilao)
             <tr>
+                <td>{{ $leilao->uuid }}</td>
                 <td>{{ $leilao->descricao }}</td>
                 <td>{{ $leilao->promotor['nome'] }}</td>
                 <td>{{ $leilao->leiloeiro['nome'] }}</td>
