@@ -290,7 +290,7 @@ MENU PRINCIPAL
                 </button>
                 <ul id="dropdown-avaliacao-desempenho" class="hidden py-2 space-y-2" style="font-size: 13px">
                     <li>
-                        <a class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Meus Leilões</a>
+                        <a href="{{route('leilao.index')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Meus Leilões</a>
                     </li>
 {{--                    <li>--}}
 {{--                        <a href="{{route('modelo-avaliacao.index')}}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Modelos de Avaliação</a>--}}
