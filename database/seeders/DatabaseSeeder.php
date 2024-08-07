@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             LoteItemSeeder::class,
             CompraSeeder::class,
             VendaSeeder::class,
-            ParcelaSeeder::class
+            ParcelaSeeder::class,
+            PrelanceConfigSeeder::class
         ]);
     }
 }

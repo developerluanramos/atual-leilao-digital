@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('cidade');
             $table->dateTime('aberto_em');
             $table->dateTime('fechado_em');
-
+            $table->dateTime('prelance_aberto_em');
+            $table->dateTime('prelance_fechado_em');
             $table->foreignUuid('promotor_uuid')->references('uuid')->on('promotor');
             $table->foreignUuid('leiloeiro_uuid')->references('uuid')->on('leiloeiro');
             $table->timestamps();

@@ -21,6 +21,8 @@ class Leilao extends Model
         'cidade',
         'aberto_em',
         'fechado_em',
+        'prelance_aberto_em',
+        'prelance_fechado_em',
         'promotor_uuid',
         'leiloeiro_uuid',
     ];

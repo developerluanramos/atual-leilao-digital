@@ -28,6 +28,8 @@ class LeilaoFactory extends Factory
             'cidade' => $this->faker->city(),
             'aberto_em' => $this->faker->dateTimeBetween('-30 days', 'now'),
             'fechado_em' => $this->faker->dateTimeBetween('now', '+3 days'),
+            'prelance_aberto_em' => $this->faker->dateTimeBetween('-35days', '-31 days'),
+            'prelance_fechado_em' => $this->faker->dateTimeBetween('-35days', '-31 days'),
             'promotor_uuid' => Promotor::inRandomOrder()->first()->uuid,
             'leiloeiro_uuid' => Leiloeiro::inRandomOrder()->first()->uuid,
         ];
