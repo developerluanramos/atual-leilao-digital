@@ -4,17 +4,17 @@
     {{ Breadcrumbs::render('setor.create') }}
 @endsection
 
-@section('title', 'Novo Setor')
+@section('title', 'Novo Leilão')
 
-<x-layouts.headers.create-header :title="'Novo Setor'"/>
+<x-layouts.headers.create-header :title="'Novo Leilão'"/>
 
 @section('content')
 
 @include('components.alerts.form-errors')
 
-<form action="{{ route('setor.store') }}" method="POST">
+<form action="{{ route('leilao.store') }}" method="POST">
     @csrf
-    @include('app.setor.partials.form')
+    @include('app.leilao.partials.form')
 </form>
 
 @endsection

@@ -31,10 +31,10 @@
 {{--                            ])"--}}
 {{--                    />--}}
                     <x-layouts.buttons.action-button
-                        text="Editar"
-                        action="editar"
+                        text="Visualizar"
+                        action="ver"
                         color="primary"
-                        :route="route('setor.edit', $leilao->uuid)"/>
+                        :route="route('leilao.show', $leilao->uuid)"/>
                 </td>
             </tr>
         @endforeach
