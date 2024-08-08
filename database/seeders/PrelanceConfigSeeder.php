@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\PrelanceConfig;
 use Illuminate\Database\Seeder;
 
 class PrelanceConfigSeeder extends Seeder
@@ -12,6 +12,6 @@ class PrelanceConfigSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        PrelanceConfig::factory(3)->create();
     }
 }

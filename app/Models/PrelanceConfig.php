@@ -20,4 +20,14 @@ class PrelanceConfig extends Model
         'valor_estimado',
         'valor_minimo'
     ];
+
+    public function plano_pagamento()
+    {
+        return $this->hasOne(PlanoPagamento::class, 'uuid', 'plano_pagamento_uuid');
+    }
+
+    public function leilao()
+    {
+        return $this->belongsTo(Leilao::class, 'leilao_uuid', 'uuid');
+    }
 }

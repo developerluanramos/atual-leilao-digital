@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('cor');
             $table->foreignUuid('leilao_uuid')->references('uuid')->on('leilao');
             $table->foreignUuid('plano_pagamento_uuid')->references('uuid')->on('plano_pagamento');
-            $table->decimal('valor_estimado');
-            $table->decimal('valor_minimo');
+            $table->decimal('valor_estimado', 12, 2);
+            $table->decimal('valor_minimo', 12, 2);
             $table->timestamps();
         });
     }

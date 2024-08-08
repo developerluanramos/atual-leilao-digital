@@ -41,4 +41,9 @@ class Leilao extends Model
     {
         return $this->hasMany(Lote::class, 'leilao_uuid', 'uuid');
     }
+
+    public function config_prelance()
+    {
+        return $this->hasMany(PrelanceConfig::class, 'leilao_uuid', 'uuid');
+    }
 }
