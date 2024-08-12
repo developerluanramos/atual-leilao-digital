@@ -28,7 +28,9 @@ class DatabaseSeeder extends Seeder
             CompraSeeder::class,
             VendaSeeder::class,
             ParcelaSeeder::class,
-            PrelanceConfigSeeder::class
+            PrelanceConfigSeeder::class,
+            LanceSeeder::class,
+            LanceClienteSeeder::class
         ]);
     }
 }

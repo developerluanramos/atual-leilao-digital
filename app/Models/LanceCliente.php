@@ -9,7 +9,7 @@ class LanceCliente extends Model
 {
     use HasFactory;
 
-    protected $table = "lance";
+    protected $table = "lance_cliente";
 
     protected $fillable = [
         'uuid',
@@ -20,4 +20,9 @@ class LanceCliente extends Model
         'cota_percentual',
         'cota_real'
     ];
+
+    public function cliente()
+    {
+        return $this->hasOne(Cliente::class, 'uuid', 'cliente_uuid');
+    }
 }

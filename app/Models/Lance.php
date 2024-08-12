@@ -19,4 +19,9 @@ class Lance extends Model
         'realizado_em',
         'valor'
     ];
+
+    public function lance_clientes()
+    {
+        return $this->hasMany(LanceCliente::class, 'lance_uuid', 'uuid');
+    }
 }

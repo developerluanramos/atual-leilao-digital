@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('lance_cliente', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
+            $table->uuid()->unique();
             $table->foreignUuid('leilao_uuid')->references('uuid')->on('leilao');
             $table->foreignUuid('lote_uuid')->references('uuid')->on('lote');
             $table->foreignUuid('lance_uuid')->references('uuid')->on('lance');

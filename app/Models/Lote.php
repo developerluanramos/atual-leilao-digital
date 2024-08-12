@@ -51,4 +51,9 @@ class Lote extends Model
     {
         return $this->hasMany(LoteItem::class, 'lote_uuid', 'uuid');
     }
+
+    public function lances()
+    {
+        return $this->hasMany(Lance::class, 'lote_uuid', 'uuid');
+    }
 }

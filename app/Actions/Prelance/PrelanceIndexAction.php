@@ -15,7 +15,7 @@ class PrelanceIndexAction
     public function exec(string $leilaoUuid)
     {
         return $this->leilaoRepository->find($leilaoUuid, [
-            'lotes', 'config_prelance.plano_pagamento',
+            'lotes.lances.lance_clientes.cliente', 'config_prelance.plano_pagamento',
         ]);
     }
 }

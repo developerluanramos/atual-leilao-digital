@@ -100,5 +100,5 @@
             </div>
         </div>
     </div>
-    {{json_encode($leilao)}}
+    {{json_encode($leilao->lotes[0]->lances[0]->lance_clientes[0]->cliente)}}
 @endsection
