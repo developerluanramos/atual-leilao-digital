@@ -25,7 +25,7 @@ class LanceFactory extends Factory
             'lote_uuid' => $lote->uuid,
             'plano_pagamento_uuid' => $lote->plano_pagamento_uuid,
             'realizado_em' => fake()->date(),
-            'valor' => $this->faker->randomFloat(),
+            'valor' => $this->faker->numberBetween(100, 500)
         ];
     }
 }

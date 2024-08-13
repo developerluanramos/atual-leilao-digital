@@ -23,7 +23,7 @@ class PreLanceVisaoGeral extends Component
                 "numeroLote" => $lote->id,
                 "maiorLance" => max(array_column($lote->lances->toArray(),'valor')),
                 "config" => $leilao->config_prelance,
-                "cliente" => $lote->cliente
+                "cliente" => "Nome do cliente"
             ];
         }
     }
