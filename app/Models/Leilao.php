@@ -46,4 +46,14 @@ class Leilao extends Model
     {
         return $this->hasMany(PrelanceConfig::class, 'leilao_uuid', 'uuid');
     }
+
+    public function lances()
+    {
+        return $this->hasMany(Lance::class, 'leilao_uuid', 'uuid');
+    }
+
+    public function clientes()
+    {
+        return $this->hasMany(LanceCliente::class, 'leilao_uuid', 'uuid');
+    }
 }
