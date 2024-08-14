@@ -22,8 +22,8 @@ class CondicaoPagamentoFactory extends Factory
             'descricao' => $this->faker->word(),
             'repeticoes' => $this->faker->numberBetween(1, 2),
             'qtd_parcelas' => $this->faker->randomElement([36, 50, 60]),
-            'percentual_comissao_vendedor' => $this->faker->randomElement([true, false]),
-            'percentual_comissao_comprador' => $this->faker->randomElement([true, false]),
+            'percentual_comissao_vendedor' => 5,
+            'percentual_comissao_comprador' => 2,
             'plano_pagamento_uuid' => PlanoPagamento::inRandomOrder()->first()->uuid,
         ];
     }

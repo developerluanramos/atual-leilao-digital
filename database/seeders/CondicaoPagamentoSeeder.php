@@ -13,6 +13,6 @@ class CondicaoPagamentoSeeder extends Seeder
      */
     public function run(): void
     {
-        CondicaoPagamento::factory(5)->create();
+        CondicaoPagamento::factory(2)->create();
     }
 }
