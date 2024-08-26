@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class LanceCliente extends Model
 {
@@ -20,9 +21,4 @@ class LanceCliente extends Model
         'cota_percentual',
         'cota_real'
     ];
-
-    public function cliente()
-    {
-        return $this->hasOne(Cliente::class, 'uuid', 'cliente_uuid');
-    }
 }

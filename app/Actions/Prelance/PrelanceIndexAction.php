@@ -3,23 +3,40 @@
 namespace App\Actions\Prelance;
 
 use App\Repositories\Leilao\LeilaoRepositoryInterface;
+use App\Repositories\Cliente\ClienteRepositoryInterface;
+// use App\Repositories\Lote\LoteRepositoryInterface;
+// use App\Repositories\Prelance\PrelanceRepositoryInterface;
 
 class PrelanceIndexAction
 {
     protected $leilaoRepository;
-    public function __construct(LeilaoRepositoryInterface $leilaoRepository)
+    protected $clienteRepository;
+    protected $loteRepository;
+    protected $comissaoRepository;
+
+    public function __construct(
+        LeilaoRepositoryInterface $leilaoRepository,
+        ClienteRepositoryInterface $clienteRepository,
+        // LoteRepositoryInterface $loteRepository,
+        // PrelanceRepositoryInterface $prelanceRepository
+
+    )
     {
         $this->leilaoRepository = $leilaoRepository;
+        $this->clienteRepository = $clienteRepository;
+        // $this->loteRepository = $loteRepository;
+        // $this->prelanceRepository = $prelanceRepository;
     }
 
     public function exec(string $leilaoUuid)
     {
-        return $this->leilaoRepository->find($leilaoUuid, [
-            'clientes.cliente',
-            'lances.lance_clientes.cliente',
-            'lotes.lances.lance_clientes.cliente',
-            'lotes.itens',
-            'config_prelance.plano_pagamento',
-        ]);
+        return [
+            'leilao' => $this->leilaoRepository->find($leilaoUuid),
+            // 'vendedores' => $this->clienteRepository->vendedoresByLeilaoUuid($leilaoUuid),
+            // 'compradores' => $this->clienteRepository->compradoresByLeilaoUuid($leilaoUuid),
+            // 'comissoes' => [],
+            // 'total_lances' => 0,
+            // 'total_lances_vencedores' => 0
+        ];
     }
 }

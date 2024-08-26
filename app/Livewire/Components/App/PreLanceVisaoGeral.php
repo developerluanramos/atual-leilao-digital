@@ -13,19 +13,6 @@ class PreLanceVisaoGeral extends Component
     public function mount(Leilao $leilao)
     {
         $this->leilao = $leilao;
-
-        foreach ($this->leilao->lotes as $lote)
-        {
-            $this->lotesLanceVencedor[] = [
-                "lote" => $lote->uuid,
-                "numero" => $lote->id,
-                "quantidade" => $lote->itens->count(),
-                "numeroLote" => $lote->id,
-                "maiorLance" => max(array_column($lote->lances->toArray(),'valor')),
-                "config" => $leilao->config_prelance,
-                "cliente" => "Nome do cliente"
-            ];
-        }
     }
 
     public function render()

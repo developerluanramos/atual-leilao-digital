@@ -15,13 +15,19 @@ class Lance extends Model
         'uuid',
         'leilao_uuid',
         'lote_uuid',
+        'prelance_config_uuid',
         'plano_pagamento_uuid',
         'realizado_em',
         'valor'
     ];
 
-    public function lance_clientes()
+    public function clientes()
     {
-        return $this->hasMany(LanceCliente::class, 'lance_uuid', 'uuid');
+        return $this->belongsToMany(Cliente::class, 'lance_cliente', 'lance_uuid', 'cliente_uuid', 'uuid' /* lance.uuid */, 'uuid' /* cliente.uuid */);
+    }
+
+    public function prelance_config()
+    {
+        return $this->hasOne(PrelanceConfig::class, 'uuid', 'prelance_config_uuid');
     }
 }

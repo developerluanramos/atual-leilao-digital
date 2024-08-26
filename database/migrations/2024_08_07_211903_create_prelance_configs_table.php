@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('prelance_config', function (Blueprint $table) {
             $table->id();
-            $table->uuid();
+            $table->uuid()->unique();
             $table->date('data');
             $table->string('cor');
             $table->foreignUuid('leilao_uuid')->references('uuid')->on('leilao');

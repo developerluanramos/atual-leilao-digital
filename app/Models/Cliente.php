@@ -24,4 +24,9 @@ class Cliente extends Model
         'email',
         'site',
     ];
+
+    public function lances()
+    {
+        return $this->belongsToMany(Lance::class, 'lance_cliente', 'lance_uuid', 'cliente_uuid', 'uuid');
+    }
 }

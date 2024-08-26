@@ -54,6 +54,6 @@ class Leilao extends Model
 
     public function clientes()
     {
-        return $this->hasMany(LanceCliente::class, 'leilao_uuid', 'uuid');
+        return $this->belongsToMany(Cliente::class, 'lance_cliente', 'leilao_uuid', 'cliente_uuid', 'uuid' /* lance.uuid */, 'uuid' /* cliente.uuid */)->distinct('cliente_uuid');
     }
 }

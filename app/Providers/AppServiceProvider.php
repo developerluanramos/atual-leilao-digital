@@ -122,7 +122,7 @@ class AppServiceProvider extends ServiceProvider
         Setor::observe(SetorObserver::class);
         PostoTrabalho::observe(PostoTrabalhoObserver::class);
         Departamento::observe(DepartamentoObserver::class);
-
+        \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
             $dataNascimento = $validator->getData()['data_nascimento'];
             $dataAdmissao = $value;

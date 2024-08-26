@@ -56,4 +56,9 @@ class Lote extends Model
     {
         return $this->hasMany(Lance::class, 'lote_uuid', 'uuid');
     }
+
+    public function lance_vencedor()
+    {
+        return $this->lances->last();
+    }
 }
