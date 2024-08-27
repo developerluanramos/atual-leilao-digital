@@ -21,6 +21,10 @@ class Lance extends Model
         'valor'
     ];
 
+    protected $appends = [
+        'comissao_comprador',
+    ];
+
     public function clientes()
     {
         return $this->belongsToMany(Cliente::class, 'lance_cliente', 'lance_uuid', 'cliente_uuid', 'uuid' /* lance.uuid */, 'uuid' /* cliente.uuid */);
@@ -29,5 +33,20 @@ class Lance extends Model
     public function prelance_config()
     {
         return $this->hasOne(PrelanceConfig::class, 'uuid', 'prelance_config_uuid');
+    }
+
+    /*
+    * Campos automáticos
+    *
+    */
+    public function getComissaoVendedorAttribute()
+    {
+
+    }
+
+    public function getComissaoCompradorAttribute()
+    {
+        $valorComissaoComprador = 22;
+        return $valorComissaoComprador;
     }
 }

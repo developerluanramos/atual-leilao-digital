@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasAttributes;
 
 class Leilao extends Model
 {
@@ -27,6 +29,14 @@ class Leilao extends Model
         'leiloeiro_uuid',
     ];
 
+    protected $appends = [
+        'comissao_comprador',
+    ];
+
+    /*
+    * Database relations
+    *
+    */
     public function promotor()
     {
         return $this->hasOne(Promotor::class, 'uuid', 'promotor_uuid');
@@ -55,5 +65,20 @@ class Leilao extends Model
     public function clientes()
     {
         return $this->belongsToMany(Cliente::class, 'lance_cliente', 'leilao_uuid', 'cliente_uuid', 'uuid' /* lance.uuid */, 'uuid' /* cliente.uuid */)->distinct('cliente_uuid');
+    }
+
+    /*
+    * Campos automáticos
+    *
+    */
+    public function getComissaoVendedorAttribute()
+    {
+
+    }
+
+    public function getComissaoCompradorAttribute()
+    {
+        $valorComissaoComprador = $this->lances->sum('valor');
+        return $valorComissaoComprador;
     }
 }
