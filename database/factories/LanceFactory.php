@@ -28,7 +28,9 @@ class LanceFactory extends Factory
             'prelance_config_uuid' => $preLanceConfig->uuid,
             'plano_pagamento_uuid' => $lote->plano_pagamento_uuid,
             'realizado_em' => fake()->date(),
-            'valor' => $this->faker->numberBetween(100, 500)
+            'valor' => $this->faker->numberBetween(100, 500),
+            'valor_comissao_compra' => $this->faker->numberBetween(25, 55),
+            'valor_comissao_venda' => $this->faker->numberBetween(25, 55)
         ];
     }
 }

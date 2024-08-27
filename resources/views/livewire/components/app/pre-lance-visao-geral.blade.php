@@ -1,38 +1,30 @@
-<style>
-    .lis {
-    display: inline-block;
-    padding: 1rem;
-    text-align: center;
-    width: 16%;
-    }
-</style>
 <div>
     <div class="flex flex-wrap mb-2">
         <div class="w-full md:w-9/12 mb-6 md:mb-0">
             <div class="flex w-full md:w-12/12 mb-6 md:mb-0">
                 <div class="space-y-12 lg:grid lg:grid-cols-4 sm:gap-6 xl:gap-10 lg:space-y-0">
                     <!-- Pricing Card -->
-                    <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                    <div class="flex flex-col p-6 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                         <h3 class="mb-4 text-2xl font-semibold">
                             <x-layouts.badges.info-money
                                 :convert="true"
                                 :textLength="'lg'"
-                                :value="$leilao->comissao_comprador" />
+                                :value="$leilao->valor_comissao_compra" />
                         </h3>
-                        <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Comissao Comprador</p>
+                        <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Comissao Compra</p>
                     </div>
                     <!-- Pricing Card -->
-                    <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                    <div class="flex flex-col p-6 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                         <h3 class="mb-4 text-2xl font-semibold">
                             <x-layouts.badges.info-money
                                 :convert="true"
                                 :textLength="'lg'"
-                                :value="$leilao->comissao_comprador" />
+                                :value="$leilao->valor_comissao_venda" />
                         </h3>
-                        <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Comissao Vendedor</p>
+                        <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Comissao Venda</p>
                     </div>
                     <!-- Pricing Card -->
-                    <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                    <div class="flex flex-col p-6 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                         <h3 class="mb-4 text-2xl font-semibold">
                             <x-layouts.badges.info-number
                                 :textLength="'lg'"
@@ -41,12 +33,12 @@
                         <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Total Lotes</p>
                     </div>
                     <!-- Pricing Card -->
-                    <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                    <div class="flex flex-col p-6 w-full  max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                         <h3 class="mb-4 text-2xl font-semibold">
                             <x-layouts.badges.info-money
                                 :convert="true"
                                 :textLength="'lg'"
-                                :value="$leilao->comissao_comprador" />
+                                :value="$leilao->valor_comissao_total" />
                         </h3>
                         <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Total Comissão</p>
                     </div>
@@ -62,64 +54,137 @@
                     </button>
                 </h2>
                 <div id="accordion-flush-body-2" data-accordion="collapse" aria-labelledby="accordion-flush-heading-2">
-                    
-                        <div class="space-y-8 lg:grid lg:grid-cols-6 pr-6 sm:gap-6 xl:gap-10 lg:space-y-0">
+                        <div class="space-y-8 lg:grid lg:grid-cols-6 pr-8 sm:gap-6 xl:gap-10 lg:space-y-0">
                             @foreach($leilao->lotes as $index => $lote)
                                 <div data-modal-target="{{$lote->uuid}}" data-modal-toggle="{{$lote->uuid}}"
                                     style="background-color: {{ $lote->lance_vencedor()->prelance_config()->first()->cor }}" class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                         {{ $index + 1 }}
                                     </h5>
-                                    <x-layouts.badges.info-money
+                                    <p><x-layouts.badges.info-money
                                         :convert="false"
-                                        :textLength="'sm'"
-                                        :value="$lote->lance_vencedor()->valor" />
+                                        :textLength="'md'"
+                                        :value="$lote->lance_vencedor()->valor" /></p>
                                 </div>
                                 <x-layouts.modals.simple-modal
                                     :identificador="$lote->uuid"
                                     :sessao="$lote->uuid"
                                     :titulo="'Lote '.$lote->id">
                                         @section($lote->uuid)
-                                            <ol class="relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mb-4 md:mb-5">
-                                                @foreach($lote->lances()->get()->reverse() as $index => $lance)
-                                                    @if($index === 0)
-                                                        <li class="mb-10 ms-8">
-                                                            <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full -start-3.5 ring-8 ring-white dark:ring-gray-700 dark:bg-gray-600">
-                                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                                                                    <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
-                                                                </svg>
-                                                            </span>
-                                                            @foreach($lance->clientes()->get() as $index => $cliente)
-                                                            <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$cliente->nome}}</h6>
-                                                            @endforeach
-                                                            <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{ $lance->created_at }}</time>
-                                                            <x-layouts.badges.info-money
-                                                                :convert="false"
-                                                                :textLength="'sm'"
-                                                                :value="$lance->valor"
-                                                                />
-                                                        </li>
-                                                    @else
-                                                        <li class="mb-10 ms-8">
-                                                            <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full -start-3.5 ring-8 ring-white dark:ring-gray-700 dark:bg-gray-600">
-                                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z"/>
-                                                                </svg>
-                                                            </span>
-                                                            @foreach($lance->clientes()->get() as $index => $cliente)
-                                                            <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$cliente->nome}}</h6>
-                                                            @endforeach
-                                                            <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{ $lance->created_at }}</time>
-                                                            <x-layouts.badges.info-money
-                                                                :convert="false"
-                                                                :textLength="'sm'"
-                                                                :value="$lance->valor"
-                                                                />
-                                                        </li>
-                                                    @endif
-                                                @endforeach                
-                                            </ol>
-                                        @endsection
+                                        <small>
+                                            Valor atingido 
+                                            <x-layouts.badges.info-money
+                                                :convert="true"
+                                                :textLength="'md'"
+                                                :value="$lote->valor_prelance" />
+                                            &nbsp 
+                                            x
+                                            &nbsp 
+                                            Valor estimado
+                                            <x-layouts.badges.info-money
+                                                :convert="false"
+                                                :textLength="'md'"
+                                                :value="$lote->valor_estimado" />
+                                            
+                                        </small>
+                                        <div class="w-full bg-gray-200 dark:bg-gray-700 text-center">
+                                            <div class="bg-blue-600 text-xs text-blue font-medium text-blue-100 text-center p-1.5 leading-none" style="width: {{ $lote->valor_prelance_percentual_valor_estimado }}%"> 
+                                            </div>
+                                        </div>
+                                        <small>
+                                            <x-layouts.badges.info-percent
+                                                :convert="false"
+                                                :textLength="'md'"
+                                                :value="$lote->valor_prelance_percentual_valor_estimado" /> 
+                                        </small>
+                                        <div class="flex w-full md:w-12/12 mb-6 md:mb-0">
+                                            <div class="space-y-12 lg:grid lg:grid-cols-4 sm:gap-6 xl:gap-10 lg:space-y-0">
+                                                <!-- Pricing Card -->
+                                                <div class="flex flex-col p-3 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+                                                    <h3 class="mb-4 text-2xl font-semibold">
+                                                        <x-layouts.badges.info-money
+                                                            :convert="false"
+                                                            :textLength="'xs'"
+                                                            :value="$lote->valor_comissao_compra" />
+                                                    </h3>
+                                                    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Comissao Compra</p>
+                                                </div>
+                                                <!-- Pricing Card -->
+                                                <div class="flex flex-col p-3 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+                                                    <h3 class="mb-4 text-2xl font-semibold">
+                                                        <x-layouts.badges.info-money
+                                                            :convert="false"
+                                                            :textLength="'xs'"
+                                                            :value="$lote->valor_comissao_venda" />
+                                                    </h3>
+                                                    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Comissao Venda</p>
+                                                </div>
+                                                <!-- Pricing Card -->
+                                                <div class="flex flex-col p-3 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+                                                    <h3 class="mb-4 text-2xl font-semibold">
+                                                        <x-layouts.badges.info-number
+                                                            :textLength="'xs'"
+                                                            :value="$lote->lances->count()" />
+                                                    </h3>
+                                                    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Total Lances</p>
+                                                </div>
+                                                <!-- Pricing Card -->
+                                                <div class="flex flex-col p-3 w-full  max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+                                                    <h3 class="mb-4 text-2xl font-semibold">
+                                                        <x-layouts.badges.info-money
+                                                            :convert="true"
+                                                            :textLength="'xs'"
+                                                            :value="$lote->valor_comissao_total" />
+                                                    </h3>
+                                                    <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Total Comissão</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <small class="mt-6">Histórico de lances</small>
+                                        <ol class="mt-6 relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mb-4 md:mb-5">
+                                            @foreach($lote->lances()->get()->reverse() as $index => $lance)
+                                                @if($index === 0)
+                                                    <li class="mb-10 ms-8">
+                                                        <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full -start-3.5 ring-8 ring-white dark:ring-gray-700 dark:bg-gray-600">
+                                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                                <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
+                                                            </svg>
+                                                        </span>
+                                                        @foreach($lance->clientes()->get() as $index => $cliente)
+                                                        <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$cliente->nome}}</h6>
+                                                        @endforeach
+                                                        <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{ $lance->created_at }}</time>
+                                                        <small class="flex">
+                                                            <span style="background-color: {{ $lance->prelance_config()->first()->cor }}" class="flex w-3 h-3 mt-1 me-3 rounded-full"></span><x-layouts.badges.info-money
+                                                            :convert="false"
+                                                            :textLength="'sm'"
+                                                            :value="$lance->valor"
+                                                            />
+                                                        </small>
+                                                    </li>
+                                                @else
+                                                    <li class="mb-10 ms-8">
+                                                        <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full -start-3.5 ring-8 ring-white dark:ring-gray-700 dark:bg-gray-600">
+                                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z"/>
+                                                            </svg>
+                                                        </span>
+                                                        @foreach($lance->clientes()->get() as $index => $cliente)
+                                                        <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$cliente->nome}}</h6>
+                                                        @endforeach
+                                                        <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{ $lance->created_at }}</time>
+                                                        <small class="flex">
+                                                            <span style="background-color: {{ $lance->prelance_config()->first()->cor }}" class="flex w-3 h-3 mt-1 me-3 rounded-full"></span><x-layouts.badges.info-money
+                                                            :convert="false"
+                                                            :textLength="'sm'"
+                                                            :value="$lance->valor"
+                                                            />
+                                                        </small>
+                                                    </li>
+                                                @endif
+                                            @endforeach                
+                                        </ol>
+                                    @endsection
                                 </x-layouts.modals.simple-modal>
                             @endforeach
                         </div>
@@ -149,16 +214,29 @@
                                             {{ $clienteVencedor->nome }}
                                         </p>
                                         @endforeach
-                                        <!-- <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                            {{ $lote->id }}
-                                            </p> -->
+                                        <small>
+                                            c. compra:
+                                            <x-layouts.badges.info-money
+                                                :convert="false"
+                                                :textLength="'xs'"
+                                                :value="$lote->valor_comissao_compra"
+                                            />
+
+                                            &nbsp c. venda:
+                                            <x-layouts.badges.info-money
+                                                :convert="false"
+                                                :textLength="'xs'"
+                                                :value="$lote->valor_comissao_venda"
+                                            />
+                                        </small>
+
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                                         <x-layouts.badges.info-money
                                             :convert="false"
-                                            :textLength="'sm'"
+                                            :textLength="'lg'"
                                             :value="$lote->lance_vencedor()->valor"
-                                            />
+                                            /><br>
                                     </div>
                                 </div>
                             </li>
@@ -184,7 +262,16 @@
                                 </span>
                                 <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$lote->descricao}}</h6>
                                 <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{$lote->created_at}} - {{$lote->lances()->count() }} lances</time>
-                                <ol class="relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mb-4 md:mb-5">
+                                <div class="w-full bg-gray-200 dark:bg-gray-700 mt-2">
+                                    <div class="text-center bg-blue-600 text-xs text-blue font-medium text-blue-100 text-center p-1.5 leading-none" style="width: {{ $lote->valor_prelance_percentual_valor_estimado }}%"> 
+                                    </div>
+                                </div>
+                                <x-layouts.badges.info-percent
+                                                            :convert="false"
+                                                            :textLength="'sm'"
+                                                            :value="$lote->valor_prelance_percentual_valor_estimado"
+                                                            />
+                                <ol class="relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mt-2 mb-4 md:mb-5">
                                     @foreach($lote->lances()->get()->reverse() as $index => $lance)
                                     @if($index === 0)
                                     <li class="mb-10 ms-8">
@@ -197,11 +284,13 @@
                                         <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$cliente->nome}}</h6>
                                         @endforeach
                                         <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{ $lance->created_at }}</time>
-                                        <x-layouts.badges.info-money
+                                        <small class="flex">
+                                            <span style="background-color: {{ $lance->prelance_config()->first()->cor }}" class="flex w-3 h-3 mt-1 me-3 rounded-full"></span><x-layouts.badges.info-money
                                             :convert="false"
                                             :textLength="'sm'"
                                             :value="$lance->valor"
                                             />
+                                        </small>
                                     </li>
                                     @else
                                     <li class="mb-10 ms-8">
@@ -214,11 +303,13 @@
                                         <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$cliente->nome}}</h6>
                                         @endforeach
                                         <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{ $lance->created_at }}</time>
-                                        <x-layouts.badges.info-money
+                                        <small class="flex">
+                                            <span style="background-color: {{ $lance->prelance_config()->first()->cor }}" class="flex w-3 h-3 mt-1 me-3 rounded-full"></span><x-layouts.badges.info-money
                                             :convert="false"
                                             :textLength="'sm'"
                                             :value="$lance->valor"
                                             />
+                                        </small>
                                     </li>
                                     @endif
                                     @endforeach                
@@ -294,13 +385,13 @@
         </div>
         <br>
         <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
-            <button type="button" class="px-6 w-full mb-2 text-center py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid])}}" type="button" class="px-6 w-full mb-2 text-center py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
                     <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
                     <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
                 </svg>
                 REGISTRAR NOVO LANCE
-            </button>
+            </a>
             <div class="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex items-center justify-between mb-4">
                     <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Clientes no pré-lance</h5>
@@ -337,32 +428,6 @@
                 </div>
             </div>
             <br>
-        </div>
-    </div>
-    <!-- Main modal -->
-    <div id="timeline-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative w-full max-w-4xl max-h-full">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <!-- Modal header -->
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Histórico
-                    </h3>
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="timeline-modal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                </div>
-                <!-- Modal body -->
-                <!-- <div class="p-4 md:p-5">
-                    <button class="text-white inline-flex w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    My Downloads
-                    </button>
-                    </div> -->
-            </div>
         </div>
     </div>
 </div>

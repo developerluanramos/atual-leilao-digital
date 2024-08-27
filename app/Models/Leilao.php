@@ -30,7 +30,9 @@ class Leilao extends Model
     ];
 
     protected $appends = [
-        'comissao_comprador',
+        'valor_comissao_venda',
+        'valor_comissao_compra',
+        'valor_comissao_total'
     ];
 
     /*
@@ -71,14 +73,18 @@ class Leilao extends Model
     * Campos automáticos
     *
     */
-    public function getComissaoVendedorAttribute()
+    public function getValorComissaoVendaAttribute()
     {
-
+        return $this->lotes->sum('valor_comissao_venda');
     }
 
-    public function getComissaoCompradorAttribute()
+    public function getValorComissaoCompraAttribute()
     {
-        $valorComissaoComprador = $this->lances->sum('valor');
-        return $valorComissaoComprador;
+        return $this->lotes->sum('valor_comissao_compra');
+    }
+
+    public function getValorComissaoTotalAttribute()
+    {
+        return $this->valor_comissao_venda + $this->valor_comissao_compra;
     }
 }

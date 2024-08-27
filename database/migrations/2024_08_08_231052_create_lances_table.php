@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreignUuid('prelance_config_uuid')->references('uuid')->on('prelance_config');
             $table->date('realizado_em');
             $table->decimal('valor', 12);
+            $table->decimal('valor_comissao_compra', 12);
+            $table->decimal('valor_comissao_venda', 12);
             $table->timestamps();
         });
     }

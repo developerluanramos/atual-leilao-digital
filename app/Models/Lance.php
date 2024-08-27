@@ -18,11 +18,9 @@ class Lance extends Model
         'prelance_config_uuid',
         'plano_pagamento_uuid',
         'realizado_em',
-        'valor'
-    ];
-
-    protected $appends = [
-        'comissao_comprador',
+        'valor',
+        'valor_comissao_compra',
+        'valor_comissao_venda'
     ];
 
     public function clientes()
@@ -35,18 +33,8 @@ class Lance extends Model
         return $this->hasOne(PrelanceConfig::class, 'uuid', 'prelance_config_uuid');
     }
 
-    /*
-    * Campos automáticos
-    *
-    */
-    public function getComissaoVendedorAttribute()
+    public function plano_pagamento()
     {
-
-    }
-
-    public function getComissaoCompradorAttribute()
-    {
-        $valorComissaoComprador = 22;
-        return $valorComissaoComprador;
+        return $this->hasOne(PlanoPagamento::class, 'uuid', 'plano_pagamento_uuid');
     }
 }

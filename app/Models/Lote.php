@@ -29,18 +29,15 @@ class Lote extends Model
     protected $dates = ['created_at', 'updated_at'];
 
     protected $appends = [
-        'created_at_for_humans', 'updated_at_for_humans'
+        'created_at_for_humans', 
+        'updated_at_for_humans',
+        'valor_comissao_venda',
+        'valor_comissao_compra',
+        'valor_comissao_total',
+        'valor_prelance',
+        'valor_prelance_diferenca_valor_estimado',
+        'valor_prelance_percentual_valor_estimado'
     ];
-
-    public function getCreatedAtForHumansAttribute()
-    {
-        return $this->created_at->diffForHumans(Carbon::now());
-    }
-
-    public function getUpdatedAtForHumansAttribute()
-    {
-        return $this->updated_at->diffForHumans(Carbon::now());
-    }
 
     public function plano_pagamento()
     {
@@ -60,5 +57,63 @@ class Lote extends Model
     public function lance_vencedor()
     {
         return $this->lances->last();
+    }
+
+
+    /*
+    * Campos automáticos
+    *
+    */
+    public function getValorComissaoVendaAttribute()
+    {
+        return $this->lance_vencedor()->valor_comissao_venda;
+    }
+
+    public function getValorComissaoCompraAttribute()
+    {
+        return $this->lance_vencedor()->valor_comissao_compra;
+    }
+
+    public function getValorComissaoTotalAttribute()
+    {
+        return $this->valor_comissao_venda + $this->valor_comissao_compra;
+    }
+
+    public function getValorPrelanceAttribute()
+    {
+        $valorLanceOriginal = $this->lance_vencedor()->valor;
+        $quantidadeClientes = $this->lance_vencedor()->clientes->count() ? $this->lance_vencedor()->clientes->count() : 1;
+        $planoPagamento = $this->lance_vencedor()->plano_pagamento;
+        $condicoesPagamento = $planoPagamento->condicoes_pagamento()->get();
+        $valorLotePreLance = 0;
+
+        foreach ($condicoesPagamento as $key => $condicaoPagamento)
+        {
+            for($i = 0; $i <= $condicaoPagamento['qtd_parcelas']; $i++) {
+                $valorLotePreLance += ($condicaoPagamento['repeticoes'] * ($valorLanceOriginal * $this->itens->count())) / $quantidadeClientes;
+            }
+        }
+
+        return $valorLotePreLance;
+    }
+
+    public function getValorPrelancePercentualValorEstimadoAttribute()
+    {
+        return (100 * $this->valor_prelance) / $this->valor_estimado;
+    }
+
+    public function getValorPrelanceDiferencaValorEstimadoAttribute()
+    {
+        return $this->valor_prelance - $this->valor_estimado;
+    }
+
+    public function getCreatedAtForHumansAttribute()
+    {
+        return $this->created_at->diffForHumans(Carbon::now());
+    }
+
+    public function getUpdatedAtForHumansAttribute()
+    {
+        return $this->updated_at->diffForHumans(Carbon::now());
     }
 }
