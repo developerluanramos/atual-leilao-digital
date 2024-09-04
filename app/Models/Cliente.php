@@ -27,6 +27,6 @@ class Cliente extends Model
 
     public function lances()
     {
-        return $this->belongsToMany(Lance::class, 'lance_cliente', 'lance_uuid', 'cliente_uuid', 'uuid');
+        return $this->belongsToMany(Lance::class, 'lance_cliente', 'cliente_uuid', 'lance_uuid', 'uuid', 'uuid');
     }
 }

@@ -23,6 +23,11 @@ class Lance extends Model
         'valor_comissao_venda'
     ];
 
+    public function lote()
+    {
+        return $this->belongsTo(Lote::class, 'lote_uuid', 'uuid');
+    }
+
     public function clientes()
     {
         return $this->belongsToMany(Cliente::class, 'lance_cliente', 'lance_uuid', 'cliente_uuid', 'uuid' /* lance.uuid */, 'uuid' /* cliente.uuid */);

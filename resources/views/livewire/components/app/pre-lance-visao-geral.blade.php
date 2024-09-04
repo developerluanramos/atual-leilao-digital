@@ -67,10 +67,18 @@
                                         :value="$lote->lance_vencedor()->valor" /></p>
                                 </div>
                                 <x-layouts.modals.simple-modal
+                                    :tamanho="4"
                                     :identificador="$lote->uuid"
                                     :sessao="$lote->uuid"
                                     :titulo="'Lote '.$lote->id">
                                         @section($lote->uuid)
+                                        <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])}}" type="button" class="px-6 w-full mb-2 text-center py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                                                <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                                                <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                                            </svg>
+                                            REGISTRAR NOVO LANCE
+                                        </a>
                                         <small>
                                             Valor atingido 
                                             <x-layouts.badges.info-money
@@ -285,7 +293,8 @@
                                         @endforeach
                                         <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{ $lance->created_at }}</time>
                                         <small class="flex">
-                                            <span style="background-color: {{ $lance->prelance_config()->first()->cor }}" class="flex w-3 h-3 mt-1 me-3 rounded-full"></span><x-layouts.badges.info-money
+                                            <span style="background-color: {{ $lance->prelance_config()->first()->cor }}" class="flex w-3 h-3 mt-1 me-3 rounded-full"></span>
+                                            <x-layouts.badges.info-money
                                             :convert="false"
                                             :textLength="'sm'"
                                             :value="$lance->valor"
@@ -381,6 +390,8 @@
                         </div>
                     </div>
                 </div>
+
+                @livewire('components.app.charts.prelance-lote-valor-atingido', [$leilao])
             </div>
         </div>
         <br>
@@ -408,19 +419,60 @@
                                 </div>
                                 <div class="flex-1 min-w-0 ms-4">
                                     <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                        {{ $cliente->nome }}
+                                        <a class="cursor-pointer" data-modal-target="{{$cliente->uuid}}" data-modal-toggle="{{$cliente->uuid}}">{{ $cliente->nome }}</a>
                                     </p>
                                     <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                         {{ $cliente->email }}
                                     </p>
                                 </div>
-                                <!-- <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                    <x-layouts.badges.info-money
-                                        :convert="false"
-                                        :textLength="'sm'"
-                                        :value="100"
-                                    />
-                                    </div> -->
+                                <x-layouts.modals.simple-modal
+                                    :tamanho="4"
+                                    :identificador="$cliente->uuid"
+                                    :sessao="$cliente->uuid"
+                                    :titulo="$cliente->nome">
+                                    @section($cliente->uuid)
+                                    <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid, 'clienteUuid' => $cliente->uuid])}}" type="button" class="px-6 w-full mb-2 text-center py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                                            <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                                            <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                                        </svg>
+                                        REGISTRAR NOVO LANCE
+                                    </a>
+                                        <ul class="w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                            @foreach($cliente->lances()->with('lote')->where('lance.leilao_uuid', $leilao->uuid)->groupBy('lance.id', 'lance_cliente.cliente_uuid')->get() as $lance)
+                                                <li class="pb-3 sm:pb-4" >
+                                                    <div class="flex items-center space-x-4 rtl:space-x-reverse" >
+                                                        <div class="flex-shrink-0"> 
+                                                            <span class="items-center justify-center w-6 h-6 bg-gray-100 rounded-full start-3.5 ring-8 ring-white dark:ring-gray-700 dark:bg-gray-600">
+                                                                <svg class="w-6 h-6 {{$lance->uuid === $lance->lote->lance_vencedor()->uuid ? 'text-green-600' : 'text-blue-100'}}  dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                                    <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
+                                                                </svg>
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex-1 min-w-0">
+                                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                                <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid, 'loteUuid' => $lote->uuid, 'clienteUuid' => $cliente->uuid])}}"  ><b role="button" >Lote {{$lance->lote->id}}</b></a>
+                                                            </p>
+                                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                            {{$lance->created_at}}
+                                                            </p>
+                                                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                                            {{$lance->lote->descricao}}
+                                                            </p>
+                                                        </div>
+                                                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">   
+                                                        <span style="background-color: {{ $lance->prelance_config()->first()->cor }}" class="flex w-3 h-3 mt-1 me-3 rounded-full"></span>
+                                                            <x-layouts.badges.info-money
+                                                                :convert="false"
+                                                                :value="$lance->valor"
+                                                            ></x-layouts.badges.info-money>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endsection
+                                </x-layouts.modals.simple-modal> 
                             </div>
                         </li>
                         @endforeach

@@ -423,5 +423,7 @@ MENU PRINCIPAL
         <span class="sr-only">Open actions menu</span>
     </button>
 </div>
+
+@livewireChartsScripts
 </body>
 </html>
