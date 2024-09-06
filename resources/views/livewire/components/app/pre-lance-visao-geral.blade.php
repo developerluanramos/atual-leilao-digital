@@ -451,7 +451,7 @@
                                                         </div>
                                                         <div class="flex-1 min-w-0">
                                                             <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                                <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid, 'loteUuid' => $lote->uuid, 'clienteUuid' => $cliente->uuid])}}"  ><b role="button" >Lote {{$lance->lote->id}}</b></a>
+                                                                <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid, 'loteUuid' => $lance->lote->uuid, 'clienteUuid' => $cliente->uuid])}}"  ><b role="button" >Lote {{$lance->lote->id}}</b></a>
                                                             </p>
                                                             <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                                                             {{$lance->created_at}}

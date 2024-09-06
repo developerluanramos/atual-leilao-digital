@@ -32,9 +32,10 @@
     <title>@yield('title') - {{config('app.name')}}</title>
 </head>
 <script>
+    // document.getElementById('htmlMainPage').classList.add('dark')
     function lighMode() {
         console.log('executou');
-        document.getElementById('htmlMainPage').classList.add('dark')
+        
     }
 </script>
 <body class="antialiased">

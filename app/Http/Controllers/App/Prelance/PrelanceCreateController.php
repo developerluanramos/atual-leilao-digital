@@ -10,11 +10,8 @@ class PrelanceCreateController
 {
     public function create(Request $request, PrelanceCreateAction $prelanceCreateAction)
     {
-        $data = $prelanceCreateAction->exec($request);
-        dd($data);
-        return view('app.prelance.create', [
-            "formData" => $data['formData'],
-            "leilao" => $data['leilao']
-        ]);
+        $formData = $prelanceCreateAction->exec($request);
+
+        return view('app.prelance.create', $formData);
     }
 }

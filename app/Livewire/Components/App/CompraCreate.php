@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Components\App;
 
-use Akaunting\Money\Currency;
-use Akaunting\Money\Money;
 use App\Actions\Cliente\ClienteSearchAction;
 use App\Models\Cliente;
 use App\Repositories\Cliente\ClienteEloquentRepository;
@@ -21,6 +19,7 @@ class CompraCreate extends Component
     public array $parcelas;
     public bool $incideComissaoCompra;
     public bool $incideComissaoVenda;
+
     public function mount(array $formData)
     {
         $this->formData = $formData;
