@@ -1,115 +1,128 @@
 <div class="mt-4">
-        @if(isset($this->lote->uuid))
-        <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
-                <h2 id="accordion-collapse-heading-2">
-                    <button wire:click="handleTab()" type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
-                        <span>Lote {{$this->lote->id}}</span>
-                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
-                        </svg>
-                    </button>
-                </h2>
-                <div id="accordion-collapse-body-2" class="{{$hidden}}" aria-labelledby="accordion-collapse-heading-2">
-                    <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
-                        <div class="p-4 mb-2 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
-                            {{-- <small>Plano Pagamento: <b>{{ $lote->plano_pagamento()->first()->descricao }}</b></small>
-                            <ul>
-                                @foreach($lote->plano_pagamento()->first()->condicoes_pagamento()->get() as $condicaoPagamento)
-                                    <li>
-                                        <p>
-                                            <small>Parcelas: <b>{{$condicaoPagamento['qtd_parcelas']}}</b></small> |
-                                            <small>Repetições: <b>{{$condicaoPagamento['repeticoes']}}</b></small> |
-                                            <small>Comissão Venda: <b>{{$condicaoPagamento['percentual_comissao_vendedor']}} %</b></small> |
-                                            <small>Comissão Compra: <b>{{$condicaoPagamento['percentual_comissao_comprador']}} %</b></small>
-                                        </p>
-                                    </li>
-                                @endforeach
-                            </ul>
-                            <br> --}}
-                            <small>Valor estimado para o lote: </small> <x-layouts.badges.info-money
-                                textLength="sm"
-                                :convert="false"
-                                :value="$lote->valor_estimado"
-                            />
-                        </div>
-                        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                            @forelse($lote->itens()->get() as $index => $item)
-                                <div class="p-2 mb-2 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-                                    <li class="sm:py-4">
-                                        <div class="flex items-center">
-                                            <div class="flex-1 min-w-0 ms-4">
-                                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                    {{$item['descricao']}}
-                                                </p>
-                                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                                    <small>Gênero: <b>{{ \App\Enums\GeneroLoteItemEnum::getDescription((int)$item['genero']) }}</b></small> |
-                                                    <small>Espécie: <b>{{$item['especie']['nome']}}</b></small> |
-                                                    <small>Raça: <b>{{$item['raca']['nome']}}</b></small>
-                                                </p>
-                                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                    <small>Valor estimado: </small> <x-layouts.badges.info-money
-                                                        textLength="sm"
-                                                        :convert="false"
-                                                        :value="$item['valor_estimado']"
-                                                    />
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </div>
-                            @empty
-                                <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
-                                    Nenhum registro adicionado até o momento, <b>preencha o formulário</b> e clique em <b>adicionar</b> para incluir itens no lote
-                                </div>
-                            @endforelse
-                        </ul>
-                    </div>
-                </div>
-            <hr>
-        </div>
-        @else
-        <div class="lg:grid lg:grid-cols-6">
-            @foreach($leilao->lotes as $index => $lote)
-                <div wire:click="selecionarLote({{$lote}})"
-                    style="background-color: #ccc" class="flex cursor-pointer flex-col p-4 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                        {{ $index + 1 }}
+    @if(is_null($leilao->plano_pagamento_prelance))
+        <p>Nenhum plano de pagamento encontrado para esta data no pré-lance</p>
+        @php die; @endphp
+    @else
+        <div class="lg:grid lg:grid-cols-{{$leilao->config_prelance()->get()->count()}} mb-3">
+            @foreach($leilao->config_prelance()->get() as $config)
+                <div style="{{$leilao->config_prelance_atual->uuid == $config->uuid ? 'background-color: #1c9b17' : '#ccc'}}" class="flex cursor-pointer items-center flex-col p-4 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+                    <h5>
+                        <span style="background-color: {{ $config->cor }}" class="flex w-3 h-3 mt-1 me-3 rounded-full"></span>
                     </h5>
-                    <p><x-layouts.badges.info-money
-                        :convert="false"
-                        :textLength="'md'"
-                        :value="$lote->lance_vencedor()->valor" /></p>
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        {{ $config->data }}
+                    </h5>
                 </div>
             @endforeach
         </div>
-        @endif
-        
+        <div class="p-4 mb-2 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
+            <small>Plano Pagamento: <b>{{ $leilao->plano_pagamento_prelance->descricao }}</b></small>
+            <ul>
+                @foreach($leilao->plano_pagamento_prelance->condicoes_pagamento()->get() as $condicaoPagamento)
+                    <li>
+                        <p>
+                            <small>Parcelas: <b>{{$condicaoPagamento['qtd_parcelas']}}</b></small> |
+                            <small>Repetições: <b>{{$condicaoPagamento['repeticoes']}}</b></small> |
+                            <small>Comissão Venda: <b>{{$condicaoPagamento['percentual_comissao_vendedor']}} %</b></small> |
+                            <small>Comissão Compra: <b>{{$condicaoPagamento['percentual_comissao_comprador']}} %</b></small>
+                        </p>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    @if(isset($this->lote->uuid))
+    <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+        <h2 id="accordion-collapse-heading-2">
+            <button wire:click="handleTab()" type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
+                <span>Lote {{$this->lote->id}}</span>
+                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                </svg>
+            </button>
+        </h2>
+        <div id="accordion-collapse-body-2" class="{{$hidden}}" aria-labelledby="accordion-collapse-heading-2">
+            <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                    @forelse($lote->itens()->get() as $index => $item)
+                        <div class="p-2 mb-2 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                            <li class="sm:py-4">
+                                <div class="flex items-center">
+                                    <div class="flex-1 min-w-0 ms-4">
+                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                            {{$item['descricao']}}
+                                        </p>
+                                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                            <small>Gênero: <b>{{ \App\Enums\GeneroLoteItemEnum::getDescription((int)$item['genero']) }}</b></small> |
+                                            <small>Espécie: <b>{{$item['especie']['nome']}}</b></small> |
+                                            <small>Raça: <b>{{$item['raca']['nome']}}</b></small>
+                                        </p>
+                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                            <small>Valor estimado: </small> <x-layouts.badges.info-money
+                                                textLength="sm"
+                                                :convert="false"
+                                                :value="$item['valor_estimado']"
+                                            />
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+                    @empty
+                        <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
+                            Nenhum registro adicionado até o momento, <b>preencha o formulário</b> e clique em <b>adicionar</b> para incluir itens no lote
+                        </div>
+                    @endforelse
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <small wire:click="removerLote()" class="cursor-pointer text-blue-800">escolher outro lote</small>
+    </div>
+    @else
+    <div class="lg:grid lg:grid-cols-6">
+        @foreach($leilao->lotes as $index => $lote)
+            <div wire:click="selecionarLote({{$lote}})"
+                style="background-color: #ccc" class="flex cursor-pointer flex-col p-4 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    {{ $index + 1 }}
+                </h5>
+                <p><x-layouts.badges.info-money
+                    :convert="false"
+                    :textLength="'md'"
+                    :value="$lote->lance_vencedor()->valor" /></p>
+            </div>
+        @endforeach
+    </div>
+    @endif
     <br>
 
-    {{-- @if(isset($this->cliente->uuid))
-        {{ $this->cliente->uuid }}
-    @else
-
-    @endif --}}
-
-    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Pesquisar</label>
-    <div class="relative">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-            </svg>
+    @if(!empty($lote))
+        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Pesquisar</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+            </div>
+            <input
+                type="text"
+                wire:model.live.debounce.300ms="searchClientes"
+                id="searchClientes"
+                class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Pesquisar clientes"
+                name="searchClientes">
         </div>
-        <input
-            type="text"
-            wire:model.live.debounce.300ms="searchClientes"
-            id="searchClientes"
-            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Pesquisar clientes"
-            name="searchClientes">
-    </div>
-    <div wire:loading>
-        Processando...
-    </div>
+        <div wire:loading>
+            <div role="status">
+                <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                    <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+                </svg>
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    @endif
     <br>
     @if(!empty($searchClientes) && !empty($searchResultClientes))
         <ul class="">
@@ -211,77 +224,81 @@
         </div>
     </div>
     @endif
-    @forelse($compradores as $index => $comprador)
-        <div class="mt-2">
-            <p>
-            {{$comprador['nome']}}
-            <p>
-                <small>
-                    {{$comprador['email']}}
-                </small>
-                <button
-                    wire:click="removerCliente({{$index}})"
-                    type="button"
-                    class="float-right focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 me-2 mb-2 mt-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                    data-te-ripple-init
-                    data-te-ripple-color="light">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-                    </svg>
-                </button>
-            </p>
-            <p>
-                <small>
-                    {{$comprador['endereco']}}
-                </small>
-            </p>
+    @if(!empty($compradores)  && !empty($this->lote))
+        @forelse($compradores as $index => $comprador)
+            <div class="mt-2">
+                <p>
+                {{$comprador['nome']}}
+                <p>
+                    <small>
+                        {{$comprador['email']}}
+                    </small>
+                    <button
+                        wire:click="removerCliente({{$index}})"
+                        type="button"
+                        class="float-right focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 me-2 mb-2 mt-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                        data-te-ripple-init
+                        data-te-ripple-color="light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                        </svg>
+                    </button>
+                </p>
+                <p>
+                    <small>
+                        {{$comprador['endereco']}}
+                    </small>
+                </p>
 
-        </div>
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th class="text-center">Data de pagamento</th>
-                    <th class="text-right">R$ Valor parcela</th>
-                    <th class="text-right">R$ Comissão Compra</th>
-                    <th class="text-right">R$ Comissão Venda</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($parcelas as $parcela)
-                    <tr>
-                        <td class="text-center">
-                            {{$parcela['data_pagamento']}}
-                        </td>
-                        <td class="text-right">
-                            <x-layouts.badges.info-money
-                                :value="$parcela['valor']"
-                            /> ({{$parcela['repeticoes']}})
-                        </td>
-                        <td class="text-right">
-                            <x-layouts.badges.info-percent
-                                :value="$parcela['percentual_comissao_comprador']"
-                            />
-                            <x-layouts.badges.info-money
-                                :value="$parcela['valor_comissao_comprador']"
-                            />
-                        </td>
-                        <td class="text-right">
-                            <x-layouts.badges.info-percent
-                                :value="$parcela['percentual_comissao_vendedor']"
-                            />
-                            <x-layouts.badges.info-money
-                                :value="$parcela['valor_comissao_vendedor']"
-                            />
-                        </td>
-                    </tr>
-                @empty
-                    <tr><td colspan="4">Nenhum parcela adicionada</td></tr>
-                @endforelse
-            </tbody>
-        </table>
-    @empty
-{{--    <p>Nenhum comprador adicionado até o momento</p>--}}
-    @endforelse
+            </div>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="text-center">Data de pagamento</th>
+                            <th class="text-right">R$ Valor parcela</th>
+                            <th class="text-right">R$ Comissão Compra</th>
+                            <th class="text-right">R$ Comissão Venda</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($parcelas as $parcela)
+                            <tr>
+                                <td class="text-center">
+                                    {{$parcela['data_pagamento']}}
+                                </td>
+                                <td class="text-right">
+                                    <x-layouts.badges.info-money
+                                        :value="$parcela['valor']"
+                                    /> ({{$parcela['repeticoes']}})
+                                </td>
+                                <td class="text-right">
+                                    <x-layouts.badges.info-percent
+                                        :value="$parcela['percentual_comissao_comprador']"
+                                    />
+                                    <x-layouts.badges.info-money
+                                        :value="$parcela['valor_comissao_comprador']"
+                                    />
+                                </td>
+                                <td class="text-right">
+                                    <x-layouts.badges.info-percent
+                                        :value="$parcela['percentual_comissao_vendedor']"
+                                    />
+                                    <x-layouts.badges.info-money
+                                        :value="$parcela['valor_comissao_vendedor']"
+                                    />
+                                </td>
+                            </tr>
+                        @empty
+                            <tr><td colspan="4">Nenhum parcela adicionada</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        @empty
+    {{--    <p>Nenhum comprador adicionado até o momento</p>--}}
+        @endforelse
+    @endif
 
     <h2 class="text-right mt-4 mb-20">
 

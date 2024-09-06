@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Concerns\HasAttributes;
 
 class Leilao extends Model
 {
@@ -32,7 +31,9 @@ class Leilao extends Model
     protected $appends = [
         'valor_comissao_venda',
         'valor_comissao_compra',
-        'valor_comissao_total'
+        'valor_comissao_total',
+        'plano_pagamento_prelance',
+        'config_prelance_atual'
     ];
 
     /*
@@ -86,5 +87,33 @@ class Leilao extends Model
     public function getValorComissaoTotalAttribute()
     {
         return $this->valor_comissao_venda + $this->valor_comissao_compra;
+    }
+
+    public function getPlanoPagamentoPrelanceAttribute()
+    {
+        $carbonHoje = Carbon::now();
+        $dataHoje = $carbonHoje->toDateString();
+        
+        $configPrelance = $this->config_prelance()->where('data', $dataHoje)->first();
+
+        if(!empty($configPrelance)) {
+            return $configPrelance->plano_pagamento()->first();
+        }
+
+        return null;
+    }
+
+    public function getConfigPrelanceAtualAttribute()
+    {
+        $carbonHoje = Carbon::now();
+        $dataHoje = $carbonHoje->toDateString();
+        
+        $configPrelance = $this->config_prelance()->where('data', $dataHoje)->first();
+
+        if(!empty($configPrelance)) {
+            return $configPrelance;
+        }
+
+        return null;
     }
 }

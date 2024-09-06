@@ -35,9 +35,10 @@ class PreLanceCreate extends Component
         $this->searchResultClientes = [];
         $this->parcelas = [];
         $this->compradores = [];
-        $this->incideComissaoVenda = true; //$this->formData['lote']['incide_comissao_venda'];
-        $this->incideComissaoCompra = true; //$this->formData['lote']['incide_comissao_compra'];
-        
+        $this->incideComissaoVenda = true;
+        $this->incideComissaoCompra = true;
+        $this->valorLance = 0; //$this->formData['lote']['valor_estimado'];
+
         if(!empty($cliente)) {
             $this->compradores[] = $cliente->toArray(); 
         }
@@ -45,8 +46,6 @@ class PreLanceCreate extends Component
         if(!empty($this->compradores)) {
             $this->updatedValorLance();
         }
-
-        $this->valorLance = 100; //$this->formData['lote']['valor_estimado'];
     }
 
     public function render()
@@ -66,6 +65,8 @@ class PreLanceCreate extends Component
     public function selecionarLote(Lote $lote)
     {
         $this->lote = $lote;
+        $this->valorLance = $this->lote->lance_vencedor()->valor;
+        $this->updatedValorLance();
     }
 
     public function updatedValorLance()
@@ -74,12 +75,15 @@ class PreLanceCreate extends Component
             $carbonHoje = Carbon::now();
             $this->parcelas = [];
             $condicoesPagamento = $this->lote->plano_pagamento()->first()->condicoes_pagamento()->get();
+            
+            if($this->valorLance == 0) {
+                $this->valorLance = $this->lote->lance_vencedor()->valor;
+            }
 
             foreach ($condicoesPagamento as $key => $condicaoPagamento)
             {
                 for($i = 0; $i <= $condicaoPagamento['qtd_parcelas']; $i++) 
                 {
-                    // dd($condicaoPagamento);
                     $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * $this->lote->itens()->count()) / $this->getQuantidadeCompradoresProperty());
                     $valorComissaoComprador = $this->incideComissaoCompra
                         ? ($condicaoPagamento['percentual_comissao_comprador'] / 100) * $valor : 0;
@@ -115,7 +119,8 @@ class PreLanceCreate extends Component
 
     public function updatedLote()
     {
-        error_log('TESTE');
+        $this->valorLance = 0;
+        
         $this->updatedValorLance();
     }
 
@@ -130,10 +135,17 @@ class PreLanceCreate extends Component
     public function removerCliente($index)
     {
         array_splice($this->compradores, $index, 1);
+        
         if(!empty($this->compradores))
         {
             $this->updatedValorLance();
         }
+    }
+
+    public function removerLote()
+    {
+        $this->valorLance = 0;
+        $this->lote = null;
     }
 
     public function getValorTotalLoteProperty()
