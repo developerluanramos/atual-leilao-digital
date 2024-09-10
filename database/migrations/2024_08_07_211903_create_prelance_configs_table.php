@@ -20,6 +20,8 @@ return new class extends Migration
             $table->foreignUuid('plano_pagamento_uuid')->references('uuid')->on('plano_pagamento');
             $table->decimal('valor_estimado', 12, 2);
             $table->decimal('valor_minimo', 12, 2);
+            $table->decimal('valor_progressao', 12, 2);
+            $table->decimal('percentual_progressao', 12, 2);
             $table->timestamps();
         });
     }

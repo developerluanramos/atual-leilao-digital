@@ -24,8 +24,10 @@ class PrelanceConfigFactory extends Factory
             'cor' => $this->faker->hexColor(),
             'leilao_uuid' => Leilao::inRandomOrder()->first()->uuid,
             'plano_pagamento_uuid' => PlanoPagamento::inRandomOrder()->first()->uuid,
-            'valor_estimado' => $this->faker->randomFloat(),
-            'valor_minimo' => $this->faker->randomFloat(),
+            'valor_estimado' => 4050.00,
+            'valor_minimo' => 100,
+            'valor_progressao' => 50.00,
+            'percentual_progressao' => 5.00
         ];
     }
 }

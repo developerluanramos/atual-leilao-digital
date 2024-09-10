@@ -65,7 +65,20 @@ class PreLanceCreate extends Component
     public function selecionarLote(Lote $lote)
     {
         $this->lote = $lote;
-        $this->valorLance = $this->lote->lance_vencedor()->valor;
+        $acrescimoValorLance = 0;
+        if(!is_null($this->leilao->config_prelance_atual->percentual_progressao))
+        {
+            $percentualProgressao = $this->leilao->config_prelance_atual->percentual_progressao / 100;
+            $acrescimoValorLance = $percentualProgressao * $this->lote->lance_vencedor()->valor;
+        }
+
+        if(!is_null($this->leilao->config_prelance_atual->valor_progressao))
+        {
+            $acrescimoValorLance = 0;
+            $acrescimoValorLance = $this->leilao->config_prelance_atual->valor_progressao;
+        }
+        error_log($acrescimoValorLance);
+        $this->valorLance = $this->lote->lance_vencedor()->valor + $acrescimoValorLance;
         $this->updatedValorLance();
     }
 
@@ -77,7 +90,20 @@ class PreLanceCreate extends Component
             $condicoesPagamento = $this->lote->plano_pagamento()->first()->condicoes_pagamento()->get();
             
             if($this->valorLance == 0) {
-                $this->valorLance = $this->lote->lance_vencedor()->valor;
+                $acrescimoValorLance = 0;
+                if(!is_null($this->leilao->config_prelance_atual->percentual_progressao))
+                {
+                    $percentualProgressao = $this->leilao->config_prelance_atual->percentual_progressao / 100;
+                    $acrescimoValorLance = $percentualProgressao * $this->lote->lance_vencedor()->valor;
+                }
+
+                if(!is_null($this->leilao->config_prelance_atual->valor_progressao))
+                {
+                    $acrescimoValorLance = 0;
+                    $acrescimoValorLance = $this->leilao->config_prelance_atual->valor_progressao;
+                }
+                
+                $this->valorLance = $this->lote->lance_vencedor()->valor + $acrescimoValorLance;
             }
 
             foreach ($condicoesPagamento as $key => $condicaoPagamento)

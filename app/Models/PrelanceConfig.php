@@ -18,7 +18,9 @@ class PrelanceConfig extends Model
         'plano_pagamento_uuid',
         'leilao_uuid',
         'valor_estimado',
-        'valor_minimo'
+        'valor_minimo',
+        'valor_progressao',
+        'percentual_progressao'
     ];
 
     public function plano_pagamento()
