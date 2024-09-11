@@ -3,17 +3,25 @@
         <p>Nenhum plano de pagamento encontrado para esta data no pré-lance</p>
         @php die; @endphp
     @else
-        <div class="lg:grid lg:grid-cols-{{$leilao->config_prelance()->get()->count()}} mb-3">
-            @foreach($leilao->config_prelance()->get() as $config)
-                <div style="{{$leilao->config_prelance_atual->uuid == $config->uuid ? 'background-color: #1c9b17' : '#ccc'}}" class="flex cursor-pointer items-center flex-col p-4 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                    <h5>
+        <div class="mb-3">
+            <ul class="flex flex-wrap items-center justify-center text-gray-900 dark:text-white">
+                @foreach($leilao->config_prelance()->get() as $config)
+                <li class="text-center content-center items-center">
+                    <a href="#" class="me-4 {{$leilao->config_prelance_atual->uuid == $config->uuid ? 'underline' : ''}} md:me-6 ">
                         <span style="background-color: {{ $config->cor }}" class="flex w-3 h-3 mt-1 me-3 rounded-full"></span>
+                        {{ $config->data }}
+                    </a>
+                </li>
+                {{-- <div style="{{$leilao->config_prelance_atual->uuid == $config->uuid ? 'background-color: #1c9b17' : '#ccc'}}" class="flex cursor-pointer items-center flex-col p-4 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+                    <h5>
+                        
                     </h5>
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         {{ $config->data }}
                     </h5>
-                </div>
+                </div> --}}
             @endforeach
+            </ul>
         </div>
         <div class="p-4 mb-2 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
             <small>Plano Pagamento: <b>{{ $leilao->plano_pagamento_prelance->descricao }}</b></small>

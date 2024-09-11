@@ -203,6 +203,10 @@ class PreLanceCreate extends Component
             ]);
             
             (new PrelanceStoreController())->store($request, (new PrelanceStoreAction()));
+
+            redirect()->to(route('prelance.index', [
+                'leilaoUuid' => $this->leilao->uuid
+            ]));
         } catch (Exception $exception) {
             throw new Exception($exception->getMessage(), 1);
         }
