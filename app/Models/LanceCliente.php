@@ -13,7 +13,6 @@ class LanceCliente extends Model
     protected $table = "lance_cliente";
 
     protected $fillable = [
-        'uuid',
         'leilao_uuid',
         'lote_uuid',
         'lance_uuid',

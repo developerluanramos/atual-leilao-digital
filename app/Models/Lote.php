@@ -5,6 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Ramsey\Uuid\Type\Decimal;
 
 class Lote extends Model
 {
@@ -36,8 +37,14 @@ class Lote extends Model
         'valor_comissao_total',
         'valor_prelance',
         'valor_prelance_diferenca_valor_estimado',
-        'valor_prelance_percentual_valor_estimado'
+        'valor_prelance_percentual_valor_estimado',
+        'valor_prelance_calculado'
     ];
+
+    public function leilao()
+    {
+       return $this->hasOne(Leilao::class, 'uuid', 'leilao_uuid');
+    }
 
     public function plano_pagamento()
     {
@@ -61,25 +68,41 @@ class Lote extends Model
 
 
     /*
-    * Campos automáticos
+    * Valor da comissão de vendedor
     *
+    * @return mixed
     */
-    public function getValorComissaoVendaAttribute()
+    public function getValorComissaoVendaAttribute(): mixed
     {
         return $this->lance_vencedor()->valor_comissao_venda;
     }
 
-    public function getValorComissaoCompraAttribute()
+    /*
+    * Valor da comissão de comprador
+    *
+    * @return mixed
+    */
+    public function getValorComissaoCompraAttribute(): mixed
     {
         return $this->lance_vencedor()->valor_comissao_compra;
     }
 
-    public function getValorComissaoTotalAttribute()
+    /*
+    * Valor total da comissão
+    *
+    * @return mixed 
+    */
+    public function getValorComissaoTotalAttribute(): mixed
     {
         return $this->valor_comissao_venda + $this->valor_comissao_compra;
     }
 
-    public function getValorPrelanceAttribute()
+    /*
+    * Valor total atribuido ao lote durante o pré-lance
+    *
+    * @return float|int
+    */
+    public function getValorPrelanceAttribute(): float|int
     {
         $valorLanceOriginal = $this->lance_vencedor()->valor;
         $quantidadeClientes = $this->lance_vencedor()->clientes->count() ? $this->lance_vencedor()->clientes->count() : 1;
@@ -97,12 +120,57 @@ class Lote extends Model
         return $valorLotePreLance;
     }
 
-    public function getValorPrelancePercentualValorEstimadoAttribute()
+    /*
+    * Valor pré calculado do lance, levando em conta o 
+    * valor de progressao ou o percentual de progressao.
+    * Primeiro leva em conta o percentual, porém, caso esteja
+    * configurado algum valor em reais, este último será considerado.
+    *
+    * @return float|int
+    */
+    public function getValorPrelanceCalculadoAttribute(): float|int
+    {
+        if(!is_null($this->lance_vencedor()) && !is_null($this->leilao()->first()->config_prelance_atual)) {
+            $acrescimoValorLance = 0;
+
+            // -- calculo pelo percentual de progressao
+            if(!is_null($this->leilao()->first()->config_prelance_atual->percentual_progressao))
+            {
+                $percentualProgressao = $this->leilao()->first()->config_prelance_atual->percentual_progressao / 100;
+                $acrescimoValorLance = $percentualProgressao * $this->lance_vencedor()->valor;
+            }
+    
+            // -- caso tenha valor real configurado, ele substitui o calculo anterior
+            if(!is_null($this->leilao()->first()->config_prelance_atual->valor_progressao))
+            {
+                $acrescimoValorLance = 0;
+                $acrescimoValorLance = $this->leilao()->first()->config_prelance_atual->valor_progressao;
+            }
+    
+            return $this->lance_vencedor()->valor + $acrescimoValorLance;
+        }
+
+        return 0;
+    }
+
+    /**
+     * percentual atingido do valor estimado para o lote
+     * em relação ao valor atual do lote (o quanto o valor atual do lote atingiu
+     * em percentual o valor que havia sido estimado para este lote)
+     * 
+     * @return float|int
+     */
+    public function getValorPrelancePercentualValorEstimadoAttribute(): float|int
     {
         return (100 * $this->valor_prelance) / $this->valor_estimado;
     }
 
-    public function getValorPrelanceDiferencaValorEstimadoAttribute()
+    /**
+     * diferença entre o valor estimado e o valor do lote atual
+     * 
+     * @return float | int
+     */
+    public function getValorPrelanceDiferencaValorEstimadoAttribute(): float|int
     {
         return $this->valor_prelance - $this->valor_estimado;
     }

@@ -23,7 +23,6 @@ class LanceClienteFactory extends Factory
         $cliente = Cliente::inRandomOrder()->first();
 
         return [
-            'uuid' => fake()->uuid(),
             'leilao_uuid' => $lance->leilao_uuid,
             'lote_uuid' => $lance->lote_uuid,
             'lance_uuid' => $lance->uuid,

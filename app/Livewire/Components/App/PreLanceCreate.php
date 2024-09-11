@@ -2,13 +2,21 @@
 
 namespace App\Livewire\Components\App;
 
+use App\Actions\Prelance\PrelanceIndexAction;
+use App\Actions\Prelance\PrelanceStoreAction;
+use App\Http\Controllers\App\Prelance\PrelanceStoreController;
 use Livewire\Component;
 use App\Actions\Cliente\ClienteSearchAction;
+use App\Http\Requests\App\Prelance\PrelanceStoreRequest;
 use App\Models\Cliente;
 use App\Models\Leilao;
 use App\Models\Lote;
 use App\Repositories\Cliente\ClienteEloquentRepository;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route as FacadesRoute;
+use Route;
 
 class PreLanceCreate extends Component
 {
@@ -65,20 +73,7 @@ class PreLanceCreate extends Component
     public function selecionarLote(Lote $lote)
     {
         $this->lote = $lote;
-        $acrescimoValorLance = 0;
-        if(!is_null($this->leilao->config_prelance_atual->percentual_progressao))
-        {
-            $percentualProgressao = $this->leilao->config_prelance_atual->percentual_progressao / 100;
-            $acrescimoValorLance = $percentualProgressao * $this->lote->lance_vencedor()->valor;
-        }
-
-        if(!is_null($this->leilao->config_prelance_atual->valor_progressao))
-        {
-            $acrescimoValorLance = 0;
-            $acrescimoValorLance = $this->leilao->config_prelance_atual->valor_progressao;
-        }
-        error_log($acrescimoValorLance);
-        $this->valorLance = $this->lote->lance_vencedor()->valor + $acrescimoValorLance;
+        $this->valorLance = $this->lote->valor_prelance_calculado;
         $this->updatedValorLance();
     }
 
@@ -87,23 +82,10 @@ class PreLanceCreate extends Component
         if(!empty($this->compradores) && !empty($this->lote)) {
             $carbonHoje = Carbon::now();
             $this->parcelas = [];
-            $condicoesPagamento = $this->lote->plano_pagamento()->first()->condicoes_pagamento()->get();
+            $condicoesPagamento = $this->leilao->plano_pagamento_prelance->condicoes_pagamento()->get();
             
             if($this->valorLance == 0) {
-                $acrescimoValorLance = 0;
-                if(!is_null($this->leilao->config_prelance_atual->percentual_progressao))
-                {
-                    $percentualProgressao = $this->leilao->config_prelance_atual->percentual_progressao / 100;
-                    $acrescimoValorLance = $percentualProgressao * $this->lote->lance_vencedor()->valor;
-                }
-
-                if(!is_null($this->leilao->config_prelance_atual->valor_progressao))
-                {
-                    $acrescimoValorLance = 0;
-                    $acrescimoValorLance = $this->leilao->config_prelance_atual->valor_progressao;
-                }
-                
-                $this->valorLance = $this->lote->lance_vencedor()->valor + $acrescimoValorLance;
+                $this->valorLance = $this->lote->valor_prelance_calculado;
             }
 
             foreach ($condicoesPagamento as $key => $condicaoPagamento)
@@ -202,5 +184,27 @@ class PreLanceCreate extends Component
     public function getQuantidadeCompradoresProperty()
     {
         return count($this->compradores);
+    }
+
+    public function registrar()
+    {
+        try {
+            $request = PrelanceStoreRequest::create( route('prelance.store'), "POST", [
+                "_token" => csrf_token(),
+                'leilao_uuid' => $this->leilao->uuid,
+                'lote_uuid' => $this->lote->uuid,
+                'prelance_config_uuid' => $this->leilao->config_prelance_atual->uuid,
+                'plano_pagamento_uuid' => $this->leilao->plano_pagamento_prelance->uuid,
+                'realizado_em' => Carbon::now()->toDateString(),
+                'valor' => $this->valorLance,
+                'valor_comissao_compra' => 1,
+                'valor_comissao_venda' => 1,
+                'clientes' => $this->compradores      
+            ]);
+            
+            (new PrelanceStoreController())->store($request, (new PrelanceStoreAction()));
+        } catch (Exception $exception) {
+            throw new Exception($exception->getMessage(), 1);
+        }
     }
 }
