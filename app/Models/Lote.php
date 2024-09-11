@@ -74,7 +74,7 @@ class Lote extends Model
     */
     public function getValorComissaoVendaAttribute(): mixed
     {
-        return $this->lance_vencedor()->valor_comissao_venda;
+        return $this->lance_vencedor()->valor_comissao_venda ?? 0;
     }
 
     /*
@@ -84,7 +84,7 @@ class Lote extends Model
     */
     public function getValorComissaoCompraAttribute(): mixed
     {
-        return $this->lance_vencedor()->valor_comissao_compra;
+        return $this->lance_vencedor()->valor_comissao_compra ?? 0;
     }
 
     /*
@@ -104,20 +104,26 @@ class Lote extends Model
     */
     public function getValorPrelanceAttribute(): float|int
     {
-        $valorLanceOriginal = $this->lance_vencedor()->valor;
-        $quantidadeClientes = $this->lance_vencedor()->clientes->count() ? $this->lance_vencedor()->clientes->count() : 1;
-        $planoPagamento = $this->lance_vencedor()->plano_pagamento;
-        $condicoesPagamento = $planoPagamento->condicoes_pagamento()->get();
-        $valorLotePreLance = 0;
-
-        foreach ($condicoesPagamento as $key => $condicaoPagamento)
+        if($this->lance_vencedor())
         {
-            for($i = 0; $i <= $condicaoPagamento['qtd_parcelas']; $i++) {
-                $valorLotePreLance += ($condicaoPagamento['repeticoes'] * ($valorLanceOriginal * $this->itens->count())) / $quantidadeClientes;
+            $valorLanceOriginal = $this->lance_vencedor()->valor;
+            $quantidadeClientes = $this->lance_vencedor()->clientes->count() ? $this->lance_vencedor()->clientes->count() : 1;
+            $planoPagamento = $this->lance_vencedor()->plano_pagamento;
+            $condicoesPagamento = $planoPagamento->condicoes_pagamento()->get();
+            $valorLotePreLance = 0;
+    
+            foreach ($condicoesPagamento as $key => $condicaoPagamento)
+            {
+                for($i = 0; $i <= $condicaoPagamento['qtd_parcelas']; $i++) {
+                    $valorLotePreLance += ($condicaoPagamento['repeticoes'] * ($valorLanceOriginal * $this->itens->count())) / $quantidadeClientes;
+                }
             }
+    
+            return $valorLotePreLance;
         }
 
-        return $valorLotePreLance;
+        return 0;
+        
     }
 
     /*

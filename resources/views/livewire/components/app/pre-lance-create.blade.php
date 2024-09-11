@@ -98,7 +98,7 @@
                 <p><x-layouts.badges.info-money
                     :convert="false"
                     :textLength="'md'"
-                    :value="$lote->lance_vencedor()->valor" /></p>
+                    :value="$lote->lance_vencedor()?->valor ?? 0" /></p>
             </div>
         @endforeach
     </div>

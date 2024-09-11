@@ -57,14 +57,14 @@
                         <div class="space-y-8 lg:grid lg:grid-cols-6 pr-8 sm:gap-6 xl:gap-10 lg:space-y-0">
                             @foreach($leilao->lotes as $index => $lote)
                                 <div data-modal-target="{{$lote->uuid}}" data-modal-toggle="{{$lote->uuid}}"
-                                    style="background-color: {{ $lote->lance_vencedor()->prelance_config()->first()->cor }}" class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                                    style="background-color: {{ $lote->lance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc' }}" class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                         {{ $index + 1 }}
                                     </h5>
                                     <p><x-layouts.badges.info-money
                                         :convert="false"
                                         :textLength="'md'"
-                                        :value="$lote->lance_vencedor()->valor" /></p>
+                                        :value="$lote->lance_vencedor()?->valor ?? 0" /></p>
                                 </div>
                                 <x-layouts.modals.simple-modal
                                     :tamanho="4"
@@ -217,10 +217,10 @@
                                         </div>
                                     </div>
                                     <div class="flex-1 min-w-0 ms-4">
-                                        @foreach($lote->lance_vencedor()->clientes()->get() as $index => $clienteVencedor)
-                                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                            {{ $clienteVencedor->nome }}
-                                        </p>
+                                        @foreach($lote->lance_vencedor()?->clientes()?->get() ?? [] as $index => $clienteVencedor)
+                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                {{ $clienteVencedor->nome }}
+                                            </p>
                                         @endforeach
                                         <small>
                                             c. compra:
@@ -237,13 +237,12 @@
                                                 :value="$lote->valor_comissao_venda"
                                             />
                                         </small>
-
                                     </div>
                                     <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                                         <x-layouts.badges.info-money
                                             :convert="false"
                                             :textLength="'lg'"
-                                            :value="$lote->lance_vencedor()->valor"
+                                            :value="$lote->lance_vencedor()?->valor ?? 0"
                                             /><br>
                                     </div>
                                 </div>
