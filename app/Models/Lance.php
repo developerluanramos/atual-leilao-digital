@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,13 @@ class Lance extends Model
         'valor_comissao_venda'
     ];
 
+    protected $dates = ['created_at', 'updated_at'];
+    
+    protected $appends = [
+        'created_at_for_humans', 
+        'updated_at_for_humans'
+    ];
+
     public function lote()
     {
         return $this->belongsTo(Lote::class, 'lote_uuid', 'uuid');
@@ -41,5 +49,15 @@ class Lance extends Model
     public function plano_pagamento()
     {
         return $this->hasOne(PlanoPagamento::class, 'uuid', 'plano_pagamento_uuid');
+    }
+
+    public function getCreatedAtForHumansAttribute()
+    {
+        return $this->created_at->diffForHumans(Carbon::now());
+    }
+
+    public function getUpdatedAtForHumansAttribute()
+    {
+        return $this->updated_at->diffForHumans(Carbon::now());
     }
 }
