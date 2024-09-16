@@ -2,6 +2,7 @@
 
 namespace App\Charts;
 
+use App\Models\Leilao;
 use App\Models\Lote;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
@@ -14,9 +15,9 @@ class LotePrelanceValorAtingido
         $this->chart = $chart;
     }
 
-    public function build(string $leilaoUuid = null): \ArielMejiaDev\LarapexCharts\HorizontalBar
+    public function build(Leilao $leilao): \ArielMejiaDev\LarapexCharts\HorizontalBar
     {
-        $lotes = Lote::all();
+        $lotes = $leilao->lotes()->get();
 
         return $this->chart->horizontalBarChart()
             ->setHeight(900)
