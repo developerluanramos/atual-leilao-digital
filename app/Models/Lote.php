@@ -156,7 +156,7 @@ class Lote extends Model
             return $this->lance_vencedor()->valor + $acrescimoValorLance;
         } 
         
-        return $this->leilao()->first()->config_prelance_atual->valor_minimo;
+        return $this->leilao()?->first()?->config_prelance_atual?->valor_minimo ?? 0;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Components\App\Charts;
 
+use App\Charts\LotePrelanceValorAtingido;
 use Livewire\Component;
 use App\Models\Leilao;
 
@@ -20,8 +21,8 @@ class PrelanceLoteValorAtingido extends Component
         //     ->addSeriesColumn(['Shopping', 'teste'], [200, 222], ['#fc8181', '#f6ad55']);
     }
 
-    public function render()
+    public function render(LotePrelanceValorAtingido $lotePrelanceValorAtingido)
     {
-        return view('livewire.components.app.charts.prelance-lote-valor-atingido');
+        return view('livewire.components.app.charts.prelance-lote-valor-atingido', ['chart' => $lotePrelanceValorAtingido->build()]);
     }
 }
