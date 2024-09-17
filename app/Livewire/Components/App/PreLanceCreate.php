@@ -202,13 +202,15 @@ class PreLanceCreate extends Component
                 'clientes' => $this->compradores      
             ]);
             
+            $request->validate(PrelanceStoreRequest::rulesForLivewire());
+
             (new PrelanceStoreController())->store($request, (new PrelanceStoreAction()));
 
             redirect()->to(route('prelance.index', [
                 'leilaoUuid' => $this->leilao->uuid
             ]));
         } catch (Exception $exception) {
-            throw new Exception($exception->getMessage(), 1);
+            return redirect()->back()->withErrors($exception);
         }
     }
 }

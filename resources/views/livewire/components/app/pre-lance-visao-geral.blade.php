@@ -287,7 +287,9 @@
                          <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$lote->descricao}}</h6>
                          <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{$lote->created_at}} - {{$lote->lances()->count() }} lances</time>
                          <div class="w-full bg-gray-200 dark:bg-gray-700 mt-2">
-                            <div class="text-center bg-blue-600 text-xs text-blue font-medium text-blue-100 text-center p-1.5 leading-none" style="width: {{ $lote->valor_prelance_percentual_valor_estimado }}%"> 
+                            <div 
+                              class="text-center bg-{{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 'green' : 'blue' }}-600 text-xs text-{{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 'green' : 'blue' }} font-medium text-{{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 'green' : 'blue' }}-100 text-center p-1.5 leading-none" 
+                              style="width: {{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 100 : $lote->valor_prelance_percentual_valor_estimado }}%"> 
                             </div>
                          </div>
                          <x-layouts.badges.info-percent
@@ -329,6 +331,7 @@
                                <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$cliente->nome}}</h6>
                                @endforeach
                                <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{ $lance->created_at }}</time>
+                               <p><small>{{$lance->created_at_for_humans}}</small></p>
                                <small class="flex">
                                   <span style="background-color: {{ $lance->prelance_config()->first()->cor }}" class="flex w-3 h-3 mt-1 me-3 rounded-full"></span>
                                   <x-layouts.badges.info-money
@@ -398,7 +401,51 @@
                    </div>
                 </div>
              </div>
-             @livewire('components.app.charts.prelance-lote-valor-atingido', [$leilao])
+             <h2 id="accordion-flush-heading-prelance-lote-valor-atingido">
+               <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-prelance-lote-valor-atingido" aria-expanded="false" aria-controls="accordion-flush-body-prelance-lote-valor-atingido">
+                  <span>Gráfico Valor estimado x Valor atingido</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+               </button>
+            </h2>
+            <div id="accordion-flush-body-prelance-lote-valor-atingido" class="hidden" aria-labelledby="accordion-flush-heading-prelance-lote-valor-atingido">
+               <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                  <div class="w-full mb-6 md:mb-0">
+                     @livewire('components.app.charts.prelance-lote-valor-atingido', [$leilao])
+                  </div>
+               </div>
+            </div>
+            <h2 id="accordion-flush-heading-lote-prelance-percentual">
+               <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-lote-prelance-percentual" aria-expanded="false" aria-controls="accordion-flush-body-lote-prelance-percentual">
+                  <span>Gráfico Lotes Percentuais</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+               </button>
+            </h2>
+            <div id="accordion-flush-body-lote-prelance-percentual" class="hidden" aria-labelledby="accordion-flush-heading-lote-prelance-percentual">
+               <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                  <div class="w-full mb-6 md:mb-0">
+                     @livewire('components.app.charts.lote-prelance-percentual', [$leilao])
+                  </div>
+               </div>
+            </div>
+            <h2 id="accordion-flush-heading-lote-prelance-radial">
+               <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-lote-prelance-radial" aria-expanded="false" aria-controls="accordion-flush-body-lote-prelance-radial">
+                  <span>Gráfico Lotes Radial</span>
+                  <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                  </svg>
+               </button>
+            </h2>
+            <div id="accordion-flush-body-lote-prelance-radial" class="hidden" aria-labelledby="accordion-flush-heading-lote-prelance-radial">
+               <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                  <div class="w-full mb-6 md:mb-0">
+                     @livewire('components.app.charts.lote-prelance-radial', [$leilao])
+                  </div>
+               </div>
+            </div>
           </div>
        </div>
        <br>
