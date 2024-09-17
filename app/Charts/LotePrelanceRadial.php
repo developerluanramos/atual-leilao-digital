@@ -20,6 +20,7 @@ class LotePrelanceRadial
 
         return $this->chart->radarChart()
             ->addData('Valor Atingido', $lotes->pluck('valor_prelance')->toArray())
+            ->setHeight(700)
             ->setXAxis($lotes->pluck('id')->toArray())
             ->setMarkers(['#303F9F'], 7, 10);
     }

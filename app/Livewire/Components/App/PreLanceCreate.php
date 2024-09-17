@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Components\App;
 
-use App\Actions\Prelance\PrelanceIndexAction;
 use App\Actions\Prelance\PrelanceStoreAction;
 use App\Http\Controllers\App\Prelance\PrelanceStoreController;
 use Livewire\Component;
@@ -14,9 +13,6 @@ use App\Models\Lote;
 use App\Repositories\Cliente\ClienteEloquentRepository;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route as FacadesRoute;
-use Route;
 
 class PreLanceCreate extends Component
 {
@@ -45,7 +41,7 @@ class PreLanceCreate extends Component
         $this->compradores = [];
         $this->incideComissaoVenda = true;
         $this->incideComissaoCompra = true;
-        $this->valorLance = 0; //$this->formData['lote']['valor_estimado'];
+        $this->valorLance = 0;
 
         if(!empty($cliente)) {
             $this->compradores[] = $cliente->toArray(); 
