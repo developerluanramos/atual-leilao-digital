@@ -8,6 +8,7 @@ use App\Models\Equipe;
 use App\Models\Fornecedor;
 use App\Models\Lance;
 use App\Models\LanceCliente;
+use App\Models\Leiloeiro;
 use App\Models\PostoTrabalho;
 use App\Models\Setor;
 use App\Observers\CargoObserver;
@@ -17,6 +18,7 @@ use App\Observers\EquipeObserver;
 use App\Observers\FornecedorObserver;
 use App\Observers\LanceClienteObserver;
 use App\Observers\LanceObserver;
+use App\Observers\LeiloeiroObserver;
 use App\Observers\PostoTrabalhoObserver;
 use App\Observers\SetorObserver;
 use App\Observers\UsuarioObserver;
@@ -128,6 +130,7 @@ class AppServiceProvider extends ServiceProvider
         Departamento::observe(DepartamentoObserver::class);
         Lance::observe(LanceObserver::class);
         LanceCliente::observe(LanceClienteObserver::class);
+        Leiloeiro::observe(LeiloeiroObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {

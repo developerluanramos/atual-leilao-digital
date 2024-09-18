@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Leiloeiro;
 
+use App\DTO\Leiloeiro\LeiloeiroStoreDTO;
 use App\Models\Leiloeiro;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -45,5 +46,10 @@ class LeiloeiroEloquentRepository implements LeiloeiroRepositoryInterface
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 
         return new PaginationPresenter($result);
+    }
+
+    public function new(LeiloeiroStoreDTO $dto): Leiloeiro
+    {
+        return $this->model->create((array) $dto);
     }
 }
