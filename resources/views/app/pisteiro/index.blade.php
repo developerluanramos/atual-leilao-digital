@@ -13,13 +13,13 @@
 @include('components.alerts.form-success')
 
 @include('app.pisteiro.partials.filters', [
-    "cargos" => $pisteiros,
+    "pisteiros" => $pisteiros,
     "filters" => $filters
 ])
 
 
 @include('app.pisteiro.partials.list', [
-    "cargos" => $pisteiros,
+    "pisteiros" => $pisteiros,
     "filters" => $filters
 ])
 

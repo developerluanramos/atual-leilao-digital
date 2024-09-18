@@ -12,7 +12,7 @@
 
 @include('components.alerts.form-errors')
 
-<form action="{{ route('cargo.store') }}" method="POST">
+<form action="{{ route('pisteiro.store') }}" method="POST">
     @csrf
     @include('app.pisteiro.partials.form')
 </form>

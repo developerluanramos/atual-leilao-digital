@@ -120,3 +120,8 @@ Breadcrumbs::for('pisteiro.create', function (BreadcrumbTrail $trail) {
     $trail->parent('pisteiro');
     $trail->push('Novo Pisteiro', route('pisteiro.create'));
 });
+
+Breadcrumbs::for('pisteiro.edit', function (BreadcrumbTrail $trail, $pisteiro) {
+    $trail->parent('pisteiro');
+    $trail->push('Edição de Pisteiro', route('pisteiro.edit', $pisteiro));
+});

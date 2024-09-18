@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Pisteiro;
 
+use App\DTO\Pisteiro\PisteiroStoreDTO;
 use App\Models\Pisteiro;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -44,5 +45,10 @@ class PisteiroEloquentRepository implements PisteiroRepositoryInterface
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 
         return new PaginationPresenter($result);
+    }
+
+    public function new(PisteiroStoreDTO $dto): Pisteiro
+    {
+        return $this->model->create((array) $dto);
     }
 }
