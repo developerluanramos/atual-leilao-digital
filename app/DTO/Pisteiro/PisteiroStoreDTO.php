@@ -15,7 +15,7 @@ class PisteiroStoreDTO
     public static function makeFromRequest(PisteiroStoreRequest $request): self
     {
         return new self(
-            $request->name,
+            $request->nome,
             $request->email,
             $request->nascido_em
         );
