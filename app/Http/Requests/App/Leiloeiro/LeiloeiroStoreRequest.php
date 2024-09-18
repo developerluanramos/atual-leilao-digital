@@ -23,7 +23,7 @@ class LeiloeiroStoreRequest extends FormRequest
     {
         return [
             "nome" => ["required", "min:3", "max:255"],
-            "email" => ["required", "email"],
+            "email" => ["required", "email", "unique:leiloeiro"],
             "nascido_em" => ["required", "date"],
         ];
     }

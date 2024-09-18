@@ -24,7 +24,7 @@ class LeiloeiroUpdateRequest extends FormRequest
         return [
             "uuid" => ["uuid", "exists:leiloeiro,uuid"],
             "nome" => ["required", "min:3", "max:255"],
-            "email" => ["required", "email"],
+            "email" => ["required", "email", "unique:leiloeiro,email,$this->uuid,uuid"],
             "nascido_em" => ["required", "date"],
         ];
     }
