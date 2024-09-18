@@ -40,6 +40,8 @@ use App\Repositories\Leiloeiro\LeiloeiroEloquentRepository;
 use App\Repositories\Leiloeiro\LeiloeiroRepositoryInterface;
 use App\Repositories\Lote\LoteEloquentRepository;
 use App\Repositories\Lote\LoteRepositoryInterface;
+use App\Repositories\Pisteiro\PisteiroEloquentRepository;
+use App\Repositories\Pisteiro\PisteiroRepositoryInterface;
 use App\Repositories\PlanoPagamento\PlanoPagamentoEloquentRepository;
 use App\Repositories\PlanoPagamento\PlanoPagamentoRepositoryInterface;
 use App\Repositories\PostoTrabalho\PostoTrabalhoEloquentRepository;
@@ -110,6 +112,9 @@ class AppServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             LeiloeiroRepositoryInterface::class, LeiloeiroEloquentRepository::class
+        );
+        $this->app->bind(
+            PisteiroRepositoryInterface::class, PisteiroEloquentRepository::class
         );
     }
 
