@@ -19,7 +19,7 @@ class LotePrelanceRadial
         $lotes = $leilao->lotes()->get();
 
         return $this->chart->radarChart()
-            ->addData('Valor Atingido', $lotes->pluck('valor_prelance')->toArray())
+            ->addData('Quantidade de lances', $lotes->pluck('quantidade_lances')->toArray())
             ->setHeight(700)
             ->setXAxis($lotes->pluck('id')->toArray())
             ->setMarkers(['#303F9F'], 7, 10);

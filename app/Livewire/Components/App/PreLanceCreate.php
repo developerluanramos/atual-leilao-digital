@@ -193,8 +193,8 @@ class PreLanceCreate extends Component
                 'plano_pagamento_uuid' => $this->leilao->plano_pagamento_prelance->uuid,
                 'realizado_em' => Carbon::now()->toDateString(),
                 'valor' => $this->valorLance,
-                'valor_comissao_compra' => 1,
-                'valor_comissao_venda' => 1,
+                'valor_comissao_compra' => $this->valorTotalComissaoComprador,
+                'valor_comissao_venda' => $this->valorTotalComissaoVendedor,
                 'clientes' => $this->compradores      
             ]);
             
