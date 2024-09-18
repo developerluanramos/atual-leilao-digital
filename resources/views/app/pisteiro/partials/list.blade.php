@@ -23,7 +23,7 @@
                     text="Editar"
                     action="editar"
                     color="primary"
-                    :route="route('cargo.edit', $pisteiro->uuid)"/>
+                    :route="route('pisteiro.edit', $pisteiro->uuid)"/>
                 </td>
             </tr>
         @endforeach
