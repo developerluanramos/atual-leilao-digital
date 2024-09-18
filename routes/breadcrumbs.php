@@ -121,4 +121,8 @@ Breadcrumbs::for('leiloeiro.create', function (BreadcrumbTrail $trail) {
     $trail->push('Novo Leiloeiro', route('leiloeiro.create'));
 });
 
+Breadcrumbs::for('leiloeiro.edit', function (BreadcrumbTrail $trail, $leiloeiro) {
+    $trail->parent('leiloeiro');
+    $trail->push('Edição de Leiloeiro', route('leiloeiro.edit', $leiloeiro));
+});
 

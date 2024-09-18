@@ -1,8 +1,8 @@
 @extends('app.layouts.app')
 
-<!-- @section('breadcrumb')
-    {{ Breadcrumbs::render('cargo.edit', $leiloeiro) }}
-@endsection -->
+@section('breadcrumb')
+    {{ Breadcrumbs::render('leiloeiro.edit', $leiloeiro) }}
+@endsection
 
 @section('title', 'Edição Leiloeiro')
 
@@ -12,7 +12,7 @@
 
 @include('components.alerts.form-errors')
 
-<form action="{{route('cargo.update', $leiloeiro->uuid)}}" method="POST">
+<form action="{{route('leiloeiro.update', $leiloeiro->uuid)}}" method="POST">
     @method('PUT')
     @include('app.leiloeiro.partials.form', ["leiloeiro" => $leiloeiro])
 </form>
