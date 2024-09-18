@@ -8,7 +8,7 @@
 
 @section('content')
 
-<x-layouts.headers.list-header :count="$leiloeiros->total()" :title="'Leiloeiros'" :route="'cargo/create'"/>
+<x-layouts.headers.list-header :count="$leiloeiros->total()" :title="'Leiloeiros'" :route="'leiloeiro/create'"/>
 
 @include('components.alerts.form-success')
 

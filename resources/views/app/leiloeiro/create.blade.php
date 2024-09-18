@@ -1,12 +1,12 @@
 @extends('app.layouts.app')
 
-<!-- @section('breadcrumb')
-    {{ Breadcrumbs::render('cargo.create') }}
-@endsection -->
+@section('breadcrumb')
+    {{ Breadcrumbs::render('leiloeiro.create') }}
+@endsection
 
 @section('title', 'Novo Leiloeiro')
 
-<x-layouts.headers.create-header :title="'Novo Cargo'"/>
+<x-layouts.headers.create-header :title="'Novo Leiloeiro'"/>
 
 @section('content')
 

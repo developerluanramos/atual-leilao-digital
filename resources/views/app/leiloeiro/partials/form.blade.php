@@ -21,7 +21,7 @@
         label="Data de Nascimento"
         name="nascido_em"
         lenght="8/12"
-        :value="$cargo->nascido_em ?? old('nascido_em')"
+        :value="$leiloeiro->nascido_em ?? old('nascido_em')"
     />
 </div>
 <x-layouts.buttons.submit-button text="Salvar"/>
