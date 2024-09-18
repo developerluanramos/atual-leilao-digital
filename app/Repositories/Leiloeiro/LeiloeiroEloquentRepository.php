@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Leiloeiro;
 
+use App\DTO\Leiloeiro\LeiloeiroDeleteDTO;
 use App\DTO\Leiloeiro\LeiloeiroStoreDTO;
 use App\DTO\Leiloeiro\LeiloeiroUpdateDTO;
 use App\Models\Leiloeiro;
@@ -59,5 +60,10 @@ class LeiloeiroEloquentRepository implements LeiloeiroRepositoryInterface
         $this->model->where("uuid", $dto->uuid)->update((array) $dto);
 
         return $this->find($dto->uuid);
+    }
+
+    public function delete(LeiloeiroDeleteDTO $dto): void
+    {
+        $this->model->where("uuid", $dto->uuid)->delete($dto->uuid);
     }
 }

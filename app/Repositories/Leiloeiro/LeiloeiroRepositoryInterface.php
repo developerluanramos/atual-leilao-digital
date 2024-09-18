@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Leiloeiro;
 
+use App\DTO\Leiloeiro\LeiloeiroDeleteDTO;
 use App\DTO\Leiloeiro\LeiloeiroStoreDTO;
 use App\DTO\Leiloeiro\LeiloeiroUpdateDTO;
 use App\Models\Leiloeiro;
@@ -19,5 +20,7 @@ interface LeiloeiroRepositoryInterface
 
     public function new(LeiloeiroStoreDTO $dto): Leiloeiro;
 
-    public function update(LeiloeiroUpdateDTO $dto):Leiloeiro;
+    public function update(LeiloeiroUpdateDTO $dto): Leiloeiro;
+
+    public function delete(LeiloeiroDeleteDTO $dto): void;
 }

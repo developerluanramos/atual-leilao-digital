@@ -24,6 +24,15 @@
                     action="editar"
                     color="primary"
                     :route="route('leiloeiro.edit', $leiloeiro->uuid)"/>
+                <x-layouts.buttons.action-button
+                    text="Excluir"
+                    action="excluir"
+                    color="danger"
+                    :identificador="'drawer-delete-confirmacao'"
+                    :route="route('leiloeiro.delete', [
+                        'uuid' => $leiloeiro->uuid
+                    ])"
+                />
                 </td>
             </tr>
         @endforeach
