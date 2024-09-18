@@ -12,7 +12,7 @@
 
 @include('components.alerts.form-errors')
 
-<form action="{{route('cargo.update', $pisteiro->uuid)}}" method="POST">
+<form action="{{route('pisteiro.update', $pisteiro->uuid)}}" method="POST">
     @method('PUT')
     @include('app.pisteiro.partials.form', ["pisteiro" => $pisteiro])
 </form>

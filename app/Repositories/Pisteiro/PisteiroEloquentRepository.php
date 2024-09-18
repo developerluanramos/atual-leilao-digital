@@ -3,6 +3,7 @@
 namespace App\Repositories\Pisteiro;
 
 use App\DTO\Pisteiro\PisteiroStoreDTO;
+use App\DTO\Pisteiro\PisteiroUpdateDTO;
 use App\Models\Pisteiro;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -50,5 +51,12 @@ class PisteiroEloquentRepository implements PisteiroRepositoryInterface
     public function new(PisteiroStoreDTO $dto): Pisteiro
     {
         return $this->model->create((array) $dto);
+    }
+
+    public function update(PisteiroUpdateDTO $dto): Pisteiro
+    {
+        $this->model->where("uuid", $dto->uuid)->update((array) $dto);
+
+        return $this->find($dto->uuid);
     }
 }
