@@ -24,6 +24,15 @@
                     action="editar"
                     color="primary"
                     :route="route('pisteiro.edit', $pisteiro->uuid)"/>
+                <x-layouts.buttons.action-button
+                    text="Excluir"
+                    action="excluir"
+                    color="danger"
+                    :identificador="'drawer-delete-confirmacao'"
+                    :route="route('pisteiro.delete', [
+                        'uuid' => $pisteiro->uuid
+                    ])"
+                />
                 </td>
             </tr>
         @endforeach

@@ -20,4 +20,6 @@ interface PisteiroRepositoryInterface
     public function new(PisteiroStoreDTO $dto): Pisteiro;
 
     public function update(PisteiroUpdateDTO $dto): Pisteiro;
+
+    public function delete(string $uuid): void;
 }

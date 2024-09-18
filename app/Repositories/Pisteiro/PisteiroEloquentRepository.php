@@ -59,4 +59,9 @@ class PisteiroEloquentRepository implements PisteiroRepositoryInterface
 
         return $this->find($dto->uuid);
     }
+
+    public function delete(string $uuid): void
+    {
+        $this->model->where("uuid", $uuid)->delete();
+    }
 }
