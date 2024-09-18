@@ -23,7 +23,7 @@
                     text="Editar"
                     action="editar"
                     color="primary"
-                    :route="route('cargo.edit', $leiloeiro->uuid)"/>
+                    :route="route('leiloeiro.edit', $leiloeiro->uuid)"/>
                 </td>
             </tr>
         @endforeach

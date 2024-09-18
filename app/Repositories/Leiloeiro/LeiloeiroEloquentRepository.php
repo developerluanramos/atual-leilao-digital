@@ -28,7 +28,7 @@ class LeiloeiroEloquentRepository implements LeiloeiroRepositoryInterface
     public function find(string $uuid): Leiloeiro
     {
         return $this->model
-            ->with('promotor', 'leiloeiro', 'lotes')
+            // ->with('promotor', 'leiloeiro', 'lotes')
             ->where('uuid', $uuid)->firstOrFail();
     }
 
