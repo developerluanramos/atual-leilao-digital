@@ -17,11 +17,12 @@
     />
 </div>
 <div class="flex flex-wrap -mx-3 mb-2">
-    <x-layouts.inputs.input-normal-text
+    <x-layouts.inputs.input-date
         label="Data de Nascimento"
         name="nascido_em"
         lenght="8/12"
         :value="$leiloeiro->nascido_em ?? old('nascido_em')"
     />
 </div>
+
 <x-layouts.buttons.submit-button text="Salvar"/>
