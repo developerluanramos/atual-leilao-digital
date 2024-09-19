@@ -116,3 +116,7 @@ Breadcrumbs::for('especie', function (BreadcrumbTrail $trail) {
     $trail->push('Especies', route('especie.index'));
 });
 
+Breadcrumbs::for('especie.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('especie');
+    $trail->push('Nova Especie', route('especie.create'));
+});
