@@ -12,7 +12,7 @@
                 <td>{{ $especie->nome }}</td>
                 <td>{{ $especie->descricao }}</td>
                 <td class="text-right">
-                    <x-layouts.buttons.action-button
+                <x-layouts.buttons.action-button
                     text="Ver"
                     action="ver"
                     color="secondary"
@@ -22,6 +22,15 @@
                     action="editar"
                     color="primary"
                     :route="route('especie.edit', $especie->uuid)"/>
+                <x-layouts.buttons.action-button
+                    text="Excluir"
+                    action="excluir"
+                    color="danger"
+                    :identificador="'drawer-delete-confirmacao'"
+                    :route="route('especie.delete', [
+                        'uuid' => $especie->uuid
+                    ])"
+                />
                 </td>
             </tr>
         @endforeach

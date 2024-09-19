@@ -20,4 +20,6 @@ interface EspecieRepositoryInterface
     public function new(EspecieStoreDTO $dto): Especie;
 
     public function update(EspecieUpdateDTO $dto): Especie;
+
+    public function delete(string $uuid): void;
 }
