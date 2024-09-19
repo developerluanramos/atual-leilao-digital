@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Especie;
 
+use App\DTO\Especie\EspecieStoreDTO;
 use App\Models\Especie;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -45,5 +46,10 @@ class EspecieEloquentRepository implements EspecieRepositoryInterface
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 
         return new PaginationPresenter($result);
+    }
+
+    public function new(EspecieStoreDTO $dto): Especie
+    {
+        return $this->model->create((array) $dto);
     }
 }

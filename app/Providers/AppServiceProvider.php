@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Cargo;
 use App\Models\Departamento;
 use App\Models\Equipe;
+use App\Models\Especie;
 use App\Models\Fornecedor;
 use App\Models\Lance;
 use App\Models\LanceCliente;
@@ -14,6 +15,7 @@ use App\Observers\CargoObserver;
 use App\Models\User;
 use App\Observers\DepartamentoObserver;
 use App\Observers\EquipeObserver;
+use App\Observers\EspecieObserver;
 use App\Observers\FornecedorObserver;
 use App\Observers\LanceClienteObserver;
 use App\Observers\LanceObserver;
@@ -128,6 +130,7 @@ class AppServiceProvider extends ServiceProvider
         Departamento::observe(DepartamentoObserver::class);
         Lance::observe(LanceObserver::class);
         LanceCliente::observe(LanceClienteObserver::class);
+        Especie::observe(EspecieObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
