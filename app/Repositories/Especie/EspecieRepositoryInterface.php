@@ -3,6 +3,7 @@
 namespace App\Repositories\Especie;
 
 use App\DTO\Especie\EspecieStoreDTO;
+use App\DTO\Especie\EspecieUpdateDTO;
 use App\Models\Especie;
 use App\Repositories\Interfaces\PaginationInterface;
 
@@ -17,4 +18,6 @@ interface EspecieRepositoryInterface
     public function paginate(int $page = 1, int $totalPerPage = 10, string $filter = null): PaginationInterface;
 
     public function new(EspecieStoreDTO $dto): Especie;
+
+    public function update(EspecieUpdateDTO $dto): Especie;
 }

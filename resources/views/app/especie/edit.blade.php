@@ -12,7 +12,7 @@
 
 @include('components.alerts.form-errors')
 
-<form action="{{route('cargo.update', $especie->uuid)}}" method="POST">
+<form action="{{route('especie.update', $especie->uuid)}}" method="POST">
     @method('PUT')
     @include('app.especie.partials.form', ["especie" => $especie])
 </form>

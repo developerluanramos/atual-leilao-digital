@@ -3,6 +3,7 @@
 namespace App\Repositories\Especie;
 
 use App\DTO\Especie\EspecieStoreDTO;
+use App\DTO\Especie\EspecieUpdateDTO;
 use App\Models\Especie;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -51,5 +52,12 @@ class EspecieEloquentRepository implements EspecieRepositoryInterface
     public function new(EspecieStoreDTO $dto): Especie
     {
         return $this->model->create((array) $dto);
+    }
+
+    public function update(EspecieUpdateDTO $dto): Especie
+    {
+        $this->model->where("uuid", $dto->uuid)->update((array) $dto);
+
+        return $this->find($dto->uuid);
     }
 }
