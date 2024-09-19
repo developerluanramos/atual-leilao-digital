@@ -111,4 +111,8 @@ Breadcrumbs::for('departamento.edit', function (BreadcrumbTrail $trail, $departa
     $trail->push('Edição de Departamento', route('departamento.edit', $departamento));
 });
 
+Breadcrumbs::for('especie', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard' , route('dashboard.index'));
+    $trail->push('Especies', route('especie.index'));
+});
 
