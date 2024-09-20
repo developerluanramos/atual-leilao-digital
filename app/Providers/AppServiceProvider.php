@@ -9,6 +9,7 @@ use App\Models\Fornecedor;
 use App\Models\Lance;
 use App\Models\LanceCliente;
 use App\Models\PostoTrabalho;
+use App\Models\Raca;
 use App\Models\Setor;
 use App\Observers\CargoObserver;
 use App\Models\User;
@@ -18,6 +19,7 @@ use App\Observers\FornecedorObserver;
 use App\Observers\LanceClienteObserver;
 use App\Observers\LanceObserver;
 use App\Observers\PostoTrabalhoObserver;
+use App\Observers\RacaObserver;
 use App\Observers\SetorObserver;
 use App\Observers\UsuarioObserver;
 use App\Repositories\Cargo\CargoEloquentRepository;
@@ -128,6 +130,7 @@ class AppServiceProvider extends ServiceProvider
         Departamento::observe(DepartamentoObserver::class);
         Lance::observe(LanceObserver::class);
         LanceCliente::observe(LanceClienteObserver::class);
+        Raca::observe(RacaObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
