@@ -28,7 +28,6 @@ class RacaEloquentRepository implements RacaRepositoryInterface
     public function find(string $uuid): Raca
     {
         return $this->model
-            ->with('promotor', 'leiloeiro', 'lotes')
             ->where('uuid', $uuid)->firstOrFail();
     }
 

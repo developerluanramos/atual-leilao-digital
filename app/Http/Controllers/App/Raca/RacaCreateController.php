@@ -17,5 +17,4 @@ class RacaCreateController extends Controller
         $formData = $this->createAction->exec();
         return view('app.raca.create', compact('formData'));
     }
-
 }
