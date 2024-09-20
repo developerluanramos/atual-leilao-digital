@@ -3,6 +3,7 @@
 namespace App\Repositories\Raca;
 
 use App\DTO\Raca\RacaStoreDTO;
+use App\DTO\Raca\RacaUpdateDTO;
 use App\Models\Raca;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -50,5 +51,12 @@ class RacaEloquentRepository implements RacaRepositoryInterface
     public function new(RacaStoreDTO $dto): Raca
     {
         return $this->model->create((array) $dto);
+    }
+
+    public function update(RacaUpdateDTO $dto): Raca
+    {
+        $this->model->where("uuid", $dto->uuid)->update((array) $dto);
+
+        return $this->find($dto->uuid);
     }
 }
