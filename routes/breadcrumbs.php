@@ -116,4 +116,8 @@ Breadcrumbs::for('raca', function (BreadcrumbTrail $trail) {
     $trail->push('Raças', route('raca.index'));
 });
 
+Breadcrumbs::for('raca.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('raca');
+    $trail->push('Nova Raça', route('raca.create'));
+});
 
