@@ -11,7 +11,7 @@
 <div class="flex flex-wrap -mx-3 mb-2">
     <x-layouts.inputs.input-normal-text
         label="Descrição"
-        name="nome"
+        name="descricao"
         lenght="8/12"
         :value="$raca->descricao ?? old('descricao')"
     />

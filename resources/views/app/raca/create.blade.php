@@ -4,7 +4,7 @@
     {{ Breadcrumbs::render('raca.create') }}
 @endsection
 
-@section('title', 'Novo Cargo')
+@section('title', 'Nova Raça')
 
 <x-layouts.headers.create-header :title="'Nova Raça'"/>
 
@@ -12,7 +12,7 @@
 
 @include('components.alerts.form-errors')
 
-<form action="{{ route('cargo.store') }}" method="POST">
+<form action="{{ route('raca.store') }}" method="POST">
     @csrf
     @include('app.raca.partials.form')
 </form>

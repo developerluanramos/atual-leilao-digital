@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Raca;
 
+use App\DTO\Raca\RacaStoreDTO;
 use App\Models\Raca;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -45,5 +46,10 @@ class RacaEloquentRepository implements RacaRepositoryInterface
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 
         return new PaginationPresenter($result);
+    }
+
+    public function new(RacaStoreDTO $dto): Raca
+    {
+        return $this->model->create((array) $dto);
     }
 }
