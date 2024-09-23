@@ -111,7 +111,21 @@ Breadcrumbs::for('departamento.edit', function (BreadcrumbTrail $trail, $departa
     $trail->push('Edição de Departamento', route('departamento.edit', $departamento));
 });
 
-Breadcrumbs::for('raca', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('especie', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard' , route('dashboard.index'));
+    $trail->push('Especies', route('especie.index'));
+});
+
+Breadcrumbs::for('especie.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('especie');
+    $trail->push('Nova Especie', route('especie.create'));
+});
+
+Breadcrumbs::for('especie.edit', function (BreadcrumbTrail $trail, $especie) {
+    $trail->parent('especie');
+    $trail->push('Edição de Especie', route('especie.edit', $especie));
+
+    Breadcrumbs::for('raca', function (BreadcrumbTrail $trail) {
     $trail->parent('Dashboard', route('dashboard.index'));
     $trail->push('Raças', route('raca.index'));
 });
@@ -124,7 +138,8 @@ Breadcrumbs::for('raca.create', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('raca.edit', function (BreadcrumbTrail $trail, $raca) {
     $trail->parent('raca');
     $trail->push('Edição de Raça', route('raca.edit', $raca));
-Breadcrumbs::for('pisteiro', function (BreadcrumbTrail $trail) {
+
+    Breadcrumbs::for('pisteiro', function (BreadcrumbTrail $trail) {
     $trail->parent('Dashboard' , route('dashboard.index'));
     $trail->push('Pisteiros', route('pisteiro.index'));
 });
