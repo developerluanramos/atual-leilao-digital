@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->uuid()->unique();
             $table->string('nome');
+            $table->string('email');
+            $table->date('nascido_em');
             $table->timestamps();
         });
     }
