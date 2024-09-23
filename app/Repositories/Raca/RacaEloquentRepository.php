@@ -59,4 +59,10 @@ class RacaEloquentRepository implements RacaRepositoryInterface
 
         return $this->find($dto->uuid);
     }
+
+    public function delete(string $uuid): void
+    {
+        $raca = $this->find($uuid);
+        $raca->delete();
+    }
 }

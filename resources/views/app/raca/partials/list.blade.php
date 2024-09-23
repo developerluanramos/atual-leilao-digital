@@ -22,6 +22,15 @@
                     action="editar"
                     color="primary"
                     :route="route('raca.edit', $raca->uuid)"/>
+                <x-layouts.buttons.action-button
+                    text="Excluir"
+                    action="excluir"
+                    color="danger"
+                    :identificador="'drawer-delete-confirmacao'"
+                    :route="route('raca.delete', [
+                        'uuid' => $raca->uuid
+                    ])"
+                />
                 </td>
             </tr>
         @endforeach

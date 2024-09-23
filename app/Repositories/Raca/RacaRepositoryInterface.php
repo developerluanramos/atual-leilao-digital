@@ -20,4 +20,6 @@ interface RacaRepositoryInterface
     public function new(RacaStoreDTO $dto): Raca;
 
     public function update(RacaUpdateDTO $dto): Raca;
+
+    public function delete(string $uuid): void;
 }
