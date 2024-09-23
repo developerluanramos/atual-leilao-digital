@@ -38,7 +38,8 @@ class Lote extends Model
         'valor_prelance',
         'valor_prelance_diferenca_valor_estimado',
         'valor_prelance_percentual_valor_estimado',
-        'valor_prelance_calculado'
+        'valor_prelance_calculado',
+        'quantidade_lances'
     ];
 
     public function leilao()
@@ -64,6 +65,17 @@ class Lote extends Model
     public function lance_vencedor()
     {
         return $this->lances->last();
+    }
+
+
+    /*
+    * Valor da comissão de vendedor
+    *
+    * @return mixed
+    */
+    public function getQuantidadeLancesAttribute(): mixed
+    {
+        return $this->lances()->get()->count() ?? 0;
     }
 
 
@@ -99,6 +111,7 @@ class Lote extends Model
 
     /*
     * Valor total atribuido ao lote durante o pré-lance
+    * (obtido por meio do lance vencedor)
     *
     * @return float|int
     */
@@ -122,8 +135,7 @@ class Lote extends Model
             return $valorLotePreLance;
         }
 
-        return 0;
-        
+        return 0; 
     }
 
     /*
@@ -131,6 +143,8 @@ class Lote extends Model
     * valor de progressao ou o percentual de progressao.
     * Primeiro leva em conta o percentual, porém, caso esteja
     * configurado algum valor em reais, este último será considerado.
+    *
+    * (isto é utilizado pra determinar o valor do próximo lance a ser ofertado no lote)
     *
     * @return float|int
     */

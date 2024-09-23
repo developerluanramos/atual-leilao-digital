@@ -14,5 +14,7 @@ class Pisteiro extends Model
     protected $fillable = [
         'uuid',
         'nome',
+        'email',
+        'nascido_em'
     ];
 }

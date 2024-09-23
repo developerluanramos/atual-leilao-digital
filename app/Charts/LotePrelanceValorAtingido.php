@@ -20,10 +20,10 @@ class LotePrelanceValorAtingido
         $lotes = $leilao->lotes()->get();
 
         return $this->chart->horizontalBarChart()
-            ->setHeight(900)
-            ->setTitle('valor estimado x Valor atingido')
             ->addData('Valor Estimado', $lotes->pluck('valor_estimado')->toArray())
             ->addData('Valor Atingido', $lotes->pluck('valor_prelance')->toArray())
+            ->setHeight(900)
+            ->setTitle('valor estimado x Valor atingido')
             ->setXAxis($lotes->pluck('id')->toArray());
     }
 }

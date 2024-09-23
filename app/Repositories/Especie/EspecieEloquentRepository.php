@@ -2,6 +2,9 @@
 
 namespace App\Repositories\Especie;
 
+use App\DTO\Especie\EspecieDeleteDTO;
+use App\DTO\Especie\EspecieStoreDTO;
+use App\DTO\Especie\EspecieUpdateDTO;
 use App\Models\Especie;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -45,5 +48,23 @@ class EspecieEloquentRepository implements EspecieRepositoryInterface
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 
         return new PaginationPresenter($result);
+    }
+
+    public function new(EspecieStoreDTO $dto): Especie
+    {
+        return $this->model->create((array) $dto);
+    }
+
+    public function update(EspecieUpdateDTO $dto): Especie
+    {
+        $this->model->where("uuid", $dto->uuid)->update((array) $dto);
+
+        return $this->find($dto->uuid);
+    }
+
+    public function delete(string $uuid): void
+    {
+        $especie = $this->find($uuid);
+        $especie->delete();
     }
 }

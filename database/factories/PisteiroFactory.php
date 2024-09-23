@@ -19,6 +19,8 @@ class PisteiroFactory extends Factory
         return [
             'uuid' => fake()->uuid(),
             'nome' => fake()->name(),
+            'email' => fake()->email(),
+            'nascido_em' => fake()->date()
         ];
     }
 }

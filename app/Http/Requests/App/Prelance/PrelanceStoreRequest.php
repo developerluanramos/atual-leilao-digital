@@ -14,13 +14,28 @@ class PrelanceStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'leilao_uuid' => ["required"],
-            // 'lote_uuid' => ["required"],
-            // 'prelance_config_uuid' => ["required"],
-            // 'plano_pagamento_uuid' => ["required"],
-            // 'realizado_em' => ["required"],
-            // 'valor' => ["required"],
-            // 'clientes' => ["required"],
+            'leilao_uuid' => ["required"],
+            'lote_uuid' => ["required"],
+            'prelance_config_uuid' => ["required"],
+            'plano_pagamento_uuid' => ["required"],
+            'realizado_em' => ["required"],
+            'valor' => ["required"],
+            'clientes' => ["required"],
+        ];
+    }
+
+    static function rulesForLivewire(): array
+    {
+        return [
+            'leilao_uuid' => ["required"],
+            'lote_uuid' => ["required"],
+            'prelance_config_uuid' => ["required"],
+            'plano_pagamento_uuid' => ["required"],
+            'realizado_em' => ["required"],
+            'valor' => ["required"],
+            'valor_comissao_compra' => ["required"],
+            'valor_comissao_venda' => ["required"],
+            'clientes' => ["required"],
         ];
     }
 }

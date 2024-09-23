@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Components\App;
 
-use App\Actions\Prelance\PrelanceIndexAction;
 use App\Actions\Prelance\PrelanceStoreAction;
 use App\Http\Controllers\App\Prelance\PrelanceStoreController;
 use Livewire\Component;
@@ -14,9 +13,6 @@ use App\Models\Lote;
 use App\Repositories\Cliente\ClienteEloquentRepository;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route as FacadesRoute;
-use Route;
 
 class PreLanceCreate extends Component
 {
@@ -45,7 +41,7 @@ class PreLanceCreate extends Component
         $this->compradores = [];
         $this->incideComissaoVenda = true;
         $this->incideComissaoCompra = true;
-        $this->valorLance = 0; //$this->formData['lote']['valor_estimado'];
+        $this->valorLance = 0;
 
         if(!empty($cliente)) {
             $this->compradores[] = $cliente->toArray(); 
@@ -197,18 +193,20 @@ class PreLanceCreate extends Component
                 'plano_pagamento_uuid' => $this->leilao->plano_pagamento_prelance->uuid,
                 'realizado_em' => Carbon::now()->toDateString(),
                 'valor' => $this->valorLance,
-                'valor_comissao_compra' => 1,
-                'valor_comissao_venda' => 1,
+                'valor_comissao_compra' => $this->valorTotalComissaoComprador,
+                'valor_comissao_venda' => $this->valorTotalComissaoVendedor,
                 'clientes' => $this->compradores      
             ]);
             
+            $request->validate(PrelanceStoreRequest::rulesForLivewire());
+
             (new PrelanceStoreController())->store($request, (new PrelanceStoreAction()));
 
             redirect()->to(route('prelance.index', [
                 'leilaoUuid' => $this->leilao->uuid
             ]));
         } catch (Exception $exception) {
-            throw new Exception($exception->getMessage(), 1);
+            return redirect()->back()->withErrors($exception);
         }
     }
 }

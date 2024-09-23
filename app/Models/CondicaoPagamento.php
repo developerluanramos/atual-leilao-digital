@@ -18,6 +18,8 @@ class CondicaoPagamento extends Model
         'qtd_parcelas',
         'percentual_comissao_vendedor',
         'percentual_comissao_comprador',
+        'incide_comissao_comprador',
+        'incide_comissao_vendedor',
         'plano_pagamento_uuid',
     ];
 }

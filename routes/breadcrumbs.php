@@ -124,5 +124,45 @@ Breadcrumbs::for('leiloeiro.create', function (BreadcrumbTrail $trail) {
 Breadcrumbs::for('leiloeiro.edit', function (BreadcrumbTrail $trail, $leiloeiro) {
     $trail->parent('leiloeiro');
     $trail->push('Edição de Leiloeiro', route('leiloeiro.edit', $leiloeiro));
+Breadcrumbs::for('especie', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard' , route('dashboard.index'));
+    $trail->push('Especies', route('especie.index'));
 });
 
+Breadcrumbs::for('especie.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('especie');
+    $trail->push('Nova Especie', route('especie.create'));
+});
+
+Breadcrumbs::for('especie.edit', function (BreadcrumbTrail $trail, $especie) {
+    $trail->parent('especie');
+    $trail->push('Edição de Especie', route('especie.edit', $especie));
+
+    Breadcrumbs::for('raca', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard', route('dashboard.index'));
+    $trail->push('Raças', route('raca.index'));
+});
+
+Breadcrumbs::for('raca.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('raca');
+    $trail->push('Nova Raça', route('raca.create'));
+});
+
+Breadcrumbs::for('raca.edit', function (BreadcrumbTrail $trail, $raca) {
+    $trail->parent('raca');
+    $trail->push('Edição de Raça', route('raca.edit', $raca));
+
+    Breadcrumbs::for('pisteiro', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard' , route('dashboard.index'));
+    $trail->push('Pisteiros', route('pisteiro.index'));
+});
+
+Breadcrumbs::for('pisteiro.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('pisteiro');
+    $trail->push('Novo Pisteiro', route('pisteiro.create'));
+});
+
+Breadcrumbs::for('pisteiro.edit', function (BreadcrumbTrail $trail, $pisteiro) {
+    $trail->parent('pisteiro');
+    $trail->push('Edição de Pisteiro', route('pisteiro.edit', $pisteiro));
+});
