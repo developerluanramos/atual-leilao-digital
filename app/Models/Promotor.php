@@ -13,6 +13,8 @@ class Promotor extends Model
 
     protected $fillable = [
         'uuid',
-        'nome'
+        'nome',
+        'email',
+        'nascido_em'
     ];
 }

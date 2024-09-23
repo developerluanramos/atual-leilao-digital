@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Promotor;
 
+use App\DTO\Promotor\PromotorStoreDTO;
 use App\Models\Promotor;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -29,5 +30,10 @@ class PromotorEloquentRepository implements PromotorRepositoryInterface
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 
         return new PaginationPresenter($result);
+    }
+
+    public function new(PromotorStoreDTO $dto): Promotor
+    {
+        return $this->model->create((array) $dto);
     }
 }
