@@ -2,7 +2,8 @@
     :headers="[
         'Nome',
         'Email',
-        'Data de Nascimento'
+        'Data de Nascimento',
+        'Ações'
     ]"
     :paginator="$promotores"
     :appends="$filters"

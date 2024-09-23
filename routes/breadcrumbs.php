@@ -175,3 +175,8 @@ Breadcrumbs::for('promotor', function (BreadcrumbTrail $trail) {
     $trail->parent('Dashboard' , route('dashboard.index'));
     $trail->push('Promotor', route('promotor.index'));
 });
+
+Breadcrumbs::for('promotor.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('promotor');
+    $trail->push('Novo Promotor', route('promotor.create'));
+});

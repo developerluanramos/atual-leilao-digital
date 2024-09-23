@@ -8,7 +8,7 @@
 
 @section('content')
 
-<x-layouts.headers.list-header :count="$promotores->total()" :title="'Promotores'" :route="'pisteiro/create'"/>
+<x-layouts.headers.list-header :count="$promotores->total()" :title="'Promotores'" :route="'promotor/create'"/>
 
 @include('components.alerts.form-success')
 
