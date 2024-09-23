@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Repositories\Raca;
+namespace App\Repositories\Pisteiro;
 
-use App\DTO\Raca\RacaStoreDTO;
-use App\DTO\Raca\RacaUpdateDTO;
-use App\Models\Raca;
+use App\DTO\Pisteiro\PisteiroStoreDTO;
+use App\DTO\Pisteiro\PisteiroUpdateDTO;
+use App\Models\Pisteiro;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
 
-class RacaEloquentRepository implements RacaRepositoryInterface
+class PisteiroEloquentRepository implements PisteiroRepositoryInterface
 {
     protected $model;
 
-    public function __construct(Raca $model)
+    public function __construct(Pisteiro $model)
     {
         $this->model = $model;
     }
@@ -26,7 +26,7 @@ class RacaEloquentRepository implements RacaRepositoryInterface
         return $this->model->count();
     }
 
-    public function find(string $uuid): Raca
+    public function find(string $uuid): Pisteiro
     {
         return $this->model
             ->where('uuid', $uuid)->firstOrFail();
@@ -48,12 +48,12 @@ class RacaEloquentRepository implements RacaRepositoryInterface
         return new PaginationPresenter($result);
     }
 
-    public function new(RacaStoreDTO $dto): Raca
+    public function new(PisteiroStoreDTO $dto): Pisteiro
     {
         return $this->model->create((array) $dto);
     }
 
-    public function update(RacaUpdateDTO $dto): Raca
+    public function update(PisteiroUpdateDTO $dto): Pisteiro
     {
         $this->model->where("uuid", $dto->uuid)->update((array) $dto);
 
@@ -62,7 +62,6 @@ class RacaEloquentRepository implements RacaRepositoryInterface
 
     public function delete(string $uuid): void
     {
-        $raca = $this->find($uuid);
-        $raca->delete();
+        $this->model->where("uuid", $uuid)->delete();
     }
 }

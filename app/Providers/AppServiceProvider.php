@@ -9,7 +9,9 @@ use App\Models\Especie;
 use App\Models\Fornecedor;
 use App\Models\Lance;
 use App\Models\LanceCliente;
+use App\Models\Pisteiro;
 use App\Models\PostoTrabalho;
+use App\Models\Raca;
 use App\Models\Setor;
 use App\Observers\CargoObserver;
 use App\Models\User;
@@ -19,7 +21,9 @@ use App\Observers\EspecieObserver;
 use App\Observers\FornecedorObserver;
 use App\Observers\LanceClienteObserver;
 use App\Observers\LanceObserver;
+use App\Observers\PisteiroObserver;
 use App\Observers\PostoTrabalhoObserver;
+use App\Observers\RacaObserver;
 use App\Observers\SetorObserver;
 use App\Observers\UsuarioObserver;
 use App\Repositories\Cargo\CargoEloquentRepository;
@@ -42,6 +46,8 @@ use App\Repositories\Leiloeiro\LeiloeiroEloquentRepository;
 use App\Repositories\Leiloeiro\LeiloeiroRepositoryInterface;
 use App\Repositories\Lote\LoteEloquentRepository;
 use App\Repositories\Lote\LoteRepositoryInterface;
+use App\Repositories\Pisteiro\PisteiroEloquentRepository;
+use App\Repositories\Pisteiro\PisteiroRepositoryInterface;
 use App\Repositories\PlanoPagamento\PlanoPagamentoEloquentRepository;
 use App\Repositories\PlanoPagamento\PlanoPagamentoRepositoryInterface;
 use App\Repositories\PostoTrabalho\PostoTrabalhoEloquentRepository;
@@ -113,6 +119,9 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             LeiloeiroRepositoryInterface::class, LeiloeiroEloquentRepository::class
         );
+        $this->app->bind(
+            PisteiroRepositoryInterface::class, PisteiroEloquentRepository::class
+        );
     }
 
 
@@ -131,6 +140,8 @@ class AppServiceProvider extends ServiceProvider
         Lance::observe(LanceObserver::class);
         LanceCliente::observe(LanceClienteObserver::class);
         Especie::observe(EspecieObserver::class);
+        Raca::observe(RacaObserver::class);
+        Pisteiro::observe(PisteiroObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
