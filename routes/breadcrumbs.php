@@ -111,6 +111,19 @@ Breadcrumbs::for('departamento.edit', function (BreadcrumbTrail $trail, $departa
     $trail->push('Edição de Departamento', route('departamento.edit', $departamento));
 });
 
+Breadcrumbs::for('leiloeiro', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard' , route('dashboard.index'));
+    $trail->push('Leiloeiros', route('leiloeiro.index'));
+});
+
+Breadcrumbs::for('leiloeiro.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('leiloeiro');
+    $trail->push('Novo Leiloeiro', route('leiloeiro.create'));
+});
+
+Breadcrumbs::for('leiloeiro.edit', function (BreadcrumbTrail $trail, $leiloeiro) {
+    $trail->parent('leiloeiro');
+    $trail->push('Edição de Leiloeiro', route('leiloeiro.edit', $leiloeiro));
 Breadcrumbs::for('especie', function (BreadcrumbTrail $trail) {
     $trail->parent('Dashboard' , route('dashboard.index'));
     $trail->push('Especies', route('especie.index'));

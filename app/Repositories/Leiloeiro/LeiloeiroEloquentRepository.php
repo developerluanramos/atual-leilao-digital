@@ -2,6 +2,9 @@
 
 namespace App\Repositories\Leiloeiro;
 
+use App\DTO\Leiloeiro\LeiloeiroDeleteDTO;
+use App\DTO\Leiloeiro\LeiloeiroStoreDTO;
+use App\DTO\Leiloeiro\LeiloeiroUpdateDTO;
 use App\Models\Leiloeiro;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -27,7 +30,7 @@ class LeiloeiroEloquentRepository implements LeiloeiroRepositoryInterface
     public function find(string $uuid): Leiloeiro
     {
         return $this->model
-            ->with('promotor', 'leiloeiro', 'lotes')
+            // ->with('promotor', 'leiloeiro', 'lotes')
             ->where('uuid', $uuid)->firstOrFail();
     }
 
@@ -45,5 +48,22 @@ class LeiloeiroEloquentRepository implements LeiloeiroRepositoryInterface
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 
         return new PaginationPresenter($result);
+    }
+
+    public function new(LeiloeiroStoreDTO $dto): Leiloeiro
+    {
+        return $this->model->create((array) $dto);
+    }
+
+    public function update(LeiloeiroUpdateDTO $dto): Leiloeiro
+    {
+        $this->model->where("uuid", $dto->uuid)->update((array) $dto);
+
+        return $this->find($dto->uuid);
+    }
+
+    public function delete(LeiloeiroDeleteDTO $dto): void
+    {
+        $this->model->where("uuid", $dto->uuid)->delete($dto->uuid);
     }
 }
