@@ -54,6 +54,8 @@ use App\Repositories\PlanoPagamento\PlanoPagamentoEloquentRepository;
 use App\Repositories\PlanoPagamento\PlanoPagamentoRepositoryInterface;
 use App\Repositories\PostoTrabalho\PostoTrabalhoEloquentRepository;
 use App\Repositories\PostoTrabalho\PostoTrabalhoRepositoryInterface;
+use App\Repositories\Promotor\PromotorEloquentRepository;
+use App\Repositories\Promotor\PromotorRepositoryInterface;
 use App\Repositories\Raca\RacaEloquentRepository;
 use App\Repositories\Raca\RacaRepositoryInterface;
 use App\Repositories\Setor\SetorEloquentRepository;
@@ -123,6 +125,9 @@ class AppServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             PisteiroRepositoryInterface::class, PisteiroEloquentRepository::class
+        );
+        $this->app->bind(
+            PromotorRepositoryInterface::class, PromotorEloquentRepository::class
         );
     }
 
