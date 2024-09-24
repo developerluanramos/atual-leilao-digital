@@ -13,6 +13,7 @@ class PlanoPagamento extends Model
 
     protected $fillable = [
         'uuid',
+        'nome',
         'descricao'
     ];
 
