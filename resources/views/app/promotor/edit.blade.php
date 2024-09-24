@@ -12,7 +12,7 @@
 
 @include('components.alerts.form-errors')
 
-<form action="{{route('pisteiro.update', $promotor->uuid)}}" method="POST">
+<form action="{{route('promotor.update', $promotor->uuid)}}" method="POST">
     @method('PUT')
     @include('app.promotor.partials.form', ["promotor" => $promotor])
 </form>

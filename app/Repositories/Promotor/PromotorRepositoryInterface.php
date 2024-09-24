@@ -3,6 +3,7 @@
 namespace App\Repositories\Promotor;
 
 use App\DTO\Promotor\PromotorStoreDTO;
+use App\DTO\Promotor\PromotorUpdateDTO;
 use App\Models\Promotor;
 use App\Repositories\Interfaces\PaginationInterface;
 
@@ -13,4 +14,6 @@ interface PromotorRepositoryInterface
     public function new(PromotorStoreDTO $dto): Promotor;
 
     public function find(string $uuid): Promotor;
+
+    public function update(PromotorUpdateDTO $dto): Promotor;
 }

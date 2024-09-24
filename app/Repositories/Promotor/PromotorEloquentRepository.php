@@ -3,6 +3,7 @@
 namespace App\Repositories\Promotor;
 
 use App\DTO\Promotor\PromotorStoreDTO;
+use App\DTO\Promotor\PromotorUpdateDTO;
 use App\Models\Promotor;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -40,5 +41,12 @@ class PromotorEloquentRepository implements PromotorRepositoryInterface
     public function find(string $uuid): Promotor
     {
         return $this->model->where('uuid', $uuid)->firstOrFail();
+    }
+
+    public function update(PromotorUpdateDTO $dto): Promotor
+    {
+        $this->model->where("uuid", $dto->uuid)->update((array) $dto);
+
+        return $this->find($dto->uuid);
     }
 }
