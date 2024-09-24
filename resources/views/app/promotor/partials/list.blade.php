@@ -30,7 +30,7 @@
                     action="excluir"
                     color="danger"
                     :identificador="'drawer-delete-confirmacao'"
-                    :route="route('pisteiro.delete', [
+                    :route="route('promotor.delete', [
                         'uuid' => $promotor->uuid
                     ])"
                 />

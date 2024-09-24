@@ -49,4 +49,11 @@ class PromotorEloquentRepository implements PromotorRepositoryInterface
 
         return $this->find($dto->uuid);
     }
+
+    public function delete(string $uuid): void
+    {
+        $promotor = $this->find($uuid);
+
+        $promotor->delete();
+    }
 }

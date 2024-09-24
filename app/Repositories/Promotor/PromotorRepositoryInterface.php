@@ -16,4 +16,6 @@ interface PromotorRepositoryInterface
     public function find(string $uuid): Promotor;
 
     public function update(PromotorUpdateDTO $dto): Promotor;
+
+    public function delete(string $uuid): void;
 }
