@@ -180,3 +180,8 @@ Breadcrumbs::for('promotor.create', function (BreadcrumbTrail $trail) {
     $trail->parent('promotor');
     $trail->push('Novo Promotor', route('promotor.create'));
 });
+
+Breadcrumbs::for('promotor.edit', function (BreadcrumbTrail $trail, $promotor) {
+    $trail->parent('promotor');
+    $trail->push('Edição de Promotor', route('promotor.edit', $promotor));
+});

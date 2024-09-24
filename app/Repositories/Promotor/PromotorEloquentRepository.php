@@ -36,4 +36,9 @@ class PromotorEloquentRepository implements PromotorRepositoryInterface
     {
         return $this->model->create((array) $dto);
     }
+
+    public function find(string $uuid): Promotor
+    {
+        return $this->model->where('uuid', $uuid)->firstOrFail();
+    }
 }

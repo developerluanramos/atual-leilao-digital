@@ -11,4 +11,6 @@ interface PromotorRepositoryInterface
     public function paginate(int $page = 1, int $totalPerPage = 10, string $filter = null): PaginationInterface;
 
     public function new(PromotorStoreDTO $dto): Promotor;
+
+    public function find(string $uuid): Promotor;
 }

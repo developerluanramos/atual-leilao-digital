@@ -24,7 +24,7 @@
                     text="Editar"
                     action="editar"
                     color="primary"
-                    :route="route('pisteiro.edit', $promotor->uuid)"/>
+                    :route="route('promotor.edit', $promotor->uuid)"/>
                 <x-layouts.buttons.action-button
                     text="Excluir"
                     action="excluir"
