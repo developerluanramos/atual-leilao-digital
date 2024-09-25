@@ -18,7 +18,7 @@ class PlanoPagamentoFactory extends Factory
     {
         return [
             'uuid' => fake()->uuid(),
-            'nome' => fake()->nome(),
+            'nome' => fake()->name(),
             'descricao' => fake()->text('50'),
         ];
     }
