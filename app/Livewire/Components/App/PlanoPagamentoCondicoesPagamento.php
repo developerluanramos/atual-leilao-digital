@@ -17,8 +17,8 @@ class PlanoPagamentoCondicoesPagamento extends Component
         'condicao.qtd_parcelas' => 'required|number',
         'condicao.percentual_comissao_vendedor' => 'required|number',
         'condicao.percentual_comissao_comprador' => 'required|number',
-        'condicao.incide_comissao_vendedor' => 'required|boolean',
-        'condicao.incide_comissao_comprador' => 'required|boolean',
+        'condicao.incide_comissao_vendedor' => 'required',
+        'condicao.incide_comissao_comprador' => 'required',
     ];
 
     public function render()
@@ -29,7 +29,10 @@ class PlanoPagamentoCondicoesPagamento extends Component
     public function mount()
     {
         $this->condicoes = [];
-        $this->condicao = new CondicaoPagamento();
+        $this->condicao = new CondicaoPagamento([
+            'incide_comissao_vendedor' => true,
+            'incide_comissao_comprador' => true
+        ]);
     }
 
     public function add()
@@ -54,11 +57,14 @@ class PlanoPagamentoCondicoesPagamento extends Component
             'qtd_parcelas' => $this->condicao->qtd_parcelas,
             'percentual_comissao_vendedor' => $this->condicao->percentual_comissao_vendedor,
             'percentual_comissao_comprador' => $this->condicao->percentual_comissao_comprador,
-            'incide_comissao_vendedor' => $this->condicao->indice_comissao_vendedor == 1 ? 'Sim' : 'Não',
-            'incide_comissao_comprador' => $this->condicao->indice_comissao_comprador == 1 ? 'Sim' : 'Não'
+            'incide_comissao_vendedor' => $this->condicao->incide_comissao_vendedor,
+            'incide_comissao_comprador' => $this->condicao->incide_comissao_comprador
         ];
-        
-        $this->condicao = new CondicaoPagamento();
+
+        $this->condicao = new CondicaoPagamento([
+            'incide_comissao_vendedor' => true,
+            'incide_comissao_comprador' => true
+        ]);
         $this->errorMessage = '';
     }
 

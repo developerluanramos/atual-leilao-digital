@@ -58,16 +58,12 @@
                         label="Comissão Venda"
                         name="condicao.incide_comissao_vendedor"
                         model="condicao.incide_comissao_vendedor"
-                        change="default"
-                        lenght="4/12"
                         :value="$condicao->incide_comissao_vendedor ?? old('incide_comissao_vendedor')" 
                     />
                     <x-layouts.inputs.input-switch-livewire
                         label="Comissão Compra"
                         name="condicao.incide_comissao_comprador"
                         model="condicao.incide_comissao_comprador"
-                        change="default"
-                        lenght="4/12"
                         :value="$condicao->incide_comissao_comprador ?? old('incide_comissao_comprador')" 
                     />
                 </div>
@@ -107,10 +103,16 @@
                                     />
                                 </p>
                                 <p class="text-sm font-medium text-gray-500 truncate dark:text-gray">
-                                    <small>Comissão venda: </small> {{$condicao['incide_comissao_vendedor']}}
+                                    <small>Comissão venda: </small> 
+                                    <x-layouts.badges.sim-nao
+                                        :status="$condicao['incide_comissao_vendedor']"
+                                    />
                                 </p>
                                 <p class="text-sm font-medium text-gray-500 truncate dark:text-gray">
-                                    <small>Comissão compra: </small> {{$condicao['incide_comissao_comprador']}}
+                                    <small>Comissão compra: </small> 
+                                    <x-layouts.badges.sim-nao
+                                        :status="$condicao['incide_comissao_comprador']"
+                                    />
                                 </p>
                             </div>
                             <div class="items-center truncate text-base font-semibold text-gray-900 dark:text-white">
@@ -136,5 +138,6 @@
                 </div>
             @endforelse
         </ul>
+        <input type="hidden" name="condicoes_pagamento" value="{{json_encode($condicoes)}}">
     </div>
 </div>
