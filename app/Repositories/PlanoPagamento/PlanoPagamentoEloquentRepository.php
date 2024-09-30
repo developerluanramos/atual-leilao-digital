@@ -2,6 +2,7 @@
 
 namespace App\Repositories\PlanoPagamento;
 
+use App\Models\CondicaoPagamento;
 use App\Models\PlanoPagamento;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -9,10 +10,12 @@ use App\Repositories\Presenters\PaginationPresenter;
 class PlanoPagamentoEloquentRepository implements PlanoPagamentoRepositoryInterface
 {
     protected $model;
+    protected $condicaoPagamentoModel;
 
-    public function __construct(PlanoPagamento $model)
+    public function __construct(PlanoPagamento $model, CondicaoPagamento $condicaoPagamentoModel)
     {
         $this->model = $model;
+        $this->condicaoPagamentoModel = $condicaoPagamentoModel;
     }
 
     public function all()
@@ -26,9 +29,7 @@ class PlanoPagamentoEloquentRepository implements PlanoPagamentoRepositoryInterf
 
     public function find(string $uuid): PlanoPagamento
     {
-        return $this->model
-            ->with('promotor', 'leiloeiro', 'lotes')
-            ->where('uuid', $uuid)->firstOrFail();
+        return $this->model->where('uuid', $uuid)->firstOrFail();
     }
 
     public function paginate(int $page = 1, int $totalPerPage = 10, string $filter = null): PaginationInterface
@@ -45,5 +46,12 @@ class PlanoPagamentoEloquentRepository implements PlanoPagamentoRepositoryInterf
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 
         return new PaginationPresenter($result);
+    }
+
+    public function delete(string $uuid): void
+    {
+        $planoPagamento = $this->find($uuid);
+        $condicoesPagamento = $this->condicaoPagamentoModel->where('plano_pagamento_uuid', $uuid)->all();
+        dd($condicoesPagamento);
     }
 }

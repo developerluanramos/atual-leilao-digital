@@ -28,7 +28,7 @@
                     action="excluir"
                     color="danger"
                     :identificador="'drawer-delete-confirmacao'"
-                    :route="route('pisteiro.delete', [
+                    :route="route('plano-pagamento.delete', [
                         'uuid' => $plano_pagamento->uuid
                     ])"
                 />
