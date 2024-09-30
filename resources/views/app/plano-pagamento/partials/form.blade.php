@@ -9,7 +9,7 @@
     />
     <x-layouts.inputs.input-normal-text
         label="Descrição"
-        name="nome"
+        name="descricao"
         lenght="4/12"
         :value="$plano_pagamento->descricao ?? old('descricao')"
     />

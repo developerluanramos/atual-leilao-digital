@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Cargo;
+use App\Models\CondicaoPagamento;
 use App\Models\Departamento;
 use App\Models\Equipe;
 use App\Models\Especie;
@@ -11,12 +12,14 @@ use App\Models\Lance;
 use App\Models\LanceCliente;
 use App\Models\Leiloeiro;
 use App\Models\Pisteiro;
+use App\Models\PlanoPagamento;
 use App\Models\PostoTrabalho;
 use App\Models\Promotor;
 use App\Models\Raca;
 use App\Models\Setor;
 use App\Observers\CargoObserver;
 use App\Models\User;
+use App\Observers\CondicaoPagamentoObserver;
 use App\Observers\DepartamentoObserver;
 use App\Observers\EquipeObserver;
 use App\Observers\EspecieObserver;
@@ -25,6 +28,7 @@ use App\Observers\LanceClienteObserver;
 use App\Observers\LanceObserver;
 use App\Observers\LeiloeiroObserver;
 use App\Observers\PisteiroObserver;
+use App\Observers\PlanoPagamentoObserver;
 use App\Observers\PostoTrabalhoObserver;
 use App\Observers\PromotorObserver;
 use App\Observers\RacaObserver;
@@ -153,6 +157,8 @@ class AppServiceProvider extends ServiceProvider
         Raca::observe(RacaObserver::class);
         Pisteiro::observe(PisteiroObserver::class);
         Promotor::observe(PromotorObserver::class);
+        PlanoPagamento::observe(PlanoPagamentoObserver::class);
+        CondicaoPagamento::observe(CondicaoPagamentoObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
