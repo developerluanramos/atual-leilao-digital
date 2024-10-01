@@ -26,9 +26,9 @@ class PlanoPagamentoCondicoesPagamento extends Component
         return view('livewire.components.app.plano-pagamento-condicoes-pagamento');
     }
 
-    public function mount()
+    public function mount(array $condicoes = [])
     {
-        $this->condicoes = [];
+        $this->condicoes = $condicoes;
         $this->condicao = new CondicaoPagamento([
             'incide_comissao_vendedor' => true,
             'incide_comissao_comprador' => true
