@@ -17,6 +17,22 @@ class PlanoPagamentoEditController extends Controller
     {
         $planoPagamento = $this->editAction->exec(PlanoPagamentoEditDTO::makeFromRequest($request));
 
-        return view('app.plano-pagamento.edit',compact('planoPagamento'));
+        // $tmp = $planoPagamento->condicoes_pagamento[0]->id;
+        // dd($tmp);
+        
+        foreach($planoPagamento->condicoes_pagamento as $condicao)
+        {
+            $condicoesPagamento[] = [
+                'descricao' => $condicao->descricao,
+                'repeticoes' => $condicao->repeticoes,
+                'qtd_parcelas' => $condicao->qtd_parcelas,
+                'percentual_comissao_vendedor' => $condicao->percentual_comissao_vendedor,
+                'percentual_comissao_comprador' => $condicao->percentual_comissao_comprador,
+                'incide_comissao_vendedor' => $condicao->incide_comissao_vendedor,
+                'incide_comissao_comprador' => $condicao->incide_comissao_comprador
+            ];
+        }
+
+        return view('app.plano-pagamento.edit',compact('planoPagamento', 'condicoesPagamento'));
     }
 }

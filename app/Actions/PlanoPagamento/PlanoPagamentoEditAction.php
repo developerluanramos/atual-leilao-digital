@@ -15,8 +15,6 @@ class PlanoPagamentoEditAction
                             ->with('condicoes_pagamento')
                             ->first();
         
-        dd($planoPagamento);
-
         return $planoPagamento;
     }
 }

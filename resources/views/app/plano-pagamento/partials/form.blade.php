@@ -15,6 +15,6 @@
     />
 </div>
 
-@livewire('components.app.plano-pagamento-condicoes-pagamento')
+@livewire('components.app.plano-pagamento-condicoes-pagamento', [$condicoesPagamento])
 
 <x-layouts.buttons.submit-button text="Salvar"/>
