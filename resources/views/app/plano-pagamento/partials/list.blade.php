@@ -22,7 +22,7 @@
                     text="Editar"
                     action="editar"
                     color="primary"
-                    :route="route('pisteiro.edit', $plano_pagamento->uuid)"/>
+                    :route="route('plano-pagamento.edit', $plano_pagamento->uuid)"/>
                 <x-layouts.buttons.action-button
                     text="Excluir"
                     action="excluir"
