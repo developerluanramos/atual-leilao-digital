@@ -11,6 +11,8 @@ class PlanoPagamentoCreateController extends Controller
 
     public function create()
     {
-        return view('app.plano-pagamento.create');
+        $condicoesPagamento = [];
+
+        return view('app.plano-pagamento.create', compact('condicoesPagamento'));
     }
 }

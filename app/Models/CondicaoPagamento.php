@@ -22,4 +22,9 @@ class CondicaoPagamento extends Model
         'incide_comissao_vendedor',
         'plano_pagamento_uuid',
     ];
+
+    public function plano_pagamento()
+    {
+        return $this->hasOne(PlanoPagamento::class);
+    }
 }

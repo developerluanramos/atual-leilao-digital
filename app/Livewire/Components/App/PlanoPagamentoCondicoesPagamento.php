@@ -61,8 +61,6 @@ class PlanoPagamentoCondicoesPagamento extends Component
             'incide_comissao_comprador' => $this->condicao->incide_comissao_comprador
         ];
 
-        dd($this->condicoes);
-
         $this->condicao = new CondicaoPagamento([
             'incide_comissao_vendedor' => true,
             'incide_comissao_comprador' => true

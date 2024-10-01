@@ -8,7 +8,7 @@
 
 @include('components.alerts.form-errors')
 
-<form action="{{ route('plano-pagamento.store', $planoPagamento->uuid) }}" method="POST">
+<form action="{{ route('plano-pagamento.update', $planoPagamento->uuid) }}" method="POST">
     @method('PUT')
     @include('app.plano-pagamento.partials.form', ["plano_pagamento" => $planoPagamento])
 </form>

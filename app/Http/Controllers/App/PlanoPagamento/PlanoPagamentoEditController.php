@@ -17,9 +17,6 @@ class PlanoPagamentoEditController extends Controller
     {
         $planoPagamento = $this->editAction->exec(PlanoPagamentoEditDTO::makeFromRequest($request));
 
-        // $tmp = $planoPagamento->condicoes_pagamento[0]->id;
-        // dd($tmp);
-        
         foreach($planoPagamento->condicoes_pagamento as $condicao)
         {
             $condicoesPagamento[] = [
