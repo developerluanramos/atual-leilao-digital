@@ -3,6 +3,7 @@
 namespace App\Actions\PlanoPagamento;
 
 use App\DTO\PlanoPagamento\PlanoPagamentoUpdateDTO;
+use App\Models\CondicaoPagamento;
 use App\Models\PlanoPagamento;
 
 class PlanoPagamentoUpdateAction
@@ -15,20 +16,20 @@ class PlanoPagamentoUpdateAction
                             ->with('condicoes_pagamento')
                             ->first();
 
+        foreach($planoPagamento->condicoes_pagamento as $condicao)
+        {
+            $idsCondicoesPagamento[] = $condicao->id;
+        }
+
         $planoPagamento->update((array) $dto);
         $planoPagamento->condicoes_pagamento()->saveMany($dto->condicoesPagamento);
 
-        foreach($dto->condicoesPagamento as $condicaoPagamento)
-        {
-            $idsCondicoesPagamento[] = $condicaoPagamento->id;
-        }
-
-        $planoPagamento->condicoes_pagamento()->sync($idsCondicoesPagamento);
+        CondicaoPagamento::destroy($idsCondicoesPagamento);
 
         $planoPagamentoUpdated = PlanoPagamento::where('uuid', $dto->uuid)
                                     ->with('condicoes_pagamento')
                                     ->first();
 
-        dd($planoPagamentoUpdated);
+        return $planoPagamentoUpdated;
     }
 }
