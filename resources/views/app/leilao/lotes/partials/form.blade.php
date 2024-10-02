@@ -4,7 +4,7 @@
     <x-layouts.inputs.input-normal-text
         label="Descrição"
         name="nome"
-        lenght="2/12"
+        lenght="3/12"
         :value="$lote->nome ?? old('nome')"
     />
     <x-layouts.inputs.input-normal-select
@@ -20,6 +20,14 @@
         lenght="3/12"
         :value="$lote->valor ?? old('valor')"
     />
+    <x-layouts.inputs.input-normal-text
+        label="Valor Mínimo Pré-lance"
+        name="valor_minimo_prelance"
+        lenght="3/12"
+        :value="$lote->valor ?? old('valor')"
+    />
+</div>
+<div class="flex flex-wrap -mx-3 mb-4">
     <div class="w-full md:w-2/12 px-3 mb-6 md:mb-0">
         <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="incide_comissao_compra">
             Comissão Compra

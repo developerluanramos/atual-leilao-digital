@@ -27,10 +27,10 @@ class LoteFactory extends Factory
             'uuid' => $this->faker->uuid(),
             'descricao' => $this->faker->word(),
             'leilao_uuid' => Leilao::inRandomOrder()->first()->uuid,
-            'quantidade'  => $this->faker->numberBetween(1, 3),
-            'quantidade_macho'  => $this->faker->numberBetween(1, 3),
-            'quantidade_femea'  => $this->faker->numberBetween(1, 3),
-            'quantidade_outro'  => $this->faker->numberBetween(1, 3),
+            'quantidade'  => $this->faker->numberBetween(1, 3), // -- desconsiderar
+            'quantidade_macho'  => $this->faker->numberBetween(1, 3), // -- desconsiderar
+            'quantidade_femea'  => $this->faker->numberBetween(1, 3), // -- desconsiderar
+            'quantidade_outro'  => $this->faker->numberBetween(1, 3), // -- desconsiderar
             'plano_pagamento_uuid' => $planoPagamento->uuid,
             'valor_estimado' => $this->faker->numerify('#####.##'),
             'incide_comissao_compra' => $this->faker->randomElement([true, false]),

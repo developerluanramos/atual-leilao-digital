@@ -19,10 +19,11 @@ class Lote extends Model
         'leilao_uuid',
         'plano_pagamento_uuid',
         'valor_estimado',
-        'quantidade',
-        'quantidade_macho',
-        'quantidade_femea',
-        'quantidade_outro',
+        'valor_minimo_prelance',
+        'quantidade', // -- desconsiderar
+        'quantidade_macho', // -- desconsiderar
+        'quantidade_femea', // -- desconsiderar
+        'quantidade_outro', // -- desconsiderar
         'incide_comissao_compra',
         'incide_comissao_venda',
     ];
