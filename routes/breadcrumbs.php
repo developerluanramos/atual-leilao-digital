@@ -190,3 +190,13 @@ Breadcrumbs::for('plano-pagamento', function (BreadcrumbTrail $trail) {
     $trail->parent('Dashboard' , route('dashboard.index'));
     $trail->push('Plano de Pagamento', route('plano-pagamento.index'));
 });
+
+Breadcrumbs::for('plano-pagamento.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('plano-pagamento');
+    $trail->push('Novo Plano de Pagamento', route('plano-pagamento.create'));
+});
+
+Breadcrumbs::for('plano-pagamento.edit', function (BreadcrumbTrail $trail, $planoPagamento) {
+    $trail->parent('plano-pagamento');
+    $trail->push('Edição de Plano de Pagamento', route('plano-pagamento.edit', $planoPagamento));
+});

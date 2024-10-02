@@ -1,5 +1,9 @@
 @extends('app.layouts.app')
 
+@section('breadcrumb')
+    {{ Breadcrumbs::render('plano-pagamento.edit', $planoPagamento) }}
+@endsection
+
 @section('title', 'Editar Plano de Pagamento')
 
 <x-layouts.headers.create-header :title="$planoPagamento->uuid. ' - ' .$planoPagamento->nome"/>

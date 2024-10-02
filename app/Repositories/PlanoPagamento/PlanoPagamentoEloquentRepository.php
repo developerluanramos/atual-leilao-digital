@@ -2,7 +2,6 @@
 
 namespace App\Repositories\PlanoPagamento;
 
-use App\Models\CondicaoPagamento;
 use App\Models\PlanoPagamento;
 use App\Repositories\Interfaces\PaginationInterface;
 use App\Repositories\Presenters\PaginationPresenter;
@@ -10,12 +9,10 @@ use App\Repositories\Presenters\PaginationPresenter;
 class PlanoPagamentoEloquentRepository implements PlanoPagamentoRepositoryInterface
 {
     protected $model;
-    protected $condicaoPagamentoModel;
-
-    public function __construct(PlanoPagamento $model, CondicaoPagamento $condicaoPagamentoModel)
+    
+    public function __construct(PlanoPagamento $model)
     {
         $this->model = $model;
-        $this->condicaoPagamentoModel = $condicaoPagamentoModel;
     }
 
     public function all()
@@ -51,7 +48,6 @@ class PlanoPagamentoEloquentRepository implements PlanoPagamentoRepositoryInterf
     public function delete(string $uuid): void
     {
         $planoPagamento = $this->find($uuid);
-        $condicoesPagamento = $this->condicaoPagamentoModel->where('plano_pagamento_uuid', $uuid)->all();
-        dd($condicoesPagamento);
+        $planoPagamento->delete();
     }
 }

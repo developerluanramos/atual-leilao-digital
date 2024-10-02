@@ -12,7 +12,6 @@ class PlanoPagamentoDeleteAction
 
     public function exec(string $uuid): void
     {
-        $planoPagamento = $this->repository->find($uuid);
-        $planoPagamento->delete();
+        $this->repository->delete($uuid);
     }
 }

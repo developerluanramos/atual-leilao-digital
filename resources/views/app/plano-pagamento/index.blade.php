@@ -8,7 +8,7 @@
 
 @section('content')
 
-<x-layouts.headers.list-header :count="$planos_pagamento->total()" :title="'Plano de Pagamento'" :route="'plano-pagamento/create'"/>
+<x-layouts.headers.list-header :count="$planos_pagamento->total()" :title="'Planos de Pagamento'" :route="'plano-pagamento/create'"/>
 
 @include('components.alerts.form-success')
 
