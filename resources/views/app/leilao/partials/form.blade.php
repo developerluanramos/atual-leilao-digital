@@ -64,6 +64,13 @@
         :Data="$formData['leiloeiros']"
         :value="$leilao->leiloeiro_uuid ?? old('leiloeiro_uuid') ?? null"
     />
+    <x-layouts.inputs.input-normal-select
+        label="promotor"
+        name="promotor_uuid"
+        lenght="6/12"
+        :Data="$formData['promotores']"
+        :value="$leilao->promotor_uuid ?? old('promotor_uuid') ?? null"
+    />
 </div>
 
 <b class="uppercase mb-2">Configuração Pré-lances</b>
