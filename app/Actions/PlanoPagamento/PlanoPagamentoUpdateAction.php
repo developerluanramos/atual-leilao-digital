@@ -16,20 +16,12 @@ class PlanoPagamentoUpdateAction
                             ->with('condicoes_pagamento')
                             ->first();
 
-        foreach($planoPagamento->condicoes_pagamento as $condicao)
-        {
-            $idsCondicoesPagamento[] = $condicao->id;
-        }
-
         $planoPagamento->update((array) $dto);
+
+        CondicaoPagamento::destroy($planoPagamento->condicoes_pagamento()->pluck('id'));
+
         $planoPagamento->condicoes_pagamento()->saveMany($dto->condicoesPagamento);
 
-        CondicaoPagamento::destroy($idsCondicoesPagamento);
-
-        $planoPagamentoUpdated = PlanoPagamento::where('uuid', $dto->uuid)
-                                    ->with('condicoes_pagamento')
-                                    ->first();
-
-        return $planoPagamentoUpdated;
+        return $planoPagamento;
     }
 }
