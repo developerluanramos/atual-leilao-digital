@@ -3,9 +3,9 @@
 <div class="flex flex-wrap -mx-3 mb-4">
     <x-layouts.inputs.input-normal-text
         label="Descrição"
-        name="nome"
+        name="descricao"
         lenght="3/12"
-        :value="$lote->nome ?? old('nome')"
+        :value="$lote->descricao ?? old('descricao')"
     />
     <x-layouts.inputs.input-normal-select
         :data="$formData['planos_pagamentos']"

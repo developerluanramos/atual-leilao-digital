@@ -33,6 +33,7 @@ class LoteFactory extends Factory
             'quantidade_outro'  => $this->faker->numberBetween(1, 3), // -- desconsiderar
             'plano_pagamento_uuid' => $planoPagamento->uuid,
             'valor_estimado' => $this->faker->numerify('#####.##'),
+            'valor_minimo_prelance' => $this->faker->numerify('##.##'),
             'incide_comissao_compra' => $this->faker->randomElement([true, false]),
             'incide_comissao_venda' => $this->faker->randomElement([true, false]),
         ];

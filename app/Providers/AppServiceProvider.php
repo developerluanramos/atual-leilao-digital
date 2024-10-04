@@ -10,6 +10,8 @@ use App\Models\Fornecedor;
 use App\Models\Lance;
 use App\Models\LanceCliente;
 use App\Models\Leiloeiro;
+use App\Models\Lote;
+use App\Models\LoteItem;
 use App\Models\Pisteiro;
 use App\Models\PostoTrabalho;
 use App\Models\Promotor;
@@ -24,6 +26,8 @@ use App\Observers\FornecedorObserver;
 use App\Observers\LanceClienteObserver;
 use App\Observers\LanceObserver;
 use App\Observers\LeiloeiroObserver;
+use App\Observers\LoteItemObserver;
+use App\Observers\LoteObserver;
 use App\Observers\PisteiroObserver;
 use App\Observers\PostoTrabalhoObserver;
 use App\Observers\PromotorObserver;
@@ -153,6 +157,8 @@ class AppServiceProvider extends ServiceProvider
         Raca::observe(RacaObserver::class);
         Pisteiro::observe(PisteiroObserver::class);
         Promotor::observe(PromotorObserver::class);
+        Lote::observe(LoteObserver::class);
+        LoteItem::observe(LoteItemObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {

@@ -19,8 +19,8 @@ class LoteItem extends Model
         'raca_uuid',
         'especie_uuid',
         'valor_estimado',
-        'inside_comissao_compra',
-        'incide_comissao_venda',
+        // 'incide_comissao_compra',
+        // 'incide_comissao_venda',
     ];
 
     public function raca()

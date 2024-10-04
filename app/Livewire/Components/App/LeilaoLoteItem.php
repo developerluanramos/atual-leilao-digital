@@ -5,12 +5,21 @@ namespace App\Livewire\Components\App;
 use App\Enums\GeneroLoteItemEnum;
 use App\Models\LoteItem;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use stdClass;
 
 class LeilaoLoteItem extends Component
 {
+    use WithFileUploads;
+
     public $errorMessage = '';
     public array $itens;
     public array $formData;
+    public array $imagens;
+
+    public array $videos;
+
+    public stdClass $video;
     public LoteItem $item;
 
     protected $rules = [
@@ -19,6 +28,10 @@ class LeilaoLoteItem extends Component
         'item.raca_uuid' => 'required|string',
         'item.valor_estimado' => 'required|number',
         'item.genero' => 'required|number',
+        'item.imagens' => 'image|max:1024',
+        'item.videos' => 'required',
+        'item.video_descricao' => 'required|string',
+        'item.video_url' => 'required|string',
     ];
 
     public function mount(array $formData)
@@ -26,7 +39,8 @@ class LeilaoLoteItem extends Component
         $this->itens = [];
         $this->item = new LoteItem();
         $this->item->valor_estimado = 0;
-//        $this->item->genero = GeneroLoteItemEnum::MACHO;
+        $this->imagens = [];
+        $this->videos = [];
         $this->formData = $formData;
     }
 
@@ -38,7 +52,7 @@ class LeilaoLoteItem extends Component
     public function add()
     {
         $this->errorMessage = '';
-        sleep(1);
+        
         if(
             is_null($this->item->descricao)
             || is_null($this->item->especie_uuid)
@@ -55,8 +69,38 @@ class LeilaoLoteItem extends Component
             'raca_uuid' => $this->item->raca_uuid,
             'valor_estimado' => $this->item->valor_estimado,
             'genero' => $this->item->genero,
+            'imagens' => $this->imagens,
+            'videos' => $this->videos
         ];
+
         $this->item = new LoteItem();
+        $this->imagens = [];
+        $this->videos = [];
+        $this->errorMessage = '';
+    }
+
+    public function addVideo()
+    {
+        $this->videos[] = [
+            'descricao' => $this->item->video_descricao,
+            'url' => $this->item->video_url
+        ];
+    }
+
+    public function imagensUpdated()
+    {
+
+    }
+    
+    function removeVideo(int $index)
+    {
+        array_splice($this->videos, $index, 1);
+        $this->errorMessage = '';
+    }
+
+    function removeImagem(int $index)
+    {
+        array_splice($this->imagens, $index, 1);
         $this->errorMessage = '';
     }
 

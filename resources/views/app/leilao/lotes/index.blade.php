@@ -1,6 +1,7 @@
 <x-layouts.tables.simple-table
     :headers="[
         'Número',
+        'Descrição',
         'Plano Pagamento',
         'Comissão Venda',
         'Comissão Compra',
@@ -17,6 +18,9 @@
             <tr>
                 <td>
                     {{$lote->id}}
+                </td>
+                <td>
+                    {{$lote->descricao}}
                 </td>
                 <td>
                     {{$lote->plano_pagamento['descricao']}}
