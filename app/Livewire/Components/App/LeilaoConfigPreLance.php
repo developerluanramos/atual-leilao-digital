@@ -58,6 +58,8 @@ class LeilaoConfigPreLance extends Component
                     'plano_pagamento_uuid' => null,
                     'valor_estimado' => 0,
                     'valor_minimo' => 0,
+                    'valor_progressao' => 0,
+                    'percentual_progressao' => 0,
                 ];
             }
         }

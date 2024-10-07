@@ -34,8 +34,10 @@
                     <th class="text-center">Data</th>
                     <th class="text-center">Plano de pagamento</th>
                     <th class="text-center">Cor</th>
-                    <th class="text-right">Valor estimado</th>
-                    <th class="text-right">Valor mínimo</th>
+                    <th class="text-center">Valor estimado</th>
+                    <th class="text-center">Valor mínimo</th>
+                    <th class="text-center">Valor Progressão</th>
+                    <th class="text-center">Percentual Progressão</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -96,10 +98,33 @@
                                 :value="$leilao->valor_minimo ?? old('valor_minimo') ?? null"
                             />
                         </td>
+                        <td class="text-right">
+                            <x-layouts.inputs.input-normal-text-livewire
+                                label=""
+                                model="{{ 'configs.'.$key.'.valor_progressao' }}"
+                                name="valor_progressao"
+                                lenght="12/12"
+                                change="default"
+                                blur="default"
+                                :value="$leilao->valor_progressao ?? old('valor_progressao') ?? null"
+                            />
+                        </td>
+                        <td class="text-right">
+                            <x-layouts.inputs.input-normal-text-livewire
+                                label=""
+                                model="{{ 'configs.'.$key.'.percentual_progressao' }}"
+                                name="percentual_progressao"
+                                lenght="12/12"
+                                change="default"
+                                blur="default"
+                                :value="$leilao->percentual_progressao ?? old('percentual_progressao') ?? null"
+                            />
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
         </div>
+        <input type="hidden" name="configPreLance" value="{{json_encode($this->configs)}}">
     @endif
 </div>
