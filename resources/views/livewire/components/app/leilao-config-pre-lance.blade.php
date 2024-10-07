@@ -69,11 +69,11 @@
                             <x-layouts.inputs.input-colorpicker-livewire
                                 label=""
                                 model="{{ 'configs.'.$key.'.cor' }}"
-                                name="dataAbertura"
+                                name="cor"
                                 lenght="12/12"
                                 change="default"
                                 blur="default"
-                                :value="$leilao->dataAbertura ?? old('dataAbertura') ?? null"
+                                :value="$this->cor ?? old('cor') ?? null"
                             />
                         </td>
                         <td class="text-right">

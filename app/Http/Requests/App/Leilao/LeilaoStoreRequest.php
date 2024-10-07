@@ -22,7 +22,6 @@ class LeilaoStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "_token" => ["required", "string"],
             "descricao" => ["required", "min:3", "max:255"],
             "denominacao" => ["required", "min:3", "max:255"],
             "local" => ["string"],
