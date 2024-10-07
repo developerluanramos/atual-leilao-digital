@@ -7,10 +7,7 @@ use App\Models\Leilao;
 
 class LeilaoStoreAction
 {
-    public function __construct()
-    {
-        
-    }
+    public function __construct() { }
 
     public function exec(LeilaoStoreDTO $dto): Leilao
     {

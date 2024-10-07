@@ -25,13 +25,13 @@
         label="Data de abertura"
         name="data_abertura"
         lenght="3/12"
-        :value="$leilao->data_abertura ?? old('data_abertura') ?? null"
+        :value="$leilao->aberto_em ?? old('aberto_em') ?? null"
     />
     <x-layouts.inputs.input-date
         label="Data de fechamento"
         name="data_fechamento"
         lenght="3/12"
-        :value="$leilao->data_fechamento ?? old('data_fechamento') ?? null"
+        :value="$leilao->fechado_em ?? old('fechado_em') ?? null"
     />
 </div>
 

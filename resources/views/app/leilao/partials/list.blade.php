@@ -37,6 +37,11 @@
                         action="ver"
                         color="primary"
                         :route="route('leilao.show', $leilao->uuid)"/>
+                    <x-layouts.buttons.action-button
+                        text="Editar"
+                        action="editar"
+                        color="primary"
+                        :route="route('leilao.edit', $leilao->uuid)"/>
                 </td>
             </tr>
         @endforeach
