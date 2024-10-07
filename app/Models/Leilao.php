@@ -25,6 +25,7 @@ class Leilao extends Model
         'prelance_aberto_em',
         'prelance_fechado_em',
         'promotor_uuid',
+        'pregoeiro_uuid',
         'leiloeiro_uuid',
     ];
 
@@ -43,6 +44,11 @@ class Leilao extends Model
     public function promotor()
     {
         return $this->hasOne(Promotor::class, 'uuid', 'promotor_uuid');
+    }
+
+    public function pregoeiro()
+    {
+        return $this->hasOne(Pregoeiro::class, 'uuid', 'pregoeiro_uuid');
     }
 
     public function leiloeiro()

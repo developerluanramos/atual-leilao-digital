@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pregoeiro', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('uuid')->unique();
-            $table->string('nome');
-            $table->string('email');
-            $table->date('nascido_em');
-            $table->timestamps();
+        Schema::table('leilao', function (Blueprint $table) {
+            $table->foreignUuid('pregoeiro_uuid')->references('uuid')->on('pregoeiro')->nullable();
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pregoeiro');
+        Schema::table('leilao', function (Blueprint $table) {
+            $table->dropColumn('pregoeiro_uuid');
+        });
     }
 };

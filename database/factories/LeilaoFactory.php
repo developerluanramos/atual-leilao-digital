@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Leiloeiro;
+use App\Models\Pregoeiro;
 use App\Models\Promotor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -32,6 +33,7 @@ class LeilaoFactory extends Factory
             'prelance_fechado_em' => $this->faker->dateTimeBetween('-35days', '-31 days'),
             'promotor_uuid' => Promotor::inRandomOrder()->first()->uuid,
             'leiloeiro_uuid' => Leiloeiro::inRandomOrder()->first()->uuid,
+            'pregoeiro_uuid' => Pregoeiro::inRandomOrder()->first()->uuid,
         ];
     }
 }

@@ -65,6 +65,15 @@
         :value="$leilao->leiloeiro_uuid ?? old('leiloeiro_uuid') ?? null"
     />
     <x-layouts.inputs.input-normal-select
+        label="pregoeiro"
+        name="pregoeiro_uuid"
+        lenght="6/12"
+        :Data="$formData['pregoeiros']"
+        :value="$leilao->pregoeiro_uuid ?? old('pregoeiro_uuid') ?? null"
+    />
+</div>
+<div class="flex flex-wrap -mx-3 mb-4">
+    <x-layouts.inputs.input-normal-select
         label="promotor"
         name="promotor_uuid"
         lenght="6/12"
@@ -72,6 +81,7 @@
         :value="$leilao->promotor_uuid ?? old('promotor_uuid') ?? null"
     />
 </div>
+
 
 <b class="uppercase mb-2">Configuração Pré-lances</b>
 @livewire('components.app.leilao-config-pre-lance', [$formData])

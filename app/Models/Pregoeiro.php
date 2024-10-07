@@ -9,7 +9,7 @@ class Pregoeiro extends Model
 {
     use HasFactory;
 
-    protected $table = 'pregoeiros';
+    protected $table = 'pregoeiro';
     
     protected $fillable = [
         'uuid',
