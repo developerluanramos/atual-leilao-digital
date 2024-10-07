@@ -14,6 +14,7 @@ use App\Models\Leiloeiro;
 use App\Models\Pisteiro;
 use App\Models\PostoTrabalho;
 use App\Models\Pregoeiro;
+use App\Models\PrelanceConfig;
 use App\Models\Promotor;
 use App\Models\Raca;
 use App\Models\Setor;
@@ -30,6 +31,7 @@ use App\Observers\LeiloeiroObserver;
 use App\Observers\PisteiroObserver;
 use App\Observers\PostoTrabalhoObserver;
 use App\Observers\PregoeiroObserver;
+use App\Observers\PrelanceConfigObserver;
 use App\Observers\PromotorObserver;
 use App\Observers\RacaObserver;
 use App\Observers\SetorObserver;
@@ -164,6 +166,7 @@ class AppServiceProvider extends ServiceProvider
         Promotor::observe(PromotorObserver::class);
         Pregoeiro::observe(PregoeiroObserver::class);
         Leilao::observe(LeilaoObserver::class);
+        PrelanceConfig::observe(PrelanceConfigObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
