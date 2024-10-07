@@ -4,7 +4,6 @@ namespace App\DTO\Leilao;
 
 use App\Http\Requests\App\Leilao\LeilaoStoreRequest;
 use App\Models\PrelanceConfig;
-use Illuminate\Support\Facades\Date;
 
 class LeilaoStoreDTO
 {
@@ -15,13 +14,13 @@ class LeilaoStoreDTO
         public string $cep,
         public string $uf,
         public string $cidade,
-        public Date $leilaoAbertoEm,
-        public Date $leilaoFechadoEm,
-        public Date $preLanceAbertoEm,
-        public Date $preLanceFechadoEm,
-        public string $promotorUuid,
-        public string $leiloeiroUuid,
-        public string $pregoeiroUuid,
+        public string $aberto_em,
+        public string $fechado_em,
+        public string $prelance_aberto_em,
+        public string $prelance_fechado_em,
+        public string $promotor_uuid,
+        public string $leiloeiro_uuid,
+        public string $pregoeiro_uuid,
         public array $configPreLance
     ) { }
 

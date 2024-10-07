@@ -9,6 +9,7 @@ use App\Models\Especie;
 use App\Models\Fornecedor;
 use App\Models\Lance;
 use App\Models\LanceCliente;
+use App\Models\Leilao;
 use App\Models\Leiloeiro;
 use App\Models\Pisteiro;
 use App\Models\PostoTrabalho;
@@ -24,6 +25,7 @@ use App\Observers\EspecieObserver;
 use App\Observers\FornecedorObserver;
 use App\Observers\LanceClienteObserver;
 use App\Observers\LanceObserver;
+use App\Observers\LeilaoObserver;
 use App\Observers\LeiloeiroObserver;
 use App\Observers\PisteiroObserver;
 use App\Observers\PostoTrabalhoObserver;
@@ -161,6 +163,7 @@ class AppServiceProvider extends ServiceProvider
         Pisteiro::observe(PisteiroObserver::class);
         Promotor::observe(PromotorObserver::class);
         Pregoeiro::observe(PregoeiroObserver::class);
+        Leilao::observe(LeilaoObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
