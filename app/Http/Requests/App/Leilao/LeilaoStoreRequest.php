@@ -27,6 +27,8 @@ class LeilaoStoreRequest extends FormRequest
             "local" => ["string"],
             "data_abertura" => ["required", "date"],
             "data_fechamento" => ["required", "date"],
+            "dataAbertura" => ["required", "date"],
+            "dataFechamento" => ["required", "date"],
             "cep" => ["required", "string"],
             "uf" => ["required", "string"],
             "cidade" => ["required", "string"],

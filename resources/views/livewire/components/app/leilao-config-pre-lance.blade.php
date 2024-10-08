@@ -7,7 +7,7 @@
             lenght="3/12"
             change="default"
             blur="default"
-            :value="$leilao->dataAbertura ?? old('dataAbertura') ?? null"
+            :value="$leilao->prelance_aberto_em ?? old('prelance_aberto_em') ?? null"
         />
         <x-layouts.inputs.input-date-livewire
             label="Data de fechamento"
@@ -16,7 +16,7 @@
             change="default"
             blur="default"
             lenght="3/12"
-            :value="$leilao->dataFechamento ?? old('dataFechamento') ?? null"
+            :value="$leilao->prelance_fechado_em ?? old('prelance_fechado_em') ?? null"
         />
     </div>
 {{--    <div class="flex flex-wrap -mx-3 mb-4">--}}
@@ -25,6 +25,8 @@
 {{--        {{$this->diffInDays}}--}}
 {{--        {{json_encode($this->configs)}}--}}
 {{--    </div>--}}
+
+{{ $this->dataAbertura }} | {{ $this->dataFechamento }}
 
     @if($this->diffInDays > 0)
         <div class="flex flex-wrap -mx-3 mb-4">
@@ -47,11 +49,11 @@
                             <x-layouts.inputs.input-date-livewire
                                 label=""
                                 model="{{ 'configs.'.$key.'.data' }}"
-                                name="dataAbertura"
+                                name="data"
                                 lenght="12/12"
                                 change="default"
                                 blur="default"
-                                :value="$leilao->dataAbertura ?? old('dataAbertura') ?? null"
+                                :value="$this->data ?? old('data') ?? null"
                             />
                         </td>
                         <td class="text-center">
@@ -84,7 +86,7 @@
                                 lenght="12/12"
                                 change="default"
                                 blur="default"
-                                :value="$leilao->valor_estimado ?? old('valor_estimado') ?? null"
+                                :value="$this->valor_estimado ?? old('valor_estimado') ?? null"
                             />
                         </td>
                         <td class="text-right">
@@ -95,7 +97,7 @@
                                 lenght="12/12"
                                 change="default"
                                 blur="default"
-                                :value="$leilao->valor_minimo ?? old('valor_minimo') ?? null"
+                                :value="$this->valor_minimo ?? old('valor_minimo') ?? null"
                             />
                         </td>
                         <td class="text-right">
@@ -106,7 +108,7 @@
                                 lenght="12/12"
                                 change="default"
                                 blur="default"
-                                :value="$leilao->valor_progressao ?? old('valor_progressao') ?? null"
+                                :value="$this->valor_progressao ?? old('valor_progressao') ?? null"
                             />
                         </td>
                         <td class="text-right">
@@ -117,7 +119,7 @@
                                 lenght="12/12"
                                 change="default"
                                 blur="default"
-                                :value="$leilao->percentual_progressao ?? old('percentual_progressao') ?? null"
+                                :value="$this->percentual_progressao ?? old('percentual_progressao') ?? null"
                             />
                         </td>
                     </tr>

@@ -31,7 +31,7 @@
         label="Data de fechamento"
         name="data_fechamento"
         lenght="3/12"
-        :value="$leilao->fechado_em ?? old('fechado_em') ?? null"
+        :value="$leilao->fechado_em ?? old('aberto_em') ?? null"
     />
 </div>
 

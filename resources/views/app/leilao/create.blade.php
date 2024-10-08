@@ -1,7 +1,7 @@
 @extends('app.layouts.app')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('setor.create') }}
+    {{ Breadcrumbs::render('leilao.create') }}
 @endsection
 
 @section('title', 'Novo Leilão')

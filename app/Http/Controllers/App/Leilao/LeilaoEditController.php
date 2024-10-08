@@ -30,7 +30,7 @@ class LeilaoEditController extends Controller
         $leilao->prelance_aberto_em = Carbon::parse($leilao->prelance_aberto_em)->format('m-d-Y');
         $leilao->prelance_fechado_em = Carbon::parse($leilao->prelance_fechado_em)->format('m-d-Y');
         
-        dd($leilao);
+        // dd($leilao);
 
         return view('app.leilao.edit', compact('leilao', 'formData'));
     }
