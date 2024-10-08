@@ -14,8 +14,12 @@ class LeilaoUpdateController extends Controller
     )
     { }
 
-    public function update(LeilaoUpdateRequest $request)
+    public function update(string $uuid, LeilaoUpdateRequest $request)
     {
+        $request->merge([
+            'uuid' => $uuid
+        ]);
+        
         $this->updateAction->exec(LeilaoUpdateDTO::makeFromRequest($request));
 
         return redirect()->route('leilao.index');
