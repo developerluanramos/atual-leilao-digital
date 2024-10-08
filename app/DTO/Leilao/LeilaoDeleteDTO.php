@@ -2,15 +2,15 @@
 
 namespace App\DTO\Leilao;
 
-use App\Http\Requests\App\Leilao\LeilaoEditRequest;
+use App\Http\Requests\App\Leilao\LeilaoDeleteRequest;
 
-class LeilaoEditDTO
+class LeilaoDeleteDTO
 {
     public function __construct(
         public string $uuid
     ) { }
 
-    public static function makeFromRequest(LeilaoEditRequest $request)
+    public static function makeFromRequest(LeilaoDeleteRequest $request): self
     {
         return new self(
             $request->uuid
