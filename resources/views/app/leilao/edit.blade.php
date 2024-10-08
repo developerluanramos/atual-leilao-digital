@@ -12,7 +12,7 @@
 
 @include('components.alerts.form-errors')
 
-<form action="{{ route('setor.update', $leilao->uuid) }}" method="POST">
+<form action="{{ route('leilao.update', $leilao->uuid) }}" method="POST">
     @csrf
     @method('PUT')
     @include('app.leilao.partials.form')
