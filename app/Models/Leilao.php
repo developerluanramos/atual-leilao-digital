@@ -37,6 +37,20 @@ class Leilao extends Model
         'config_prelance_atual'
     ];
 
+    // protected $dates = [
+    //     'aberto_em',
+    //     'fechado_em',
+    //     'prelance_aberto_em',
+    //     'prelance_fechado_em',
+    // ]; 
+    
+    // protected $casts = [
+    //     'aberto_em' => "date:Y-m-d",
+    //     'fechado_em' => "date:Y-m-d",
+    //     'prelance_aberto_em' => "date:Y-m-d",
+    //     'prelance_fechado_em' => "date:Y-m-d",
+    // ];
+
     /*
     * Database relations
     *

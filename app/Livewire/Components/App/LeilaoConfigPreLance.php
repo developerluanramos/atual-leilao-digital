@@ -7,16 +7,16 @@ use Livewire\Component;
 
 class LeilaoConfigPreLance extends Component
 {
-    public string $dataAbertura;
-    public string $dataFechamento;
+    public string $prelance_aberto_em;
+    public string $prelance_fechado_em;
     public int $diffInDays;
     public array $configs;
     public array $formData;
 
     public function __construct()
     {
-        $this->dataAbertura = Carbon::now()->toDateString();
-        $this->dataFechamento = Carbon::now()->toDateString();
+        $this->prelance_aberto_em = Carbon::now()->toDateString();
+        $this->prelance_fechado_em = Carbon::now()->toDateString();
         $this->diffInDays = 0;
         $this->configs = [];
     }
@@ -31,20 +31,20 @@ class LeilaoConfigPreLance extends Component
         return view('livewire.components.app.leilao-config-pre-lance');
     }
 
-    public function updatedDataAbertura($value)
+    public function updatedPrelanceAbertoEm($value)
     {
         $this->gerarConfiguracoes();
     }
 
-    public function updatedDataFechamento($value)
+    public function updatedPrelanceFechadoEm($value)
     {
         $this->gerarConfiguracoes();
     }
 
     public function gerarConfiguracoes()
     {
-        $dataAbertura = Carbon::createFromFormat('Y-m-d', $this->dataAbertura);
-        $dataFechamento = Carbon::createFromFormat('Y-m-d', $this->dataFechamento);
+        $dataAbertura = Carbon::createFromFormat('Y-m-d', $this->prelance_aberto_em);
+        $dataFechamento = Carbon::createFromFormat('Y-m-d', $this->prelance_fechado_em);
         $this->diffInDays = $dataAbertura->diffInDays($dataFechamento, false);
         $this->configs = [];
 

@@ -24,14 +24,7 @@ class LeilaoEditController extends Controller
 
         $formData = $this->createAction->execute();
         $leilao = $this->editAction->exec(LeilaoEditDTO::makeFromRequest($request));
-
-        $leilao->aberto_em = Carbon::parse($leilao->aberto_em)->format('m-d-Y');
-        $leilao->fechado_em = Carbon::parse($leilao->fechado_em)->format('m-d-Y');
-        $leilao->prelance_aberto_em = Carbon::parse($leilao->prelance_aberto_em)->format('m-d-Y');
-        $leilao->prelance_fechado_em = Carbon::parse($leilao->prelance_fechado_em)->format('m-d-Y');
         
-        // dd($leilao);
-
         return view('app.leilao.edit', compact('leilao', 'formData'));
     }
 }

@@ -2,8 +2,8 @@
     <div class="flex flex-wrap -mx-3 mb-4">
         <x-layouts.inputs.input-date-livewire
             label="Data de abertura"
-            model="dataAbertura"
-            name="dataAbertura"
+            model="prelance_aberto_em"
+            name="prelance_aberto_em"
             lenght="3/12"
             change="default"
             blur="default"
@@ -11,8 +11,8 @@
         />
         <x-layouts.inputs.input-date-livewire
             label="Data de fechamento"
-            model="dataFechamento"
-            name="dataFechamento"
+            model="prelance_fechado_em"
+            name="prelance_fechado_em"
             change="default"
             blur="default"
             lenght="3/12"
@@ -26,7 +26,7 @@
 {{--        {{json_encode($this->configs)}}--}}
 {{--    </div>--}}
 
-{{ $this->dataAbertura }} | {{ $this->dataFechamento }}
+{{ $this->prelance_aberto_em }} | {{ $this->prelance_fechado_em }} | {{ $this->diffInDays }}
 
     @if($this->diffInDays > 0)
         <div class="flex flex-wrap -mx-3 mb-4">

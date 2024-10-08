@@ -20,6 +20,8 @@ class LeilaoEditAction
             'config_prelance'
         ];
 
-        return $this->repository->find($dto->uuid, $relacionamentos);
+        $leilao = $this->repository->find($dto->uuid, $relacionamentos);
+
+        return LeilaoEditDTO::makeFromAction($leilao);
     }
 }

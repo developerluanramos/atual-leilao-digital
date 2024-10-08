@@ -3,6 +3,8 @@
 namespace App\DTO\Leilao;
 
 use App\Http\Requests\App\Leilao\LeilaoEditRequest;
+use App\Models\Leilao;
+use Carbon\Carbon;
 
 class LeilaoEditDTO
 {
@@ -15,5 +17,15 @@ class LeilaoEditDTO
         return new self(
             $request->uuid
         );
+    }
+
+    public static function makeFromAction(Leilao $leilao)
+    {
+        $leilao->aberto_em = Carbon::parse($leilao->aberto_em)->toDateString();
+        $leilao->fechado_em = Carbon::parse($leilao->fechado_em)->toDateString();
+        $leilao->prelance_aberto_em = Carbon::parse($leilao->prelance_aberto_em)->toDateString();
+        $leilao->prelance_fechado_em = Carbon::parse($leilao->prelance_fechado_em)->toDateString();
+        
+        return $leilao;
     }
 }
