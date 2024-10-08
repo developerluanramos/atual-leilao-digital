@@ -26,8 +26,6 @@
 {{--        {{json_encode($this->configs)}}--}}
 {{--    </div>--}}
 
-{{ $this->prelance_aberto_em }} | {{ $this->prelance_fechado_em }} | {{ $this->diffInDays }}
-
     @if($this->diffInDays > 0)
         <div class="flex flex-wrap -mx-3 mb-4">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

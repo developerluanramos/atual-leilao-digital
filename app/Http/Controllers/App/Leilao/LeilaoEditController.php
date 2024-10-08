@@ -23,15 +23,6 @@ class LeilaoEditController extends Controller
 
         $formData = $this->createAction->execute();
         $leilao = $this->editAction->exec(LeilaoEditDTO::makeFromRequest($request));
-        $configPreLance = $leilao->config_prelance;
-
-        foreach($configPreLance as $config)
-        {
-            $configPreLance[] = [
-                
-            ];
-        }
-        dd($configPreLance);
 
         return view('app.leilao.edit', compact('leilao', 'formData'));
     }

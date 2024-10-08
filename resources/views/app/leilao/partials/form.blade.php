@@ -84,7 +84,7 @@
 
 
 <b class="uppercase mb-2">Configuração Pré-lances</b>
-@livewire('components.app.leilao-config-pre-lance', [$formData])
+@livewire('components.app.leilao-config-pre-lance', [$formData, $leilao])
 <br>
 
 <x-layouts.buttons.submit-button text="Salvar"/>

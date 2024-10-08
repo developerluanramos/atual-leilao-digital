@@ -4,6 +4,7 @@ namespace App\Http\Controllers\App\Leilao;
 
 use App\Actions\Leilao\LeilaoCreateAction;
 use App\Http\Controllers\Controller;
+use App\Models\Leilao;
 use Illuminate\Http\Request;
 
 class LeilaoCreateController extends Controller
@@ -15,7 +16,8 @@ class LeilaoCreateController extends Controller
         $formData = $action->execute();
 
         return view('app.leilao.create', [
-            "formData" => $formData
+            "formData" => $formData,
+            "leilao" => new Leilao()
         ]);
     }
 }
