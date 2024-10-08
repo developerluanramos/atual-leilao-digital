@@ -7,7 +7,6 @@ use App\Actions\Leilao\LeilaoEditAction;
 use App\DTO\Leilao\LeilaoEditDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\App\Leilao\LeilaoEditRequest;
-use Carbon\Carbon;
 
 class LeilaoEditController extends Controller
 {
@@ -24,7 +23,16 @@ class LeilaoEditController extends Controller
 
         $formData = $this->createAction->execute();
         $leilao = $this->editAction->exec(LeilaoEditDTO::makeFromRequest($request));
-        
+        $configPreLance = $leilao->config_prelance;
+
+        foreach($configPreLance as $config)
+        {
+            $configPreLance[] = [
+                
+            ];
+        }
+        dd($configPreLance);
+
         return view('app.leilao.edit', compact('leilao', 'formData'));
     }
 }
