@@ -11,6 +11,8 @@ use App\Models\Fornecedor;
 use App\Models\Lance;
 use App\Models\LanceCliente;
 use App\Models\Leiloeiro;
+use App\Models\Lote;
+use App\Models\LoteItem;
 use App\Models\Pisteiro;
 use App\Models\PlanoPagamento;
 use App\Models\PostoTrabalho;
@@ -27,6 +29,8 @@ use App\Observers\FornecedorObserver;
 use App\Observers\LanceClienteObserver;
 use App\Observers\LanceObserver;
 use App\Observers\LeiloeiroObserver;
+use App\Observers\LoteItemObserver;
+use App\Observers\LoteObserver;
 use App\Observers\PisteiroObserver;
 use App\Observers\PlanoPagamentoObserver;
 use App\Observers\PostoTrabalhoObserver;
@@ -159,6 +163,8 @@ class AppServiceProvider extends ServiceProvider
         Promotor::observe(PromotorObserver::class);
         PlanoPagamento::observe(PlanoPagamentoObserver::class);
         CondicaoPagamento::observe(CondicaoPagamentoObserver::class);
+        Lote::observe(LoteObserver::class);
+        LoteItem::observe(LoteItemObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {

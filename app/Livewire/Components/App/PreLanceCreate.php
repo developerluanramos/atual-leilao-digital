@@ -89,9 +89,9 @@ class PreLanceCreate extends Component
                 for($i = 0; $i <= $condicaoPagamento['qtd_parcelas']; $i++) 
                 {
                     $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * $this->lote->itens()->count()) / $this->getQuantidadeCompradoresProperty());
-                    $valorComissaoComprador = $this->incideComissaoCompra
+                    $valorComissaoComprador = $condicaoPagamento['incide_comissao_comprador']
                         ? ($condicaoPagamento['percentual_comissao_comprador'] / 100) * $valor : 0;
-                    $valorComissaoVendedor = $this->incideComissaoVenda
+                    $valorComissaoVendedor = $condicaoPagamento['incide_comissao_vendedor']
                         ? ($condicaoPagamento['percentual_comissao_vendedor'] / 100) * $valor : 0;
 
                     $this->parcelas[] = [
@@ -99,8 +99,8 @@ class PreLanceCreate extends Component
                         'valor' => $valor,
                         'repeticoes' => $condicaoPagamento['repeticoes'],
                         'data_pagamento' => $carbonHoje->addMonth()->toDateString(),
-                        'incide_comissao_compra' => $this->incideComissaoCompra,
-                        'incide_comissao_venda' => $this->incideComissaoVenda,
+                        'incide_comissao_compra' => $condicaoPagamento['incide_comissao_comprador'],
+                        'incide_comissao_venda' => $condicaoPagamento['incide_comissao_vendedor'],
                         'percentual_comissao_vendedor' => $condicaoPagamento['percentual_comissao_vendedor'],
                         'percentual_comissao_comprador' => $condicaoPagamento['percentual_comissao_comprador'],
                         'valor_comissao_comprador' => $valorComissaoComprador,

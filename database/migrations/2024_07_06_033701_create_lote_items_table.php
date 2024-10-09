@@ -20,8 +20,8 @@ return new class extends Migration
             $table->uuid('raca_uuid');
             $table->uuid('especie_uuid');
             $table->decimal('valor_estimado', 12, 2);
-            $table->boolean('incide_comissao_compra');
-            $table->boolean('incide_comissao_venda');
+            // $table->boolean('incide_comissao_compra');
+            // $table->boolean('incide_comissao_venda');
             $table->timestamps();
         });
     }
