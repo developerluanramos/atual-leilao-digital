@@ -200,3 +200,8 @@ Breadcrumbs::for('plano-pagamento.edit', function (BreadcrumbTrail $trail, $plan
     $trail->parent('plano-pagamento');
     $trail->push('Edição de Plano de Pagamento', route('plano-pagamento.edit', $planoPagamento));
 });
+
+Breadcrumbs::for('cliente', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard' , route('dashboard.index'));
+    $trail->push('Clientes', route('cliente.index'));
+});
