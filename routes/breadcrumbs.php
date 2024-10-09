@@ -205,3 +205,7 @@ Breadcrumbs::for('cliente', function (BreadcrumbTrail $trail) {
     $trail->parent('Dashboard' , route('dashboard.index'));
     $trail->push('Clientes', route('cliente.index'));
 });
+Breadcrumbs::for('cliente.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('cliente');
+    $trail->push('Novo Cliente', route('cliente.create'));
+});
