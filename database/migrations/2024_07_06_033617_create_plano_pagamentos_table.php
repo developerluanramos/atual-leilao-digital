@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('plano_pagamento', function (Blueprint $table) {
             $table->id();
             $table->uuid()->unique();
+            $table->string('nome');
             $table->string('descricao');
             $table->timestamps();
         });

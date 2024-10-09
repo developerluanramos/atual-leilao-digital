@@ -52,7 +52,6 @@ class LeilaoLoteItem extends Component
     public function add()
     {
         $this->errorMessage = '';
-        
         if(
             is_null($this->item->descricao)
             || is_null($this->item->especie_uuid)
