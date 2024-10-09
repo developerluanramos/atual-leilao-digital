@@ -30,8 +30,8 @@ class LoteItemFactory extends Factory
             'raca_uuid' => Raca::inRandomOrder()->first()->uuid,
             'especie_uuid' => Especie::inRandomOrder()->first()->uuid,
             'valor_estimado' => $this->faker->numerify('#####.##'),
-            'incide_comissao_compra' => $this->faker->randomElement([true, false]),
-            'incide_comissao_venda' => $this->faker->randomElement([true, false]),
+            // 'incide_comissao_compra' => $this->faker->randomElement([true, false]),
+            // 'incide_comissao_venda' => $this->faker->randomElement([true, false]),
         ];
     }
 }

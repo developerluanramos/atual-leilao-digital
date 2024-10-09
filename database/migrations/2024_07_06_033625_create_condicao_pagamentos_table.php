@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('percentual_comissao_comprador', 12, 2);
             $table->boolean('incide_comissao_vendedor')->default(false);
             $table->boolean('incide_comissao_comprador')->default(false);
-            $table->foreignUuid('plano_pagamento_uuid')->references('uuid')->on('plano_pagamento');
+            $table->foreignUuid('plano_pagamento_uuid')->references('uuid')->on('plano_pagamento')->onDelete('cascade');
             $table->timestamps();
         });
     }

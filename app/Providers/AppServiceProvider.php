@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Cargo;
+use App\Models\CondicaoPagamento;
 use App\Models\Departamento;
 use App\Models\Equipe;
 use App\Models\Especie;
@@ -11,7 +12,10 @@ use App\Models\Lance;
 use App\Models\LanceCliente;
 use App\Models\Leilao;
 use App\Models\Leiloeiro;
+use App\Models\Lote;
+use App\Models\LoteItem;
 use App\Models\Pisteiro;
+use App\Models\PlanoPagamento;
 use App\Models\PostoTrabalho;
 use App\Models\Pregoeiro;
 use App\Models\PrelanceConfig;
@@ -20,6 +24,7 @@ use App\Models\Raca;
 use App\Models\Setor;
 use App\Observers\CargoObserver;
 use App\Models\User;
+use App\Observers\CondicaoPagamentoObserver;
 use App\Observers\DepartamentoObserver;
 use App\Observers\EquipeObserver;
 use App\Observers\EspecieObserver;
@@ -28,7 +33,10 @@ use App\Observers\LanceClienteObserver;
 use App\Observers\LanceObserver;
 use App\Observers\LeilaoObserver;
 use App\Observers\LeiloeiroObserver;
+use App\Observers\LoteItemObserver;
+use App\Observers\LoteObserver;
 use App\Observers\PisteiroObserver;
+use App\Observers\PlanoPagamentoObserver;
 use App\Observers\PostoTrabalhoObserver;
 use App\Observers\PregoeiroObserver;
 use App\Observers\PrelanceConfigObserver;
@@ -167,6 +175,10 @@ class AppServiceProvider extends ServiceProvider
         Pregoeiro::observe(PregoeiroObserver::class);
         Leilao::observe(LeilaoObserver::class);
         PrelanceConfig::observe(PrelanceConfigObserver::class);
+        PlanoPagamento::observe(PlanoPagamentoObserver::class);
+        CondicaoPagamento::observe(CondicaoPagamentoObserver::class);
+        Lote::observe(LoteObserver::class);
+        LoteItem::observe(LoteItemObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
