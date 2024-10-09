@@ -24,7 +24,7 @@
                     text="Editar"
                     action="editar"
                     color="primary"
-                    :route="route('especie.edit', $cliente->uuid)"/>
+                    :route="route('cliente.edit', $cliente->uuid)"/>
                 <x-layouts.buttons.action-button
                     text="Excluir"
                     action="excluir"

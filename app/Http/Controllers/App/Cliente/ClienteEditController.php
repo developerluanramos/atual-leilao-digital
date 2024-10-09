@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Actions\Cliente;
+namespace App\Http\Controllers\App\Cliente;;
 
+use App\Actions\Cliente\ClienteCreateAction;
+use App\Actions\Cliente\ClienteEditAction;
 use App\DTO\Cliente\ClienteEditDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\App\Cliente\ClienteEditRequest;
