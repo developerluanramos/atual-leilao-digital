@@ -17,8 +17,8 @@ class LeilaoStoreAction
 
     public function exec(LeilaoStoreDTO $dto): Leilao
     {
-        $this->leilao->create((array) $dto);
-        $this->leilao->config_prelance()->saveMany($dto->configPreLance);
+        $leilao = $this->leilao->create((array) $dto);
+        $leilao->config_prelance()->saveMany($dto->configPreLance);
 
         return $this->leilao;
     }

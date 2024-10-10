@@ -16,8 +16,8 @@ class LoteStoreAction
 
     public function execute(LoteStoreDTO $leilaoStoreDTO) : Lote
     {
-        $this->lote->create((array)$leilaoStoreDTO);
-        $this->lote->itens()->createMany($leilaoStoreDTO->lote_itens);
+        $lote = $this->lote->create((array)$leilaoStoreDTO);
+        $lote->itens()->createMany($leilaoStoreDTO->lote_itens);
         
         foreach($this->lote->itens()->get() as $index => $item) {
             $item->imagens()->createMany($leilaoStoreDTO->lote_itens[$index]["imagens"]);
