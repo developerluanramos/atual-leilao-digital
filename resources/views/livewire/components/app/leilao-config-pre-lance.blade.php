@@ -2,21 +2,21 @@
     <div class="flex flex-wrap -mx-3 mb-4">
         <x-layouts.inputs.input-date-livewire
             label="Data de abertura"
-            model="dataAbertura"
-            name="dataAbertura"
+            model="prelance_aberto_em"
+            name="prelance_aberto_em"
             lenght="3/12"
             change="default"
             blur="default"
-            :value="$leilao->dataAbertura ?? old('dataAbertura') ?? null"
+            :value="$leilao->prelance_aberto_em ?? old('prelance_aberto_em') ?? null"
         />
         <x-layouts.inputs.input-date-livewire
             label="Data de fechamento"
-            model="dataFechamento"
-            name="dataFechamento"
+            model="prelance_fechado_em"
+            name="prelance_fechado_em"
             change="default"
             blur="default"
             lenght="3/12"
-            :value="$leilao->dataFechamento ?? old('dataFechamento') ?? null"
+            :value="$leilao->prelance_fechado_em ?? old('prelance_fechado_em') ?? null"
         />
     </div>
 {{--    <div class="flex flex-wrap -mx-3 mb-4">--}}
@@ -34,8 +34,10 @@
                     <th class="text-center">Data</th>
                     <th class="text-center">Plano de pagamento</th>
                     <th class="text-center">Cor</th>
-                    <th class="text-right">Valor estimado</th>
-                    <th class="text-right">Valor mínimo</th>
+                    <th class="text-center">Valor estimado</th>
+                    <th class="text-center">Valor mínimo</th>
+                    <th class="text-center">Valor Progressão</th>
+                    <th class="text-center">Percentual Progressão</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -45,11 +47,11 @@
                             <x-layouts.inputs.input-date-livewire
                                 label=""
                                 model="{{ 'configs.'.$key.'.data' }}"
-                                name="dataAbertura"
+                                name="data"
                                 lenght="12/12"
                                 change="default"
                                 blur="default"
-                                :value="$leilao->dataAbertura ?? old('dataAbertura') ?? null"
+                                :value="$this->data ?? old('data') ?? null"
                             />
                         </td>
                         <td class="text-center">
@@ -67,11 +69,11 @@
                             <x-layouts.inputs.input-colorpicker-livewire
                                 label=""
                                 model="{{ 'configs.'.$key.'.cor' }}"
-                                name="dataAbertura"
+                                name="cor"
                                 lenght="12/12"
                                 change="default"
                                 blur="default"
-                                :value="$leilao->dataAbertura ?? old('dataAbertura') ?? null"
+                                :value="$this->cor ?? old('cor') ?? null"
                             />
                         </td>
                         <td class="text-right">
@@ -82,7 +84,7 @@
                                 lenght="12/12"
                                 change="default"
                                 blur="default"
-                                :value="$leilao->valor_estimado ?? old('valor_estimado') ?? null"
+                                :value="$this->valor_estimado ?? old('valor_estimado') ?? null"
                             />
                         </td>
                         <td class="text-right">
@@ -93,7 +95,29 @@
                                 lenght="12/12"
                                 change="default"
                                 blur="default"
-                                :value="$leilao->valor_minimo ?? old('valor_minimo') ?? null"
+                                :value="$this->valor_minimo ?? old('valor_minimo') ?? null"
+                            />
+                        </td>
+                        <td class="text-right">
+                            <x-layouts.inputs.input-normal-text-livewire
+                                label=""
+                                model="{{ 'configs.'.$key.'.valor_progressao' }}"
+                                name="valor_progressao"
+                                lenght="12/12"
+                                change="default"
+                                blur="default"
+                                :value="$this->valor_progressao ?? old('valor_progressao') ?? null"
+                            />
+                        </td>
+                        <td class="text-right">
+                            <x-layouts.inputs.input-normal-text-livewire
+                                label=""
+                                model="{{ 'configs.'.$key.'.percentual_progressao' }}"
+                                name="percentual_progressao"
+                                lenght="12/12"
+                                change="default"
+                                blur="default"
+                                :value="$this->percentual_progressao ?? old('percentual_progressao') ?? null"
                             />
                         </td>
                     </tr>
@@ -101,5 +125,6 @@
                 </tbody>
             </table>
         </div>
+        <input type="hidden" name="configPreLance" value="{{json_encode($this->configs)}}">
     @endif
 </div>

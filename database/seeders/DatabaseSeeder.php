@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             ClienteSeeder::class,
             ContatoSeeder::class,
             PromotorSeeder::class,
+            PregoeiroSeeder::class,
             EspecieSeeder::class,
             RacaSeeder::class,
             LeiloeiroSeeder::class,

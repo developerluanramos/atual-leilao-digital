@@ -186,6 +186,21 @@ Breadcrumbs::for('promotor.edit', function (BreadcrumbTrail $trail, $promotor) {
     $trail->push('Edição de Promotor', route('promotor.edit', $promotor));
 });
 
+Breadcrumbs::for('leilao', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard' , route('dashboard.index'));
+    $trail->push('Leilão', route('leilao.index'));
+});
+
+Breadcrumbs::for('leilao.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('leilao');
+    $trail->push('Novo Leilão', route('leilao.create'));
+});
+
+Breadcrumbs::for('leilao.edit', function (BreadcrumbTrail $trail, $leilao) {
+    $trail->parent('leilao');
+    $trail->push('Edição de Leilão', route('leilao.edit', $leilao));
+});
+
 Breadcrumbs::for('plano-pagamento', function (BreadcrumbTrail $trail) {
     $trail->parent('Dashboard' , route('dashboard.index'));
     $trail->push('Plano de Pagamento', route('plano-pagamento.index'));

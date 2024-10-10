@@ -46,4 +46,10 @@ class LeilaoEloquentRepository implements LeilaoRepositoryInterface
 
         return new PaginationPresenter($result);
     }
+
+    public function delete(string $uuid): void
+    {
+        $leilao = $this->find($uuid);
+        $leilao->delete();
+    }
 }
