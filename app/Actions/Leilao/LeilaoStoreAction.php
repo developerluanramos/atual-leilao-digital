@@ -7,13 +7,19 @@ use App\Models\Leilao;
 
 class LeilaoStoreAction
 {
-    public function __construct() { }
+    protected Leilao $leilao;
+
+    public function __construct(
+        Leilao $leilao
+    ) { 
+        $this->leilao = $leilao;
+    }
 
     public function exec(LeilaoStoreDTO $dto): Leilao
     {
-        $leilao = Leilao::create((array) $dto);
-        $leilao->config_prelance()->saveMany($dto->configPreLance);
+        $this->leilao->create((array) $dto);
+        $this->leilao->config_prelance()->saveMany($dto->configPreLance);
 
-        return $leilao;
+        return $this->leilao;
     }
 }
