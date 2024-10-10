@@ -17,6 +17,8 @@ class LeilaoLoteItem extends Component
     public array $formData;
     public array $imagens;
 
+    public array $uploadedImages;
+
     public array $videos;
 
     public stdClass $video;
@@ -40,6 +42,7 @@ class LeilaoLoteItem extends Component
         $this->item = new LoteItem();
         $this->item->valor_estimado = 0;
         $this->imagens = [];
+        $this->uploadedImages = [];
         $this->videos = [];
         $this->formData = $formData;
     }
@@ -62,19 +65,20 @@ class LeilaoLoteItem extends Component
             $this->errorMessage = 'Preencha o formulário corretamente para continuar';
             return false;
         }
-
+        
         $this->itens[] = [
             'descricao' => $this->item->descricao,
             'especie_uuid' => $this->item->especie_uuid,
             'raca_uuid' => $this->item->raca_uuid,
             'valor_estimado' => $this->item->valor_estimado,
             'genero' => $this->item->genero,
-            'imagens' => $this->imagens,
+            'imagens' => $this->uploadedImages,
             'videos' => $this->videos
         ];
 
         $this->item = new LoteItem();
         $this->imagens = [];
+        $this->uploadedImages = [];
         $this->videos = [];
         $this->errorMessage = '';
     }
@@ -87,9 +91,19 @@ class LeilaoLoteItem extends Component
         ];
     }
 
-    public function imagensUpdated()
+    public function updatedImagens()
     {
+        $this->validate([
+            'imagens.*' => 'image|max:1024', // 1MB Max
+        ]);
 
+        foreach($this->imagens as $imgIndex => $imagem)
+        {
+            $this->uploadedImages[] = [
+                "descricao" => $imagem->getFileName(),
+                "url" => $imagem->store('imagens/lote-itens', 'local')
+            ];
+        }
     }
     
     function removeVideo(int $index)

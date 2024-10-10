@@ -32,4 +32,14 @@ class LoteItem extends Model
     {
         return $this->hasOne(Especie::class, 'uuid', 'especie_uuid');
     }
+
+    public function imagens()
+    {
+        return $this->hasMany(LoteItemImagem::class, 'lote_item_uuid', 'uuid');
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(LoteItemVideo::class, 'lote_item_uuid', 'uuid');
+    }
 }

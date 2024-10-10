@@ -7,9 +7,12 @@ use App\DTO\Leilao\Lote\LoteStoreDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\App\Leilao\Lote\LoteStoreRequest;
 use Illuminate\Http\Request;
+use Livewire\WithFileUploads;
 
 class LoteStoreController extends Controller
 {
+    use WithFileUploads;
+
     public function store($leilaoUuid, LoteStoreRequest $request)
     {
         $request->merge([
@@ -17,7 +20,6 @@ class LoteStoreController extends Controller
         ]);
 
         $storeLote = (new LoteStoreAction())->execute(
-            $leilaoUuid,
             LoteStoreDTO::makeFromRequest($request)
         );
 
