@@ -8,7 +8,7 @@
 
 @include('components.alerts.form-errors')
 
-<form action="{{route('especie.update', $lote->uuid)}}" method="POST">
+<form action="{{route('leilao.lote.update', ['uuid' => $uuid, 'loteUuid' => $loteUuid])}}" method="POST">
     @method('PUT')
     @include('app.leilao.lotes.partials.form', ["lote" => $lote])
 </form>

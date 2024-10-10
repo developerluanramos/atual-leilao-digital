@@ -22,7 +22,7 @@ class LeilaoUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "uuid" => ["uuid", "exists:especie,uuid"],
+            "uuid" => ["uuid", "exists:leilao,uuid"],
             "descricao" => ["required", "min:3", "max:255"],
             "denominacao" => ["required", "min:3", "max:255"],
             "local" => ["string"],
