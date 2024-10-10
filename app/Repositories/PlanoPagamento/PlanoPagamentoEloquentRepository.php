@@ -9,7 +9,7 @@ use App\Repositories\Presenters\PaginationPresenter;
 class PlanoPagamentoEloquentRepository implements PlanoPagamentoRepositoryInterface
 {
     protected $model;
-
+    
     public function __construct(PlanoPagamento $model)
     {
         $this->model = $model;
@@ -26,9 +26,7 @@ class PlanoPagamentoEloquentRepository implements PlanoPagamentoRepositoryInterf
 
     public function find(string $uuid): PlanoPagamento
     {
-        return $this->model
-            ->with('promotor', 'leiloeiro', 'lotes')
-            ->where('uuid', $uuid)->firstOrFail();
+        return $this->model->where('uuid', $uuid)->firstOrFail();
     }
 
     public function paginate(int $page = 1, int $totalPerPage = 10, string $filter = null): PaginationInterface
@@ -45,5 +43,11 @@ class PlanoPagamentoEloquentRepository implements PlanoPagamentoRepositoryInterf
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 
         return new PaginationPresenter($result);
+    }
+
+    public function delete(string $uuid): void
+    {
+        $planoPagamento = $this->find($uuid);
+        $planoPagamento->delete();
     }
 }
