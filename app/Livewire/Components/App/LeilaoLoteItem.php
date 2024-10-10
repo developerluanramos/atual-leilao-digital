@@ -36,9 +36,9 @@ class LeilaoLoteItem extends Component
         'item.video_url' => 'required|string',
     ];
 
-    public function mount(array $formData)
+    public function mount(array $formData, array $itens = [])
     {
-        $this->itens = [];
+        $this->itens = $itens;
         $this->item = new LoteItem();
         $this->item->valor_estimado = 0;
         $this->imagens = [];

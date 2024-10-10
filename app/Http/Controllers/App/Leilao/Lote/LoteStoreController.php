@@ -23,6 +23,6 @@ class LoteStoreController extends Controller
             LoteStoreDTO::makeFromRequest($request)
         );
 
-        return redirect()->back();
+        return redirect()->route('leilao.lote.index', [$leilaoUuid]);
     }
 }
