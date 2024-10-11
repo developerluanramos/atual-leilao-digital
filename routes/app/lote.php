@@ -5,3 +5,4 @@ Route::get('leilao/{uuid}/lote/create', [\App\Http\Controllers\App\Leilao\Lote\L
 Route::get('leilao/{uuid}/lote/{loteUuid}/edit', [\App\Http\Controllers\App\Leilao\Lote\LoteEditController::class, 'edit'])->name('leilao.lote.edit');
 Route::put('leilao/{uuid}/lote/{loteUuid}/update', [\App\Http\Controllers\App\Leilao\Lote\LoteUpdateController::class, 'update'])->name('leilao.lote.update');
 Route::get('leilao/{uuid}/lote/{loteUuid}/show', [\App\Http\Controllers\App\Leilao\Lote\LoteShowController::class, 'show'])->name('leilao.lote.show');
+Route::delete('leilao/{uuid}/lote/{loteUuid}', [\App\Http\Controllers\App\Leilao\Lote\LoteDeleteController::class, 'delete'])->name('leilao.lote.delete');
