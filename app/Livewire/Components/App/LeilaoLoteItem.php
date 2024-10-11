@@ -69,7 +69,7 @@ class LeilaoLoteItem extends Component
             'descricao' => $this->item->descricao,
             'especie_uuid' => $this->item->especie_uuid,
             'raca_uuid' => $this->item->raca_uuid,
-            'valor_estimado' => $this->item->valor_estimado,
+            'valor_estimado' => number_format($this->item->valor_estimado, 2),
             'genero' => $this->item->genero,
             'imagens' => $this->uploadedImages,
             'videos' => $this->videos
