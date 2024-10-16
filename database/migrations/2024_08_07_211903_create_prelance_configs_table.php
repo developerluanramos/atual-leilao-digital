@@ -22,6 +22,8 @@ return new class extends Migration
             $table->decimal('valor_minimo', 12, 2);
             $table->decimal('valor_progressao', 12, 2);
             $table->decimal('percentual_progressao', 12, 2);
+            $table->boolean('incide_comissao_vendedor')->default(false);
+            $table->boolean('incide_comissao_comprador')->default(false);
             $table->timestamps();
         });
     }
