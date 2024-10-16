@@ -42,7 +42,6 @@
                         model="item.genero"
                         lenght="4/12"
                     />
-
                     <x-layouts.inputs.input-normal-number-livewire
                         label="Valor Estimado"
                         name="item.valor_estimado"
@@ -157,6 +156,7 @@
                     </div>
                 @endif
             </li>
+            {{ json_encode($itens) }}
             @forelse($itens as $index => $item)
                 <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                     <li class="py-3 sm:py-4">
@@ -177,6 +177,7 @@
                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                                     <small>Valor estimado: </small> <x-layouts.badges.info-money
                                         textLength="sm"
+                                        :convert="false"
                                         :value="$item['valor_estimado']"
                                     />
                                 </p>

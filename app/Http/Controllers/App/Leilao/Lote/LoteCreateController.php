@@ -15,7 +15,8 @@ class LoteCreateController extends Controller
             'aba' => 'lotes',
             'action' => 'create',
             'leilao' => $formData['leilao'],
-            'formData' => $formData
+            'formData' => $formData,
+            'itens' => []
         ]);
     }
 }
