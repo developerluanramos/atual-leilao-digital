@@ -20,7 +20,9 @@ class PrelanceConfig extends Model
         'valor_estimado',
         'valor_minimo',
         'valor_progressao',
-        'percentual_progressao'
+        'percentual_progressao',
+        'incide_comissao_vendedor',
+        'incide_comissao_comprador',
     ];
 
     public function plano_pagamento()

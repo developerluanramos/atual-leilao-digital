@@ -38,6 +38,8 @@
                     <th class="text-center">Valor mínimo</th>
                     <th class="text-center">Valor Progressão</th>
                     <th class="text-center">Percentual Progressão</th>
+                    <th class="text-center">Comisão Venda</th>
+                    <th class="text-center">Comisão Compra</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -118,6 +120,22 @@
                                 change="default"
                                 blur="default"
                                 :value="$this->percentual_progressao ?? old('percentual_progressao') ?? null"
+                            />
+                        </td>
+                        <td class="text-right">
+                            <x-layouts.inputs.input-switch-livewire
+                                label=""
+                                name="incide_comissao_vendedor"
+                                model="{{ 'configs.'.$key.'.incide_comissao_vendedor' }}"
+                                :value="$this->incide_comissao_vendedor ?? old('incide_comissao_vendedor')" 
+                            />
+                        </td>
+                        <td class="text-right">
+                            <x-layouts.inputs.input-switch-livewire
+                                label=""
+                                name="incide_comissao_comprador"
+                                model="{{ 'configs.'.$key.'.incide_comissao_comprador' }}"
+                                :value="$this->incide_comissao_comprador ?? old('incide_comissao_comprador')" 
                             />
                         </td>
                     </tr>
