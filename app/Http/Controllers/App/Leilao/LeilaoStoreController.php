@@ -14,7 +14,7 @@ class LeilaoStoreController extends Controller
     ) { }
 
     public function store(LeilaoStoreRequest $request)
-    {
+    {   
         $this->storeAction->exec(LeilaoStoreDTO::makeFromRequest($request));
 
         return redirect()->route('leilao.index');
