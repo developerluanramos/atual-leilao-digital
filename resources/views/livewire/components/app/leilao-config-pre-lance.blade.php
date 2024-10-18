@@ -40,6 +40,8 @@
                     <th class="text-center">Percentual Progressão</th>
                     <th class="text-center">Comisão Venda</th>
                     <th class="text-center">Comisão Compra</th>
+                    <th class="text-center">Incide Comissão Venda</th>
+                    <th class="text-center">Incide Comissão Compra</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -120,6 +122,28 @@
                                 change="default"
                                 blur="default"
                                 :value="$this->percentual_progressao ?? old('percentual_progressao') ?? null"
+                            />
+                        </td>
+                        <td class="text-right">
+                            <x-layouts.inputs.input-normal-text-livewire
+                                label=""
+                                model="{{ 'configs.'.$key.'.percentual_comissao_vendedor' }}"
+                                name="percentual_comissao_vendedor"
+                                lenght="12/12"
+                                change="default"
+                                blur="default"
+                                :value="$this->percentual_comissao_vendedor ?? old('percentual_comissao_vendedor') ?? null"
+                            />
+                        </td>
+                        <td class="text-right">
+                            <x-layouts.inputs.input-normal-text-livewire
+                                label=""
+                                model="{{ 'configs.'.$key.'.percentual_comissao_comprador' }}"
+                                name="percentual_comissao_comprador"
+                                lenght="12/12"
+                                change="default"
+                                blur="default"
+                                :value="$this->percentual_comissao_comprador ?? old('percentual_comissao_comprador') ?? null"
                             />
                         </td>
                         <td class="text-right">

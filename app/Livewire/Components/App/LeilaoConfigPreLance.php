@@ -72,6 +72,8 @@ class LeilaoConfigPreLance extends Component
                         'valor_minimo' => 0,
                         'valor_progressao' => 0,
                         'percentual_progressao' => 0,
+                        'percentual_comissao_vendedor' => 0,
+                        'percentual_comissao_comprador' => 0,
                         'incide_comissao_vendedor' => true,
                         'incide_comissao_comprador' => true,
                     ];
