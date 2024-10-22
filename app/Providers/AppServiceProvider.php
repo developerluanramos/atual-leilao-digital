@@ -17,6 +17,7 @@ use App\Models\Pisteiro;
 use App\Models\PlanoPagamento;
 use App\Models\PostoTrabalho;
 use App\Models\Promotor;
+use App\Models\Propriedade;
 use App\Models\Raca;
 use App\Models\Setor;
 use App\Observers\CargoObserver;
@@ -35,6 +36,7 @@ use App\Observers\PisteiroObserver;
 use App\Observers\PlanoPagamentoObserver;
 use App\Observers\PostoTrabalhoObserver;
 use App\Observers\PromotorObserver;
+use App\Observers\PropriedadeObserver;
 use App\Observers\RacaObserver;
 use App\Observers\SetorObserver;
 use App\Observers\UsuarioObserver;
@@ -165,6 +167,7 @@ class AppServiceProvider extends ServiceProvider
         CondicaoPagamento::observe(CondicaoPagamentoObserver::class);
         Lote::observe(LoteObserver::class);
         LoteItem::observe(LoteItemObserver::class);
+        Propriedade::observe(PropriedadeObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
