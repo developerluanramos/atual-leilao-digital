@@ -30,7 +30,7 @@
                     action="excluir"
                     color="danger"
                     :identificador="'drawer-delete-confirmacao'"
-                    :route="route('especie.delete', [
+                    :route="route('cliente.delete', [
                         'uuid' => $cliente->uuid
                     ])"
                 />
