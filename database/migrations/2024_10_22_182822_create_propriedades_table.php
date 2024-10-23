@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('logradouro');
             $table->string('cep_rural');
             $table->string('numero');
+            $table->string('telefone_celular');
             $table->timestamps();
         });
     }

@@ -18,6 +18,7 @@ class Propriedade extends Model
         'logradouro',
         'cep_rural',
         'numero',
+        'telefone_celular',
         'cliente_uuid'
     ];
 }
