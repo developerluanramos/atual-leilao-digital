@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('logradouro');
             $table->string('cep_rural');
             $table->string('numero');
+            $table->foreignUuid('cliente_uuid')->references('uuid')->on('cliente')->onDelete('cascade');
             $table->string('telefone_celular');
             $table->timestamps();
         });

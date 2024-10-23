@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nome');
             $table->string('valor');
             $table->string('descricao');
+            $table->foreignUuid('cliente_uuid')->references('uuid')->on('cliente')->onDelete('cascade');
             $table->timestamps();
         });
     }

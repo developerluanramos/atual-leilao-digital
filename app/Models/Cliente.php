@@ -30,4 +30,14 @@ class Cliente extends Model
     {
         return $this->belongsToMany(Lance::class, 'lance_cliente', 'cliente_uuid', 'lance_uuid', 'uuid', 'uuid');
     }
+
+    public function propriedades()
+    {
+        return $this->hasMany(Propriedade::class, 'cliente_uuid', 'uuid');
+    }
+
+    public function contatos()
+    {
+        return $this->hasMany(Contato::class, 'cliente_uuid', 'uuid');
+    }
 }
