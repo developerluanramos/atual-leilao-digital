@@ -5,7 +5,7 @@ namespace App\Http\Controllers\App\Cliente;
 use App\Actions\Cliente\ClienteUpdateAction;
 use App\DTO\Cliente\ClienteUpdateDTO;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\App\Cliente\ClienteUpdateRequest;
 
 class ClienteUpdateController extends Controller
 {
@@ -13,7 +13,7 @@ class ClienteUpdateController extends Controller
         protected ClienteUpdateAction $updateAction
     ) {}
 
-    public function update(string $uuid, Request $request)
+    public function update(string $uuid, ClienteUpdateRequest $request)
     {
         $request->merge([
             'uuid' => $uuid
