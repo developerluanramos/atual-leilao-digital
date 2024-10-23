@@ -14,7 +14,7 @@ class Contato extends Model
     protected $fillable = [
         'uuid',
         'nome',
-        'contato',
+        'valor',
         'descricao',
         'cliente_uuid'
     ];

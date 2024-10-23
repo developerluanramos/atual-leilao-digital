@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid()->unique();
             $table->string('nome');
-            $table->string('contato');
+            $table->string('valor');
             $table->string('descricao');
             $table->timestamps();
         });

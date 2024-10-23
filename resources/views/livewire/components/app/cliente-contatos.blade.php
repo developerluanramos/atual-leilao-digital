@@ -7,6 +7,14 @@
             <li class="py-3 sm:py-4">
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <x-layouts.inputs.input-normal-text-livewire
+                        label="Nome"
+                        name="contato.nome"
+                        model="contato.nome"
+                        blur="default"
+                        lenght="4/12"
+                        :value="$contato->nome ?? old('nome')"
+                    />
+                    <x-layouts.inputs.input-normal-text-livewire
                         label="Contato"
                         name="contato.valor"
                         model="contato.valor"
