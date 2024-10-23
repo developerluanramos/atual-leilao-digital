@@ -19,6 +19,7 @@ class Cliente extends Model
         'cep',
         'cidade',
         'uf',
+        'celular',
         'numero',
         'complemento',
         'email',

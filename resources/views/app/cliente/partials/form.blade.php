@@ -47,11 +47,17 @@
     />
 </div>
 <div class="flex flex-wrap -mx-3 mb-2">
-<x-layouts.inputs.input-normal-text
+    <x-layouts.inputs.input-normal-text
         label="Complemento"
         name="complemento"
-        lenght="6/12"
+        lenght="4/12"
         :value="$cliente->complemento ?? old('complemento')"
+    />
+    <x-layouts.inputs.input-normal-text
+        label="Celular"
+        name="celular"
+        lenght="2/12"
+        :value="$cliente->celular ?? old('celular')"
     />
     <x-layouts.inputs.input-normal-text
         label="Email"
