@@ -73,7 +73,7 @@
     />
 </div>
 
-@livewire('components.app.cliente-propriedades')
-@livewire('components.app.cliente-contatos')
+@livewire('components.app.cliente-propriedades', [$propriedades])
+@livewire('components.app.cliente-contatos', [$contatos])
 
 <x-layouts.buttons.submit-button text="Salvar"/>
