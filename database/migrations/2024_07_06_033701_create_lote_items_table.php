@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid()->unique();
             $table->enum('genero', \App\Enums\GeneroLoteItemEnum::getValues());
             $table->string('descricao');
-            $table->foreignUuid('lote_uuid')->references('uuid')->on('lote');
+            $table->foreignUuid('lote_uuid')->references('uuid')->on('lote')->onDelete('cascade');
             $table->uuid('raca_uuid');
             $table->uuid('especie_uuid');
             $table->decimal('valor_estimado', 12, 2);

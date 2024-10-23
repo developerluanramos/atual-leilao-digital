@@ -18,13 +18,13 @@
         label="Valor Estimado"
         name="valor_estimado"
         lenght="3/12"
-        :value="$lote->valor ?? old('valor')"
+        :value="$lote->valor_estimado ?? old('valor_estimado')"
     />
     <x-layouts.inputs.input-normal-text
         label="Valor Mínimo Pré-lance"
         name="valor_minimo_prelance"
         lenght="3/12"
-        :value="$lote->valor ?? old('valor')"
+        :value="$lote->valor_minimo_prelance ?? old('valor_minimo_prelance')"
     />
 </div>
 <div class="flex flex-wrap -mx-3 mb-4">
@@ -51,6 +51,6 @@
     </div>
 </div>
 
-@livewire('components.app.leilao-lote-item', [$formData])
+@livewire('components.app.leilao-lote-item', [$formData, $itens])
 
 <x-layouts.buttons.submit-button text="Salvar"/>

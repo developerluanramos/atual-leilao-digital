@@ -27,7 +27,8 @@ class LoteStoreRequest extends FormRequest
             "valor_estimado" => ["required"],
             "valor_minimo_prelance" => ["required"],
             "incide_comissao_compra" => ["required"],
-            "incide_comissao_venda" => ["required"]
+            "incide_comissao_venda" => ["required"],
+            "lote_itens" => ["required"]
         ];
     }
 }

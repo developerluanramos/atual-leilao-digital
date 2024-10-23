@@ -1,12 +1,12 @@
 @extends('app.layouts.app')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('cliente.edit', $cliente) }}
+    {{ Breadcrumbs::render('plano-pagamento.edit', $planoPagamento) }}
 @endsection
 
-@section('title', 'Edição Cliente')
+@section('title', 'Editar Plano de Pagamento')
 
-<x-layouts.headers.edit-header :title="$cliente->uuid.' - '.$cliente->nome"/>
+<x-layouts.headers.create-header :title="$cliente->uuid. ' - ' .$cliente->nome"/>
 
 @section('content')
 

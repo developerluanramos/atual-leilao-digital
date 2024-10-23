@@ -25,6 +25,7 @@ class Leilao extends Model
         'prelance_aberto_em',
         'prelance_fechado_em',
         'promotor_uuid',
+        'pregoeiro_uuid',
         'leiloeiro_uuid',
     ];
 
@@ -36,6 +37,20 @@ class Leilao extends Model
         'config_prelance_atual'
     ];
 
+    // protected $dates = [
+    //     'aberto_em',
+    //     'fechado_em',
+    //     'prelance_aberto_em',
+    //     'prelance_fechado_em',
+    // ]; 
+    
+    // protected $casts = [
+    //     'aberto_em' => "date:Y-m-d",
+    //     'fechado_em' => "date:Y-m-d",
+    //     'prelance_aberto_em' => "date:Y-m-d",
+    //     'prelance_fechado_em' => "date:Y-m-d",
+    // ];
+
     /*
     * Database relations
     *
@@ -43,6 +58,11 @@ class Leilao extends Model
     public function promotor()
     {
         return $this->hasOne(Promotor::class, 'uuid', 'promotor_uuid');
+    }
+
+    public function pregoeiro()
+    {
+        return $this->hasOne(Pregoeiro::class, 'uuid', 'pregoeiro_uuid');
     }
 
     public function leiloeiro()

@@ -15,6 +15,6 @@ class LeilaoShowAction
 
     public function exec($leilaoUuid)
     {
-        return $this->repository->find($leilaoUuid);
+        return $this->repository->find($leilaoUuid, []);
     }
 }

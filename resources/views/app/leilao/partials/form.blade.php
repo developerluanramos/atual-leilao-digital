@@ -25,13 +25,13 @@
         label="Data de abertura"
         name="data_abertura"
         lenght="3/12"
-        :value="$leilao->data_abertura ?? old('data_abertura') ?? null"
+        :value="$leilao->aberto_em ?? old('aberto_em') ?? null"
     />
     <x-layouts.inputs.input-date
         label="Data de fechamento"
         name="data_fechamento"
         lenght="3/12"
-        :value="$leilao->data_fechamento ?? old('data_fechamento') ?? null"
+        :value="$leilao->fechado_em ?? old('aberto_em') ?? null"
     />
 </div>
 
@@ -64,9 +64,27 @@
         :Data="$formData['leiloeiros']"
         :value="$leilao->leiloeiro_uuid ?? old('leiloeiro_uuid') ?? null"
     />
+    <x-layouts.inputs.input-normal-select
+        label="pregoeiro"
+        name="pregoeiro_uuid"
+        lenght="6/12"
+        :Data="$formData['pregoeiros']"
+        :value="$leilao->pregoeiro_uuid ?? old('pregoeiro_uuid') ?? null"
+    />
+</div>
+<div class="flex flex-wrap -mx-3 mb-4">
+    <x-layouts.inputs.input-normal-select
+        label="promotor"
+        name="promotor_uuid"
+        lenght="6/12"
+        :Data="$formData['promotores']"
+        :value="$leilao->promotor_uuid ?? old('promotor_uuid') ?? null"
+    />
 </div>
 
-<b class="uppercase mb-2">Configuração Pré-lances</b>
-@livewire('components.app.leilao-config-pre-lance', [$formData])
-<br><br>
 
+<b class="uppercase mb-2">Configuração Pré-lances</b>
+@livewire('components.app.leilao-config-pre-lance', [$formData, $leilao])
+<br>
+
+<x-layouts.buttons.submit-button text="Salvar"/>
