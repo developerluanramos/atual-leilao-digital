@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Cargo;
 use App\Models\CondicaoPagamento;
+use App\Models\Contato;
 use App\Models\Departamento;
 use App\Models\Equipe;
 use App\Models\Especie;
@@ -23,6 +24,7 @@ use App\Models\Setor;
 use App\Observers\CargoObserver;
 use App\Models\User;
 use App\Observers\CondicaoPagamentoObserver;
+use App\Observers\ContatoObserver;
 use App\Observers\DepartamentoObserver;
 use App\Observers\EquipeObserver;
 use App\Observers\EspecieObserver;
@@ -168,6 +170,7 @@ class AppServiceProvider extends ServiceProvider
         Lote::observe(LoteObserver::class);
         LoteItem::observe(LoteItemObserver::class);
         Propriedade::observe(PropriedadeObserver::class);
+        Contato::observe(ContatoObserver::class);
 
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {

@@ -13,12 +13,9 @@ class Contato extends Model
 
     protected $fillable = [
         'uuid',
+        'nome',
+        'contato',
         'descricao',
-        'telefone_comercial',
-        'telefone_residencial',
-        'celular_pessoal',
-        'celular_comercial',
-        'email',
         'cliente_uuid'
     ];
 }

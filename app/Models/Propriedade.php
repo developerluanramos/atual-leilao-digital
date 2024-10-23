@@ -17,6 +17,7 @@ class Propriedade extends Model
         'municipio_localidade',
         'logradouro',
         'cep_rural',
-        'numero'
+        'numero',
+        'cliente_uuid'
     ];
 }
