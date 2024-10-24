@@ -10,6 +10,8 @@ class PrelanceIndexController
 {
     public function index(Request $request, PrelanceIndexAction $prelanceIndexAction)
     {
+        set_time_limit(10000);
+        
         $data = $prelanceIndexAction->exec($request->get('leilaoUuid'));
         
         return view('app.prelance.index', [

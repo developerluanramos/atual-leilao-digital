@@ -27,7 +27,9 @@ class PrelanceConfigFactory extends Factory
             'valor_estimado' => 4050.00,
             'valor_minimo' => 100,
             'valor_progressao' => 50.00,
-            'percentual_progressao' => 5.00
+            'percentual_progressao' => 5.00,
+            'percentual_comissao_vendedor' => 5.00,
+            'percentual_comissao_comprador' => 8.00
         ];
     }
 }

@@ -1,22 +1,76 @@
 <div class="mt-4">
-    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Pesquisar</label>
-    <div class="relative">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+    @if ($temPreLanceVencedor)
+    <div id="alert-additional-content-1" class="p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
+        <div class="flex items-center">
+            <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
             </svg>
+            <span class="sr-only">Info</span>
+            <h3 class="text-lg font-medium">Atenção!</h3>
         </div>
-        <input
-            type="text"
-            wire:model.live.debounce.300ms="search"
-            id="search"
-            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Pesquisar clientes"
-            name="search">
+        <div class="mt-2 mb-4 text-sm">
+            Este lote possui um pré lance vencedor, você deseja continuar com os parâmetros do pré lance> 
+        </div>
+        <div class="flex">
+            <button wire:click="aplicarConfigPrelance()" type="button" class="text-white bg-blue-800 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <svg class="me-2 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+            </svg>
+            Sim, quero continuar com o pré lance
+            </button>
+            <button wire:click="aplicarConfigLote()" type="button" class="text-blue-800 bg-transparent border border-blue-800 hover:bg-blue-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-200 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-blue-600 dark:border-blue-600 dark:text-blue-400 dark:hover:text-white dark:focus:ring-blue-800" data-dismiss-target="#alert-additional-content-1" aria-label="Close">
+            Não quero
+            </button>
+        </div>
     </div>
-    <div wire:loading>
-        Processando...
+    @endif
+
+    @if ($usandoPrelanceConfig)
+    <div id="alert-additional-content-4" class="p-4 mb-4 text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800" role="alert">
+        <div class="flex items-center">
+            <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <h3 class="text-lg font-medium">Configurado pelo pré lance</h3>
+        </div>
+        <div class="mt-2 mb-4 text-sm">
+            Você está usando as configurações do pré lance vencedor. Para alterar e usar as configurações do Lote, clique no botão abaixo.
+        </div>
+        <div class="flex">
+            <button type="button" wire:click="aplicarConfigLote()" class="text-white bg-yellow-800 hover:bg-yellow-900 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-yellow-300 dark:text-gray-800 dark:hover:bg-yellow-400 dark:focus:ring-yellow-800">
+            <svg class="me-2 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 14">
+                <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+            </svg>
+            Usar configurações do Lote
+            </button>
+        </div>
     </div>
+    @endif
+    
+    @if (!$temPreLanceVencedor)
+    <div>
+        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Pesquisar</label>
+        <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                </svg>
+            </div>
+            <input
+                type="text"
+                wire:model.live.debounce.300ms="search"
+                id="search"
+                class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Pesquisar clientes"
+                name="search">
+        </div>
+        <div wire:loading>
+            Processando...
+        </div>
+    </div>
+    @endif
+    
     <br>
     @if(!empty($search) && !empty($searchResult))
         <ul class="">
@@ -41,7 +95,7 @@
             @endforeach
         </ul>
     @endif
-    @if(!empty($compradores))
+    @if(!empty($compradores) && !$temPreLanceVencedor)
     <div class="flex flex-wrap -mx-3 mb-2">
         <div class="w-full md:w-2/12 md:mb-0 px-3">
             <label class="block uppercase tracking-wide text-xs font-bold mb-2" for="grid-city">
@@ -72,7 +126,7 @@
                 <p class="font-normal text-gray-700 dark:text-gray-400">Comissão Comprador</p>
                 <p>
                     <x-layouts.badges.sim-nao
-                        :status="$this->formData['lote']['incide_comissao_compra']"
+                        :status="$this->incideComissaoCompra"
                     />
                 </p>
                 <p>
@@ -87,7 +141,7 @@
                 <p class="font-normal text-gray-700 dark:text-gray-400">Comissão Vendedor</p>
                 <p>
                     <x-layouts.badges.sim-nao
-                        :status="$this->formData['lote']['incide_comissao_venda']"
+                        :status="$this->incideComissaoVenda"
                     />
                 </p>
                 <p>
