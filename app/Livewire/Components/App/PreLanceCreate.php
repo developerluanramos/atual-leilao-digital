@@ -86,7 +86,7 @@ class PreLanceCreate extends Component
 
             foreach ($condicoesPagamento as $key => $condicaoPagamento)
             {
-                for($i = 0; $i <= $condicaoPagamento['qtd_parcelas']; $i++) 
+                for($i = 1; $i <= $condicaoPagamento['qtd_parcelas']; $i++) 
                 {
                     $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * $this->lote->itens()->count()) / $this->getQuantidadeCompradoresProperty());
                     $valorComissaoComprador = $this->incideComissaoCompra

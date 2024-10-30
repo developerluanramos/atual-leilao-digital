@@ -26,12 +26,12 @@ class DatabaseSeeder extends Seeder
             LeilaoSeeder::class,
             LoteSeeder::class,
             LoteItemSeeder::class,
-            CompraSeeder::class,
-            VendaSeeder::class,
-            ParcelaSeeder::class,
+            // CompraSeeder::class,
+            // VendaSeeder::class,
+            // ParcelaSeeder::class,
             PrelanceConfigSeeder::class,
-            LanceSeeder::class,
-            LanceClienteSeeder::class
+            // LanceSeeder::class,
+            // LanceClienteSeeder::class
         ]);
     }
 }

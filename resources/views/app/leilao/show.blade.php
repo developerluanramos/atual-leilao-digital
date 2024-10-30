@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <pre>{{json_encode($leilao, JSON_PRETTY_PRINT)}}</pre>
+        {{-- <pre>{{json_encode($leilao, JSON_PRETTY_PRINT)}}</pre> --}}
     @endif
 
     @if($aba === 'lotes')

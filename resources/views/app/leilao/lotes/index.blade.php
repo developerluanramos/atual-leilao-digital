@@ -3,11 +3,13 @@
         'Número',
         'Descrição',
         'Plano Pagamento',
-        'Comissão Venda',
-        'Comissão Compra',
+        // 'Comissão Venda',
+        // 'Comissão Compra',
         'Criado em',
         'Última atualização',
-        'Valor Estimado R$',
+        // 'Estimado R$',
+        // 'Atingido R$',
+        'Status',
         'Opções',
     ]"
     :paginator="$lotes"
@@ -25,12 +27,12 @@
                 <td>
                     {{$lote->plano_pagamento['descricao']}}
                 </td>
-                <td class="text-center">
+                {{-- <td class="text-center">
                     <x-layouts.badges.sim-nao :status="$lote->incide_comissao_venda"></x-layouts.badges.sim-nao>
                 </td>
                 <td class="text-center">
                     <x-layouts.badges.sim-nao :status="$lote->incide_comissao_compra"></x-layouts.badges.sim-nao>
-                </td>
+                </td> --}}
                 <td class="text-center">
                     {{$lote->created_at_for_humans}}
                 </td>
@@ -38,11 +40,9 @@
                     {{$lote->updated_at_for_humans}}
                 </td>
                 <td class="text-right">
-                    <x-layouts.badges.info-money
-                        textLength="sm"
-                        :convert="false"
-                        :value="$lote->valor_estimado"
-                    />
+                    <x-layouts.badges.status-lote 
+                        :status="(int)$lote->status">
+                    </x-layouts.badges.status-lote>
                 </td>
                 <td class="text-right">
                     <a href="{{route('compra.create', ['loteUuid' => $lote->uuid])}}">

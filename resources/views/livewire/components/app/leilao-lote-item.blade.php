@@ -156,7 +156,6 @@
                     </div>
                 @endif
             </li>
-            {{ json_encode($itens) }}
             @forelse($itens as $index => $item)
                 <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                     <li class="py-3 sm:py-4">

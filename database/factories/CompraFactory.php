@@ -19,11 +19,16 @@ class CompraFactory extends Factory
     public function definition(): array
     {
         $lote = Lote::inRandomOrder()->first();
-
+        $leilao = $lote->leilao()->first();
+        
         return [
             'uuid' => $this->faker->uuid,
-            'cliente_uuid' => Cliente::inRandomOrder()->first()->uuid,
+            'leilao_uuid' => $leilao->uuid,
             'lote_uuid' => $lote->uuid,
+            // 'plano_pagamento_uuid',
+            // 'valor',
+            // 'valor_comissao_vendedor',
+            // 'valor_comissao_comprador',
         ];
     }
 }

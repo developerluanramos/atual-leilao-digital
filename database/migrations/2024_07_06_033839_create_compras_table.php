@@ -14,8 +14,12 @@ return new class extends Migration
         Schema::create('compra', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->foreignUuid('cliente_uuid')->references('uuid')->on('cliente');
+            $table->foreignUuid(column: 'leilao_uuid')->references('uuid')->on('leilao');
             $table->foreignUuid('lote_uuid')->references('uuid')->on('lote');
+            $table->foreignUuid('plano_pagamento_uuid')->references('uuid')->on('plano_pagamento');
+            $table->decimal('valor', 12, 2);
+            $table->decimal('valor_comissao_vendedor', 12, 2);
+            $table->decimal('valor_comissao_comprador', 12, 2);
             $table->timestamps();
         });
     }

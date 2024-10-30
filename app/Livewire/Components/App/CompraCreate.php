@@ -3,15 +3,21 @@
 namespace App\Livewire\Components\App;
 
 use App\Actions\Cliente\ClienteSearchAction;
+use App\Actions\Compra\CompraStoreAction;
+use App\Http\Controllers\App\Compra\CompraStoreController;
+use App\Http\Requests\App\Compra\CompraStoreRequest;
 use App\Models\Cliente;
+use App\Models\Leilao;
 use App\Models\Lote;
 use App\Repositories\Cliente\ClienteEloquentRepository;
 use Carbon\Carbon;
+use Exception;
 use Livewire\Component;
 
 class CompraCreate extends Component
 {
     public Lote $lote;
+    public Leilao $leilao;
     public bool $temPreLanceVencedor = false;
     public bool $usandoPrelanceConfig = false;
     public bool $incideComissaoCompra;
@@ -21,7 +27,6 @@ class CompraCreate extends Component
     public string $valorLance;
     public array $compradores;
     public array $condicoesPagamento;
-    
     public string $search;
     public array $searchResult;
     public array $parcelas;
@@ -29,6 +34,7 @@ class CompraCreate extends Component
     public function mount(Lote $lote)
     {
         $this->lote = $lote;
+        $this->leilao = $lote->leilao()->get()->first();
         if($this->lote->prelance_vencedor()) {
             $this->temPreLanceVencedor = true;
         }
@@ -37,8 +43,8 @@ class CompraCreate extends Component
         // // -- valor vencedor do pré-lance ou valor mínimo do lote
         // $this->valorLance = $this->lote->valor_estimado;
         // // -- config do pre lance ou condicoes de pagamento ou lote
-        // $this->incideComissaoVenda = $this->lote->incide_comissao_venda;
-        // $this->incideComissaoCompra = $this->lote->incide_comissao_compra;
+        $this->incideComissaoVenda = $this->lote->incide_comissao_venda;
+        $this->incideComissaoCompra = $this->lote->incide_comissao_compra;
         // $this->parcelas = [];
         // $this->compradores = [];
         // if(!empty($this->compradores)) {
@@ -73,10 +79,10 @@ class CompraCreate extends Component
     {
         $this->temPreLanceVencedor = false;
         $this->usandoPrelanceConfig = false;
-        $this->incideComissaoVenda = $this->lote->incide_comissao_venda;
-        $this->incideComissaoCompra = $this->lote->incide_comissao_compra;
-        $this->percentualComissaoCompra = $this->lote->prelance_vencedor()->prelance_config()->first()->percentual_comissao_comprador;
-        $this->percentualComissaoVenda = $this->lote->prelance_vencedor()->prelance_config()->first()->percentual_comissao_vendedor;
+        $this->incideComissaoVenda = $this->lote->incide_comissao_venda; // trocar para condição pagamento
+        $this->incideComissaoCompra = $this->lote->incide_comissao_compra; // trocar para condição pagamento
+        $this->percentualComissaoCompra = 5; // trocar para condição pagamento
+        $this->percentualComissaoVenda = 6; // trocar para condição pagamento
         $this->parcelas = [];
         $this->compradores = [];
         $this->valorLance = 50;
@@ -92,7 +98,7 @@ class CompraCreate extends Component
 
         foreach ($this->condicoesPagamento as $key => $condicaoPagamento)
         {
-            for($i = 0; $i <= $condicaoPagamento['qtd_parcelas']; $i++) {
+            for($i = 1; $i <= $condicaoPagamento['qtd_parcelas']; $i++) {
                 $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * count($this->lote->itens))) / $this->getQuantidadeCompradoresProperty();
                 $valorComissaoComprador = $this->incideComissaoCompra
                     ? ($this->percentualComissaoCompra / 100) * $valor : 0;
@@ -130,6 +136,12 @@ class CompraCreate extends Component
         $this->compradores[] = $comprador;
         $this->searchResult = [];
         $this->search = "";
+        if($this->lote->prelance_vencedor()) {
+            $this->temPreLanceVencedor = true;
+            $this->aplicarConfigPrelance();
+        } else {
+            $this->aplicarConfigLote();
+        }
         $this->updatedValorLance();
     }
 
@@ -170,5 +182,35 @@ class CompraCreate extends Component
     public function getQuantidadeCompradoresProperty()
     {
         return count($this->compradores);
+    }
+
+    public function registrar()
+    {
+        try {
+            $request = CompraStoreRequest::create( route('compra.store'), "POST", [
+                "_token" => csrf_token(),
+                'leilao_uuid' => $this->leilao->uuid,
+                'lote_uuid' => $this->lote->uuid,
+                // 'prelance_config_uuid' => $this->leilao->config_prelance_atual->uuid,
+                'plano_pagamento_uuid' => $this->leilao->plano_pagamento_prelance->uuid,
+                // 'realizado_em' => Carbon::now()->toDateString(),
+                'valor' => $this->valorTotalLote,
+                'valor_comissao_comprador' => $this->valorTotalComissaoComprador,
+                'valor_comissao_vendedor' => $this->valorTotalComissaoVendedor,
+                'clientes' => $this->compradores      
+            ]);
+            
+            $request->validate(CompraStoreRequest::rulesForLivewire());
+
+            (new CompraStoreController())->store($request, (new CompraStoreAction()));
+
+            redirect()->to(route('leilao.lote.index', [
+                'uuid' => $this->lote->leilao_uuid,
+                'aba' => 'lotes'
+            ]));
+        } catch (Exception $exception) {
+            dd($exception->getMessage());
+            return redirect()->back()->withErrors($exception);
+        }
     }
 }
