@@ -7,12 +7,17 @@ use App\Repositories\Interfaces\PaginationInterface;
 
 class ClienteIndexAction
 {
-    public function __construct(
-        protected ClienteRepositoryInterface $repository
-    ) { }
+    protected $clienteRepository;
 
-    public function exec(int $page = 1, int $totalPerPage = 10, string $filter = null): PaginationInterface
+    public function __construct(
+        ClienteRepositoryInterface $clienteRepository
+    )
     {
-        return $this->repository->paginate($page, $totalPerPage, $filter);
+        $this->clienteRepository = $clienteRepository;
+    }
+
+    public function execute(int $page = 1, int $totalPerPage = 10, string $filter = null,) : PaginationInterface
+    {
+        return $this->clienteRepository->paginate($page, $totalPerPage, $filter);
     }
 }

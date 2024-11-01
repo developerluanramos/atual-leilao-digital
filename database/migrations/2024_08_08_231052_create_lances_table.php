@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\TipoLanceEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->foreignUuid('lote_uuid')->references('uuid')->on('lote');
             $table->foreignUuid('plano_pagamento_uuid')->references('uuid')->on('plano_pagamento');
             $table->foreignUuid('prelance_config_uuid')->references('uuid')->on('prelance_config');
+            $table->enum('tipo', TipoLanceEnum::getValues())->default(TipoLanceEnum::PRELANCE);
             $table->date('realizado_em');
             $table->decimal('valor', 12);
             $table->decimal('valor_comissao_compra', 12);

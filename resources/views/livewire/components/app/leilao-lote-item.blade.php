@@ -42,7 +42,6 @@
                         model="item.genero"
                         lenght="4/12"
                     />
-
                     <x-layouts.inputs.input-normal-number-livewire
                         label="Valor Estimado"
                         name="item.valor_estimado"
@@ -69,6 +68,8 @@
                                     lenght="12/12"
                                     :value="$lote->imagens ?? old('imagens')"
                                 />
+                                @error('imagens') <span class="error">{{ $message }}</span> @enderror
+                                <div wire:loading wire:target="imagens">Carregando...</div>
                         </div>
                     </div>
                     <div class="flex flex-wrap mb-2">
@@ -175,34 +176,12 @@
                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                                     <small>Valor estimado: </small> <x-layouts.badges.info-money
                                         textLength="sm"
+                                        :convert="false"
                                         :value="$item['valor_estimado']"
                                     />
                                 </p>
-                                <p>Videos</p>
-                                <p>
-                                    <div class="flex flex-wrap mb-2 mt-2">
-                                        @foreach ($item['videos'] as $index => $video)
-                                            <iframe src="{{$video['url']}}"
-                                                loading="lazy"
-                                                width="350"
-                                                height="210"
-                                                frameborder="0"
-                                                allow="accelerometer; autoplay;
-                                                encrypted-media; gyroscope;
-                                                picture-in-picture"
-                                                allowfullscreen>
-                                            </iframe>
-                                        @endforeach
-                                    </div>
-                                </p>
-                                <p>Imagens</p>
-                                <p>
-                                    <div class="flex flex-wrap mb-2">
-                                        @foreach ($item['imagens'] as $index => $imagem)
-                                            <img class="h-auto max-w-xs pr-3 pt-3" src="{{$imagem->temporaryUrl()}}" alt="image description">
-                                        @endforeach
-                                    </div>
-                                </p>
+                                <p>{{count($item['videos'])}} Videos</p>
+                                <p>{{count($item['imagens'])}} Imagens</p>
                             </div>
                             <div class="items-center truncate text-base font-semibold text-gray-900 dark:text-white">
                                 <p class="text-sm text-gray-500 truncate dark:text-gray-400">

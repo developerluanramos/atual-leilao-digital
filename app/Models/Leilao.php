@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TipoLanceEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,16 +26,31 @@ class Leilao extends Model
         'prelance_aberto_em',
         'prelance_fechado_em',
         'promotor_uuid',
+        'pregoeiro_uuid',
         'leiloeiro_uuid',
     ];
 
     protected $appends = [
-        'valor_comissao_venda',
-        'valor_comissao_compra',
-        'valor_comissao_total',
+        'valor_prelance_comissao_venda',
+        'valor_prelance_comissao_compra',
+        'valor_prelance_comissao_total',
         'plano_pagamento_prelance',
         'config_prelance_atual'
     ];
+
+    // protected $dates = [
+    //     'aberto_em',
+    //     'fechado_em',
+    //     'prelance_aberto_em',
+    //     'prelance_fechado_em',
+    // ]; 
+    
+    // protected $casts = [
+    //     'aberto_em' => "date:Y-m-d",
+    //     'fechado_em' => "date:Y-m-d",
+    //     'prelance_aberto_em' => "date:Y-m-d",
+    //     'prelance_fechado_em' => "date:Y-m-d",
+    // ];
 
     /*
     * Database relations
@@ -43,6 +59,11 @@ class Leilao extends Model
     public function promotor()
     {
         return $this->hasOne(Promotor::class, 'uuid', 'promotor_uuid');
+    }
+
+    public function pregoeiro()
+    {
+        return $this->hasOne(Pregoeiro::class, 'uuid', 'pregoeiro_uuid');
     }
 
     public function leiloeiro()
@@ -62,7 +83,12 @@ class Leilao extends Model
 
     public function lances()
     {
-        return $this->hasMany(Lance::class, 'leilao_uuid', 'uuid');
+        return $this->hasMany(Lance::class, 'leilao_uuid', 'uuid')->where('tipo', (string)TipoLanceEnum::LANCE);
+    }
+
+    public function prelances()
+    {
+        return $this->hasMany(Lance::class, 'leilao_uuid', 'uuid')->where('tipo', (string)TipoLanceEnum::PRELANCE);
     }
 
     public function clientes()
@@ -74,19 +100,19 @@ class Leilao extends Model
     * Campos automáticos
     *
     */
-    public function getValorComissaoVendaAttribute()
+    public function getValorPrelanceComissaoVendaAttribute()
     {
-        return $this->lotes->sum('valor_comissao_venda');
+        return $this->lotes->sum('valor_prelance_comissao_venda');
     }
 
-    public function getValorComissaoCompraAttribute()
+    public function getValorPrelanceComissaoCompraAttribute()
     {
-        return $this->lotes->sum('valor_comissao_compra');
+        return $this->lotes->sum('valor_prelance_comissao_compra');
     }
 
-    public function getValorComissaoTotalAttribute()
+    public function getValorPrelanceComissaoTotalAttribute()
     {
-        return $this->valor_comissao_venda + $this->valor_comissao_compra;
+        return $this->valor_prelance_comissao_venda + $this->valor_prelance_comissao_compra;
     }
 
     public function getPlanoPagamentoPrelanceAttribute()

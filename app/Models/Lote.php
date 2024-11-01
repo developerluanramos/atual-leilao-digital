@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\TipoLanceEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Ramsey\Uuid\Type\Decimal;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Lote extends Model
 {
@@ -20,6 +21,7 @@ class Lote extends Model
         'plano_pagamento_uuid',
         'valor_estimado',
         'valor_minimo_prelance',
+        'status', // aberto / Fechado
         'quantidade', // -- desconsiderar
         'quantidade_macho', // -- desconsiderar
         'quantidade_femea', // -- desconsiderar
@@ -33,14 +35,14 @@ class Lote extends Model
     protected $appends = [
         'created_at_for_humans', 
         'updated_at_for_humans',
-        'valor_comissao_venda',
-        'valor_comissao_compra',
-        'valor_comissao_total',
+        'valor_prelance_comissao_venda',
+        'valor_prelance_comissao_compra',
+        'valor_prelance_comissao_total',
         'valor_prelance',
         'valor_prelance_diferenca_valor_estimado',
         'valor_prelance_percentual_valor_estimado',
         'valor_prelance_calculado',
-        'quantidade_lances'
+        'quantidade_prelances'
     ];
 
     public function leilao()
@@ -57,6 +59,16 @@ class Lote extends Model
     {
         return $this->hasMany(LoteItem::class, 'lote_uuid', 'uuid');
     }
+    
+    public function prelances(): HasMany
+    {
+        return $this->hasMany(Lance::class, 'lote_uuid', 'uuid')->where('tipo', (string)TipoLanceEnum::PRELANCE);
+    }
+
+    public function prelance_vencedor()
+    {
+        return $this->prelances->last();
+    }
 
     public function lances()
     {
@@ -68,26 +80,29 @@ class Lote extends Model
         return $this->lances->last();
     }
 
-
-    /*
-    * Valor da comissão de vendedor
-    *
-    * @return mixed
-    */
-    public function getQuantidadeLancesAttribute(): mixed
+    public function compras(): HasMany
     {
-        return $this->lances()->get()->count() ?? 0;
+        return $this->hasMany(Compra::class, 'lote_uuid', 'uuid');
     }
 
+    /*
+    * Valor da comissão de vendedor
+    *
+    * @return mixed
+    */
+    public function getQuantidadePrelancesAttribute(): mixed
+    {
+        return $this->prelances()->get()->count() ?? 0;
+    }
 
     /*
     * Valor da comissão de vendedor
     *
     * @return mixed
     */
-    public function getValorComissaoVendaAttribute(): mixed
+    public function getValorPrelanceComissaoVendaAttribute(): mixed
     {
-        return $this->lance_vencedor()->valor_comissao_venda ?? 0;
+        return $this->prelance_vencedor()->valor_comissao_venda ?? 0;
     }
 
     /*
@@ -95,9 +110,9 @@ class Lote extends Model
     *
     * @return mixed
     */
-    public function getValorComissaoCompraAttribute(): mixed
+    public function getValorPrelanceComissaoCompraAttribute(): mixed
     {
-        return $this->lance_vencedor()->valor_comissao_compra ?? 0;
+        return $this->prelance_vencedor()->valor_comissao_compra ?? 0;
     }
 
     /*
@@ -105,9 +120,9 @@ class Lote extends Model
     *
     * @return mixed 
     */
-    public function getValorComissaoTotalAttribute(): mixed
+    public function getValorPrelanceComissaoTotalAttribute(): mixed
     {
-        return $this->valor_comissao_venda + $this->valor_comissao_compra;
+        return $this->valor_prelance_comissao_venda + $this->valor_prelance_comissao_compra;
     }
 
     /*
@@ -118,11 +133,11 @@ class Lote extends Model
     */
     public function getValorPrelanceAttribute(): float|int
     {
-        if($this->lance_vencedor())
+        if($this->prelance_vencedor())
         {
-            $valorLanceOriginal = $this->lance_vencedor()->valor;
-            $quantidadeClientes = $this->lance_vencedor()->clientes->count() ? $this->lance_vencedor()->clientes->count() : 1;
-            $planoPagamento = $this->lance_vencedor()->plano_pagamento;
+            $valorLanceOriginal = $this->prelance_vencedor()->valor;
+            $quantidadeClientes = $this->prelance_vencedor()->clientes->count() ? $this->prelance_vencedor()->clientes->count() : 1;
+            $planoPagamento = $this->prelance_vencedor()->plano_pagamento;
             $condicoesPagamento = $planoPagamento->condicoes_pagamento()->get();
             $valorLotePreLance = 0;
     
@@ -151,14 +166,14 @@ class Lote extends Model
     */
     public function getValorPrelanceCalculadoAttribute(): float|int
     {
-        if(!is_null($this->lance_vencedor()) && !is_null($this->leilao()->first()->config_prelance_atual)) {
+        if(!is_null($this->prelance_vencedor()) && !is_null($this->leilao()->first()->config_prelance_atual)) {
             $acrescimoValorLance = 0;
 
             // -- calculo pelo percentual de progressao
             if(!is_null($this->leilao()->first()->config_prelance_atual->percentual_progressao))
             {
                 $percentualProgressao = $this->leilao()->first()->config_prelance_atual->percentual_progressao / 100;
-                $acrescimoValorLance = $percentualProgressao * $this->lance_vencedor()->valor;
+                $acrescimoValorLance = $percentualProgressao * $this->prelance_vencedor()->valor;
             }
     
             // -- caso tenha valor real configurado, ele substitui o calculo anterior
@@ -168,7 +183,7 @@ class Lote extends Model
                 $acrescimoValorLance = $this->leilao()->first()->config_prelance_atual->valor_progressao;
             }
     
-            return $this->lance_vencedor()->valor + $acrescimoValorLance;
+            return $this->prelance_vencedor()->valor + $acrescimoValorLance;
         } 
         
         return $this->leilao()?->first()?->config_prelance_atual?->valor_minimo ?? 0;

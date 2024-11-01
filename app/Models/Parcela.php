@@ -14,9 +14,15 @@ class Parcela extends Model
     protected $fillable = [
         'uuid',
         'numero',
-        'quantidade_total_parcelas',
-        'quantidade_real_parcelas',
         'compra_uuid',
         'cliente_uuid',
+        'lote_uuid',
+        'leilao_uuid',
+        'vencimento_em',
+        'valor',
+        'valor_comissao_vendedor',
+        'valor_comissao_comprador',
+        'percentual_comissao_vendedor',
+        'percentual_comissao_comprador'
     ];
 }

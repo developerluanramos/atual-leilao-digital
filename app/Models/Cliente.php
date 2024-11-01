@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TipoLanceEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,6 +28,18 @@ class Cliente extends Model
 
     public function lances()
     {
-        return $this->belongsToMany(Lance::class, 'lance_cliente', 'cliente_uuid', 'lance_uuid', 'uuid', 'uuid');
+        return $this->belongsToMany(Lance::class, 'lance_cliente', 'cliente_uuid', 'lance_uuid', 'uuid', 'uuid')
+            ->where('tipo', (string)TipoLanceEnum::LANCE);
+    }
+
+    public function prelances()
+    {
+        return $this->belongsToMany(Lance::class, 'lance_cliente', 'cliente_uuid', 'lance_uuid', 'uuid', 'uuid')
+            ->where('tipo', (string)TipoLanceEnum::PRELANCE);
+    }
+
+    public function compras()
+    {
+        return $this->belongsToMany(Compra::class, 'compra_cliente', 'cliente_uuid', 'compra_uuid', 'uuid', 'uuid');
     }
 }

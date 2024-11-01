@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\StatusLoteEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->decimal('valor_minimo_prelance', 12, 2);
             $table->boolean('incide_comissao_compra');
             $table->boolean('incide_comissao_venda');
+            $table->enum('status', StatusLoteEnum::getValues())->default(StatusLoteEnum::ABERTO);
             $table->timestamps();
         });
     }

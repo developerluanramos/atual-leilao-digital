@@ -22,7 +22,7 @@ class CompraCreateAction
     public function execute(string $loteUuid) : array
     {
         $lote = $this->loteRepository->find($loteUuid);
-        $leilao = $this->leilaoRepository->find($lote->leilao_uuid);
+        $leilao = $this->leilaoRepository->find($lote->leilao_uuid, []);
 
         return [
             'leilao' => $leilao,

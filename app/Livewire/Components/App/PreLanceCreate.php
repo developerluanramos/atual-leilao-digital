@@ -39,8 +39,8 @@ class PreLanceCreate extends Component
         $this->searchResultClientes = [];
         $this->parcelas = [];
         $this->compradores = [];
-        $this->incideComissaoVenda = true;
-        $this->incideComissaoCompra = true;
+        $this->incideComissaoVenda = $leilao->config_prelance_atual->incide_comissao_vendedor;
+        $this->incideComissaoCompra = $leilao->config_prelance_atual->incide_comissao_comprador;
         $this->valorLance = 0;
 
         if(!empty($cliente)) {
@@ -86,23 +86,23 @@ class PreLanceCreate extends Component
 
             foreach ($condicoesPagamento as $key => $condicaoPagamento)
             {
-                for($i = 0; $i <= $condicaoPagamento['qtd_parcelas']; $i++) 
+                for($i = 1; $i <= $condicaoPagamento['qtd_parcelas']; $i++) 
                 {
                     $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * $this->lote->itens()->count()) / $this->getQuantidadeCompradoresProperty());
-                    $valorComissaoComprador = $condicaoPagamento['incide_comissao_comprador']
-                        ? ($condicaoPagamento['percentual_comissao_comprador'] / 100) * $valor : 0;
-                    $valorComissaoVendedor = $condicaoPagamento['incide_comissao_vendedor']
-                        ? ($condicaoPagamento['percentual_comissao_vendedor'] / 100) * $valor : 0;
+                    $valorComissaoComprador = $this->incideComissaoCompra
+                        ? ($this->leilao->config_prelance_atual->percentual_comissao_comprador / 100) * $valor : 0;
+                    $valorComissaoVendedor = $this->incideComissaoVenda
+                        ? ($this->leilao->config_prelance_atual->percentual_comissao_vendedor / 100) * $valor : 0;
 
                     $this->parcelas[] = [
                         'valor_original' => $this->valorLance,
                         'valor' => $valor,
                         'repeticoes' => $condicaoPagamento['repeticoes'],
                         'data_pagamento' => $carbonHoje->addMonth()->toDateString(),
-                        'incide_comissao_compra' => $condicaoPagamento['incide_comissao_comprador'],
-                        'incide_comissao_venda' => $condicaoPagamento['incide_comissao_vendedor'],
-                        'percentual_comissao_vendedor' => $condicaoPagamento['percentual_comissao_vendedor'],
-                        'percentual_comissao_comprador' => $condicaoPagamento['percentual_comissao_comprador'],
+                        'incide_comissao_compra' => $this->incideComissaoCompra,
+                        'incide_comissao_venda' => $this->incideComissaoVenda,
+                        'percentual_comissao_vendedor' => $this->leilao->config_prelance_atual->percentual_comissao_vendedor,
+                        'percentual_comissao_comprador' => $this->leilao->config_prelance_atual->percentual_comissao_comprador,
                         'valor_comissao_comprador' => $valorComissaoComprador,
                         'valor_comissao_vendedor' => $valorComissaoVendedor
                     ];

@@ -17,6 +17,11 @@ class PromotorEloquentRepository implements PromotorRepositoryInterface
         $this->model = $model;
     }
 
+    public function all()
+    {
+        return $this->model->all();
+    }
+
     public function paginate(int $page = 1, int $totalPerPage = 10, string $filter = null): PaginationInterface
     {
         $query = $this->model->query();

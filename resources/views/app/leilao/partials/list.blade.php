@@ -1,11 +1,11 @@
 <x-layouts.tables.simple-table
     :headers="[
-        'uuid',
+        'Identificação',
         'Descrição',
         'Promotor',
-        'Leiloeiro',
-        'Local',
-        'Cidade',
+        // 'Leiloeiro',
+        // 'Local',
+        // 'Cidade',
         'Opções'
     ]"
     :paginator="$leiloes"
@@ -17,9 +17,9 @@
                 <td>{{ $leilao->uuid }}</td>
                 <td>{{ $leilao->descricao }}</td>
                 <td>{{ $leilao->promotor['nome'] }}</td>
-                <td>{{ $leilao->leiloeiro['nome'] }}</td>
+                {{-- <td>{{ $leilao->leiloeiro['nome'] }}</td>
                 <td>{{ $leilao->local }}</td>
-                <td>{{ $leilao->cidade }}</td>
+                <td>{{ $leilao->cidade }}</td> --}}
                 <td class="text-right">
                     <a href="{{route('prelance.index', ["leilaoUuid" => $leilao->uuid])}}">
                         <button
@@ -36,7 +36,23 @@
                         text="Visualizar"
                         action="ver"
                         color="primary"
-                        :route="route('leilao.show', $leilao->uuid)"/>
+                        :route="route('leilao.show', $leilao->uuid)"
+                    />
+                    <x-layouts.buttons.action-button
+                        text="Editar"
+                        action="editar"
+                        color="primary"
+                        :route="route('leilao.edit', $leilao->uuid)"
+                    />
+                    <x-layouts.buttons.action-button
+                        text="Excluir"
+                        action="excluir"
+                        color="danger"
+                        :identificador="'drawer-delete-confirmacao'"
+                        :route="route('leilao.delete', [
+                            'uuid' => $leilao->uuid
+                        ])"
+                    />
                 </td>
             </tr>
         @endforeach

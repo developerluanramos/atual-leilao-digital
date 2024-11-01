@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Leilao;
 use App\Models\PlanoPagamento;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,14 +21,16 @@ class PrelanceConfigFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid(),
-            'data' => $this->faker->date('Y-m-d'),
+            'data' => Carbon::now()->toDateString(),
             'cor' => $this->faker->hexColor(),
             'leilao_uuid' => Leilao::inRandomOrder()->first()->uuid,
             'plano_pagamento_uuid' => PlanoPagamento::inRandomOrder()->first()->uuid,
             'valor_estimado' => 4050.00,
             'valor_minimo' => 100,
             'valor_progressao' => 50.00,
-            'percentual_progressao' => 5.00
+            'percentual_progressao' => 5.00,
+            'percentual_comissao_vendedor' => 5.00,
+            'percentual_comissao_comprador' => 8.00
         ];
     }
 }

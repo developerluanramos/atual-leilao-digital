@@ -17,7 +17,6 @@
     "filters" => $filters
 ])
 
-
 @include('app.cliente.partials.list', [
     "clientes" => $clientes,
     "filters" => $filters

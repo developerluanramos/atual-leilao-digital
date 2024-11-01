@@ -40,7 +40,7 @@ class LoteEloquentRepository implements LoteRepositoryInterface
 //            $query->orWhere("situacao", "like", "%".$filter."%");
 //        }
 
-        $query->orderBy('updated_at', 'desc');
+        $query->orderBy('updated_at', 'desc')->orderBy('id');
 
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 

@@ -77,5 +77,5 @@
         </div>
         <hr>
     </div>
-    @livewire('components.app.compra-create', [$formData])
+    @livewire('components.app.compra-create', [$formData['lote']])
 @endsection

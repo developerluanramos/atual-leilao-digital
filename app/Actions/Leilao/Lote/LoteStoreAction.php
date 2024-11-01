@@ -7,17 +7,23 @@ use App\Models\Lote;
 
 class LoteStoreAction
 {
-    protected $leilaoRepository;
+    protected $lote;
 
-    public function __construct()
-    { }
+    public function __construct(Lote $lote)
+    { 
+        $this->lote = $lote;
+    }
 
-    public function execute(string $leilaoUuid, LoteStoreDTO $leilaoStoreDTO) : Lote
+    public function execute(LoteStoreDTO $leilaoStoreDTO) : Lote
     {
-        $lote = Lote::create((array)$leilaoStoreDTO);
-
+        $lote = $this->lote->create((array)$leilaoStoreDTO);
         $lote->itens()->createMany($leilaoStoreDTO->lote_itens);
+        
+        foreach($this->lote->itens()->get() as $index => $item) {
+            $item->imagens()->createMany($leilaoStoreDTO->lote_itens[$index]["imagens"]);
+            $item->videos()->createMany($leilaoStoreDTO->lote_itens[$index]["videos"]);
+        }
 
-        return $lote;
+        return $this->lote;
     }
 }

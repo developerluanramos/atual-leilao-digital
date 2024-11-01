@@ -21,8 +21,13 @@ class LoteIndexAction
 
     public function execute(int $page = 1, int $totalPerPage = 10, string $filter = null, string $leilaoUuid)
     {
-        $leilao = $this->leilaoRepository->find($leilaoUuid);
-        $lotes = $this->loteRepository->paginateByLeilaoUuid($page, $totalPerPage, $filter, $leilaoUuid);
+        $leilao = $this->leilaoRepository->find($leilaoUuid, []);
+        $lotes = $this->loteRepository->paginateByLeilaoUuid(
+            $page, 
+            $totalPerPage, 
+            $filter, 
+            $leilaoUuid
+        );
 
         return [
             'leilao' => $leilao,

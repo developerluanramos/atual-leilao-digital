@@ -19,6 +19,7 @@ class Lance extends Model
         'prelance_config_uuid',
         'plano_pagamento_uuid',
         'realizado_em',
+        'tipo', // pré-lance / lance
         'valor',
         'valor_comissao_compra',
         'valor_comissao_venda'
