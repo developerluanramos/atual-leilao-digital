@@ -27,7 +27,10 @@ class ClienteEloquentRepository implements ClienteRepositoryInterface
     public function find(string $uuid): Cliente
     {
         return $this->model
-            ->where('uuid', $uuid)->firstOrFail();
+            ->where('uuid', $uuid)
+            ->with('propriedades')
+            ->with('contatos')
+            ->firstOrFail();
     }
 
     public function paginate(int $page = 1, int $totalPerPage = 10, string $filter = null): PaginationInterface

@@ -5,17 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contato extends Model
+class Propriedade extends Model
 {
     use HasFactory;
 
-    protected $table = 'contatos';
+    protected $table = 'propriedades';
 
     protected $fillable = [
         'uuid',
         'nome',
-        'valor',
-        'descricao',
+        'municipio_localidade',
+        'logradouro',
+        'cep_rural',
+        'numero',
+        'telefone_celular',
         'cliente_uuid'
     ];
 }

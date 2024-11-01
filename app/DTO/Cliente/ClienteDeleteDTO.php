@@ -2,16 +2,16 @@
 
 namespace App\DTO\Cliente;
 
-use App\Http\Requests\App\Cliente\ClienteEditRequest;
+use App\Http\Requests\App\Cliente\ClienteDeleteRequest;
 
-class ClienteEditDTO 
+class ClienteDeleteDTO 
 {
     public function __construct(
         public string $uuid
     )
     { }
 
-    public static function makeFromRequest(ClienteEditRequest $request)
+    public static function makeFromRequest(ClienteDeleteRequest $request)
     {
         return new self(
             $request->uuid

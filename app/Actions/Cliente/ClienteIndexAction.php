@@ -10,14 +10,11 @@ class ClienteIndexAction
     protected $clienteRepository;
 
     public function __construct(
-        ClienteRepositoryInterface $clienteRepository
-    )
-    {
-        $this->clienteRepository = $clienteRepository;
-    }
+        protected ClienteRepositoryInterface $repository
+    ) { }
 
-    public function execute(int $page = 1, int $totalPerPage = 10, string $filter = null,) : PaginationInterface
+    public function exec(int $page = 1, int $totalPerPage = 10, string $filter = null): PaginationInterface
     {
-        return $this->clienteRepository->paginate($page, $totalPerPage, $filter);
+        return $this->repository->paginate($page, $totalPerPage, $filter);
     }
 }

@@ -15,7 +15,9 @@ class ClienteCreateController extends Controller
     public function create(ClienteCreateRequest $request)
     {
         $formData = $this->createAction->exec();
+        $propriedades = [];
+        $contatos = [];
 
-        return view('app.cliente.create', compact('formData'));
+        return view('app.cliente.create', compact('formData', 'propriedades', 'contatos'));
     }
 }

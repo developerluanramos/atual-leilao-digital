@@ -23,7 +23,30 @@ class ClienteEditController extends Controller
 
         $formData = $this->createAction->exec();
         $cliente = $this->editAction->exec(ClienteEditDTO::makeFromRequest($request));
+        $propriedade = [];
+        $contatos = [];
+        
+        foreach($cliente->propriedades as $propriedade)
+        {
+            $propriedades[] = [
+                'nome' => $propriedade->nome,
+                'municipio_localidade' => $propriedade->municipio_localidade,
+                'logradouro' => $propriedade->logradouro,
+                'cep_rural' => $propriedade->cep_rural,
+                'numero' => $propriedade->numero,
+                'telefone_celular' => $propriedade->telefone_celular
+            ];
+        }
 
-        return view('app.cliente.edit', compact('formData', 'cliente'));
+        foreach($cliente->contatos as $contato)
+        {
+            $contatos[] = [
+                'nome' => $contato->nome,
+                'valor' => $contato->valor,
+                'descricao' => $contato->descricao,
+            ];
+        }
+
+        return view('app.cliente.edit', compact('formData', 'cliente', 'propriedades', 'contatos'));
     }
 }
