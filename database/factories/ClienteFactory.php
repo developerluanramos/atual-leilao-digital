@@ -24,6 +24,7 @@ class ClienteFactory extends Factory
             'cep' => $this->faker->postcode(),
             'cidade' => $this->faker->city(),
             'uf' => 'PA',
+            'celular' => $this->faker->phoneNumber(),
             'numero' => 22,
             'complemento' => $this->faker->streetAddress(),
             'email' => $this->faker->email(),

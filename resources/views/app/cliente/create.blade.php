@@ -1,20 +1,20 @@
 @extends('app.layouts.app')
 
 @section('breadcrumb')
-    {{ Breadcrumbs::render('plano-pagamento.create') }}
+    {{ Breadcrumbs::render('cliente.create') }}
 @endsection
 
-@section('title', 'Novo Plano de Pagamento')
+@section('title', 'Novo Cliente')
 
-<x-layouts.headers.create-header :title="'Novo Plano de Pagamento'"/>
+<x-layouts.headers.create-header :title="'Novo Cliente'"/>
 
 @section('content')
 
 @include('components.alerts.form-errors')
 
-<form action="{{ route('plano-pagamento.store') }}" method="POST">
+<form action="{{ route('cliente.store') }}" method="POST">
     @csrf
-    @include('app.plano-pagamento.partials.form')
+    @include('app.cliente.partials.form')
 </form>
 
 @endsection

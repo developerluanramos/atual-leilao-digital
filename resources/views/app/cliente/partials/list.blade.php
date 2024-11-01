@@ -2,9 +2,8 @@
     :headers="[
         'Nome',
         'Email',
-        'Documento',
-        'Endereço'
-        // 'Ações'
+        'CPF/CNPJ',
+        'Ações'
     ]"
     :paginator="$clientes"
     :appends="$filters"
@@ -15,9 +14,8 @@
                 <td>{{ $cliente->nome }}</td>
                 <td>{{ $cliente->email }}</td>
                 <td>{{ $cliente->cpf_cnpj }}</td>
-                <td>{{ $cliente->endereco }}</td>
-                {{-- <td class="text-right">
-                    <x-layouts.buttons.action-button
+                <td class="text-right">
+                <x-layouts.buttons.action-button
                     text="Ver"
                     action="ver"
                     color="secondary"
@@ -26,17 +24,17 @@
                     text="Editar"
                     action="editar"
                     color="primary"
-                    :route="route('plano-pagamento.edit', $cliente->uuid)"/>
+                    :route="route('cliente.edit', $cliente->uuid)"/>
                 <x-layouts.buttons.action-button
                     text="Excluir"
                     action="excluir"
                     color="danger"
                     :identificador="'drawer-delete-confirmacao'"
-                    :route="route('plano-pagamento.delete', [
+                    :route="route('cliente.delete', [
                         'uuid' => $cliente->uuid
                     ])"
                 />
-                </td> --}}
+                </td>
             </tr>
         @endforeach
     @endsection

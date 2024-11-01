@@ -20,6 +20,7 @@ class Cliente extends Model
         'cep',
         'cidade',
         'uf',
+        'celular',
         'numero',
         'complemento',
         'email',
@@ -41,5 +42,15 @@ class Cliente extends Model
     public function compras()
     {
         return $this->belongsToMany(Compra::class, 'compra_cliente', 'cliente_uuid', 'compra_uuid', 'uuid', 'uuid');
+    }
+
+    public function propriedades()
+    {
+        return $this->hasMany(Propriedade::class, 'cliente_uuid', 'uuid');
+    }
+
+    public function contatos()
+    {
+        return $this->hasMany(Contato::class, 'cliente_uuid', 'uuid');
     }
 }

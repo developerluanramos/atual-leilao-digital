@@ -215,3 +215,16 @@ Breadcrumbs::for('plano-pagamento.edit', function (BreadcrumbTrail $trail, $plan
     $trail->parent('plano-pagamento');
     $trail->push('Edição de Plano de Pagamento', route('plano-pagamento.edit', $planoPagamento));
 });
+
+Breadcrumbs::for('cliente', function (BreadcrumbTrail $trail) {
+    $trail->parent('Dashboard' , route('dashboard.index'));
+    $trail->push('Clientes', route('cliente.index'));
+});
+Breadcrumbs::for('cliente.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('cliente');
+    $trail->push('Novo Cliente', route('cliente.create'));
+});
+Breadcrumbs::for('cliente.edit', function (BreadcrumbTrail $trail, $cliente) {
+    $trail->parent('cliente');
+    $trail->push('Edição de Cliente', route('cliente.edit', $cliente));
+});
