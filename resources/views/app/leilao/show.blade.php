@@ -73,12 +73,12 @@
         <div class="flex flex-wrap -mx-3 mb-2">
             <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
                 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    
+                    @livewire('components.app.charts.leilao-lote-conclusao', [$leilao])
                 </div>
             </div>
             <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
                 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    
+                    @livewire('components.app.charts.leilao-lote-conclusao', [$leilao])
                 </div>
             </div>
             <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
@@ -103,12 +103,12 @@
                         </h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">
-                        {{Akaunting\Money\Money::BRL($leilao->lotes->sum('valor'), true)}}
+                        {{-- {{Akaunting\Money\Money::BRL($leilao->lotes->compras()->sum('valor'), true)}} --}}
                     </p>
                 </div>
             </div>
         </div>
-        <div>
+        <div class="p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             @livewire('components.app.charts.leilao-valor-atingido', [$leilao])
         </div>
         {{-- <pre>{{json_encode($leilao, JSON_PRETTY_PRINT)}}</pre> --}}
