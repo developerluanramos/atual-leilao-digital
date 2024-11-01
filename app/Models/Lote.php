@@ -70,7 +70,6 @@ class Lote extends Model
         return $this->prelances->last();
     }
 
-
     public function lances()
     {
         return $this->hasMany(Lance::class, 'lote_uuid', 'uuid');
@@ -79,6 +78,11 @@ class Lote extends Model
     public function lance_vencedor()
     {
         return $this->lances->last();
+    }
+
+    public function compras(): HasMany
+    {
+        return $this->hasMany(Compra::class, 'lote_uuid', 'uuid');
     }
 
     /*

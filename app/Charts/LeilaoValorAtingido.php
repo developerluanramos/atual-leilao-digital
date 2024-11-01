@@ -17,11 +17,22 @@ class LeilaoValorAtingido
     public function build(Leilao $leilao): \ArielMejiaDev\LarapexCharts\BarChart
     {
         $lotes = $leilao->lotes()->get();
+        $compras = [];
+
+        foreach($lotes as $index => $lote) {
+            $valorCompra = 0;
+
+            if($lote->compras()->exists()) {
+                $valorCompra = $lote->compras()->sum('valor');
+            }
+
+            array_push($compras, $valorCompra);
+        }
 
         return $this->chart->barChart()
             ->addData('Valor Estimado', $lotes->pluck('valor_estimado')->toArray())
             ->addData('Valor Pré-lance', $lotes->pluck('valor_prelance')->toArray())
-            ->addData('Valor Arrematado', [])
+            ->addData('Valor Arrematado', $compras)
             ->setHeight(400)
             ->setTitle('Gráfico comparativo de valor atingido')
             ->setSubtitle('Evidencía os comparativos entre o valor estimado para o lote, o valor atingido no pré-lance e o valor fechado no arremate do lote')

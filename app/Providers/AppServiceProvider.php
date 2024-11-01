@@ -18,6 +18,7 @@ use App\Models\Lote;
 use App\Models\LoteItem;
 use App\Models\LoteItemImagem;
 use App\Models\LoteItemVideo;
+use App\Models\Parcela;
 use App\Models\Pisteiro;
 use App\Models\PlanoPagamento;
 use App\Models\PostoTrabalho;
@@ -43,6 +44,7 @@ use App\Observers\LoteItemImagemObserver;
 use App\Observers\LoteItemObserver;
 use App\Observers\LoteItemVideoObserver;
 use App\Observers\LoteObserver;
+use App\Observers\ParcelaObserver;
 use App\Observers\PisteiroObserver;
 use App\Observers\PlanoPagamentoObserver;
 use App\Observers\PostoTrabalhoObserver;
@@ -191,7 +193,8 @@ class AppServiceProvider extends ServiceProvider
         LoteItemVideo::observe(LoteItemVideoObserver::class);
         Compra::observe(CompraObserver::class);
         CompraCliente::observe(CompraClienteObserver::class);
-
+        Parcela::observe(ParcelaObserver::class);
+        
         \DB::enableQueryLog();
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
             $dataNascimento = $validator->getData()['data_nascimento'];

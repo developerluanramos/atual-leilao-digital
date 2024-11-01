@@ -217,7 +217,7 @@
                 @forelse($parcelas as $parcela)
                     <tr>
                         <td class="text-center">
-                            {{$parcela['data_pagamento']}}
+                            {{$parcela['vencimento_em']}}
                         </td>
                         <td class="text-right">
                             <x-layouts.badges.info-money

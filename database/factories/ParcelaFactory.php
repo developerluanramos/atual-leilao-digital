@@ -18,11 +18,10 @@ class ParcelaFactory extends Factory
      */
     public function definition(): array
     {
+        // -- desatualiazado
         return [
             'uuid' => $this->faker->uuid(),
             'numero' => $this->faker->numberBetween(1, 60),
-            'quantidade_total_parcelas' => $this->faker->numberBetween(50, 60),
-            'quantidade_real_parcelas' => $this->faker->numberBetween(30, 50),
             'compra_uuid' => Compra::inRandomOrder()->first()->uuid,
             'cliente_uuid' => Cliente::inRandomOrder()->first()->uuid,
         ];

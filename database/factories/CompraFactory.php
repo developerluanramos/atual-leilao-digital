@@ -25,6 +25,7 @@ class CompraFactory extends Factory
             'uuid' => $this->faker->uuid,
             'leilao_uuid' => $leilao->uuid,
             'lote_uuid' => $lote->uuid,
+            // 'cliente_uuid' => $cliente->uuid,
             // 'plano_pagamento_uuid',
             // 'valor',
             // 'valor_comissao_vendedor',

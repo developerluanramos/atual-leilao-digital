@@ -28,6 +28,8 @@ class CompraStoreRequest extends FormRequest
             'valor' => ["required"],
             'valor_comissao_vendedor' => ["required"],
             'valor_comissao_comprador' => ["required"],
+            'clientes' => ["required"],
+            'parcelas' => ["required"]
         ];
     }
 
@@ -45,6 +47,8 @@ class CompraStoreRequest extends FormRequest
             'valor' => ["required"],
             'valor_comissao_vendedor' => ["required"],
             'valor_comissao_comprador' => ["required"],
+            'clientes' => ["required"],
+            'parcelas' => ["required"]
         ];
     }
 }

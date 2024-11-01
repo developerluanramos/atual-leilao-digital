@@ -7,8 +7,10 @@ use App\Actions\Compra\CompraStoreAction;
 use App\Http\Controllers\App\Compra\CompraStoreController;
 use App\Http\Requests\App\Compra\CompraStoreRequest;
 use App\Models\Cliente;
+use App\Models\Compra;
 use App\Models\Leilao;
 use App\Models\Lote;
+use App\Models\Parcela;
 use App\Repositories\Cliente\ClienteEloquentRepository;
 use Carbon\Carbon;
 use Exception;
@@ -112,10 +114,12 @@ class CompraCreate extends Component
                     ? ($percentualComissaoVendedor / 100) * $valor : 0;
 
                 $this->parcelas[] = [
+                    'lote_uuid' => $this->lote->uuid,
+                    'leilao_uuid' => $this->leilao->uuid,
                     'valor_original' => $this->valorLance,
                     'valor' => $valor,
                     'repeticoes' => $condicaoPagamento['repeticoes'],
-                    'data_pagamento' => $carbonHoje->addMonth()->toDateString(),
+                    'vencimento_em' => $carbonHoje->addMonth()->toDateString(),
                     'incide_comissao_compra' => $incideComissaoComprador,
                     'incide_comissao_venda' => $incideComissaoVendedor,
                     'percentual_comissao_vendedor' => $percentualComissaoVendedor,
@@ -197,18 +201,21 @@ class CompraCreate extends Component
                 "_token" => csrf_token(),
                 'leilao_uuid' => $this->leilao->uuid,
                 'lote_uuid' => $this->lote->uuid,
-                // 'prelance_config_uuid' => $this->leilao->config_prelance_atual->uuid,
                 'plano_pagamento_uuid' => $this->leilao->plano_pagamento_prelance->uuid,
-                // 'realizado_em' => Carbon::now()->toDateString(),
                 'valor' => $this->valorTotalLote,
                 'valor_comissao_comprador' => $this->valorTotalComissaoComprador,
                 'valor_comissao_vendedor' => $this->valorTotalComissaoVendedor,
-                'clientes' => $this->compradores      
+                'clientes' => $this->compradores,
+                'parcelas' => $this->parcelas    
             ]);
             
             $request->validate(CompraStoreRequest::rulesForLivewire());
 
-            (new CompraStoreController())->store($request, (new CompraStoreAction()));
+            (new CompraStoreController())->store($request, (new CompraStoreAction(
+                new Compra(),
+                new Lote(),
+                new Parcela()
+            )));
 
             redirect()->to(route('leilao.lote.index', [
                 'uuid' => $this->lote->leilao_uuid,
