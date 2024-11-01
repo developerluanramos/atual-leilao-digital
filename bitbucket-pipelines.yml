@@ -24,4 +24,4 @@ pipelines:
           after-script:
             # Run migrations and seeders on Heroku
             - heroku run "php artisan migrate --force" --app $HEROKU_APP_NAME
-            - heroku run "php artisan db:seed --force" --app $HEROKU_APP_NAME
+            - heroku run "php artisan db:seed --force" --app $HEROKU_APP_NAME 

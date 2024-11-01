@@ -20,11 +20,8 @@ class ContatoFactory extends Factory
         return [
             'uuid' => $this->faker->uuid(),
             'descricao' => $this->faker->text('100'),
-            'telefone_comercial' => $this->faker->phoneNumber(),
-            'telefone_residencial' => $this->faker->phoneNumber(),
-            'celular_pessoal' => $this->faker->phoneNumber(),
-            'celular_comercial' => $this->faker->phoneNumber(),
-            'email' => $this->faker->email(),
+            'nome' => $this->faker->name(),
+            'valor' => $this->faker->email(),
             'cliente_uuid' => Cliente::inRandomOrder()->first()->uuid,
         ];
     }
