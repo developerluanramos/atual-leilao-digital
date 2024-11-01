@@ -9,7 +9,7 @@ pipelines:
           caches:
             - composer
           script:
-            - apt-get update && apt-get install -y git curl zip unzip libmysqlclient-dev
+            - apt-get update && apt-get install -y git curl zip unzip default-mysql-client
             # Install PHP extensions needed for MySQL
             - docker-php-ext-install pdo_mysql
             # Install Heroku CLI
