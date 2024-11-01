@@ -9,7 +9,9 @@ pipelines:
           caches:
             - composer
           script:
-            - apt-get update && apt-get install -y git curl zip unzip
+            - apt-get update && apt-get install -y git curl zip unzip libmysqlclient-dev
+            # Install PHP extensions needed for MySQL
+            - docker-php-ext-install pdo_mysql
             # Install Heroku CLI
             - curl https://cli-assets.heroku.com/install.sh | sh
             # Login to Heroku using the API key
