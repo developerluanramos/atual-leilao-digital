@@ -37,14 +37,16 @@ class CompraCreate extends Component
         $this->leilao = $lote->leilao()->get()->first();
         if($this->lote->prelance_vencedor()) {
             $this->temPreLanceVencedor = true;
+        } else {
+            $this->aplicarConfigLote();
         }
         // $this->search = "";
         // $this->searchResult = [];
         // // -- valor vencedor do pré-lance ou valor mínimo do lote
         // $this->valorLance = $this->lote->valor_estimado;
         // // -- config do pre lance ou condicoes de pagamento ou lote
-        $this->incideComissaoVenda = $this->lote->incide_comissao_venda;
-        $this->incideComissaoCompra = $this->lote->incide_comissao_compra;
+        // $this->incideComissaoVenda = $this->lote->incide_comissao_venda;
+        // $this->incideComissaoCompra = $this->lote->incide_comissao_compra;
         // $this->parcelas = [];
         // $this->compradores = [];
         // if(!empty($this->compradores)) {
@@ -59,8 +61,6 @@ class CompraCreate extends Component
 
     public function aplicarConfigPrelance()
     {
-        // dd($this->lote->prelance_vencedor()->prelance_config());
-        // -- config do pre lance ou condicoes de pagamento ou lote
         $this->temPreLanceVencedor = false;
         $this->usandoPrelanceConfig = true;
         $this->incideComissaoVenda = $this->lote->prelance_vencedor()->prelance_config()->first()->incide_comissao_vendedor;
@@ -79,16 +79,17 @@ class CompraCreate extends Component
     {
         $this->temPreLanceVencedor = false;
         $this->usandoPrelanceConfig = false;
-        $this->incideComissaoVenda = $this->lote->incide_comissao_venda; // trocar para condição pagamento
-        $this->incideComissaoCompra = $this->lote->incide_comissao_compra; // trocar para condição pagamento
-        $this->percentualComissaoCompra = 5; // trocar para condição pagamento
-        $this->percentualComissaoVenda = 6; // trocar para condição pagamento
+        // -- essas 4 variáveis não serão utilizadas para o calculo de parcelas
+        // -- já que são substituidas pela condição de pagamento caso não seja usado 
+        // -- as configs de pré-lance.
+        $this->incideComissaoVenda = true; 
+        $this->incideComissaoCompra = true; 
+        $this->percentualComissaoCompra = 0; 
+        $this->percentualComissaoVenda = 0; 
         $this->parcelas = [];
         $this->compradores = [];
         $this->valorLance = 50;
         $this->condicoesPagamento = $this->lote->plano_pagamento()->first()->condicoes_pagamento()->get()->toArray();
-        
-        // $this->updatedValorLance();
     }
 
     public function updatedValorLance()
@@ -99,21 +100,26 @@ class CompraCreate extends Component
         foreach ($this->condicoesPagamento as $key => $condicaoPagamento)
         {
             for($i = 1; $i <= $condicaoPagamento['qtd_parcelas']; $i++) {
+                $incideComissaoComprador = $this->usandoPrelanceConfig ? $this->incideComissaoCompra : $condicaoPagamento['incide_comissao_comprador'];
+                $incideComissaoVendedor = $this->usandoPrelanceConfig ? $this->incideComissaoVenda : $condicaoPagamento['incide_comissao_vendedor'];
+                $percentualComissaoComprador = $this->usandoPrelanceConfig ? $this->percentualComissaoCompra : $condicaoPagamento['percentual_comissao_comprador'];
+                $percentualComissaoVendedor = $this->usandoPrelanceConfig ? $this->percentualComissaoVenda : $condicaoPagamento['percentual_comissao_vendedor'];
+
                 $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * count($this->lote->itens))) / $this->getQuantidadeCompradoresProperty();
-                $valorComissaoComprador = $this->incideComissaoCompra
-                    ? ($this->percentualComissaoCompra / 100) * $valor : 0;
-                $valorComissaoVendedor = $this->incideComissaoVenda
-                    ? ($this->percentualComissaoVenda / 100) * $valor : 0;
+                $valorComissaoComprador = $incideComissaoComprador
+                    ? ($percentualComissaoComprador / 100) * $valor : 0;
+                $valorComissaoVendedor = $incideComissaoVendedor
+                    ? ($percentualComissaoVendedor / 100) * $valor : 0;
 
                 $this->parcelas[] = [
                     'valor_original' => $this->valorLance,
                     'valor' => $valor,
                     'repeticoes' => $condicaoPagamento['repeticoes'],
                     'data_pagamento' => $carbonHoje->addMonth()->toDateString(),
-                    'incide_comissao_compra' => $this->usandoPrelanceConfig ? $this->incideComissaoCompra : $condicaoPagamento['incide_comissao_comprador'],
-                    'incide_comissao_venda' => $this->usandoPrelanceConfig ? $this->incideComissaoVenda : $condicaoPagamento['incide_comissao_vendedor'],
-                    'percentual_comissao_vendedor' => $this->percentualComissaoVenda,
-                    'percentual_comissao_comprador' => $this->percentualComissaoCompra,
+                    'incide_comissao_compra' => $incideComissaoComprador,
+                    'incide_comissao_venda' => $incideComissaoVendedor,
+                    'percentual_comissao_vendedor' => $percentualComissaoVendedor,
+                    'percentual_comissao_comprador' => $percentualComissaoComprador,
                     'valor_comissao_comprador' => $valorComissaoComprador,
                     'valor_comissao_vendedor' => $valorComissaoVendedor
                 ];
@@ -136,12 +142,12 @@ class CompraCreate extends Component
         $this->compradores[] = $comprador;
         $this->searchResult = [];
         $this->search = "";
-        if($this->lote->prelance_vencedor()) {
-            $this->temPreLanceVencedor = true;
-            $this->aplicarConfigPrelance();
-        } else {
-            $this->aplicarConfigLote();
-        }
+        // if($this->lote->prelance_vencedor()) {
+        //     $this->temPreLanceVencedor = true;
+        //     $this->aplicarConfigPrelance();
+        // } else {
+        //     $this->aplicarConfigLote();
+        // }
         $this->updatedValorLance();
     }
 

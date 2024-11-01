@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Ramsey\Uuid\Type\Decimal;
 
 class Lote extends Model
 {
@@ -74,7 +73,7 @@ class Lote extends Model
 
     public function lances()
     {
-        return $this->hasMany(Lance::class, 'lote_uuid', 'uuid')->where('tipo', (string)TipoLanceEnum::LANCE);
+        return $this->hasMany(Lance::class, 'lote_uuid', 'uuid');
     }
 
     public function lance_vencedor()

@@ -30,9 +30,9 @@
                     <li>
                         <p>
                             <small>Parcelas: <b>{{$condicaoPagamento['qtd_parcelas']}}</b></small> |
-                            <small>Repetições: <b>{{$condicaoPagamento['repeticoes']}}</b></small> |
-                            <small>Comissão Venda: <b>{{$condicaoPagamento['percentual_comissao_vendedor']}} %</b></small> |
-                            <small>Comissão Compra: <b>{{$condicaoPagamento['percentual_comissao_comprador']}} %</b></small>
+                            <small>Repetições: <b>{{$condicaoPagamento['repeticoes']}}</b></small>
+                            {{-- <small>Comissão Venda: <b>{{$condicaoPagamento['percentual_comissao_vendedor']}} %</b></small> |
+                            <small>Comissão Compra: <b>{{$condicaoPagamento['percentual_comissao_comprador']}} %</b></small> --}}
                         </p>
                     </li>
                 @endforeach

@@ -1,4 +1,10 @@
 <div class="mt-4">
+    {{-- <div wire:poll.750ms>
+        Current time: 
+        {{ 
+            \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $leilao->fechado_em, 'America/Sao_Paulo')->toDateString()
+        }}
+    </div> --}}
     @if ($temPreLanceVencedor)
     <div id="alert-additional-content-1" class="p-4 mb-4 text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
         <div class="flex items-center">
@@ -124,11 +130,11 @@
         <div class="w-full md:w-2/12 md:mb-0 px-3 text-center">
             <div class="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <p class="font-normal text-gray-700 dark:text-gray-400">Comissão Comprador</p>
-                <p>
+                {{-- <p>
                     <x-layouts.badges.sim-nao
                         :status="$this->incideComissaoCompra"
                     />
-                </p>
+                </p> --}}
                 <p>
                     <x-layouts.badges.info-money
                         :value="$this->valorTotalComissaoComprador"
@@ -139,11 +145,11 @@
         <div class="w-full md:w-2/12 md:mb-0 px-3 text-center">
             <div class="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <p class="font-normal text-gray-700 dark:text-gray-400">Comissão Vendedor</p>
-                <p>
+                {{-- <p>
                     <x-layouts.badges.sim-nao
                         :status="$this->incideComissaoVenda"
                     />
-                </p>
+                </p> --}}
                 <p>
                     <x-layouts.badges.info-money
                         :value="$this->valorTotalComissaoVendedor"
@@ -219,6 +225,9 @@
                             /> ({{$parcela['repeticoes']}})
                         </td>
                         <td class="text-right">
+                            <x-layouts.badges.sim-nao
+                                :status="$parcela['incide_comissao_compra']"
+                            />
                             <x-layouts.badges.info-percent
                                 :value="$parcela['percentual_comissao_comprador']"
                             />
@@ -227,6 +236,9 @@
                             />
                         </td>
                         <td class="text-right">
+                            <x-layouts.badges.sim-nao
+                                :status="$parcela['incide_comissao_venda']"
+                            />
                             <x-layouts.badges.info-percent
                                 :value="$parcela['percentual_comissao_vendedor']"
                             />
