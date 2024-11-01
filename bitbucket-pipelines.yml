@@ -21,7 +21,7 @@ pipelines:
             - php composer.phar install --no-dev --prefer-dist --optimize-autoloader
             # Push code to Heroku
             - git push heroku main -f
-          after-script:
-            # Run migrations and seeders on Heroku
-            - heroku run "php artisan migrate --force" --app $HEROKU_APP_NAME
-            - heroku run "php artisan db:seed --force" --app $HEROKU_APP_NAME 
+          # after-script:
+          #   # Run migrations and seeders on Heroku
+          #   - heroku run "php artisan migrate --force" --app $HEROKU_APP_NAME
+          #   - heroku run "php artisan db:seed --force" --app $HEROKU_APP_NAME 
