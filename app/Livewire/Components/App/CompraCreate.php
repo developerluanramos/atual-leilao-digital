@@ -172,7 +172,7 @@ class CompraCreate extends Component
 
     public function getValorTotalLoteProperty()
     {
-        return array_sum(array_column($this->parcelas, 'valor'));
+        return array_sum(array_column($this->parcelas, 'valor')) * count($this->compradores);
     }
 
     public function getValorTotalComissaoVendedorProperty()
@@ -208,7 +208,7 @@ class CompraCreate extends Component
                 'leilao_uuid' => $this->leilao->uuid,
                 'lote_uuid' => $this->lote->uuid,
                 'plano_pagamento_uuid' => $this->planoPagamento->uuid,
-                'valor' => $this->valorTotalLote,
+                'valor' => $this->valorTotalLote / count($this->compradores),
                 'valor_comissao_comprador' => $this->valorTotalComissaoComprador,
                 'valor_comissao_vendedor' => $this->valorTotalComissaoVendedor,
                 'clientes' => $this->compradores,
