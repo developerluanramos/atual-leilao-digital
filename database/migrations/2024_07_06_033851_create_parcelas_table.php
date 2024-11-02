@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\StatusParcelaEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,6 +26,10 @@ return new class extends Migration
             $table->decimal('valor_comissao_comprador', 12, 2);
             $table->decimal('percentual_comissao_vendedor', 12, 2);
             $table->decimal('percentual_comissao_comprador', 12, 2);
+            $table->boolean('incide_comissao_venda')->default(false);
+            $table->boolean('incide_comissao_compra')->default(false);
+            $table->integer('repeticoes')->default(1);
+            $table->enum('status', StatusParcelaEnum::getValues())->default(StatusParcelaEnum::ABERTO);
             $table->timestamps();
         });
     }

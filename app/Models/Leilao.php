@@ -91,9 +91,15 @@ class Leilao extends Model
         return $this->hasMany(Lance::class, 'leilao_uuid', 'uuid')->where('tipo', (string)TipoLanceEnum::PRELANCE);
     }
 
+    // -- clientes no pré-lance, depois é necessário renomear este método
     public function clientes()
     {
         return $this->belongsToMany(Cliente::class, 'lance_cliente', 'leilao_uuid', 'cliente_uuid', 'uuid' /* lance.uuid */, 'uuid' /* cliente.uuid */)->distinct('cliente_uuid');
+    }
+
+    public function compras()
+    {
+        return $this->hasMany(Compra::class, 'leilao_uuid', 'uuid');
     }
 
     /*

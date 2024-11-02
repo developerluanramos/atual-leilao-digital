@@ -23,6 +23,10 @@ class Parcela extends Model
         'valor_comissao_vendedor',
         'valor_comissao_comprador',
         'percentual_comissao_vendedor',
-        'percentual_comissao_comprador'
+        'percentual_comissao_comprador',
+        'incide_comissao_venda',
+        'incide_comissao_compra',
+        'repeticoes',
+        'status'
     ];
 }

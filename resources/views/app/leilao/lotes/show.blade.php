@@ -1,10 +1,8 @@
 @section('title', 'Visualiza Lote')
 
-<x-layouts.badges.status-lote 
+<h2 class="tittle-2 mb-3">Lote: {{$lote->descricao}} <x-layouts.badges.status-lote 
     :status="(int)$lote->status">
-</x-layouts.badges.status-lote>
-
-    
+</x-layouts.badges.status-lote> </h2>    
         
 <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
     <div class="flex items-center justify-between mb-4">
@@ -13,7 +11,7 @@
 <div class="flow-root">
     <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
         @forelse ($lote->compras as $compra)
-            <li class="py-3 sm:py-4">
+            <li class="py-3 sm:py-4 cursor-pointer pointer" data-modal-target="{{$compra->cliente->uuid}}" data-modal-toggle="{{$compra->cliente->uuid}}">
                 <div class="flex items-center w-full">
                     <div class="flex-shrink-0">
                         <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
@@ -36,6 +34,108 @@
                     </div>
                 </div>
             </li>
+            <style>
+                .table-bordered { border-collapse: collapse; }
+            </style>
+            <x-layouts.modals.simple-modal
+                :tamanho="6"
+                :identificador="$compra->cliente->uuid"
+                :sessao="$compra->cliente->uuid"
+                :titulo="$compra->cliente->nome">
+                @section($compra->cliente->uuid)
+                
+                <span class="content-end text-right mr-lg">
+                    <x-layouts.badges.info-money
+                    :convert="false"
+                    :textLength="'lg'"
+                    :value="$compra->valor"
+                ></x-layouts.badges.info-money>
+                </span>
+                
+                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="ml-lg text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                    Promissórias
+                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                    </svg>
+                </button>
+                    
+                <!-- Dropdown menu -->
+                <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Via Interna</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Via Cliente</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Via Vendedor</a>
+                    </li>
+                    </ul>
+                </div>
+    
+                <table class="table-bordered w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Data de pagamento</th>
+                            <th class="text-right">R$ Comissão Compra</th>
+                            <th class="text-right">R$ Comissão Venda</th>
+                            <th class="text-right">R$ Valor parcela</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($compra->parcelas as $parcela)
+                            <tr>
+                                <td class="text-left">
+                                    <x-layouts.badges.status-parcela
+                                        :status="(int)$parcela['status']"
+                                    />
+                                </td>
+                                <td class="text-center">
+                                    {{$parcela['vencimento_em']}}
+                                </td>
+                                <td class="text-right">
+                                    <x-layouts.badges.sim-nao
+                                        :status="$parcela['incide_comissao_compra']"
+                                    />
+                                    <x-layouts.badges.info-percent
+                                        :value="$parcela['percentual_comissao_comprador']"
+                                    />
+                                    <x-layouts.badges.info-money
+                                        :convert="false"
+                                        :outline="true"
+                                        :value="$parcela['valor_comissao_comprador']"
+                                    />
+                                </td>
+                                <td class="text-right text-sm">
+                                    <x-layouts.badges.sim-nao
+                                        :status="$parcela['incide_comissao_venda']"
+                                    />
+                                    <x-layouts.badges.info-percent
+                                        :value="$parcela['percentual_comissao_vendedor']"
+                                    />
+                                    <x-layouts.badges.info-money
+                                        :convert="false"
+                                        :outline="true"
+                                        :value="$parcela['valor_comissao_vendedor']"
+                                    />
+                                </td>
+                                <td class="text-right">
+                                    <x-layouts.badges.info-money
+                                        :convert="false"
+                                        :textLength="'lg'"
+                                        :value="$parcela['valor']"
+                                    /> ({{$parcela['repeticoes']}})
+                                </td>
+                            </tr>
+                        @empty
+                            Nenhum parcela adicionada
+                        @endforelse
+                    </tbody>
+                </table>
+                @endsection
+            </x-layouts.modals.simple-modal>
         @empty
             <small class="color-red">nenhuma compra registrada neste lote</small>
         @endforelse
