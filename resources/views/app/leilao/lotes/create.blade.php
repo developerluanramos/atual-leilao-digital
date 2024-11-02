@@ -1,4 +1,4 @@
-@section('title', 'Novo Cargo')
+@section('title', 'Novo Lote')
 
 <x-layouts.headers.create-header :title="'Novo Cargo'"/>
 

@@ -38,9 +38,9 @@ class Compra extends Model
 
     }
 
-    public function clientes()
+    public function cliente()
     {
-        return $this->hasMany(Cliente::class, 'uuid', 'cliente_uuid');
+        return $this->hasOne(Cliente::class, 'uuid', 'cliente_uuid');
     }
 
     public function parcelas()

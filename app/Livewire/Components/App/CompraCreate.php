@@ -11,6 +11,7 @@ use App\Models\Compra;
 use App\Models\Leilao;
 use App\Models\Lote;
 use App\Models\Parcela;
+use App\Models\PlanoPagamento;
 use App\Repositories\Cliente\ClienteEloquentRepository;
 use Carbon\Carbon;
 use Exception;
@@ -29,6 +30,8 @@ class CompraCreate extends Component
     public string $valorLance;
     public array $compradores;
     public array $condicoesPagamento;
+    public PlanoPagamento $planoPagamento;
+
     public string $search;
     public array $searchResult;
     public array $parcelas;
@@ -37,6 +40,7 @@ class CompraCreate extends Component
     {
         $this->lote = $lote;
         $this->leilao = $lote->leilao()->get()->first();
+        $this->planoPagamento = new PlanoPagamento();
         if($this->lote->prelance_vencedor()) {
             $this->temPreLanceVencedor = true;
         } else {
@@ -72,6 +76,7 @@ class CompraCreate extends Component
         $this->parcelas = [];
         $this->compradores = $this->lote->prelance_vencedor()->clientes()->get()->toArray();
         $this->valorLance = $this->lote->prelance_vencedor()->valor;
+        $this->planoPagamento = $this->lote->prelance_vencedor()->prelance_config()->first()->plano_pagamento()->first();
         $this->condicoesPagamento = $this->lote->prelance_vencedor()->prelance_config()->first()->plano_pagamento()->first()->condicoes_pagamento()->get()->toArray();
         
         $this->updatedValorLance();
@@ -91,6 +96,7 @@ class CompraCreate extends Component
         $this->parcelas = [];
         $this->compradores = [];
         $this->valorLance = 50;
+        $this->planoPagamento = $this->lote->plano_pagamento()->first();
         $this->condicoesPagamento = $this->lote->plano_pagamento()->first()->condicoes_pagamento()->get()->toArray();
     }
 
@@ -201,7 +207,7 @@ class CompraCreate extends Component
                 "_token" => csrf_token(),
                 'leilao_uuid' => $this->leilao->uuid,
                 'lote_uuid' => $this->lote->uuid,
-                'plano_pagamento_uuid' => $this->leilao->plano_pagamento_prelance->uuid,
+                'plano_pagamento_uuid' => $this->planoPagamento->uuid,
                 'valor' => $this->valorTotalLote,
                 'valor_comissao_comprador' => $this->valorTotalComissaoComprador,
                 'valor_comissao_vendedor' => $this->valorTotalComissaoVendedor,
@@ -222,7 +228,7 @@ class CompraCreate extends Component
                 'aba' => 'lotes'
             ]));
         } catch (Exception $exception) {
-            dd($exception->getMessage());
+            dd($exception->getMessage(), $exception->getFile(), $exception->getLine());
             return redirect()->back()->withErrors($exception);
         }
     }

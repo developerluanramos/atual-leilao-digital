@@ -113,7 +113,7 @@
         </div>
         {{-- <pre>{{json_encode($leilao, JSON_PRETTY_PRINT)}}</pre> --}}
     @endif
-
+        
     @if($aba === 'lotes')
         @if($action == 'index')
             <div class="">
@@ -127,6 +127,8 @@
             @include('app.leilao.lotes.index', ['leilao' => $leilao, 'lotes' => $lotes])
         @elseif($action == 'create')
             @include('app.leilao.lotes.create', ['leilao' => $leilao, 'formData' => $formData])
+        @elseif($action == 'show')
+            @include('app.leilao.lotes.show', ['leilao' => $leilao, 'lote' => $lote])
         @endif
     @endif
 
