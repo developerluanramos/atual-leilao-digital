@@ -58,7 +58,8 @@
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                    </svg> &nbsp; Atual Leiloes
+                    </svg> &nbsp; 
+                    {{-- <img style="width: 70px; height: 30px;" src="{{asset('atual_leiloes_logo.png')}}" alt=""> --}}
                 </a>
                 <!-- Left navigation links -->
 
@@ -98,7 +99,6 @@
 
     <div class="mt-2">
         @yield('header')
-
     </div>
 
     <div>
@@ -116,7 +116,9 @@ MENU PRINCIPAL
 -->
 <!-- drawer component -->
 <div style="width: 400px" id="drawer-navigation" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-64 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-navigation-label">
-    <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">Atual Leilões </h5>
+    <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">
+        Atual Leilões 
+    </h5>
     <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -209,7 +211,7 @@ MENU PRINCIPAL
             </li>
         </ul>
 
-        <div class="absolute inset-x-0 bottom-0 h-16 p-4 overflow-y-auto">
+        <div class="absolute inset-x-0 bottom-0 h-16 p-4">
             <ul class="space-y-2 font-medium ">
                 <li>
                     <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -279,5 +281,6 @@ MENU PRINCIPAL
 </div>
 
 @livewireChartsScripts
+@stack('scripts') 
 </body>
 </html>

@@ -18,9 +18,13 @@ class LeilaoValorAtingido extends Component
 
     public function render(ChartsLeilaoValorAtingido $chartsLeilaoValorAtingido)
     {
+        $chart = $chartsLeilaoValorAtingido->build($this->leilao);
+        
         return view('livewire.components.app.charts.leilao-valor-atingido', [
-            'chart'=> $chartsLeilaoValorAtingido->build($this->leilao),
-            'chart2'=> $chartsLeilaoValorAtingido->build($this->leilao)
+            'chartLeilaoValorAtingido'=> $chart,
+            'chartContainer' => $chart->container(),  // Add this to access the container
+            'chartScript' => $chart->script()
+            // 'chart2'=> $chartsLeilaoValorAtingido->build($this->leilao)
         ]);
     }
 }

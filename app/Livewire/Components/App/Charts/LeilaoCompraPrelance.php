@@ -18,8 +18,11 @@ class LeilaoCompraPrelance extends Component
 
     public function render(ChartsLeilaoCompraPrelance $leilaoCompraPrelance)
     {
+        $chartLeilaoCompraPrelance = $leilaoCompraPrelance->build($this->leilao);
+
         return view('livewire.components.app.charts.leilao-compra-prelance', [
-            'chart'=> $leilaoCompraPrelance->build($this->leilao)
+            'chartLeilaoCompraPrelance'=> $chartLeilaoCompraPrelance,
+            'chartScripts' => $chartLeilaoCompraPrelance->script()
         ]);
     }
 }

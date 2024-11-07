@@ -1,10 +1,10 @@
-<div>
-    <div>
-        <div class="mt-3">
-            {!! $chart->container() !!}
-        </div>
-        <script src="{{ $chart->cdn() }}"></script>
-        
-        {{ $chart->script() }}
+
+<div id="leilao-valor-atingido">
+    <div class="mt-3">
+        {!! $chartLeilaoValorAtingido->container() !!}
     </div>
+    {{-- Chart script --}}
+    @push('scripts')
+        {!! $chartScript !!}
+    @endpush
 </div>

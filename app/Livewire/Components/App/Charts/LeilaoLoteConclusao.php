@@ -16,8 +16,11 @@ class LeilaoLoteConclusao extends Component
     }
     public function render(\App\Charts\LeilaoLoteConclusao $chartLeilaoLoteConclusao)
     {
+        $chart = $chartLeilaoLoteConclusao->build($this->leilao);
+
         return view('livewire.components.app.charts.leilao-lote-conclusao', [
-            'chart'=> $chartLeilaoLoteConclusao->build($this->leilao)
+            'chart'=> $chart,
+            'chartScripts' => $chart->script()
         ]);
     }
 }

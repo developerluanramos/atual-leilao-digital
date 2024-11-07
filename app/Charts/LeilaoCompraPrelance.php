@@ -32,9 +32,11 @@ class LeilaoCompraPrelance
             ->setDataLabels(true)
             ->setTitle('Com pré-lance x Sem pré-lance')
             ->setColors(['#58d68d', '#c0392b'])
+            ->setHeight(200)
+            ->setToolbar(true, true)
             ->setSubtitle('')
             ->addData([$qtdLoteComPrelanceVencedor, $qtdLoteSemPrelanceVencedor])
-            ->setXAxis(['January', 'February', 'March', 'April', 'May', 'June']);
+            ->setXAxis(['Com pré-lance', 'Sem pré-lance']);
             // ->setLabels(['Fechados', 'Abertos']);
     }
 }
