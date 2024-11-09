@@ -14,12 +14,11 @@ class CompraStoreAction
     protected $loteRepository;
     protected $parcelaRepository;
 
-    public function __construct(
+    public function __construct (
         Compra $compraRepository,
         Lote $loteRepository,
         Parcela $parcelaRepository
-    )
-    {
+    ) {
         $this->compraRepository = $compraRepository;
         $this->loteRepository = $loteRepository;
         $this->parcelaRepository = $parcelaRepository;
@@ -30,6 +29,7 @@ class CompraStoreAction
         foreach ($compraStoreDTO->clientes as $index => $cliente)
         {
             $compraStoreDTO->cliente_uuid = $cliente['uuid'];
+            $compraStoreDTO->percentual_cota = (1 / count($compraStoreDTO->clientes)) * 100;
             $compra = $this->compraRepository::create((array)$compraStoreDTO);
 
             foreach($compraStoreDTO->parcelas as $index => $parcela) {
@@ -39,7 +39,6 @@ class CompraStoreAction
 
                 $this->parcelaRepository::create($parcela);
             }
-            // $compra->parcelas()->createMany($compraStoreDTO->parcelas);
         }
         
         $lote = $this->loteRepository::where('uuid', $compraStoreDTO->lote_uuid)->first();

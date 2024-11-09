@@ -100,7 +100,7 @@ class LeilaoLoteItem extends Component
         {
             $this->uploadedImages[] = [
                 "descricao" => $imagem->getFileName(),
-                "url" => $imagem->store('imagens/lote-itens', 'local')
+                "url" => $imagem->store('public/imagens/lote-itens', 'local')
             ];
         }
     }

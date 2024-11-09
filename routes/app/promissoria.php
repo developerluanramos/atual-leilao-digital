@@ -11,10 +11,15 @@ Route::get('promissoria/via-cliente', function() {
     ]);
     
     $pdf->loadView('app.promissoria.cliente', [
-        'compra' => Compra::find(1)
+        'compra' => Compra::with([
+            'cliente',
+            'lote.itens.raca',
+            'lote.itens.especie',
+            'leilao.leiloeiro'
+        ])->find(7)
     ]);
     $pdf->setOption('isRemoteEnabled', true);
-    $pdf->download('promissoria-cliente.pdf');
+    // $pdf->download('promissoria-cliente.pdf');
     return $pdf->stream('promissoria-cliente.pdf');
 })->name('promissoria.via-cliente');
 // Route::get('promissoria/via-vendedor', [\App\Http\Controllers\App\Prelance\PrelanceCreateController::class, 'create'])->name('prelance.create');

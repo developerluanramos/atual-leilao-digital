@@ -25,17 +25,17 @@ class Compra extends Model
 
     public function plano_pagamento()
     {
-
+        return $this->hasOne(PlanoPagamento::class, 'uuid', 'plano_pagamento_uuid');
     }
 
     public function leilao() 
     {
-
+        return $this->hasOne(Leilao::class, 'uuid', 'leilao_uuid');
     }
 
     public function lote() 
     {
-
+        return $this->hasOne(Lote::class, 'uuid', 'lote_uuid');
     }
 
     public function cliente()
