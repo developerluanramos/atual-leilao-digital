@@ -22,7 +22,8 @@ class Compra extends Model
         'valor_lance',
         'valor_comissao_vendedor',
         'valor_comissao_comprador',
-        'percentual_cota'
+        'percentual_cota',
+        'percentual_cota_vendedor'
     ];
 
     public function plano_pagamento()

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->decimal('valor_comissao_vendedor', 12, 2);
             $table->decimal('valor_comissao_comprador', 12, 2);
             $table->decimal('percentual_cota', 12, 2)->default(100);
+            $table->decimal('percentual_cota_vendedor', 12, 2)->default(100);
             $table->timestamps();
         });
     }

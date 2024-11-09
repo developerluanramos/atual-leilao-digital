@@ -25,6 +25,20 @@
                         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                             {{$compra->created_at}}
                         </p>
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                            Vendedor: <b>{{$compra->vendedor->nome}}</b>
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white mr-lg">
+                        <x-layouts.badges.info-percent
+                            :convert="false"
+                            :value="$compra->percentual_cota"
+                        ></x-layouts.badges.info-percent>
+                        de
+                        <x-layouts.badges.info-percent
+                            :convert="false"
+                            :value="$compra->percentual_cota_vendedor"
+                        ></x-layouts.badges.info-percent>
                     </div>
                     <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                         <x-layouts.badges.info-money

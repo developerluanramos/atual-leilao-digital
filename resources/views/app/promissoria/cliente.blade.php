@@ -9,15 +9,15 @@
             font-family: Arial, sans-serif;
             color: #333;
             margin: 0;
-            padding: 0;
+            padding: -20;
             font-size: 10px;
-            background-color: #f8bff8;
+            background-color: white;
         }
         .header {
             text-align: center;
-            background-color: #4a90e2;
-            color: #fff;
-            padding: 20px;
+            background-color: white;
+            color: #111010;
+            padding: 5px;
         }
         .header h1 {
             font-size: 14px;
@@ -28,8 +28,8 @@
             margin: 5px 0 0;
         }
         .section {
-            margin: 20px auto;
-            padding: 15px;
+            margin: 5px auto;
+            padding: 5px;
             background-color: #ffffff;
             border-radius: 8px;
             width: 90%;
@@ -183,39 +183,96 @@
     <!-- Header -->
     <div class="header">
         {{-- <img src="{{ asset("atual_leiloes_logo.png") }}" alt="" style="width: 150px; height: 150px;"> --}}
-        <h1>{{$compra->leilao->descricao}}</h1>
+        <h1 class="text-uppercase">{{$compra->leilao->descricao}}</h1>
         <h2>Nota de Leilão e Contrato de Compra e Venda com Reserva de Domínio</h2>
-        <p>Leiloeiro: {{$compra->leilao->leiloeiro->nome}} | Data: {{$compra->leilao->fechado_em}} | Local: {{$compra->leilao->local}}</p>
+        <p><b>Leiloeiro:</b> {{$compra->leilao->leiloeiro->nome}} | <b>Data:</b> {{$compra->leilao->fechado_em}} | <b>Local:</b> {{$compra->leilao->local}}</p>
     </div>
 
     <!-- Seller Section -->
     <div class="section">
         <h3>Informações do Vendedor</h3>
-        <div class="details-box">
+        <table style="width:100%">
+            <tbody>
+                <tr style="">
+                    <td style="width: 33%;"><strong>Nome: </strong>{{$compra->vendedor->nome}}</td>
+                    <td style="width: 33%;"><strong>CPF/CNPJ:</strong> {{$compra->vendedor->cpf_cnpj}}</td>
+                    <td style="width: 33%;"><strong>Fones:</strong>{{$compra->vendedor->celular}}</td>
+                </tr>
+                <tr style="">
+                    <td colspan="2" style="width: 70%"><strong>Endereço: </strong>{{$compra->vendedor->endereco}}, {{$compra->vendedor->cep}}, {{$compra->vendedor->cidade}}/{{$compra->vendedor->uf}}</td>
+                    <td style="width: 30%;"><strong>Email: </strong>{{$compra->vendedor->email}}</td>
+                </tr>
+            </tbody>
+        </table>
+        {{-- <div class="details-box">
             <p class="info-item"><strong>Nome:</strong> {{$compra->vendedor->nome}}</p>
             <p class="info-item"><strong>CPF/CNPJ:</strong> {{$compra->vendedor->cpf_cnpj}}</p>
             <p class="info-item"><strong>Endereço:</strong> {{$compra->vendedor->endereco}}, {{$compra->vendedor->cep}}, {{$compra->vendedor->cidade}}/{{$compra->vendedor->uf}}</p>
             <p class="info-item"><strong>Fones:</strong> {{$compra->vendedor->celular}}</p>
             <p class="info-item"><strong>Email:</strong> {{$compra->vendedor->email}}</p>
-        </div>
+        </div> --}}
     </div>
 
     <!-- Buyer Section -->
     <div class="section">
         <h3>Informações do Comprador</h3>
-        <div class="details-box">
+        <table style="width:100%">
+            <tbody>
+                <tr style="">
+                    <td style="width: 33%;"><strong>Nome: </strong>{{$compra->cliente->nome}}</td>
+                    <td style="width: 33%;"><strong>CPF/CNPJ:</strong> {{$compra->cliente->cpf_cnpj}}</td>
+                    <td style="width: 33%;"><strong>Fones:</strong>{{$compra->cliente->celular}}</td>
+                </tr>
+                <tr style="">
+                    <td colspan="2" style="width: 70%"><strong>Endereço: </strong>{{$compra->cliente->endereco}}, {{$compra->cliente->cep}}, {{$compra->cliente->cidade}}/{{$compra->cliente->uf}}</td>
+                    <td style="width: 30%;"><strong>Email: </strong>{{$compra->cliente->email}}</td>
+                </tr>
+            </tbody>
+        </table>
+        {{-- <div class="details-box">
             <p class="info-item"><strong>Nome:</strong> {{$compra->cliente->nome}}</p>
             <p class="info-item"><strong>CPF/CNPJ:</strong> {{$compra->cliente->cpf_cnpj}}</p>
             <p class="info-item"><strong>Endereço:</strong> {{$compra->cliente->endereco}}, {{$compra->cliente->cep}}, {{$compra->cliente->cidade}}/{{$compra->cliente->uf}}</p>
             <p class="info-item"><strong>Fones:</strong> {{$compra->cliente->celular}}</p>
             <p class="info-item"><strong>Email:</strong> {{$compra->cliente->email}}</p>
-        </div>
+        </div> --}}
     </div>
 
     <!-- Lot Details Section -->
     <div class="section">
         <h3>Dados do Lote</h3>
-        <div class="lot-details">
+        <table style="width:100%">
+            <tbody>
+                <tr style="">
+                    <td style="width: 80%;"><strong>Lote: </strong>0{{$compra->lote->id}} - {{$compra->percentual_cota_vendedor}} de {{$compra->lote->descricao}}</td>
+                    <td style="width: 20%;"><strong>Valor:</strong><x-layouts.badges.info-money
+                        :convert="false"
+                        :textLength="'lg'"
+                        :value="$compra->valor"
+                    /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <tbody>
+                @forelse ($compra->lote->itens as $item)
+                    <tr>
+                        <td><strong>Nome:</strong> xxx</td>
+                        <td colspan="2"><strong>Descrição Animal:</strong>  {{$item->descricao}}</td>
+                        <td><strong>Número ID:</strong> xxx</td>
+                    </tr>
+                    <tr style="border-top: solid 1px black">
+                        <td><strong>Espécie:</strong> {{$item->especie->nome}}</td>
+                        <td><strong>Raça:</strong> {{$item->raca->nome}}</td>
+                        <td><strong>Sexo:</strong> {{\App\Enums\GeneroLoteItemEnum::getKey((int)$item->genero)}}</td>
+                        <td><strong>Cor:</strong> xxx</td>
+                    </tr>
+                @empty
+                    <b>Nenhum item adicionado neste lote</b>
+                @endforelse
+            </tbody>
+        </table>
+        {{-- <div class="lot-details">
             <table>
                 <tr>
                     <th>Lote</th>
@@ -249,7 +306,7 @@
             @empty
                 <b>Nenhum item adicionado neste lote</b>
             @endforelse
-        </div>
+        </div> --}}
     </div>
     
     <!-- Buyer Section -->

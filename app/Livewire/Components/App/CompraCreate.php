@@ -109,34 +109,39 @@ class CompraCreate extends Component
 
         foreach ($this->condicoesPagamento as $key => $condicaoPagamento)
         {
-            for($i = 1; $i <= $condicaoPagamento['qtd_parcelas']; $i++) {
-                $incideComissaoComprador = $this->usandoPrelanceConfig ? $this->incideComissaoCompra : $condicaoPagamento['incide_comissao_comprador'];
-                $incideComissaoVendedor = $this->usandoPrelanceConfig ? $this->incideComissaoVenda : $condicaoPagamento['incide_comissao_vendedor'];
-                $percentualComissaoComprador = $this->usandoPrelanceConfig ? $this->percentualComissaoCompra : $condicaoPagamento['percentual_comissao_comprador'];
-                $percentualComissaoVendedor = $this->usandoPrelanceConfig ? $this->percentualComissaoVenda : $condicaoPagamento['percentual_comissao_vendedor'];
-
-                $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * count($this->lote->itens))) / $this->getQuantidadeCompradoresProperty();
-                $valorComissaoComprador = $incideComissaoComprador
-                    ? ($percentualComissaoComprador / 100) * $valor : 0;
-                $valorComissaoVendedor = $incideComissaoVendedor
-                    ? ($percentualComissaoVendedor / 100) * $valor : 0;
-
-                $this->parcelas[] = [
-                    'lote_uuid' => $this->lote->uuid,
-                    'leilao_uuid' => $this->leilao->uuid,
-                    'valor_original' => $this->valorLance,
-                    'valor' => $valor,
-                    'repeticoes' => $condicaoPagamento['repeticoes'],
-                    'vencimento_em' => $carbonHoje->addMonth()->toDateString(),
-                    'incide_comissao_compra' => $incideComissaoComprador,
-                    'incide_comissao_venda' => $incideComissaoVendedor,
-                    'percentual_comissao_vendedor' => $percentualComissaoVendedor,
-                    'percentual_comissao_comprador' => $percentualComissaoComprador,
-                    'valor_comissao_comprador' => $valorComissaoComprador,
-                    'valor_comissao_vendedor' => $valorComissaoVendedor
-                ];
+            foreach($this->vendedores as $indexVendedor => $vendedor)
+            {
+                for($i = 1; $i <= $condicaoPagamento['qtd_parcelas']; $i++) {
+                    $incideComissaoComprador = $this->usandoPrelanceConfig ? $this->incideComissaoCompra : $condicaoPagamento['incide_comissao_comprador'];
+                    $incideComissaoVendedor = $this->usandoPrelanceConfig ? $this->incideComissaoVenda : $condicaoPagamento['incide_comissao_vendedor'];
+                    $percentualComissaoComprador = $this->usandoPrelanceConfig ? $this->percentualComissaoCompra : $condicaoPagamento['percentual_comissao_comprador'];
+                    $percentualComissaoVendedor = $this->usandoPrelanceConfig ? $this->percentualComissaoVenda : $condicaoPagamento['percentual_comissao_vendedor'];
+    
+                    $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * count($this->lote->itens))) / $this->getQuantidadeCompradoresProperty();
+                    $valorComissaoComprador = $incideComissaoComprador
+                        ? ($percentualComissaoComprador / 100) * $valor : 0;
+                    $valorComissaoVendedor = $incideComissaoVendedor
+                        ? ($percentualComissaoVendedor / 100) * $valor : 0;
+                    
+                    $this->parcelas[$indexVendedor][] = [
+                        'lote_uuid' => $this->lote->uuid,
+                        'leilao_uuid' => $this->leilao->uuid,
+                        'valor_original' => $this->valorLance,
+                        'valor' => $vendedor['pivot']['percentual_cota'] / 100 * $valor,
+                        'repeticoes' => $condicaoPagamento['repeticoes'],
+                        'vencimento_em' => $carbonHoje->addMonth()->toDateString(),
+                        'incide_comissao_compra' => $incideComissaoComprador,
+                        'incide_comissao_venda' => $incideComissaoVendedor,
+                        'percentual_comissao_vendedor' => $percentualComissaoVendedor,
+                        'percentual_comissao_comprador' => $percentualComissaoComprador,
+                        'valor_comissao_comprador' => $vendedor['pivot']['percentual_cota'] / 100 * $valorComissaoComprador,
+                        'valor_comissao_vendedor' => $vendedor['pivot']['percentual_cota'] / 100 * $valorComissaoVendedor,
+                        'vendedor' => $vendedor
+                    ];
+                }
             }
         }
+        // dd($this->parcelas);
     }
 
     public function updatedSearch()
@@ -174,17 +179,49 @@ class CompraCreate extends Component
 
     public function getValorTotalLoteProperty()
     {
-        return array_sum(array_column($this->parcelas, 'valor')) * count($this->compradores);
+        $valorTotal = 0;
+
+        foreach($this->parcelas as $parcelasList) 
+        {
+            foreach($parcelasList as $parcela) 
+            {
+                $valorTotal += $parcela['valor'];
+            }
+        }
+        
+        return $valorTotal * count($this->compradores);
     }
 
     public function getValorTotalComissaoVendedorProperty()
     {
-        return array_sum(array_column($this->parcelas, 'valor_comissao_vendedor'));
+        $valorTotal = 0;
+
+        foreach($this->parcelas as $parcelasList) 
+        {
+            foreach($parcelasList as $parcela) 
+            {
+                $valorTotal += $parcela['valor_comissao_vendedor'];
+            }
+        }
+        
+        return $valorTotal;
+        // return array_sum(array_column($this->parcelas, 'valor_comissao_vendedor'));
     }
 
     public function getValorTotalComissaoCompradorProperty()
     {
-        return array_sum(array_column($this->parcelas, 'valor_comissao_comprador'));
+        $valorTotal = 0;
+
+        foreach($this->parcelas as $parcelasList) 
+        {
+            foreach($parcelasList as $parcela) 
+            {
+                $valorTotal += $parcela['valor_comissao_comprador'];
+            }
+        }
+        
+        return $valorTotal;
+        // return array_sum(array_column($this->parcelas, 'valor_comissao_comprador'));
     }
 
     public function getDiferencaValorEstimadoProperty()
@@ -215,7 +252,7 @@ class CompraCreate extends Component
                 'valor_comissao_comprador' => $this->valorTotalComissaoComprador,
                 'valor_comissao_vendedor' => $this->valorTotalComissaoVendedor,
                 'clientes' => $this->compradores,
-                'parcelas' => $this->parcelas    
+                'parcelas' => $this->parcelas
             ]);
             
             $request->validate(CompraStoreRequest::rulesForLivewire());

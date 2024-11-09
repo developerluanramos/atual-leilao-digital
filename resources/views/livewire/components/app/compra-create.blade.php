@@ -204,9 +204,11 @@
             </p>
 
         </div>
+        @foreach ($parcelas as $listaParcelas)
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
+                    <th>vendedor</th>
                     <th class="text-center">Data de pagamento</th>
                     <th class="text-right">R$ Valor parcela</th>
                     <th class="text-right">R$ Comissão Compra</th>
@@ -214,8 +216,11 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($parcelas as $parcela)
+                @forelse($listaParcelas as $parcela)
                     <tr>
+                        <td class="text-center">
+                            {{$parcela['vendedor']['nome']}}
+                        </td>
                         <td class="text-center">
                             {{$parcela['vencimento_em']}}
                         </td>
@@ -252,6 +257,7 @@
                 @endforelse
             </tbody>
         </table>
+        @endforeach
     @empty
 {{--    <p>Nenhum comprador adicionado até o momento</p>--}}
     @endforelse
