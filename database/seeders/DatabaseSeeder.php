@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             LeilaoSeeder::class,
             LoteSeeder::class,
             LoteItemSeeder::class,
+            LoteVendedorSeeder::class,
             // CompraSeeder::class,
             // VendaSeeder::class,
             // ParcelaSeeder::class,

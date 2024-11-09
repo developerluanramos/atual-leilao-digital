@@ -16,8 +16,10 @@ class Compra extends Model
         'leilao_uuid',
         'lote_uuid',
         'cliente_uuid',
+        'vendedor_uuid',
         'plano_pagamento_uuid',
         'valor',
+        'valor_lance',
         'valor_comissao_vendedor',
         'valor_comissao_comprador',
         'percentual_cota'
@@ -41,6 +43,11 @@ class Compra extends Model
     public function cliente()
     {
         return $this->hasOne(Cliente::class, 'uuid', 'cliente_uuid');
+    }
+
+    public function vendedor()
+    {
+        return $this->hasOne(Cliente::class, 'uuid', 'vendedor_uuid');
     }
 
     public function parcelas()

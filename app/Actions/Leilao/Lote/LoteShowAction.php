@@ -21,7 +21,7 @@ class LoteShowAction
 
     public function execute(string $leilaoUuid, string $loteUuid) : array
     {
-        $lote = $this->lote->with('compras.cliente', 'compras.parcelas')
+        $lote = $this->lote->with('compras.cliente', 'compras.vendedor', 'compras.parcelas', 'vendedores')
                     ->where('uuid', $loteUuid)
                     ->firstOrFail();
 

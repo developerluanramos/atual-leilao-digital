@@ -29,6 +29,7 @@ class CompraCreate extends Component
     public string $percentualComissaoCompra;
     public string $valorLance;
     public array $compradores;
+    public array $vendedores;
     public array $condicoesPagamento;
     public PlanoPagamento $planoPagamento;
 
@@ -39,6 +40,7 @@ class CompraCreate extends Component
     public function mount(Lote $lote)
     {
         $this->lote = $lote;
+        $this->vendedores = $lote->vendedores()->get()->toArray();
         $this->leilao = $lote->leilao()->get()->first();
         $this->planoPagamento = new PlanoPagamento();
         if($this->lote->prelance_vencedor()) {
@@ -208,6 +210,7 @@ class CompraCreate extends Component
                 'leilao_uuid' => $this->leilao->uuid,
                 'lote_uuid' => $this->lote->uuid,
                 'plano_pagamento_uuid' => $this->planoPagamento->uuid,
+                'valor_lance' => $this->valorLance,
                 'valor' => $this->valorTotalLote / count($this->compradores),
                 'valor_comissao_comprador' => $this->valorTotalComissaoComprador,
                 'valor_comissao_vendedor' => $this->valorTotalComissaoVendedor,

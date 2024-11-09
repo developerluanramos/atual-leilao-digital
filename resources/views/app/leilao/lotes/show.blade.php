@@ -11,13 +11,13 @@
 <div class="flow-root">
     <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
         @forelse ($lote->compras as $compra)
-            <li class="py-3 sm:py-4 cursor-pointer pointer" data-modal-target="{{$compra->cliente->uuid}}" data-modal-toggle="{{$compra->cliente->uuid}}">
+            <li class="py-3 sm:py-4 cursor-pointer pointer" data-modal-target="{{$compra->uuid}}" data-modal-toggle="{{$compra->uuid}}">
                 <div class="flex items-center w-full">
                     <div class="flex-shrink-0">
                         <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                             <span class="font-medium text-gray-600 dark:text-gray-300">{{mb_substr($compra->cliente->nome, 0, 2)}}</span>
                         </div>
-                        </div>
+                    </div>
                     <div class="flex-1 min-w-0 ms-4">
                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                             {{$compra->cliente->nome}}
@@ -39,20 +39,31 @@
             </style>
             <x-layouts.modals.simple-modal
                 :tamanho="6"
-                :identificador="$compra->cliente->uuid"
-                :sessao="$compra->cliente->uuid"
+                :identificador="$compra->uuid"
+                :sessao="$compra->uuid"
                 :titulo="$compra->cliente->nome">
-                @section($compra->cliente->uuid)
+                @section($compra->uuid)
                 
                 <span class="content-end text-right mr-lg">
                     <x-layouts.badges.info-money
                     :convert="false"
                     :textLength="'lg'"
                     :value="$compra->valor"
-                ></x-layouts.badges.info-money>
+                    ></x-layouts.badges.info-money>
                 </span>
+                <div>
+                    <a type="button" target="_blank" href="{{route('promissoria.via-cliente')}}" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+                        Via Comprador
+                    </a>
+                    <a type="button" target="_blank" href="{{route('promissoria.via-cliente')}}" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+                        Via Vendedor
+                    </a>
+                    <a type="button" target="_blank" href="{{route('promissoria.via-cliente')}}" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+                        Via Interna
+                    </a>
+                </div>
                 
-                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="ml-lg text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                {{-- <button id="{{$compra->uuid}}" data-dropdown-toggle="{{$compra->uuid}}" class="ml-lg text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                     Promissórias
                     <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -60,8 +71,8 @@
                 </button>
                     
                 <!-- Dropdown menu -->
-                <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                <div id="{{$compra->uuid}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="{{$compra->uuid}}">
                     <li>
                         <a target="_blank" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Via Interna</a>
                     </li>
@@ -72,7 +83,7 @@
                         <a target="_blank" href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Via Vendedor</a>
                     </li>
                     </ul>
-                </div>
+                </div> --}}
     
                 <table class="table-bordered w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

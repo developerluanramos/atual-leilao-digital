@@ -34,6 +34,7 @@
             border-radius: 8px;
             width: 90%;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 5; position: relative; display: block;
         }
         .section h3 {
             margin-top: 0;
@@ -172,6 +173,10 @@
         .amount {
             color: #555;
         }
+
+        .text-uppercase {
+            text-transform: uppercase
+        }
     </style>
 </head>
 <body>
@@ -187,11 +192,11 @@
     <div class="section">
         <h3>Informações do Vendedor</h3>
         <div class="details-box">
-            <p class="info-item"><strong>Nome:</strong> JOAO REGIS DALLA MAESTRI - HARAS JS MARAJOARA</p>
-            <p class="info-item"><strong>CPF/CNPJ:</strong> 471.121.156-04</p>
-            <p class="info-item"><strong>Endereço:</strong> ROD 010 KM 16, PARADA E HOTEL CRICABOM, DOM ELISEU/PA</p>
-            <p class="info-item"><strong>Fones:</strong> 94 98122-2848</p>
-            <p class="info-item"><strong>Email:</strong> email</p>
+            <p class="info-item"><strong>Nome:</strong> {{$compra->vendedor->nome}}</p>
+            <p class="info-item"><strong>CPF/CNPJ:</strong> {{$compra->vendedor->cpf_cnpj}}</p>
+            <p class="info-item"><strong>Endereço:</strong> {{$compra->vendedor->endereco}}, {{$compra->vendedor->cep}}, {{$compra->vendedor->cidade}}/{{$compra->vendedor->uf}}</p>
+            <p class="info-item"><strong>Fones:</strong> {{$compra->vendedor->celular}}</p>
+            <p class="info-item"><strong>Email:</strong> {{$compra->vendedor->email}}</p>
         </div>
     </div>
 
@@ -291,23 +296,26 @@
     <div class="page-break"></div>
 
     <!-- Payment Terms Section -->
-    <div class="section">
+    <div class="section" style="z-index: 5; position: relative; display: block;">
         <h3>NOTA PROMISSÓRIA ÚNICA</h3>
         <p class="text-center">
             <img class="brasao" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/1200px-Coat_of_arms_of_Brazil.svg.png" alt="">
         </p>
         <p>
             No vencimento acima, pagarei(emos) por esta única via de Nota Promissória a 
-            <strong style="color: red">vendedor</strong> <strong style="color: red"> CPF/CNPJ: xxxx</strong> 
+            <strong class="text-uppercase">{{$compra->vendedor->nome}}</strong> CPF/CNPJ:<strong class="text-uppercase">{{$compra->vendedor->cpf_cnpj}}</strong> 
             ou a sua ordem a quantia supra de 
             <strong><x-layouts.badges.info-money
                 :convert="false"
                 :textLength="'lg'"
                 :value="$compra->valor"
             /></strong>
-            em moeda corrente do país, na praça de <strong>{{$compra->leilao->local}}</strong> pela compra que lhe fizemos no <strong>{{$compra->leilao->descricao}}</strong>
+            em moeda corrente do país, na praça de <strong class="text-uppercase">{{$compra->leilao->local}}</strong> pela compra que lhe fizemos no <strong class="text-uppercase">{{$compra->leilao->descricao}}</strong>
         </p>
-        <p><strong>Data de Vencimento:</strong> <span style="color: red">Data da primeira parcela</span></p>
+        <p style="text-align: center; font-size:65px; color:red">
+            SEM VALOR
+        </p>
+        <p><strong>Data de Vencimento:</strong> <span>{{$compra->parcelas[0]->vencimento_em}}</span></p>
         <p><strong>Lote:</strong> 0{{$compra->lote->id}} - {{$compra->lote->descricao}}</p>
         <p><strong>Valor:</strong>  <strong><x-layouts.badges.info-money
             :convert="false"
@@ -337,8 +345,8 @@
     <p style="text-align: center">
         <hr style="color:black; width:40%; margin-top:40px;">
     </p>
-    <p style="text-align: center; color: red">
-        nome vendedor
+    <p style="text-align: center;">
+        {{$compra->vendedor->nome}}
     </p>
 
     <!-- Footer -->

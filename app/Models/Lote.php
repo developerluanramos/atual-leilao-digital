@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Schema;
 
 class Lote extends Model
 {
@@ -48,6 +49,21 @@ class Lote extends Model
     public function leilao()
     {
        return $this->hasOne(Leilao::class, 'uuid', 'leilao_uuid');
+    }
+
+    public function vendedores()
+    {
+        $table_name = (new LoteVendedor())->getTable();
+        
+        $table_fields = Schema::getColumnListing($table_name);
+        //dd($table_fields);
+        return $this->belongsToMany(
+            Cliente::class, 
+        'lote_vendedor', 
+    'lote_uuid', 
+'cliente_uuid', 
+'uuid' /* lote.uuid */, 
+'uuid' /* cliente.uuid */)->withPivot($table_fields);
     }
 
     public function plano_pagamento()
