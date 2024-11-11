@@ -11,7 +11,6 @@
 
 @include('app.promissoria.partials.assinatura-info', ['compra' => $compra])
 
-<br>
 @include('app.promissoria.partials.pagamento-info', ['compra' => $compra])
 
 <div class="page-break"></div>
@@ -32,10 +31,6 @@
         /></strong>
         em moeda corrente do país, na praça de <strong class="text-uppercase">{{$compra->leilao->local}}</strong> pela compra que lhe fizemos no <strong class="text-uppercase">{{$compra->leilao->descricao}}</strong>
     </p>
-    <div style="text-align: center; position: absolute; top: 220px; left: 50%; transform: translateX(-50%);
-            font-size: 5em; font-weight: bold; color: rgba(7, 7, 7, 0.253); white-space: nowrap;">
-        SEM VALOR
-    </div>
     <table style="width:100%">
         <tbody>
             <tr style="">

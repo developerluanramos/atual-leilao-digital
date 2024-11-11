@@ -43,7 +43,8 @@ class Lote extends Model
         'valor_prelance_diferenca_valor_estimado',
         'valor_prelance_percentual_valor_estimado',
         'valor_prelance_calculado',
-        'quantidade_prelances'
+        'quantidade_prelances',
+        'valor_total'
     ];
 
     public function leilao()
@@ -226,6 +227,17 @@ class Lote extends Model
     {
         return $this->valor_prelance - $this->valor_estimado;
     }
+
+    /**
+     * valor total do lote baseado nas compras realizadas nele
+     * 
+     * @return float | int
+     */
+    public function getValorTotalAttribute(): float|int
+    {
+        return $this->compras()->sum('valor');
+    }
+
 
     public function getCreatedAtForHumansAttribute()
     {
