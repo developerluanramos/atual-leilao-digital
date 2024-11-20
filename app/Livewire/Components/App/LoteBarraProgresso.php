@@ -19,4 +19,24 @@ class LoteBarraProgresso extends Component
     {
         $this->lote = $lote;
     }
+
+    public function getPercentualValorTotalProperty()
+    {
+        return $this->lote->valor_total * 100/$this->lote->valor_estimado;
+    }
+
+    public function getPercentualValorEstimadoProperty()
+    {
+        return $this->lote->valor_estimado * 100/$this->lote->valor_total;
+    }
+
+    public function getPercentualValorExcedenteProperty()
+    {
+        return $this->lote->valor_total * 100/$this->lote->valor_estimado - 100;
+    }
+
+    public function getValorExcedenteProperty()
+    {
+        return $this->lote->valor_total - $this->lote->valor_estimado;
+    }
 }
