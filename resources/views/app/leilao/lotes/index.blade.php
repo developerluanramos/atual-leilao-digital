@@ -1,8 +1,10 @@
 <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
     <div class="flow-root">
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+            <!-- {{ json_encode($leilao->lotes) }} -->
             @foreach($lotes->items() as $index => $lote)
                 <li class="py-3 sm:py-4 cursor-pointer pointer">
+                @livewire('components.app.lote-barra-progresso', [$lote])
                     <div class="flex items-center w-full">
                         <div class="flex-shrink-0">
                             <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
