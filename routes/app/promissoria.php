@@ -11,21 +11,23 @@ $pdf = Pdf::setOptions([
 
 $pdf->setOption('isRemoteEnabled', true);
 
-Route::get('promissoria/via-cliente', function() use ($pdf) {
-    
-    $pdf->loadView('app.promissoria.cliente', [
-        'compra' => Compra::with([
-            'vendedor',
-            'cliente',
-            'lote.itens.raca',
-            'lote.itens.especie',
-            'leilao.leiloeiro'
-        ])->find(1)
-    ]);
-    
-    return $pdf->stream('promissoria-cliente.pdf');
+Route::get('promissoria/via-cliente', [\App\Http\Controllers\App\Promissoria\PromissoriaViaClienteController::class, 'promissoriaCliente'])->name('promissoria.via-cliente');
 
-})->name('promissoria.via-cliente');
+// Route::get('promissoria/via-cliente', function() use ($pdf) {
+    
+//     $pdf->loadView('app.promissoria.cliente', [
+//         'compra' => Compra::with([
+//             'vendedor',
+//             'cliente',
+//             'lote.itens.raca',
+//             'lote.itens.especie',
+//             'leilao.leiloeiro'
+//         ])->find(1)
+//     ]);
+    
+//     return $pdf->stream('promissoria-cliente.pdf');
+
+// })->name('promissoria.via-cliente');
 
 Route::get('promissoria/via-vendedor', function() use ($pdf) {
     
