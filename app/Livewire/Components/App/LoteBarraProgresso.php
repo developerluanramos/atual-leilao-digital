@@ -2,20 +2,21 @@
 
 namespace App\LiveWire\Components\App;
 
+use App\Models\Lote;
 use App\Repositories\Presenters\PaginationPresenter;
 use Livewire\Component;
 use stdClass;
 
 class LoteBarraProgresso extends Component
 {
-    public stdClass $lote;
+    public Lote $lote;
     
     public function render()
     {
         return view('livewire.components.app.lote-barra-progresso');
     }
 
-    public function mount(stdClass $lote)
+    public function mount(Lote $lote)
     {
         $this->lote = $lote;
     }

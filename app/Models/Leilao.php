@@ -35,7 +35,11 @@ class Leilao extends Model
         'valor_prelance_comissao_compra',
         'valor_prelance_comissao_total',
         'plano_pagamento_prelance',
-        'config_prelance_atual'
+        'config_prelance_atual',
+        'valor_total',
+        'valor_comissao_total',
+        'valor_comissao_venda',
+        'valor_comissao_compra'
     ];
 
     // protected $dates = [
@@ -119,6 +123,26 @@ class Leilao extends Model
     public function getValorPrelanceComissaoTotalAttribute()
     {
         return $this->valor_prelance_comissao_venda + $this->valor_prelance_comissao_compra;
+    }
+
+    public function getValorComissaoVendaAttribute()
+    {
+        return $this->lotes->sum('valor_comissao_venda');
+    }
+
+    public function getValorComissaoCompraAttribute()
+    {
+        return $this->lotes->sum('valor_comissao_compra');
+    }
+
+    public function getValorComissaoTotalAttribute()
+    {
+        return $this->valor_comissao_venda + $this->valor_comissao_compra;
+    }
+
+    public function getValorTotalAttribute()
+    {
+        return $this->lotes->sum('valor_total');
     }
 
     public function getPlanoPagamentoPrelanceAttribute()

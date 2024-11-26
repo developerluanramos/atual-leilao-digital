@@ -57,6 +57,7 @@ class LoteEloquentRepository implements LoteRepositoryInterface
 //        }
 
         $query->where('leilao_uuid', $leilaoUuid);
+        $query->orderBy('id', 'asc');
         $query->orderBy('updated_at', 'desc');
 
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);

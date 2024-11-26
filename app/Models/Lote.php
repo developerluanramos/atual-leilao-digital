@@ -36,6 +36,7 @@ class Lote extends Model
     protected $appends = [
         'created_at_for_humans', 
         'updated_at_for_humans',
+        'quantidade_prelances',
         'valor_prelance_comissao_venda',
         'valor_prelance_comissao_compra',
         'valor_prelance_comissao_total',
@@ -43,8 +44,10 @@ class Lote extends Model
         'valor_prelance_diferenca_valor_estimado',
         'valor_prelance_percentual_valor_estimado',
         'valor_prelance_calculado',
-        'quantidade_prelances',
-        'valor_total'
+        'valor_total',
+        'valor_comissao_venda',
+        'valor_comissao_compra',
+        'valor_comissao_total',
     ];
 
     public function leilao()
@@ -57,11 +60,11 @@ class Lote extends Model
         $table_name = (new LoteVendedor())->getTable();
         
         $table_fields = Schema::getColumnListing($table_name);
-        //dd($table_fields);
+
         return $this->belongsToMany(
             Cliente::class, 
-        'lote_vendedor', 
-    'lote_uuid', 
+            'lote_vendedor', 
+'lote_uuid', 
 'cliente_uuid', 
 'uuid' /* lote.uuid */, 
 'uuid' /* cliente.uuid */)->withPivot($table_fields);
@@ -140,6 +143,36 @@ class Lote extends Model
     public function getValorPrelanceComissaoTotalAttribute(): mixed
     {
         return $this->valor_prelance_comissao_venda + $this->valor_prelance_comissao_compra;
+    }
+
+    /*
+    * Valor da comissão de vendedor
+    *
+    * @return mixed
+    */
+    public function getValorComissaoVendaAttribute(): mixed
+    {
+        return $this->compras()->sum('valor_comissao_vendedor');
+    }
+
+    /*
+    * Valor da comissão de comprador
+    *
+    * @return mixed
+    */
+    public function getValorComissaoCompraAttribute(): mixed
+    {
+        return $this->compras()->sum('valor_comissao_comprador');
+    }
+
+    /*
+    * Valor total da comissão
+    *
+    * @return mixed 
+    */
+    public function getValorComissaoTotalAttribute(): mixed
+    {
+        return $this->valor_comissao_venda + $this->valor_comissao_compra;
     }
 
     /*

@@ -55,9 +55,4 @@ class Compra extends Model
     {
         return $this->hasMany(Parcela::class, 'compra_uuid', 'uuid');
     }
-
-    // public function clientes()
-    // {
-    //     return $this->belongsToMany(Cliente::class, 'compra_cliente', 'compra_uuid', 'cliente_uuid', 'uuid' /* compra.uuid */, 'uuid' /* cliente.uuid */);
-    // }
 }

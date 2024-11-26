@@ -2,9 +2,9 @@
 
 @section('content-promissoria')
 
-@include('app.promissoria.partials.vendedor-info', ['vendedor' => $compra->cliente])
+@include('app.promissoria.partials.vendedor-info', ['vendedor' => $compra->vendedor])
 
-@include('app.promissoria.partials.comprador-info', ['comprador' => $compra->vendedor])
+@include('app.promissoria.partials.comprador-info', ['comprador' => $compra->cliente])
 
 @include('app.promissoria.partials.compra-info', ['compra' => $compra])
 
@@ -106,7 +106,7 @@
         <strong>2)</strong> As partes COMPRADOR e VENDEDOR encontram-se qualificados na nota de Leilão e neste ato o vendedor declara ser legítimo possuidor e proprietário do(s) animal(is) / produto(s) especificado(s).
     </li>
     <li class="contract-section">
-        <strong>3)</strong> Para garantia do presente Contrato será emitida, pelo COMPRADOR, NOTA PROMISSÓRIA ÚNICA, vinculada à nota de leilão que deverá ser assinada pelo mesmo, antes da entrega do(s) animal(is), com data de vencimento à vista da apresentação. Essa NOTA PROMISSÓRIA ÚNICA será desmembrada em 50 (cinquenta) parcelas, sendo 14 (quatorze) parcelas duplas e 22 (vinte e duas) simples, parcelas mensais de acordo com as datas e vencimentos constantes no verso deste Contrato, no corpo da Nota de Leilão e Contrato de Compromisso.
+        <strong>3)</strong> Para garantia do presente Contrato será emitida, pelo COMPRADOR, NOTA PROMISSÓRIA ÚNICA, vinculada à nota de leilão que deverá ser assinada pelo mesmo, antes da entrega do(s) animal(is), com data de vencimento à vista da apresentação. Essa NOTA PROMISSÓRIA ÚNICA será desmembrada em parcelas mensais de acordo com as datas, valores e vencimentos constantes no verso deste Contrato, no corpo da Nota de Leilão e Contrato de Compromisso.
     </li>
     <li class="contract-section">
         <strong>4)</strong> Pelo instrumento particular de Compra e Venda com reserva de domínio, vinculado a nota de leilão, fica reservado ao VENDEDOR a propriedade do(s) animal(is) / produto(s) ora vendido(s), até que seja pago totalmente o preço com a liquidação da última parcela pactuada no referido contrato, bem como a devolução da NOTA PROMISSÓRIA ÚNICA, mencionada no item 3 (três).

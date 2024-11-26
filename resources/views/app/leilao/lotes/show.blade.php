@@ -2,12 +2,61 @@
 
 <h2 class="tittle-2 mb-3">Lote: {{$lote->descricao}} <x-layouts.badges.status-lote 
     :status="(int)$lote->status">
-</x-layouts.badges.status-lote> </h2>    
-        
-<div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+</x-layouts.badges.status-lote> </h2>   
+{{-- @dd($lote) --}}
+@livewire('components.app.lote-barra-progresso', [$lote]) 
+{{-- <div class="space-y-8 lg:grid lg:grid-cols-6 pr-8 sm:gap-6 xl:gap-10 lg:space-y-0"> --}}
+{{-- <div class="flex w-full mb-6 md:mb-0"> --}}
+    <div class="space-y-12 mt-2  mb-lg lg:grid lg:grid-cols-4 sm:gap-4 xl:gap-4 lg:space-y-0">
+       <!-- Pricing Card -->
+       <div class="flex flex-col p-3 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+          <h3 class="mb-4 text-2xl font-semibold">
+             <x-layouts.badges.info-money
+                :convert="false"
+                :textLength="'lg'"
+                :value="$lote->valor_comissao_compra" />
+          </h3>
+          <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Comissao Compra</p>
+       </div>
+       <!-- Pricing Card -->
+       <div class="flex flex-col p-3 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+          <h3 class="mb-4 text-2xl font-semibold">
+             <x-layouts.badges.info-money
+                :convert="false"
+                :textLength="'lg'"
+                :value="$lote->valor_comissao_venda" />
+          </h3>
+          <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Comissao Venda</p>
+       </div>
+       <!-- Pricing Card -->
+       <div class="flex flex-col p-3 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+          <h3 class="mb-4 text-2xl font-semibold">
+            <x-layouts.badges.info-money
+                :convert="true"
+                :textLength="'lg'"
+                :value="$lote->valor_comissao_total" />
+          </h3>
+          <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Total Comissão</p>
+       </div>
+       <!-- Pricing Card -->
+       <div class="flex flex-col p-3 w-full  max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+          <h3 class="mb-4 text-2xl font-semibold">
+             <x-layouts.badges.info-money
+                :convert="true"
+                :textLength="'lg'"
+                :value="$lote->valor_total" />
+          </h3>
+          <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Total</p>
+       </div>
+    </div>
+ {{-- </div> --}}
+{{-- </div> --}}
+
+<div class="w-full p-4 mt-2 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
     <div class="flex items-center justify-between mb-4">
         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Compras</h5>
 </div>
+
 <div class="flow-root">
     <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
         @forelse ($lote->compras as $compra)

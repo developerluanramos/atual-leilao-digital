@@ -3,9 +3,9 @@
 
 @section('content-promissoria')
 
-@include('app.promissoria.partials.vendedor-info', ['vendedor' => $compra->cliente])
+@include('app.promissoria.partials.vendedor-info', ['vendedor' => $compra->vendedor])
 
-@include('app.promissoria.partials.comprador-info', ['comprador' => $compra->vendedor])
+@include('app.promissoria.partials.comprador-info', ['comprador' => $compra->cliente])
 
 @include('app.promissoria.partials.compra-info', ['compra' => $compra])
 
