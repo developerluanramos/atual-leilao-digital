@@ -13,7 +13,8 @@ class LoteStoreDTO {
         public string $valor_minimo_prelance,
         public string $incide_comissao_compra,
         public string $incide_comissao_venda,
-        public array $lote_itens
+        public array $lote_itens,
+        public array $lote_vendedores
     ) {}
 
     public static function makeFromRequest(LoteStoreRequest $request): self
@@ -27,6 +28,7 @@ class LoteStoreDTO {
             $request->incide_comissao_compra ? 1 : 0,
             $request->incide_comissao_venda ? 1 : 0,
             json_decode($request->lote_itens, true),
+            json_decode($request->lote_vendedores, true)
         );
     }
 }

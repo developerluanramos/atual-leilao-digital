@@ -52,5 +52,7 @@
 </div>
 
 @livewire('components.app.leilao-lote-item', [$formData, $itens])
+<br>
+@livewire('components.app.leilao-lote-vendedor', [$lote ?? null])
 
 <x-layouts.buttons.submit-button text="Salvar"/>
