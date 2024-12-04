@@ -25,7 +25,7 @@ class LoteFactory extends Factory
 
         return [
             'uuid' => $this->faker->uuid(),
-            'descricao' => $this->faker->word(),
+            'descricao' => $this->faker->text(150),
             'leilao_uuid' => Leilao::inRandomOrder()->first()->uuid,
             'quantidade'  => $this->faker->numberBetween(1, 3), // -- desconsiderar
             'quantidade_macho'  => $this->faker->numberBetween(1, 3), // -- desconsiderar
@@ -36,6 +36,9 @@ class LoteFactory extends Factory
             'valor_minimo_prelance' => $this->faker->numerify('##.##'),
             'incide_comissao_compra' => $this->faker->randomElement([true, false]),
             'incide_comissao_venda' => $this->faker->randomElement([true, false]),
+            'multiplicador' => $this->faker->randomElement([null, 1]),
+            'observacoes' => $this->faker->text(150),
+            'numero' => 1
         ];
     }
 }

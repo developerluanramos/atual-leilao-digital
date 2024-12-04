@@ -34,7 +34,10 @@ class LoteEditController extends Controller
                 'especie_uuid' => $item->especie_uuid,
                 'valor_estimado' => $item->valor_estimado,
                 'imagens' => [],
-                'videos' => []
+                'videos' => [],
+                'observacoes' => $item->observacoes,
+                'cor' => $item->cor,
+                'codigo_identificacao' => $item->codigo_identificacao
             ];
         }
         

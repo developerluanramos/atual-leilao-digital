@@ -19,9 +19,11 @@ return new class extends Migration
             $table->foreignUuid('lote_uuid')->references('uuid')->on('lote')->onDelete('cascade');
             $table->uuid('raca_uuid');
             $table->uuid('especie_uuid');
-            $table->decimal('valor_estimado', 12, 2);
-            // $table->boolean('incide_comissao_compra');
-            // $table->boolean('incide_comissao_venda');
+            $table->decimal('valor_estimado', 12, 2)->default(0);
+            
+            $table->string('observacoes', 1500);
+            $table->string('codigo_identificacao')->nullable();
+            $table->string('cor')->nullable();
             $table->timestamps();
         });
     }

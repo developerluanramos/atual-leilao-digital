@@ -88,7 +88,7 @@ class PreLanceCreate extends Component
             {
                 for($i = 1; $i <= $condicaoPagamento['qtd_parcelas']; $i++) 
                 {
-                    $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * $this->lote->itens()->count()) / $this->getQuantidadeCompradoresProperty());
+                    $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * $this->lote->multiplicador) / $this->getQuantidadeCompradoresProperty());
                     $valorComissaoComprador = $this->incideComissaoCompra
                         ? ($this->leilao->config_prelance_atual->percentual_comissao_comprador / 100) * $valor : 0;
                     $valorComissaoVendedor = $this->incideComissaoVenda

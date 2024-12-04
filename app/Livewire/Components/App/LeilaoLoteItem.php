@@ -26,9 +26,12 @@ class LeilaoLoteItem extends Component
 
     protected $rules = [
         'item.descricao' => 'required|string',
+        'item.observacoes' => 'required|string',
+        'item.codigo_identificacao' => 'required|string',
+        'item.cor' => 'required|string',
         'item.especie_uuid' => 'required|string',
         'item.raca_uuid' => 'required|string',
-        'item.valor_estimado' => 'required|number',
+        'item.valor_estimado' => 'required|string',
         'item.genero' => 'required|number',
         'item.imagens' => 'image|max:1024',
         'item.videos' => 'required',
@@ -69,10 +72,13 @@ class LeilaoLoteItem extends Component
             'descricao' => $this->item->descricao,
             'especie_uuid' => $this->item->especie_uuid,
             'raca_uuid' => $this->item->raca_uuid,
-            'valor_estimado' => number_format($this->item->valor_estimado, 2),
+            'valor_estimado' => $this->item->valor_estimado,
             'genero' => $this->item->genero,
             'imagens' => $this->uploadedImages,
-            'videos' => $this->videos
+            'videos' => $this->videos,
+            'codigo_identificacao' => $this->item->codigo_identificacao,
+            'cor' => $this->item->cor,
+            'observacoes' => $this->item->observacoes,
         ];
 
         $this->item = new LoteItem();

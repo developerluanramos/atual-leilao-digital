@@ -117,8 +117,8 @@
         </div>
         <div class="w-full md:w-2/12 md:mb-0 px-3 text-center">
             <div class="max-w-sm p-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <p class="font-normal text-gray-700 dark:text-gray-400">Parcelas</p>
-                <h1 class="text-5xl">{{count($parcelas)}}</h1>
+                <p class="font-normal text-gray-700 dark:text-gray-400">Vendedores</p>
+                <h1 class="text-5xl">{{$this->quantidadeVendedores}}</h1>
             </div>
         </div>
         <div class="w-full md:w-2/12 md:mb-0 px-3 text-center">

@@ -52,6 +52,32 @@
                         :value="$lote->valor_estimado ?? old('valor_estimado')"
                     />
                 </div>
+                <div class="flex flex-wrap -mx-3 mb-2">
+                    <x-layouts.inputs.input-normal-text-livewire
+                        label="Código Identificação"
+                        name="item.codigo_identificacao"
+                        model="item.codigo_identificacao"
+                        blur="default"
+                        lenght="4/12"
+                        :value="$lote->codigo_identificacao ?? old('codigo_identificacao')"
+                    />
+                    <x-layouts.inputs.input-normal-text-livewire
+                        label="Cor"
+                        name="item.cor"
+                        model="item.cor"
+                        blur="default"
+                        lenght="4/12"
+                        :value="$lote->cor ?? old('cor')"
+                    />
+                    <x-layouts.inputs.input-normal-text-livewire
+                        label="Observações"
+                        name="item.observacoes"
+                        model="item.observacoes"
+                        blur="default"
+                        lenght="4/12"
+                        :value="$lote->observacoes ?? old('observacoes')"
+                    />
+                </div>
                 <div class="mt-5">
                     <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                         <div class="flex items-center justify-between mb-4">
@@ -157,6 +183,7 @@
                 @endif
             </li>
             @forelse($itens as $index => $item)
+            {{-- @dd($item) --}}
                 <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                     <li class="py-3 sm:py-4">
                         <div class="flex items-center">
@@ -173,12 +200,21 @@
                                 <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                     <small>Raça: </small> {{$item['raca_uuid']}}
                                 </p>
+                                {{-- <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                    <small>Identificação: </small> {{$item['codigo_identificacao']}}
+                                </p> --}}
+                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                    <small>Cor: </small> {{$item['cor']}}
+                                </p>
                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                                     <small>Valor estimado: </small> <x-layouts.badges.info-money
                                         textLength="sm"
                                         :convert="false"
                                         :value="$item['valor_estimado']"
                                     />
+                                </p>
+                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                    <small>Observações: </small> {{$item['observacoes']}}
                                 </p>
                                 <p>{{count($item['videos'])}} Videos</p>
                                 <p>{{count($item['imagens'])}} Imagens</p>

@@ -29,6 +29,7 @@ class LoteStoreRequest extends FormRequest
             "incide_comissao_compra" => ["required"],
             "incide_comissao_venda" => ["required"],
             "lote_itens" => ["required"],
+            "multiplicador" => ["required", "min:1"]
         ];
     }
 }

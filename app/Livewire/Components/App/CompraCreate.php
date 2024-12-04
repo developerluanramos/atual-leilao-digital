@@ -117,7 +117,7 @@ class CompraCreate extends Component
                     $percentualComissaoComprador = $this->usandoPrelanceConfig ? $this->percentualComissaoCompra : $condicaoPagamento['percentual_comissao_comprador'];
                     $percentualComissaoVendedor = $this->usandoPrelanceConfig ? $this->percentualComissaoVenda : $condicaoPagamento['percentual_comissao_vendedor'];
     
-                    $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * count($this->lote->itens))) / $this->getQuantidadeCompradoresProperty();
+                    $valor = ($condicaoPagamento['repeticoes'] * ($this->valorLance * $this->lote->multiplicador)) / $this->getQuantidadeCompradoresProperty();
                     $valorComissaoComprador = $incideComissaoComprador
                         ? ($percentualComissaoComprador / 100) * $valor : 0;
                     $valorComissaoVendedor = $incideComissaoVendedor
@@ -239,6 +239,11 @@ class CompraCreate extends Component
         return count($this->compradores);
     }
 
+    public function getQuantidadeVendedoresProperty()
+    {
+        return count($this->vendedores);
+    }
+
     public function registrar()
     {
         try {
@@ -268,7 +273,7 @@ class CompraCreate extends Component
                 'aba' => 'lotes'
             ]));
         } catch (Exception $exception) {
-            dd($exception->getMessage(), $exception->getFile(), $exception->getLine());
+            // dd($exception->getMessage(), $exception->getFile(), $exception->getLine());
             return redirect()->back()->withErrors($exception);
         }
     }

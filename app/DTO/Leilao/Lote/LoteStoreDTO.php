@@ -14,7 +14,13 @@ class LoteStoreDTO {
         public string $incide_comissao_compra,
         public string $incide_comissao_venda,
         public array $lote_itens,
-        public array $lote_vendedores
+        public array $lote_vendedores,
+        public string|null $quantidade_macho,
+        public string|null $quantidade_femea,
+        public string|null $quantidade_outro,
+        public string|null $observacoes,
+        public string|null $multiplicador,
+        public string $numero,
     ) {}
 
     public static function makeFromRequest(LoteStoreRequest $request): self
@@ -28,7 +34,13 @@ class LoteStoreDTO {
             $request->incide_comissao_compra ? 1 : 0,
             $request->incide_comissao_venda ? 1 : 0,
             json_decode($request->lote_itens, true),
-            json_decode($request->lote_vendedores, true)
+            json_decode($request->lote_vendedores, true),
+            $request->quantidade_macho,
+            $request->quantidade_femea,
+            $request->quantidade_outro,
+            $request->observacoes,
+            $request->multiplicador,
+            $request->numero,
         );
     }
 }

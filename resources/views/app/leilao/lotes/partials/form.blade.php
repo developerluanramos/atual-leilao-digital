@@ -2,9 +2,15 @@
 
 <div class="flex flex-wrap -mx-3 mb-4">
     <x-layouts.inputs.input-normal-text
+        label="Número"
+        name="numero"
+        lenght="3/12"
+        :value="$lote->numero ?? old('numero')"
+    />
+    <x-layouts.inputs.input-normal-text
         label="Descrição"
         name="descricao"
-        lenght="3/12"
+        lenght="6/12"
         :value="$lote->descricao ?? old('descricao')"
     />
     <x-layouts.inputs.input-normal-select
@@ -14,17 +20,53 @@
         lenght="3/12"
         :value="$lote->plano_pagamento_uuid ?? old('plano_pagamento_uuid')"
     />
+</div>
+<div class="flex flex-wrap -mx-3 mb-4">
+    <x-layouts.inputs.input-normal-text
+        label="Múltiplicador"
+        name="multiplicador"
+        lenght="4/12"
+        :value="$lote->multiplicador ?? old('multiplicador')"
+    />
     <x-layouts.inputs.input-normal-text
         label="Valor Estimado"
         name="valor_estimado"
-        lenght="3/12"
+        lenght="4/12"
         :value="$lote->valor_estimado ?? old('valor_estimado')"
     />
     <x-layouts.inputs.input-normal-text
         label="Valor Mínimo Pré-lance"
         name="valor_minimo_prelance"
-        lenght="3/12"
+        lenght="4/12"
         :value="$lote->valor_minimo_prelance ?? old('valor_minimo_prelance')"
+    />
+</div>
+<div class="flex flex-wrap -mx-3 mb-4">
+    <x-layouts.inputs.input-normal-text
+        label="Qtd. Machos"
+        name="quantidade_macho"
+        lenght="4/12"
+        :value="$lote->quantidade_macho ?? old('quantidade_macho')"
+    />
+    <x-layouts.inputs.input-normal-text
+        label="Qtd. Fêmeas"
+        name="quantidade_femea"
+        lenght="4/12"
+        :value="$lote->quantidade_femea ?? old('quantidade_femea')"
+    />
+    <x-layouts.inputs.input-normal-text
+        label="Qtd. Outros"
+        name="quantidade_outro"
+        lenght="4/12"
+        :value="$lote->quantidade_outro ?? old('quantidade_outro')"
+    />
+</div>
+<div class="flex flex-wrap -mx-3 mb-4">
+    <x-layouts.inputs.input-normal-text
+        label="Observações"
+        name="observacoes"
+        lenght="12/12"
+        :value="$lote->observacoes ?? old('observacoes')"
     />
 </div>
 <div class="flex flex-wrap -mx-3 mb-4">
@@ -50,9 +92,9 @@
         </label>
     </div>
 </div>
-
+{{-- @dd($itens) --}}
 @livewire('components.app.leilao-lote-item', [$formData, $itens])
 <br>
-@livewire('components.app.leilao-lote-vendedor', [$lote ?? null])
+@livewire('components.app.leilao-lote-vendedor', [isset($lote) ? $lote : null])
 
 <x-layouts.buttons.submit-button text="Salvar"/>

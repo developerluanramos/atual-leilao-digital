@@ -14,12 +14,14 @@ class LeilaoLoteVendedor extends Component
     public array $resultadoBuscaVendedor;
     public array $vendedores;
 
-    public function mount(Lote $lote) 
+    public function mount($lote = null) 
     {
-        // dd($lote);
-        foreach($lote->vendedores()->get()->toArray() as $index => $vendedor) 
+        if($lote)
         {
-            $this->addVendedor((array)$vendedor, $vendedor['pivot']['percentual_cota']);
+            foreach($lote->vendedores()->get()->toArray() as $index => $vendedor) 
+            {
+                $this->addVendedor((array)$vendedor, $vendedor['pivot']['percentual_cota']);
+            }
         }
     }
 

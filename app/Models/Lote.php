@@ -29,6 +29,9 @@ class Lote extends Model
         'quantidade_outro', // -- desconsiderar
         'incide_comissao_compra',
         'incide_comissao_venda',
+        'multiplicador',
+        'numero',
+        'observacoes'
     ];
 
     protected $dates = ['created_at', 'updated_at'];
