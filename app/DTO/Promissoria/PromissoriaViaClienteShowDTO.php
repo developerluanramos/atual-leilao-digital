@@ -2,15 +2,15 @@
 
 namespace App\DTO\Promissoria;
 
-use App\Http\Requests\App\Promissoria\PromissoriaViaVendedorRequest;
+use App\Http\Requests\App\Promissoria\PromissoriaViaClienteShowRequest;
 
-class PromissoriaViaVendedorDTO
+class PromissoriaViaClienteShowDTO
 {
     public function __construct(
         public string $compraUuid
     ) {}
 
-    public static function makeFromRequest(PromissoriaViaVendedorRequest $request)
+    public static function makeFromRequest(PromissoriaViaClienteShowRequest $request)
     {
         return new self(
             $request->compraUuid

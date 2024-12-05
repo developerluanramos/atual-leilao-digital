@@ -4,7 +4,7 @@ namespace App\Http\Requests\App\Promissoria;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PromissoriaViaClienteRequest extends FormRequest
+class PromissoriaViaInternaShowRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
