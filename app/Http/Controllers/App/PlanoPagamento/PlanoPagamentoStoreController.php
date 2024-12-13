@@ -15,7 +15,9 @@ class PlanoPagamentoStoreController extends Controller
 
     public function store(PlanoPagamentoStoreRequest $request)
     {
-        $this->storeAction->exec(PlanoPagamentoStoreDTO::makeFromRequest($request));
+        $dados = PlanoPagamentoStoreDTO::makeFromRequest($request);
+       
+        $this->storeAction->exec($dados);
 
         return redirect()->route('plano-pagamento.index');
     }
