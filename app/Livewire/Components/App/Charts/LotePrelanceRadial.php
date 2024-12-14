@@ -18,8 +18,11 @@ class LotePrelanceRadial extends Component
 
     public function render(ChartsLotePrelanceRadial $lotePrelanceRadial)
     {
+        $lotePrelanceRadialBuild = $lotePrelanceRadial->build($this->leilao);
+
         return view('livewire.components.app.charts.lote-prelance-radial', [
-            'chart'=> $lotePrelanceRadial->build($this->leilao)
+            'lotePrelanceRadialBuild' => $lotePrelanceRadialBuild,
+            'lotePrelanceRadialBuildScripts' => $lotePrelanceRadialBuild->script()
         ]);
     }
 }

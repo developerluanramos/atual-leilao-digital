@@ -37,6 +37,6 @@ class LeilaoValorAtingido
             ->setToolbar(true, true)
             ->setTitle('Gráfico comparativo de valor atingido')
             ->setSubtitle('Evidencía os comparativos entre o valor estimado para o lote, o valor atingido no pré-lance e o valor fechado no arremate do lote')
-            ->setXAxis($lotes->pluck('id')->toArray());
+            ->setXAxis($lotes->pluck('numero')->toArray());
     }
 }

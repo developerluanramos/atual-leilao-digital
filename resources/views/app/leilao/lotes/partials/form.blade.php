@@ -93,7 +93,7 @@
     </div>
 </div>
 {{-- @dd($itens) --}}
-@livewire('components.app.leilao-lote-item', [$formData, $itens])
+@livewire('components.app.leilao-lote-item', [$formData, $itens ?? []])
 <br>
 @livewire('components.app.leilao-lote-vendedor', [isset($lote) ? $lote : null])
 

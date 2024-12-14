@@ -46,7 +46,7 @@ class LoteEditController extends Controller
             'loteUuid' => $loteUuid,
             'formData' => $formData,
             'lote' => $lote,
-            'itens' => $itens
+            'itens' => $itens ?? []
         ]);
     }
 }

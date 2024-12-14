@@ -18,8 +18,11 @@ class PrelanceLoteValorAtingido extends Component
 
     public function render(LotePrelanceValorAtingido $lotePrelanceValorAtingido)
     {
+        $lotePrelanceValorAtingidoBuild = $lotePrelanceValorAtingido->build($this->leilao);
+
         return view('livewire.components.app.charts.prelance-lote-valor-atingido', [
-            'chart' => $lotePrelanceValorAtingido->build($this->leilao)
+            'chartLotePrelanceValorAtingido'=> $lotePrelanceValorAtingidoBuild,
+            'chartLotePrelanceValorAtingidoScripts' => $lotePrelanceValorAtingidoBuild->script()
         ]);
     }
 }

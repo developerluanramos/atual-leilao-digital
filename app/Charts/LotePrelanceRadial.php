@@ -21,7 +21,7 @@ class LotePrelanceRadial
         return $this->chart->radarChart()
             ->addData('Quantidade de lances', $lotes->pluck('quantidade_prelances')->toArray())
             ->setHeight(700)
-            ->setXAxis($lotes->pluck('id')->toArray())
+            ->setXAxis($lotes->pluck('numero')->toArray())
             ->setMarkers(['#303F9F'], 7, 10);
     }
 }

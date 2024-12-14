@@ -25,7 +25,7 @@ class ClienteEditController extends Controller
         $cliente = $this->editAction->exec(ClienteEditDTO::makeFromRequest($request));
         $propriedade = [];
         $contatos = [];
-        
+        $propriedades = [];
         foreach($cliente->propriedades as $propriedade)
         {
             $propriedades[] = [

@@ -20,7 +20,7 @@ class LotePrelancePercentual
 
         return $this->chart->pieChart()
             ->addData($lotes->pluck('valor_prelance')->toArray())
-            ->setLabels($lotes->pluck('id')->toArray())
-            ->setXAxis($lotes->pluck('id')->toArray());
+            ->setLabels($lotes->pluck('numero')->toArray())
+            ->setXAxis($lotes->pluck('numero')->toArray());
     }
 }

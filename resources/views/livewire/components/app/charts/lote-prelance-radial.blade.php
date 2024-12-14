@@ -1,8 +1,8 @@
-<div>
-    <div class="mt-2">
-        {!! $chart->container() !!}
-    </div>
-    <script src="{{ $chart->cdn() }}"></script>
-    
-    {{ $chart->script() }}
+<div class="mt-2">
+    {!! $lotePrelanceRadialBuild->container() !!}
+
+    {{-- Chart script --}}
+    @push('scripts')
+        {!! $lotePrelanceRadialBuildScripts !!}
+    @endpush
 </div>

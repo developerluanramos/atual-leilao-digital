@@ -17,8 +17,11 @@ class LotePrelancePercentual extends Component
     }
     public function render(ChartsLotePrelancePercentual $chartsLotePrelancePercentual)
     {
+        $chartsLotePrelancePercentualBuild = $chartsLotePrelancePercentual->build($this->leilao);
+
         return view('livewire.components.app.charts.lote-prelance-percentual', [
-            'chart'=> $chartsLotePrelancePercentual->build($this->leilao)
+            'chartsLotePrelancePercentualBuild' => $chartsLotePrelancePercentualBuild,
+            'chartsLotePrelancePercentualBuildScripts' => $chartsLotePrelancePercentualBuild->script()
         ]);
     }
 }

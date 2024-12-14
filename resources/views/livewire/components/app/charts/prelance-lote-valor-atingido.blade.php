@@ -1,6 +1,8 @@
 <div class="mt-2">
-    {!! $chart->container() !!}
-</div>
-<script src="{{ $chart->cdn() }}"></script>
+    {!! $chartLotePrelanceValorAtingido->container() !!}
 
-{{ $chart->script() }}
+    {{-- Chart script --}}
+    @push('scripts')
+        {!! $chartLotePrelanceValorAtingidoScripts !!}
+    @endpush
+</div>

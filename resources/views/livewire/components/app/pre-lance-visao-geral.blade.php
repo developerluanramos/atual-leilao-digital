@@ -72,7 +72,7 @@
                       :tamanho="4"
                       :identificador="$lote->uuid"
                       :sessao="$lote->uuid"
-                      :titulo="'Lote '.$lote->id">
+                      :titulo="'Lote '.$lote->numero">
                       @section($lote->uuid)
                       <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])}}" type="button" class="px-6 w-full mb-2 text-center py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                          <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
@@ -217,7 +217,7 @@
                          <div class="flex items-center">
                             <div class="flex-shrink-0">
                                <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-{{$lote->prelance_vencedor() ? 'green' : 'grey'}}-100 rounded-full dark:bg-gray-600">
-                                  <span class="font-medium text-gray-600 dark:text-gray-300">{{ $lote->id }}</span>
+                                  <span class="font-medium text-gray-600 dark:text-gray-300">{{ $lote->numero }}</span>
                                </div>
                             </div>
                             <div class="flex-1 min-w-0 ms-4">
@@ -282,7 +282,7 @@
                       @foreach($leilao->lotes as $index => $lote)
                       <li class="mb-10 ms-8">
                          <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-100 rounded-full -start-3.5 ring-8 ring-white dark:ring-gray-700 dark:bg-gray-600">
-                         {{ $lote->id }}
+                         {{ $lote->numero }}
                          </span>
                          <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$lote->descricao}}</h6>
                          <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{$lote->created_at}} - {{$lote->prelances()->count() }} prelances</time>
@@ -505,7 +505,7 @@
                                      </div>
                                      <div class="flex-1 min-w-0">
                                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                           <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid, 'loteUuid' => $lance->lote->uuid, 'clienteUuid' => $cliente->uuid])}}"  ><b role="button" >Lote {{$lance->lote->id}}</b></a>
+                                           <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid, 'loteUuid' => $lance->lote->uuid, 'clienteUuid' => $cliente->uuid])}}"  ><b role="button" >Lote {{$lance->lote->numero}}</b></a>
                                         </p>
                                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
                                            {{$lance->created_at}}

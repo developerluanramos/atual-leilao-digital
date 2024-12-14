@@ -24,6 +24,6 @@ class LotePrelanceValorAtingido
             ->addData('Valor Atingido', $lotes->pluck('valor_prelance')->toArray())
             ->setHeight(900)
             ->setTitle('valor estimado x Valor atingido')
-            ->setXAxis($lotes->pluck('id')->toArray());
+            ->setXAxis($lotes->pluck('numero')->toArray());
     }
 }
