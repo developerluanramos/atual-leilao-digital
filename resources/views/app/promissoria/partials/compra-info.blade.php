@@ -26,15 +26,15 @@
         <tbody>
             @forelse ($compra->lote->itens as $item)
                 <tr>
-                    <td><strong>Nome:</strong> xxx</td>
-                    <td colspan="2"><strong>Descrição Animal:</strong>  {{$item->descricao}}</td>
-                    <td><strong>Número ID:</strong> xxx</td>
+                    <td><strong>Nome:</strong> {{$item->descricao}}</td>
+                    <td colspan="2"><strong>Descrição Animal:</strong>  {{$item->observacoes}}</td>
+                    <td><strong>Número ID:</strong> {{$item->codigo_identificacao}}</td>
                 </tr>
                 <tr style="border-top: solid 1px black">
                     <td><strong>Espécie:</strong> {{$item->especie->nome}}</td>
                     <td><strong>Raça:</strong> {{$item->raca->nome}}</td>
                     <td><strong>Sexo:</strong> {{\App\Enums\GeneroLoteItemEnum::getKey((int)$item->genero)}}</td>
-                    <td><strong>Cor:</strong> xxx</td>
+                    <td><strong>Cor:</strong> {{$item->cor}}</td>
                 </tr>
             @empty
                 <b>Nenhum item adicionado neste lote</b>

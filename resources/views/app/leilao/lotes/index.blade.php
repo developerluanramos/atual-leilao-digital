@@ -3,7 +3,7 @@
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
             @foreach($lotes->items() as $index => $lote)
                 <li class="py-3 sm:py-4 cursor-pointer pointer">
-                    @livewire('components.app.lote-barra-progresso', [new App\Models\Lote((array)$lote)])
+                    {{-- @livewire('components.app.lote-barra-progresso', [new App\Models\Lote((array)$lote)]) --}}
                     <div class="flex items-center w-full mt-2">
                         <div class="flex-shrink-0">
                             <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">

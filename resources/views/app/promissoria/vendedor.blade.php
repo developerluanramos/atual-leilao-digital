@@ -1,4 +1,4 @@
-@extends('app.promissoria.partials.layout')
+@extends('app.promissoria.partials.layout', ['via' => 'Via Vendedor (branca)'])
 
 @section('content-promissoria')
 
@@ -65,7 +65,7 @@
         <tbody>
             <tr style="">
                 <td style="width: 33%;"><strong>Vencimento: </strong> {{date('d/m/Y', strtotime($compra->parcelas[0]->vencimento_em))}}</td>
-                <td style="width: 33%;"><strong>Lote:</strong> 0{{$compra->lote->id}} - {{$compra->lote->descricao}}</td>
+                <td style="width: 33%;"><strong>Lote:</strong> 0{{$compra->lote->numero}} - {{$compra->lote->descricao}}</td>
                 <td style="width: 33%;"><strong>Valor :</strong><x-layouts.badges.info-money
                     :convert="false"
                     :textLength="'lg'"

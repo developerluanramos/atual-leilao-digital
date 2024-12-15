@@ -201,7 +201,14 @@ body {
         {{-- <img src="{{ asset("atual_leiloes_logo.png") }}" alt="" style="width: 150px; height: 150px;"> --}}
         <h1 class="text-uppercase">{{$compra->leilao->descricao}}</h1>
         <h2>Nota de Leilão e Contrato de Compra e Venda com Reserva de Domínio</h2>
-        <p><b>Leiloeiro:</b> {{$compra->leilao->leiloeiro->nome}} | <b>Data:</b> {{$compra->leilao->fechado_em}} | <b>Local:</b> {{$compra->leilao->local}}</p>
+        <p>
+            <b>Leiloeiro:</b> {{$compra->leilao->leiloeiro->nome}} 
+            | <b>Data:</b> {{date('d/m/Y', strtotime($compra->leilao->fechado_em))}} 
+            | <b>Local:</b> {{$compra->leilao->local}}
+            | {{$via}}
+        </p>
+        
+        <h1 class="text-uppercase">LOTE {{$compra->lote->numero}}</h1>
     </div>
     @yield('content-promissoria')
 

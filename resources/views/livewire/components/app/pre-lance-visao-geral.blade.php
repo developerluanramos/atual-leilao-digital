@@ -96,10 +96,7 @@
                             :textLength="'md'"
                             :value="$lote->valor_estimado" />
                       </small>
-                      <div class="w-full bg-gray-200 dark:bg-gray-700 text-center">
-                         <div class="bg-blue-600 text-xs text-blue font-medium text-blue-100 text-center p-1.5 leading-none" style="width: {{ $lote->valor_prelance_percentual_valor_estimado }}%"> 
-                         </div>
-                      </div>
+                      @livewire('components.app.lote-barra-progresso', [$lote]) 
                       <small>
                          <x-layouts.badges.info-percent
                             :convert="false"

@@ -1,5 +1,5 @@
 
-@extends('app.promissoria.partials.layout')
+@extends('app.promissoria.partials.layout', ['via' => 'Via Cliente (rosa)'])
 
 @section('content-promissoria')
 
@@ -19,7 +19,7 @@
 <div class="section" style="position: relative; margin-left: -10px; margin-bottom: 20px; font-size: 12px; border: solid 0.5px black; padding: 10">
     <h3>NOTA PROMISSÓRIA ÚNICA</h3>
     <p class="text-center">
-        <img class="brasao" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/1200px-Coat_of_arms_of_Brazil.svg.png" alt="">
+        <img class="brasao" src="https://cartoriopiracaia.com.br/wp-content/uploads/2020/01/republica-federativa-do-brazil-logo-3F0D3FD72F-seeklogo.com_.png" alt="">
     </p>
     <p>
         No vencimento acima, pagarei(emos) por esta única via de Nota Promissória a 
@@ -40,7 +40,7 @@
         <tbody>
             <tr style="">
                 <td style="width: 33%;"><strong>Vencimento: </strong> {{date('d/m/Y', strtotime($compra->parcelas[0]->vencimento_em))}}</td>
-                <td style="width: 33%;"><strong>Lote:</strong> 0{{$compra->lote->id}} - {{$compra->lote->descricao}}</td>
+                <td style="width: 33%;"><strong>Lote:</strong> 0{{$compra->lote->numero}} - {{$compra->lote->descricao}}</td>
                 <td style="width: 33%;"><strong>Valor :</strong><x-layouts.badges.info-money
                     :convert="false"
                     :textLength="'lg'"

@@ -15,7 +15,7 @@
 
 @section('title', 'Visualizar Leilão')
 
-<x-layouts.headers.create-header :title="'Leilão ' . $leilao->uuid"/>
+<x-layouts.headers.create-header :title="$leilao->descricao"/>
 
 @section('content')
     @include('components.alerts.form-success')
@@ -66,62 +66,7 @@
                     </a>
                 @endif
             </li>
-        </ul>
-    </div>
-    <br>
-    @if($aba === 'dados-gerais')
-        <div class="flex flex-wrap -mx-3 mb-2">
-            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
-                <div id="chart-leilao-lote-conclusao" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    @livewire('components.app.charts.leilao-lote-conclusao', [$leilao])
-                </div>
-            </div>
-            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
-                <div id="leilao-compra-prelance" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    @livewire('components.app.charts.leilao-compra-prelance', [$leilao])
-                </div>
-            </div>
-            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z"/>
-                    </svg>
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                            Valor Total
-                        </h5>
-                    </a>
-                    <p class="mb-3 content-end content-right font-normal text-gray-500 dark:text-gray-400">
-                        <x-layouts.badges.info-money
-                        :convert="true"
-                        :textLength="'lg'"
-                        :value="$leilao->valor_total" />
-                    </p>
-                    <p class="mb-3 content-end content-right font-normal text-gray-500 dark:text-gray-400">
-                        C. Comprador: <x-layouts.badges.info-money
-                        :convert="true"
-                        :textLength="'sm'"
-                        :value="$leilao->valor_comissao_compra" />
-                    </p>
-                    <p class="mb-3 content-end content-right font-normal text-gray-500 dark:text-gray-400">
-                        C. Vendedor: <x-layouts.badges.info-money
-                        :convert="true"
-                        :textLength="'sm'"
-                        :value="$leilao->valor_comissao_venda" />
-                    </p>
-                </div>
-            </div>
-            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M18 5h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C8.4.842 6.949 0 5.5 0A3.5 3.5 0 0 0 2 3.5c.003.52.123 1.033.351 1.5H2a2 2 0 0 0-2 2v3a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a2 2 0 0 0-2-2ZM8.058 5H5.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM11 13H9v7h2v-7Zm-4 0H2v5a2 2 0 0 0 2 2h3v-7Zm6 0v7h3a2 2 0 0 0 2-2v-5h-5Z"/>
-                    </svg>
-                    <a href="#">
-                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Lotes</h5>
-                    </a>
-                    <h5 class="mb-3 text-2xl font-normal text-gray-500 dark:text-gray-400">{{count($leilao->lotes)}}</h5>
-                </div>
-
+            <li class="me-2">
                 <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="w-full mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                     Mapas <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -145,12 +90,127 @@
                         </li> --}}
                     </ul>
                 </div>
+            </li>
+        </ul>
+    </div>
+    <br>
+    @if($aba === 'dados-gerais')
+        <div class="flex flex-wrap -mx-3 mb-2">
+            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+                <div id="chart-leilao-lote-conclusao" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    @livewire('components.app.charts.leilao-lote-conclusao', [$leilao])
+                </div>
+            </div>
+            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+                <div id="leilao-compra-prelance" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    @livewire('components.app.charts.leilao-compra-prelance', [$leilao])
+                </div>
+            </div>
+            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+                <div id="chart-leilao-lote-conclusao" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    @livewire('components.app.charts.leilao-lote-conclusao', [$leilao])
+                </div>
+            </div>
+            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+                <div id="leilao-compra-prelance" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    @livewire('components.app.charts.leilao-compra-prelance', [$leilao])
+                </div>
             </div>
         </div>
+        
+        <div class="flex flex-wrap -mx-3 mb-2">
+            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2"/>
+                    </svg>                   
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                            Valor Total
+                        </h5>
+                    </a>
+                    <p class="mb-3 content-end content-right font-normal text-gray-500 dark:text-gray-400">
+                        <x-layouts.badges.info-money
+                        :convert="true"
+                        :textLength="'lg'"
+                        :value="$leilao->valor_total" />
+                    </p>
+                </div>
+            </div>
+            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2"/>
+                    </svg>                       
+                    <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                        C. Comprador
+                    </h5>
+                    <x-layouts.badges.info-money
+                    :convert="true"
+                    :textLength="'lg'"
+                    :value="$leilao->valor_comissao_compra" />
+                </div>
+            </div>
+            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2"/>
+                    </svg>                     
+                    <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                        C. Vendedor 
+                    </h5>
+                    <x-layouts.badges.info-money
+                        :convert="true"
+                        :textLength="'lg'"
+                        :value="$leilao->valor_comissao_venda" />
+                </div>
+            </div>
+            <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
+                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 17.345a4.76 4.76 0 0 0 2.558 1.618c2.274.589 4.512-.446 4.999-2.31.487-1.866-1.273-3.9-3.546-4.49-2.273-.59-4.034-2.623-3.547-4.488.486-1.865 2.724-2.899 4.998-2.31.982.236 1.87.793 2.538 1.592m-3.879 12.171V21m0-18v2.2"/>
+                    </svg>
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Média</h5>
+                    </a>
+                    <x-layouts.badges.info-money
+                        :convert="true"
+                        :textLength="'lg'"
+                        :value="$leilao->valor_total / count($leilao->lotes)" />
+                </div>
+            </div>
+        </div>
+        
         <div id="chart-leilao-valor-atingido" class="p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             @livewire('components.app.charts.leilao-valor-atingido', [$leilao])
         </div>
-        {{-- <pre>{{json_encode($leilao, JSON_PRETTY_PRINT)}}</pre> --}}
+        <div class="p-3 mt-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <h3>Médias por comprador</h3>
+            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                @forelse ($mediaCompras as $media)
+                    <li class="py-3 sm:py-4 cursor-pointer pointer">
+                        <div class="flex items-center w-full">
+                            <div class="flex-shrink-0">
+                                <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                    <span class="font-medium text-gray-600 dark:text-gray-300">{{mb_substr($media->nome, 0, 2)}}</span>
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0 ms-4">
+                                {{$media->nome}}
+                            </div>
+                            <div class="inline-flex items-right items-end text-base font-semibold text-gray-900 dark:text-white">
+                                <x-layouts.badges.info-money
+                                    :convert="false"
+                                    :value="number_format($media->media_compras, 2, '.', '')"
+                                ></x-layouts.badges.info-money>
+                            </div>
+                        </div>
+                    </li>
+                @empty
+                    <small>Nenhuma compra realizada pra renderizar as médias por cliente</small>
+                @endforelse
+            </ul>
+        </div>
     @endif
         
     @if($aba === 'lotes')
