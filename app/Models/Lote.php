@@ -196,7 +196,7 @@ class Lote extends Model
     
             foreach ($condicoesPagamento as $key => $condicaoPagamento)
             {
-                for($i = 0; $i <= $condicaoPagamento['qtd_parcelas']; $i++) {
+                for($i = 1; $i <= $condicaoPagamento['qtd_parcelas']; $i++) {
                     $valorLotePreLance += ($condicaoPagamento['repeticoes'] * ($valorLanceOriginal * $this->multiplicador)) / $quantidadeClientes;
                 }
             }
