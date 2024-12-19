@@ -107,10 +107,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind('path.public', function() {
-            // return your own correct path.
-            return realpath(base_path('../../public_html'));
-        });
+        // $this->app->bind('path.public', function() {
+        //     // return your own correct path.
+        //     return realpath(base_path('../../public_html'));
+        // });
 
         if ($this->app->environment('local')) {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
