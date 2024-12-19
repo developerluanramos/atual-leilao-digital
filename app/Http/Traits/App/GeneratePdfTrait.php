@@ -3,7 +3,7 @@
 namespace App\Http\Traits\App;
 
 use App\Models\Compra;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Barryvdh\DomPDF\Pdf as Pdf2;
 
 trait GeneratePdfTrait
@@ -15,7 +15,7 @@ trait GeneratePdfTrait
         'isRemoteEnabled' => true
     ])
     {
-        return \Barryvdh\DomPDF\Facade\Pdf::setOptions($options);
+        return PDF::setOptions($options);
     }
 
     public function loadView(Pdf2 $pdf, string $view, Compra $compra)

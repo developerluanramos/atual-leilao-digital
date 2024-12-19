@@ -169,7 +169,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
-        Diglactic\Breadcrumbs\ServiceProvider::class
+        Diglactic\Breadcrumbs\ServiceProvider::class,
+        // Barryvdh\DomPDF\Facade\Pdf::class
     ])->toArray(),
 
     /*
@@ -184,8 +185,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        "Breadcrumbs" => "Diglactic\\Breadcrumbs\\Breadcrumbs"
-        // 'Example' => App\Facades\Example::class,
+        'Breadcrumbs' => "Diglactic\\Breadcrumbs\\Breadcrumbs",
+        // 'PDF' => "Barryvdh\DomPDF\Facade\Pdf",
     ])->toArray(),
 
 ];
