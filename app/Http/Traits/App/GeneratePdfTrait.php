@@ -15,7 +15,7 @@ trait GeneratePdfTrait
         'isRemoteEnabled' => true
     ])
     {
-        return Pdf::setOptions($options);
+        return \Barryvdh\DomPDF\Facade\Pdf::setOptions($options);
     }
 
     public function loadView(Pdf2 $pdf, string $view, Compra $compra)
