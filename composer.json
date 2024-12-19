@@ -62,7 +62,12 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "providers": [
+                "Diglactic\\Breadcrumbs\\ServiceProvider"
+            ],
+            "aliases": {
+                "Breadcrumbs": "Diglactic\\Breadcrumbs\\Breadcrumbs"
+            }
         }
     },
     "config": {
