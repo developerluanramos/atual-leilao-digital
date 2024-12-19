@@ -21,13 +21,38 @@ pipelines:
             - echo "$HEROKU_API_KEY" | heroku auth:token
             # Add Heroku remote
             - heroku git:remote -a $HEROKU_APP_NAME
-            
+
+            # Use SSH for Heroku remote (replace with SSH URL)
+            - git remote set-url heroku git@heroku.com:$HEROKU_APP_NAME.git
+
             # Install Composer dependencies
             - curl -sS https://getcomposer.org/installer | php
             - php composer.phar install --prefer-dist --optimize-autoloader
 
             # Push code to Heroku
             - git push heroku main -f
+
+
+            
+            # - apt-get update && apt-get install -y git curl zip unzip default-mysql-client
+
+            # # Install PHP extensions needed for MySQL
+            # - docker-php-ext-install pdo_mysql
+
+            # # Install Heroku CLI
+            # - curl https://cli-assets.heroku.com/install.sh | sh
+
+            # # Login to Heroku using the API key
+            # - echo "$HEROKU_API_KEY" | heroku auth:token
+            # # Add Heroku remote
+            # - heroku git:remote -a $HEROKU_APP_NAME
+            
+            # # Install Composer dependencies
+            # - curl -sS https://getcomposer.org/installer | php
+            # - php composer.phar install --prefer-dist --optimize-autoloader
+
+            # # Push code to Heroku
+            # - git push heroku main -f
 
           # after-script:
           #   # Run migrations and seeders on Heroku
