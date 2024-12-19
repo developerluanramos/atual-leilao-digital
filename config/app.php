@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
+        Diglactic\Breadcrumbs\ServiceProvider::class
     ])->toArray(),
 
     /*
@@ -183,6 +184,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+        "Breadcrumbs" => "Diglactic\\Breadcrumbs\\Breadcrumbs"
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
