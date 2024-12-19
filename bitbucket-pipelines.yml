@@ -20,7 +20,7 @@ pipelines:
             # Login to Heroku using the API key
             - echo "$HEROKU_API_KEY" | heroku auth:token
             # Add Heroku remote
-            - heroku git:remote -a https://git.heroku.com/atual-leiloes.git
+            - heroku git:remote -a $HEROKU_APP_NAME
             
             # Install Composer dependencies
             - curl -sS https://getcomposer.org/installer | php
