@@ -111,7 +111,11 @@ class AppServiceProvider extends ServiceProvider
         //     // return your own correct path.
         //     return realpath(base_path('../../public_html'));
         // });
-
+        // dd($this->app->environment('local'));
+        if($this->app->environment('local') === 'production') {
+            $this->app['request']->server->set('HTTPS', true); 
+        }
+        
         if ($this->app->environment('local')) {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);
