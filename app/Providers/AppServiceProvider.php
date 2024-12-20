@@ -111,8 +111,8 @@ class AppServiceProvider extends ServiceProvider
         //     // return your own correct path.
         //     return realpath(base_path('../../public_html'));
         // });
-        dd($this->app->environment('local'));
-        if($this->app->environment('local') === 'production') {
+        
+        if($this->app->environment('production')) {
             $this->app['request']->server->set('HTTPS', true); 
         }
         
