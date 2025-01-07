@@ -214,6 +214,7 @@ class AppServiceProvider extends ServiceProvider
         Parcela::observe(ParcelaObserver::class);
         
         \DB::enableQueryLog();
+        // -- validations
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
             $dataNascimento = $validator->getData()['data_nascimento'];
             $dataAdmissao = $value;
