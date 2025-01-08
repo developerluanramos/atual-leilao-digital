@@ -18,13 +18,11 @@ class PromissoriaViaInternaShowController extends Controller
 
     public function promissoriaInterna(PromissoriaViaInternaShowRequest $request)
     {
-        $view = 'app.promissoria.interna';
-        $fileName = 'promissoria-interna.pdf';
-
         $compra =  $this->action->exec(PromissoriaViaInternaShowDTO::makeFromRequest($request));
         
         $pdf = $this->setOptions();
-        $pdf = $this->loadView($pdf, $view, $compra);
-        return $this->stream($pdf, $fileName);    
+        $pdf = $this->loadView($pdf, 'app.promissoria.interna', ['compra' => $compra]);
+        
+        return $this->stream($pdf, 'promissoria-interna.pdf');    
     }
 }

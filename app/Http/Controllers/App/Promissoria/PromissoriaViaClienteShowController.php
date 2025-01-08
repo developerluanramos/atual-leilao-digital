@@ -18,13 +18,11 @@ class PromissoriaViaClienteShowController extends Controller
 
     public function promissoriaCliente(PromissoriaViaClienteShowRequest $request)
     {
-        $view = 'app.promissoria.cliente';
-        $fileName = 'promissoria-cliente.pdf';
-
         $compra =  $this->action->exec(PromissoriaViaClienteShowDTO::makeFromRequest($request));
         
         $pdf = $this->setOptions();
-        $pdf = $this->loadView($pdf, $view, $compra);
-        return $this->stream($pdf, $fileName);
+        $pdf = $this->loadView($pdf, 'app.promissoria.cliente', ['compra' => $compra]);
+        
+        return $this->stream($pdf, 'promissoria-cliente.pdf');
     }
 }

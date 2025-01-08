@@ -79,6 +79,12 @@
                         <li>
                             <a target="_blank" href="{{route('leilao.mapa.lote-a-lote', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lote a Lote</a>
                         </li>
+                        <li>
+                            <a target="_blank" href="{{route('leilao.mapa.ranking-comprador', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ranking Compradores</a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="{{route('leilao.mapa.ranking-vendedor', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ranking Vendedores</a>
+                        </li>
                         {{-- <li>
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
                         </li>

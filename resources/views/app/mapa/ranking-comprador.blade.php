@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mapa de Leilão - Lote a Lote</title>
+    <title>Mapa de Leilão - Ranking de Compradores</title>
     <style>
         /* General Styles */
         body {
@@ -250,7 +250,7 @@
     <div class="header">
         {{-- <img src="{{ asset("atual_leiloes_logo.png") }}" alt="" style="width: 150px; height: 150px;"> --}}
         <h1 class="text-uppercase">{{$leilao->descricao}}</h1>
-        <h2>Mapa Lote a Lote</h2>
+        <h2>Ranking de Compradores</h2>
         <p>
             <b>Leiloeiro:</b> {{$leilao->leiloeiro->nome}} 
             | <b>Data:</b> {{date('d/m/Y', strtotime($leilao->fechado_em))}} 
@@ -261,183 +261,37 @@
     <table style="width: 100%" class="report-table">
         <thead>
             <tr>
-                <th>Lote</th>
-                <th>Gênero</th>
-                <th>Multiplicador</th>
+                <th>Cliente</th>
+                <th>Valor Total</th>
+                {{-- <th>Multiplicador</th>
                 <th>C. Comprador</th>
                 <th>C. Vendedor</th>
-                <th>Total</th>
+                <th>Total</th> --}}
             </tr>
         </thead>
         <tbody>
-            @forelse ($leilao->lotes()->get() as $lote)
+            @forelse ($compras as $compra)
                 <tr>
                     <td style="text-align: left !important">
-                        0{{$lote->numero}} - <small><b>{{$lote->descricao}}</b></small><br>
-                        <small>{{$lote->observacoes}}</small>
-                    </td>
-                    <td>
-                        <small> M {{$lote->quantidade_macho}}
-                        | F {{$lote->quantidade_femea}}
-                        | O {{$lote->quantidade_outro}} </small>
-                    </td>
-                    <td style="float: right; text-align:right">{{$lote->multiplicador}}</td>
-                    <td class="money" style="float: right; text-align:right">
-                        <strong>
-                            <x-layouts.badges.info-money
-                            :convert="false"
-                            :textLength="'sm'"
-                            :value="$lote->valor_comissao_compra"
-                            />
-                        </strong>
+                        <small>{{$compra->cliente->nome}}</small>
                     </td>
                     <td class="money" style="float: right; text-align:right">
                         <strong>
                             <x-layouts.badges.info-money
                             :convert="false"
                             :textLength="'sm'"
-                            :value="$lote->valor_comissao_venda"
+                            :value="$compra->total"
                             />
                         </strong>
-                    </td>
-                    <td class="money" style="float: right; text-align:right">
-                        <strong>
-                            <x-layouts.badges.info-money
-                            :convert="true"
-                            :textLength="'lg'"
-                            :value="$lote->valor_total"
-                            />
-                        </strong>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="6">
-                        <table style="width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>Comprador</th>
-                                    <th>Vendedor</th>
-                                    <th>C. Vend</th>
-                                    <th>C. Comp</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($lote->compras()->with(['cliente', 'vendedor'])->get() as $compra)
-                                    
-                                @endforeach
-                                <tr>
-                                    <td>
-                                        <x-layouts.badges.info-percent
-                                            :convert="false"
-                                            :value="$compra->percentual_cota"
-                                        ></x-layouts.badges.info-percent>
-                                        <small>{{$compra->cliente->nome}}</small>
-                                    </td>
-                                    <td>
-                                        <x-layouts.badges.info-percent
-                                            :convert="false"
-                                            :value="$compra->percentual_cota_vendedor"
-                                        ></x-layouts.badges.info-percent>
-                                        <small>{{$compra->vendedor->nome}}</small>
-                                    </td>
-                                    <td class="money" style="float: right; text-align:right">
-                                        <strong>
-                                            <x-layouts.badges.info-percent
-                                            :convert="false"
-                                            :value="8"
-                                            ></x-layouts.badges.info-percent>
-                                            <x-layouts.badges.info-money
-                                            :convert="false"
-                                            :textLength="'sm'"
-                                            :value="$compra->valor_comissao_comprador"
-                                            />
-                                        </strong>
-                                    </td>
-                                    <td class="money" style="float: right; text-align:right">
-                                        <strong>
-                                            <x-layouts.badges.info-percent
-                                            :convert="false"
-                                            :value="10"
-                                            ></x-layouts.badges.info-percent>
-                                            <x-layouts.badges.info-money
-                                            :convert="false"
-                                            :textLength="'sm'"
-                                            :value="$compra->valor_comissao_vendedor"
-                                            />
-                                        </strong>
-                                    </td>
-                                    <td class="money" style="float: right; text-align:right">
-                                        <strong>
-                                            <x-layouts.badges.info-money
-                                            :convert="false"
-                                            :textLength="'lg'"
-                                            :value="$compra->valor"
-                                            />
-                                        </strong>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </td>
                 </tr>
             @empty
-                <b>Nenhum lote registrado neste leilão</b>
+                <b>Nenhuma compra registrada neste leilão</b>
             @endforelse
         </tbody>
     </table>
 
-    <h2 class="">Consolidado</h2>
-    <table class="report-table">
-        <thead>
-            <tr>
-                <th>Valor Total Leilão</th>
-                <th>Valor Comissão Comprador</th>
-                <th>Valor Comissão Vendedor</th>
-                <th>Valor Total Comissão</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="money">
-                    <strong>
-                        <x-layouts.badges.info-money
-                        :convert="true"
-                        :textLength="'lg'"
-                        :value="$leilao->valor_total"
-                        />
-                    </strong>
-                </td>
-                <td class="money">
-                    <strong>
-                        <x-layouts.badges.info-money
-                        :convert="true"
-                        :textLength="'lg'"
-                        :value="$leilao->valor_comissao_compra"
-                        />
-                    </strong>
-                </td>
-                <td class="money">
-                    <strong>
-                        <x-layouts.badges.info-money
-                        :convert="true"
-                        :textLength="'lg'"
-                        :value="$leilao->valor_comissao_venda"
-                        />
-                    </strong>
-                </td>
-                <td class="money">
-                    <strong>
-                        <x-layouts.badges.info-money
-                        :convert="true"
-                        :textLength="'lg'"
-                        :value="$leilao->valor_comissao_total"
-                        />
-                    </strong>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    
     <!-- Footer -->
     <div class="footer">
         <p>Atual Leilões - powered by KOLARES TI - ENGENHARIA DE SOFTWARE ÁGIL</p>
