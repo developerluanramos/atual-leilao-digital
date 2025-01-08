@@ -17,10 +17,14 @@ class LotePrelancePercentual
     public function build(Leilao $leilao): \ArielMejiaDev\LarapexCharts\PieChart
     {
         $lotes = $leilao->lotes()->get();
-
+        $labels = [];
+        foreach($lotes->pluck('numero')->toArray() as $numero) {
+            array_push($labels, 'Lote '.$numero);
+        }
         return $this->chart->pieChart()
             ->addData($lotes->pluck('valor_prelance')->toArray())
-            ->setLabels($lotes->pluck('numero')->toArray())
-            ->setXAxis($lotes->pluck('numero')->toArray());
+            ->setToolbar(true, true)
+            ->setLabels($labels)
+            ->setXAxis($labels);
     }
 }

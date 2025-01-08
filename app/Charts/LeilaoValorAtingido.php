@@ -29,6 +29,11 @@ class LeilaoValorAtingido
             array_push($compras, $valorCompra);
         }
 
+        $labels = [];
+        foreach($lotes->pluck('numero')->toArray() as $numero) {
+            array_push($labels, 'Lote '.$numero);
+        }
+
         return $this->chartLeilaoValorAtingido->barChart()
             ->addData('Valor Estimado', $lotes->pluck('valor_estimado')->toArray())
             ->addData('Valor Pré-lance', $lotes->pluck('valor_prelance')->toArray())
@@ -37,6 +42,6 @@ class LeilaoValorAtingido
             ->setToolbar(true, true)
             ->setTitle('Gráfico comparativo de valor atingido')
             ->setSubtitle('Evidencía os comparativos entre o valor estimado para o lote, o valor atingido no pré-lance e o valor fechado no arremate do lote')
-            ->setXAxis($lotes->pluck('numero')->toArray());
+            ->setXAxis($labels);
     }
 }

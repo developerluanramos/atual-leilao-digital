@@ -18,12 +18,16 @@ class LotePrelanceValorAtingido
     public function build(Leilao $leilao): \ArielMejiaDev\LarapexCharts\HorizontalBar
     {
         $lotes = $leilao->lotes()->get();
-
+        $labels = [];
+        foreach($lotes->pluck('numero')->toArray() as $numero) {
+            array_push($labels, 'Lote '.$numero);
+        }
         return $this->chart->horizontalBarChart()
             ->addData('Valor Estimado', $lotes->pluck('valor_estimado')->toArray())
             ->addData('Valor Atingido', $lotes->pluck('valor_prelance')->toArray())
+            ->setToolbar(true, true)
             ->setHeight(900)
             ->setTitle('valor estimado x Valor atingido')
-            ->setXAxis($lotes->pluck('numero')->toArray());
+            ->setXAxis($labels);
     }
 }

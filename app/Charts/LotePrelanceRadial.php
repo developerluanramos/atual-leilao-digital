@@ -17,11 +17,15 @@ class LotePrelanceRadial
     public function build(Leilao $leilao): \ArielMejiaDev\LarapexCharts\RadarChart
     {
         $lotes = $leilao->lotes()->get();
-
+        $labels = [];
+        foreach($lotes->pluck('numero')->toArray() as $numero) {
+            array_push($labels, 'Lote '.$numero);
+        }
         return $this->chart->radarChart()
             ->addData('Quantidade de lances', $lotes->pluck('quantidade_prelances')->toArray())
+            ->setToolbar(true, true)
             ->setHeight(700)
-            ->setXAxis($lotes->pluck('numero')->toArray())
+            ->setXAxis($labels)
             ->setMarkers(['#303F9F'], 7, 10);
     }
 }

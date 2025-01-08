@@ -12,6 +12,8 @@ class LeilaoLoteConclusao
 
     public function __construct(LarapexChart $chart)
     {
+        $chart->setDataLabels(true);
+        $chart->setLabels(['Label 1', 'Label 2']);
         $this->chart = $chart;
     }
 
@@ -22,17 +24,13 @@ class LeilaoLoteConclusao
         $qtdLotesAbertos = $lotes->where('status', (string)StatusLoteEnum::ABERTO)->count();
 
         return $this->chart->donutChart()
-            ->setDataLabels(true)
+            ->addData([$qtdLotesFechados, $qtdLotesAbertos])
+            ->setLabels(['Lotes Fechados', 'Lotes Abertos'])
             ->setTitle('Lotes fechados x abertos')
             ->setColors(['#58d68d', '#c0392b'])
             ->setSubtitle('')
             ->setToolbar(true, true)
-            ->setTheme('dark')
-            ->setHeight(200)
-            ->setOptions([
-                'labels' => ['Label 1', 'Label 2'], // Manually set labels
-                'dataLabels' => ['enabled' => true] // Ensure data labels are enabled
-            ])
-            ->addData([$qtdLotesFechados, $qtdLotesAbertos]);
+            // '->setTheme('light')
+            ->setHeight(200);
     }
 }

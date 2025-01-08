@@ -29,13 +29,13 @@ class LeilaoCompraPrelance
         }
         
         return $this->chart->donutChart()
-            ->setDataLabels(true)
+            ->addData([$qtdLoteComPrelanceVencedor, $qtdLoteSemPrelanceVencedor])
+            ->setLabels(['Com pré-lance', 'Sem pré-lance'])
             ->setTitle('Com pré-lance x Sem pré-lance')
             ->setColors(['#58d68d', '#c0392b'])
             ->setHeight(200)
             ->setToolbar(true, true)
             ->setSubtitle('')
-            ->addData([$qtdLoteComPrelanceVencedor, $qtdLoteSemPrelanceVencedor])
             ->setXAxis(['Com pré-lance', 'Sem pré-lance']);
             // ->setLabels(['Fechados', 'Abertos']);
     }
