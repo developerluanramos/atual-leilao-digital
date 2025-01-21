@@ -31,7 +31,7 @@ class MapaRankingVendedorShowController extends Controller
         
         $leilao = Leilao::where('uuid', $leilaoUuid)->first();
         
-        $compras = Compra::selectRaw('vendedor_uuid, SUM(valor) as total')
+        $compras = Compra::selectRaw('vendedor_uuid, SUM(valor) as total, AVG(valor) as media')
                     ->with('vendedor')
                     ->groupBy('vendedor_uuid')
                     ->orderByDesc('total')

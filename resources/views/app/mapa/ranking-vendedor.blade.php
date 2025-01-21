@@ -248,7 +248,7 @@
 <body>
     <!-- Header -->
     <div class="header">
-        {{-- <img src="{{ asset("atual_leiloes_logo.png") }}" alt="" style="width: 150px; height: 150px;"> --}}
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYl3aVkWky8GGlkFjXqJEYLw_LvKM082YxEw&s" alt="" style="width: 150px; height: 150px;">
         <h1 class="text-uppercase">{{$leilao->descricao}}</h1>
         <h2>Ranking de Vendedores</h2>
         <p>
@@ -262,6 +262,7 @@
         <thead>
             <tr>
                 <th>Vendedor</th>
+                <th>Média</th>
                 <th>Valor Total</th>
                 {{-- <th>Multiplicador</th>
                 <th>C. Comprador</th>
@@ -274,6 +275,15 @@
                 <tr>
                     <td style="text-align: left !important">
                         <small>{{$compra->vendedor->nome}}</small>
+                    </td>
+                    <td class="money" style="float: right; text-align:right">
+                        <strong>
+                            <x-layouts.badges.info-money
+                            :convert="false"
+                            :textLength="'sm'"
+                            :value="number_format($compra->media, 2, '.', '')"
+                            />
+                        </strong>
                     </td>
                     <td class="money" style="float: right; text-align:right">
                         <strong>
