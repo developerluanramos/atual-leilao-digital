@@ -554,13 +554,9 @@
       let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
       tabela += "🔨 *"+leilao.descricao+"* 🔨\n\n";
       tabela += "✍️ Resumo de lotes e valores disponíveis para pré-lance ✍️ \n"
-      tabela += "======================\n";
-      tabela += `${"🐮 Lote".padEnd(5)} | ${"💰 Pré-lance".padStart(10)}\n`;
-      tabela += "======================\n";
 
       lotes.forEach(item => {
-         console.log(item)
-         tabela += `${String('Lote ' + item.numero).padEnd(8)} | ${String('*R$'+item.valor_prelance_calculado+'*').padStart(14)}\n`;
+         tabela += `- 🐮 ${String('Lote ' + item.numero).padEnd(5)} 💰 ${String('*R$'+item.valor_prelance_calculado+'*').padStart(10)}\n`;
       });
 
       tabela += "======================\n";
@@ -573,17 +569,14 @@
    {
       tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
       tabela += "🔨 *"+descricaoLeilao+"* 🔨\n\n";
-      // tabela += "✍️ Resumo de lotes e valores disponíveis para pré-lance ✍️ \n"
       tabela += "*🐮 Lote "+lote.numero+"*\n";
       tabela += "✍️ "+lote.descricao+"\n\n";
       tabela += "Pré-lances\n";
-      tabela += "===================\n";
-      tabela += `${"🗓️ Data".padEnd(5)} | ${"💰 Valor".padStart(10)}\n`;
-      tabela += "===================\n";
 
       lances.forEach(item => {
-         console.log(item)
-         tabela += `${String(item.realizado_em).padEnd(5)} | *${'R$'+item.valor.padStart(10)}*\n`;
+         // console.log(item)
+         let data = new Date(item.created_at).toLocaleDateString('pt-BR');
+         tabela += `- 🗓️ ${String(data).padEnd(5)} 💰 *${'R$'+item.valor.padStart(7)}*\n`;
       });
 
       tabela += "===================";
