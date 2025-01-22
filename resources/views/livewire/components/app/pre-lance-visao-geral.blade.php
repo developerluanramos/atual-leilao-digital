@@ -54,6 +54,12 @@
                 </button>
              </h2>
              <div id="accordion-flush-body-2" data-accordion="collapse" aria-labelledby="accordion-flush-heading-2">
+               <button type="button" onclick="copiarLotesGeral({{json_encode($leilao->toArray())}}, {{json_encode($leilao->lotes->toArray())}})" type="button" class="mt-4 p-1 mb-2 text-center text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                     <path fill-rule="evenodd" d="M14.516 6.743c-.41-.368-.443-1-.077-1.41a.99.99 0 0 1 1.405-.078l5.487 4.948.007.006A2.047 2.047 0 0 1 22 11.721a2.06 2.06 0 0 1-.662 1.51l-5.584 5.09a.99.99 0 0 1-1.404-.07 1.003 1.003 0 0 1 .068-1.412l5.578-5.082a.05.05 0 0 0 .015-.036.051.051 0 0 0-.015-.036l-5.48-4.942Zm-6.543 9.199v-.42a4.168 4.168 0 0 0-2.715 2.415c-.154.382-.44.695-.806.88a1.683 1.683 0 0 1-2.167-.571 1.705 1.705 0 0 1-.279-1.092V15.88c0-3.77 2.526-7.039 5.967-7.573V7.57a1.957 1.957 0 0 1 .993-1.838 1.931 1.931 0 0 1 2.153.184l5.08 4.248a.646.646 0 0 1 .012.011l.011.01a2.098 2.098 0 0 1 .703 1.57 2.108 2.108 0 0 1-.726 1.59l-5.08 4.25a1.933 1.933 0 0 1-2.929-.614 1.957 1.957 0 0 1-.217-1.04Z" clip-rule="evenodd"/>
+                   </svg>
+                  copiar
+               </button>
                 <div class="space-y-8 lg:grid lg:grid-cols-6 pr-8 sm:gap-6 xl:gap-10 lg:space-y-0">
                    @foreach($leilao->lotes as $index => $lote)
                    <div data-modal-target="{{$lote->uuid}}" data-modal-toggle="{{$lote->uuid}}"
@@ -146,7 +152,14 @@
                             </div>
                          </div>
                       </div>
-                      <small class="mt-6">Histórico de prelances</small>
+                      <small class="mt-6">Histórico de prelances 
+                        <button type="button" onclick="copiarLoteUnico('{{$leilao->descricao}}', {{json_encode($lote)}}, {{json_encode($lote->prelances()->get()->toArray())}})" type="button" class="mt-4 p-1 mb-2 text-center text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                           <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                              <path fill-rule="evenodd" d="M14.516 6.743c-.41-.368-.443-1-.077-1.41a.99.99 0 0 1 1.405-.078l5.487 4.948.007.006A2.047 2.047 0 0 1 22 11.721a2.06 2.06 0 0 1-.662 1.51l-5.584 5.09a.99.99 0 0 1-1.404-.07 1.003 1.003 0 0 1 .068-1.412l5.578-5.082a.05.05 0 0 0 .015-.036.051.051 0 0 0-.015-.036l-5.48-4.942Zm-6.543 9.199v-.42a4.168 4.168 0 0 0-2.715 2.415c-.154.382-.44.695-.806.88a1.683 1.683 0 0 1-2.167-.571 1.705 1.705 0 0 1-.279-1.092V15.88c0-3.77 2.526-7.039 5.967-7.573V7.57a1.957 1.957 0 0 1 .993-1.838 1.931 1.931 0 0 1 2.153.184l5.08 4.248a.646.646 0 0 1 .012.011l.011.01a2.098 2.098 0 0 1 .703 1.57 2.108 2.108 0 0 1-.726 1.59l-5.08 4.25a1.933 1.933 0 0 1-2.929-.614 1.957 1.957 0 0 1-.217-1.04Z" clip-rule="evenodd"/>
+                            </svg>
+                           copiar
+                        </button>                     
+                      </small>
                       <ol class="mt-6 relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mb-4 md:mb-5">
                          @foreach($lote->prelances()->get()->reverse() as $index => $lance)
                          @if($index === 0)
@@ -535,3 +548,47 @@
        </div>
     </div>
  </div>
+ <script>
+   function copiarLotesGeral(leilao, lotes)
+   {
+      let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
+      tabela += "🔨 *"+leilao.descricao+"* 🔨\n\n";
+      tabela += "✍️ Resumo de lotes e valores disponíveis para pré-lance ✍️ \n"
+      tabela += "======================\n";
+      tabela += `${"🐮 Lote".padEnd(5)} | ${"💰 Pré-lance".padStart(10)}\n`;
+      tabela += "======================\n";
+
+      lotes.forEach(item => {
+         console.log(item)
+         tabela += `${String('Lote ' + item.numero).padEnd(8)} | ${String('*R$'+item.valor_prelance_calculado+'*').padStart(14)}\n`;
+      });
+
+      tabela += "======================\n";
+      navigator.clipboard.writeText(tabela);
+      
+      alert("Copiado para a área de transferência");
+   }
+
+   function copiarLoteUnico(descricaoLeilao, lote, lances)
+   {
+      tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
+      tabela += "🔨 *"+descricaoLeilao+"* 🔨\n\n";
+      // tabela += "✍️ Resumo de lotes e valores disponíveis para pré-lance ✍️ \n"
+      tabela += "*🐮 Lote "+lote.numero+"*\n";
+      tabela += "✍️ "+lote.descricao+"\n\n";
+      tabela += "Pré-lances\n";
+      tabela += "===================\n";
+      tabela += `${"🗓️ Data".padEnd(5)} | ${"💰 Valor".padStart(10)}\n`;
+      tabela += "===================\n";
+
+      lances.forEach(item => {
+         console.log(item)
+         tabela += `${String(item.realizado_em).padEnd(5)} | *${'R$'+item.valor.padStart(10)}*\n`;
+      });
+
+      tabela += "===================";
+      navigator.clipboard.writeText(tabela);
+      
+      alert("Copiado para a área de transferência");
+   }
+ </script>

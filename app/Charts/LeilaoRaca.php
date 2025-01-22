@@ -29,7 +29,7 @@ class LeilaoRaca
         return $this->chart->pieChart()
             ->setTitle('Raças')
             ->addData(array_column($racaQuantities, "quantidade"))
-            ->setHeight(175)
+            ->setHeight(195)
             ->setToolbar(true, true)
             ->setLabels(array_column($racaQuantities, "nome"));
     }
