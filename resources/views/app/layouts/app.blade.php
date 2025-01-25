@@ -14,7 +14,17 @@
     <script src="https://cdn.tailwindcss.com/3.3.0"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/datepicker.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
     <script>
+        toastr.options.closeButton = true;
+        toastr.options.showEasing = 'swing';
+        toastr.options.hideEasing = 'linear';
+        toastr.options.closeEasing = 'linear';
+        toastr.options.progressBar = true;
+        
         tailwind.config = {
             darkMode: ['class', '[data-mode="dark"]'],
             theme: {

@@ -44,6 +44,7 @@ class Lote extends Model
         'valor_prelance_comissao_compra',
         'valor_prelance_comissao_total',
         'valor_prelance',
+        'prelance_vencedor',
         'valor_prelance_diferenca_valor_estimado',
         'valor_prelance_percentual_valor_estimado',
         'valor_prelance_calculado',
@@ -85,7 +86,7 @@ class Lote extends Model
     
     public function prelances(): HasMany
     {
-        return $this->hasMany(Lance::class, 'lote_uuid', 'uuid')->where('tipo', (string)TipoLanceEnum::PRELANCE);
+        return $this->hasMany(Lance::class, 'lote_uuid', 'uuid')->with('prelance_config')->where('tipo', (string)TipoLanceEnum::PRELANCE);
     }
 
     public function prelance_vencedor()
@@ -206,6 +207,22 @@ class Lote extends Model
 
         return 0; 
     }
+
+    /*
+    * prelance que está vencendo o prelance
+    *
+    * @return array
+    */
+    public function getPrelanceVencedorAttribute(): array
+    {
+        if($this->prelance_vencedor())
+        {
+            return $this->prelance_vencedor()->toArray();
+        }
+
+        return []; 
+    }
+
 
     /*
     * Valor pré calculado do lance, levando em conta o 

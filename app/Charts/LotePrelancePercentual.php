@@ -25,6 +25,7 @@ class LotePrelancePercentual
             ->addData($lotes->pluck('valor_prelance')->toArray())
             ->setToolbar(true, true)
             ->setLabels($labels)
+            ->setTitle('valor estimado x Valor atingido')
             ->setXAxis($labels);
     }
 }
