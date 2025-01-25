@@ -24,7 +24,7 @@
         toastr.options.hideEasing = 'linear';
         toastr.options.closeEasing = 'linear';
         toastr.options.progressBar = true;
-        
+
         tailwind.config = {
             darkMode: ['class', '[data-mode="dark"]'],
             theme: {
@@ -42,7 +42,7 @@
     <title>@yield('title') - {{config('app.name')}}</title>
 </head>
 <script>
-    document.getElementById('htmlMainPage').classList.add('dark')
+    //document.getElementById('htmlMainPage').classList.add('dark')
     function lighMode() {
         console.log('executou');
         
