@@ -23,7 +23,8 @@ class PreLanceVisaoGeral extends Component
                 'cliente.nome',
                 DB::raw('SUM(lance.valor / subquery.cliente_count) as total_gasto'),
                 DB::raw('COUNT(DISTINCT lote.uuid) as total_lotes'),
-                DB::raw('GROUP_CONCAT(DISTINCT lote.numero ORDER BY lote.numero ASC) as lotes_vencendo')
+                DB::raw('GROUP_CONCAT(DISTINCT lote.numero ORDER BY lote.numero ASC) as lotes_vencendo'),
+                DB::raw('GROUP_CONCAT(DISTINCT lote.descricao) as lotes_descricao')
             )
             ->join('lance_cliente', 'cliente.uuid', '=', 'lance_cliente.cliente_uuid')
             ->join('lance', 'lance_cliente.lance_uuid', '=', 'lance.uuid')
