@@ -95,7 +95,7 @@
                      Clientes no pré-lance
                   </button>
                </li>
-               <li role="presentation">
+               {{-- <li role="presentation">
                   <button 
                      class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
                      id="contacts-tab" 
@@ -106,7 +106,7 @@
                      aria-selected="false">
                      Histórico geral
                   </button>
-               </li>
+               </li> --}}
                <li role="presentation">
                   <button 
                      class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
@@ -128,16 +128,53 @@
                      role="tab" 
                      aria-controls="configuracoes-prelance" 
                      aria-selected="false">
-                     Configurações do pré-lance
+                     Configurações
                   </button>
                </li>
                <li role="presentation">
-                  <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid])}}" type="button" class="px-6 w-full mb-2 text-center py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="w-full ml-2 mr-2 mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                     Mapas <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                     </svg>
+                  </button>
+                 
+                 <!-- Dropdown menu -->
+                  <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                           <li>
+                              <a target="_blank" href="{{route('leilao.mapa.lote-a-lote', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lote a Lote</a>
+                           </li>
+                           <li>
+                              <a target="_blank" href="{{route('leilao.mapa.ranking-comprador', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ranking Compradores</a>
+                           </li>
+                           <li>
+                              <a target="_blank" href="{{route('leilao.mapa.ranking-vendedor', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ranking Vendedores</a>
+                           </li>
+                           <li>
+                              <a target="_blank" href="{{route('leilao.mapa.media-raca', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Médias por Raça</a>
+                           </li>
+                           <li>
+                              <a target="_blank" href="{{route('leilao.mapa.media-especie', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Médias por Espécie</a>
+                           </li>
+                           {{-- <li>
+                              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                           </li>
+                           <li>
+                              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                           </li>
+                           <li>
+                              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                           </li> --}}
+                        </ul>
+                  </div>
+               </li>
+               <li role="presentation">
+                  <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid])}}" type="button" class="px-6 ml-4 w-full mb-2 text-center py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                      <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
                         <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
                         <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
                      </svg>
-                     REGISTRAR NOVO LANCE
+                     NOVO LANCE
                   </a>
                </li>
             </ul>
@@ -527,7 +564,7 @@
             HISTÓRICO GERAL
             ------------------------------------------
             -->
-            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+            {{-- <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
                <div class="flow-root">
                   <ol class="relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mt-2 mb-4 md:mb-5">
                      @foreach($leilao->lotes as $index => $lote)
@@ -599,7 +636,7 @@
                      @endforeach                
                   </ol>
                </div>
-            </div>
+            </div> --}}
 
 
 

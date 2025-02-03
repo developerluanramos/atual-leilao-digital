@@ -179,7 +179,7 @@
                     <x-layouts.badges.info-money
                         :convert="true"
                         :textLength="'lg'"
-                        :value="$leilao->valor_total / count($leilao->lotes)" />
+                        :value="$leilao->valor_total / (count($leilao->lotes) ?? 1)" />
                 </div>
             </div>
         </div>
