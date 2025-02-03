@@ -176,10 +176,10 @@
                     <a href="#">
                         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Média</h5>
                     </a>
-                    <x-layouts.badges.info-money
+                    {{-- <x-layouts.badges.info-money
                         :convert="true"
                         :textLength="'lg'"
-                        :value="$leilao->valor_total / (count($leilao->lotes) ?? 1)" />
+                        :value="$leilao->valor_total / (count($leilao->lotes) ?? 1)" /> --}}
                 </div>
             </div>
         </div>
