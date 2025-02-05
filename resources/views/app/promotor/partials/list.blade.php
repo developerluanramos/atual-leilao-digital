@@ -2,7 +2,6 @@
     :headers="[
         'Nome',
         'Email',
-        'Data de Nascimento',
         'Ações'
     ]"
     :paginator="$promotores"
@@ -13,7 +12,6 @@
             <tr>
                 <td>{{ $promotor->nome }}</td>
                 <td>{{ $promotor->email }}</td>
-                <td>{{ $promotor->nascido_em }}</td>
                 <td class="text-right">
                     <x-layouts.buttons.action-button
                     text="Ver"

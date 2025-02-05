@@ -2,7 +2,7 @@
     :headers="[
         'Nome',
         'Email',
-        'Data de nascimento'
+        ''
     ]"
     :paginator="$leiloeiros"
     :appends="$filters"
@@ -12,7 +12,6 @@
             <tr>
                 <td>{{ $leiloeiro->nome }}</td>
                 <td>{{ $leiloeiro->email }}</td>
-                <td>{{ $leiloeiro->nascido_em }}</td>
                 <td class="text-right">
                     <x-layouts.buttons.action-button
                     text="Ver"

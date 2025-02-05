@@ -2,7 +2,7 @@
     :headers="[
         'Nome',
         'Email',
-        'Data de Nascimento'
+        ''
     ]"
     :paginator="$pisteiros"
     :appends="$filters"
@@ -12,7 +12,6 @@
             <tr>
                 <td>{{ $pisteiro->nome }}</td>
                 <td>{{ $pisteiro->email }}</td>
-                <td>{{ $pisteiro->nascido_em }}</td>
                 <td class="text-right">
                     <x-layouts.buttons.action-button
                     text="Ver"

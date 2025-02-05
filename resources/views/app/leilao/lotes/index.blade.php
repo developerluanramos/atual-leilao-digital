@@ -12,7 +12,7 @@
                         </div>
                         <div class="flex-1 min-w-0 ms-4">
                             <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                {{$lote->descricao}}
+                                <b>{{$lote->descricao}}</b>
                             </p>
                             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                 {{$lote->plano_pagamento['descricao']}}
@@ -23,11 +23,11 @@
                                 </x-layouts.badges.status-lote>
                             </p>
                         </div>
-                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white mr-lg">
+                        {{-- <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white mr-lg">
                             <p class="text-sm text-gray-500 truncate dark:text-gray-400 p-2">
                                 {{$lote->updated_at_for_humans}}
                             </p>
-                        </div>
+                        </div> --}}
                         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                             @if ($lote->status == App\Enums\StatusLoteEnum::ABERTO)
                                 <a class="mt-sm" title="REALIZAR VENDA DO LOTE" href="{{route('compra.create', ['loteUuid' => $lote->uuid])}}">
