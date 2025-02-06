@@ -30,7 +30,7 @@ class MapaMediaRacaShowController extends Controller
         $pdf = Pdf::setOptions($options);
         
         $leilao = Leilao::where("uuid", $leilaoUuid)->first();
-        $medias = Compra::join('lote', 'compra.lote_uuid', '=', 'lote.uuid')
+        $mediasRaca = Compra::join('lote', 'compra.lote_uuid', '=', 'lote.uuid')
             ->join('lote_item', 'lote.uuid', '=', 'lote_item.lote_uuid')
             ->join('raca', 'lote_item.raca_uuid', '=', 'raca.uuid')
             ->selectRaw('
@@ -59,7 +59,7 @@ class MapaMediaRacaShowController extends Controller
             ->get();
         
         //  dd($medias);
-        $pdf->loadView('app.mapa.media-raca', ['medias' => $medias, 'leilao' => $leilao]);
+        $pdf->loadView('app.mapa.media-raca', ['mediasRaca' => $mediasRaca, 'leilao' => $leilao]);
         
         return $this->stream($pdf, 'media-raca.pdf');
     }

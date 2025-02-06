@@ -33,7 +33,7 @@ class MapaMediaEspecieshowController extends Controller
         $pdf = Pdf::setOptions($options);
         
         $leilao = Leilao::where("uuid", $leilaoUuid)->first();
-        $medias = Compra::join('lote', 'compra.lote_uuid', '=', 'lote.uuid')
+        $mediasEspecie = Compra::join('lote', 'compra.lote_uuid', '=', 'lote.uuid')
             ->join('lote_item', 'lote.uuid', '=', 'lote_item.lote_uuid')
             ->join('especie', 'lote_item.especie_uuid', '=', 'especie.uuid')
             ->selectRaw('
@@ -63,7 +63,7 @@ class MapaMediaEspecieshowController extends Controller
         
         // $imageLogo = base64_encode(Storage::get('public/atual_leiloes_logo.png'));
         // $src = 'data:image/pgn;base64,' . base64_encode(Storage::get('public/atual_leiloes_logo.png'));
-        $pdf->loadView('app.mapa.media-especie', ['leilao' => $leilao, 'medias' => $medias]);
+        $pdf->loadView('app.mapa.media-especie', ['leilao' => $leilao, 'mediasEspecie' => $mediasEspecie]);
         
         return $this->stream($pdf, 'media-especie.pdf');
     }

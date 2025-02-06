@@ -31,14 +31,14 @@ class MapaRankingVendedorShowController extends Controller
         
         $leilao = Leilao::where('uuid', $leilaoUuid)->first();
         
-        $compras = Compra::selectRaw('vendedor_uuid, SUM(valor) as total, AVG(valor) as media')
+        $rankingVendedores = Compra::selectRaw('vendedor_uuid, SUM(valor) as total, AVG(valor) as media')
                     ->with('vendedor')
                     ->groupBy('vendedor_uuid')
                     ->orderByDesc('total')
                     ->where('leilao_uuid', $leilaoUuid)->distinct('vendedor_uuid')
                     ->get();
 
-        $pdf->loadView('app.mapa.ranking-vendedor', ['leilao' => $leilao, 'compras' => $compras]);
+        $pdf->loadView('app.mapa.ranking-vendedor', ['leilao' => $leilao, 'rankingVendedores' => $rankingVendedores]);
         
         return $this->stream($pdf, 'ranking-vendedor.pdf');
     }

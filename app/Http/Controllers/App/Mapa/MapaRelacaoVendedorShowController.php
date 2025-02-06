@@ -9,7 +9,7 @@ use App\Models\Leilao;
 use Illuminate\Support\Facades\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class MapaRankingCompradorShowController extends Controller
+class MapaRelacaoVendedorShowController extends Controller
 {
     use GeneratePdfTrait;
 
@@ -26,24 +26,20 @@ class MapaRankingCompradorShowController extends Controller
             'isRemoteEnabled' => true,
             'orientation' => 'portrait'
         ];
-        
+
         $pdf = Pdf::setOptions($options);
         
         $leilao = Leilao::where('uuid', $leilaoUuid)->first();
-
-        $rankingCompradores = Compra::selectRaw('
-                        cliente_uuid,
-                        SUM(valor) as total,
-                        AVG(valor) as media
-                    ')
-                    ->with('cliente')
-                    ->groupBy('cliente_uuid')
+        
+        $compras = Compra::selectRaw('vendedor_uuid, SUM(valor) as total, AVG(valor) as media')
+                    ->with('vendedor')
+                    ->groupBy('vendedor_uuid')
                     ->orderByDesc('total')
-                    ->where('leilao_uuid', $leilaoUuid)->distinct('cliente_uuid')
+                    ->where('leilao_uuid', $leilaoUuid)->distinct('vendedor_uuid')
                     ->get();
+
+        $pdf->loadView('app.mapa.ranking-vendedor', ['leilao' => $leilao, 'compras' => $compras]);
         
-        $pdf->loadView('app.mapa.ranking-comprador', ['leilao' => $leilao, 'rankingCompradores' => $rankingCompradores]);
-        
-        return $this->stream($pdf, 'ranking-comprador.pdf');
+        return $this->stream($pdf, 'ranking-vendedor.pdf');
     }
 }

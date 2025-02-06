@@ -74,7 +74,7 @@
                 </button>
                 
                 <!-- Dropdown menu -->
-                <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                         <li>
                             <a target="_blank" href="{{route('leilao.mapa.lote-a-lote', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lote a Lote</a>
@@ -91,15 +91,15 @@
                         <li>
                             <a target="_blank" href="{{route('leilao.mapa.media-especie', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Médias por Espécie</a>
                         </li>
-                        {{-- <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                        <li>
+                            <a target="_blank" href="{{route('leilao.mapa.relacao-comprador', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Relação de Compradores</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                            <a target="_blank" href="{{route('leilao.mapa.relacao-vendedor', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Relação de Vendedores</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                        </li> --}}
+                            <a target="_blank" href="{{route('leilao.mapa.geral', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Mapa Geral</a>
+                        </li>
                     </ul>
                 </div>
             </li>

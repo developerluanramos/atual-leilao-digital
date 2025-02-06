@@ -60,7 +60,7 @@
 <div class="flow-root">
     <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
         @forelse ($lote->compras as $compra)
-            <li class="py-3 sm:py-4 cursor-pointer pointer" data-modal-target="{{$compra->uuid}}" data-modal-toggle="{{$compra->uuid}}">
+            <li class="py-3 sm:py-4 cursor-pointer pointer">
                 <div class="flex items-center w-full">
                     <div class="flex-shrink-0">
                         <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
@@ -69,7 +69,7 @@
                     </div>
                     <div class="flex-1 min-w-0 ms-4">
                         <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            {{$compra->cliente->nome}}
+                            <b>{{$compra->cliente->nome}}</b>
                         </p>
                         <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                             {{$compra->created_at}}
@@ -94,6 +94,28 @@
                             :convert="false"
                             :value="$compra->valor"
                         ></x-layouts.badges.info-money>
+                    </div>
+                </div>
+                <div class="flex-items w-full">
+                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                        <a type="button" target="_blank" data-modal-target="{{$compra->uuid}}" data-modal-toggle="{{$compra->uuid}}" class="flex text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 3v4a1 1 0 0 1-1 1H5m8-2h3m-3 3h3m-4 3v6m4-3H8M19 4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1ZM8 12v6h8v-6H8Z"/>
+                            </svg>
+                            Parcelas
+                        </a>
+                        <a type="button" target="_blank" href="{{route('promissoria.via-cliente', ['compraUuid' => $compra->uuid])}}" class="flex text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+                            <span class="flex w-5 h-5 me-3 bg-red-200 rounded-full"></span>
+                            Via Comprador
+                        </a>
+                        <a type="button" target="_blank" href="{{route('promissoria.via-vendedor', ['compraUuid' => $compra->uuid])}}" class="flex text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+                            <span class="flex w-5 h-5 me-3 bg-gray-200 rounded-full"></span>
+                            Via Vendedor
+                        </a>
+                        <a type="button" target="_blank" href="{{route('promissoria.via-interna', ['compraUuid' => $compra->uuid])}}" class="flex text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">
+                            <span class="flex w-5 h-5 me-3 bg-yellow-300 rounded-full"></span>
+                            Via Interna
+                        </a>
                     </div>
                 </div>
             </li>
