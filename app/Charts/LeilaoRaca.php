@@ -20,7 +20,7 @@ class LeilaoRaca
         $racaQuantities = LoteItem::join('lote', 'lote_item.lote_uuid', '=', 'lote.uuid')
             ->join('leilao', 'lote.leilao_uuid', '=', 'leilao.uuid')
             ->join('raca', 'lote_item.raca_uuid', '=', 'raca.uuid')
-            ->selectRaw('raca.nome, lote_item.raca_uuid, COUNT(*) as quantidade')
+            ->selectRaw('SUBSTRING(raca.nome, 1, 10) as nome, lote_item.raca_uuid, COUNT(*) as quantidade')
             ->groupBy('lote_item.raca_uuid')
             ->orderBy('lote_item.raca_uuid')
             ->where('leilao_uuid', $leilao->uuid)
