@@ -290,6 +290,14 @@
     @include('app.mapa.ranking-comprador', ['leilao' => $leilao, 'rankingCompradores' => $rankingCompradores])
 
     <div class="page-break"></div>
+
+    @include('app.mapa.relacao-comprador', ['leilao' => $leilao, 'relacaoCompradores' => $relacaoCompradores])
+
+    <div class="page-break"></div>
+
+    @include('app.mapa.relacao-vendedor', ['leilao' => $leilao, 'relacaoVendedores' => $relacaoVendedores])
+
+    <div class="page-break"></div>
 </body>
 
 </html>

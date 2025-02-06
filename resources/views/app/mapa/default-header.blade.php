@@ -259,7 +259,7 @@
         </p>
     </div>
 
-    @yield('content-mapa')
+    @yield('content-mapa-'.$identificador)
     
     <!-- Footer -->
     <div class="footer">

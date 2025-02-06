@@ -19,6 +19,7 @@ class MapaGeralShowController extends Controller
 
     public function show(string $leilaoUuid, Request $request)
     {
+        ini_set('memory_limit', '2048M');
         set_time_limit(100000);
         $options = [
             'defaultFont' => 'sans-serif',
@@ -108,12 +109,44 @@ class MapaGeralShowController extends Controller
                     ->where('leilao_uuid', $leilaoUuid)->distinct('vendedor_uuid')
                     ->get();
 
+
+                    $relacaoCompradores = Compra::selectRaw('
+                    cliente_uuid,
+                    SUM(valor) as total,
+                    AVG(valor) as media
+                ')
+                ->with('cliente')
+                ->groupBy('cliente_uuid')
+                ->orderByDesc('total')
+                ->where('leilao_uuid', $leilaoUuid)->distinct('cliente_uuid')
+                ->get();
+
+        $relacaoVendedores = Compra::selectRaw('vendedor_uuid, SUM(valor) as total, AVG(valor) as media')
+            ->with('vendedor')
+            ->groupBy('vendedor_uuid')
+            ->orderByDesc('total')
+            ->where('leilao_uuid', $leilaoUuid)->distinct('vendedor_uuid')
+            ->get();     
+
+        $relacaoCompradores = Compra::selectRaw('
+                                    cliente_uuid,
+                                    SUM(valor) as total,
+                                    AVG(valor) as media
+                                ')
+                                ->with('cliente')
+                                ->groupBy('cliente_uuid')
+                                ->orderByDesc('total')
+                                ->where('leilao_uuid', $leilaoUuid)->distinct('cliente_uuid')
+                                ->get();
+
         $pdf->loadView('app.mapa.mapa-geral', [
             'leilao' => $leilao, 
             'mediasRaca' => $mediasRaca,
             'mediasEspecie' => $mediasEspecie,
             'rankingCompradores' => $rankingCompradores,
-            'rankingVendedores' => $rankingVendedores
+            'rankingVendedores' => $rankingVendedores,
+            'relacaoCompradores' => $relacaoCompradores,
+            'relacaoVendedores' => $relacaoVendedores
         ]);
         
         return $this->stream($pdf, 'mapa-geral.pdf');

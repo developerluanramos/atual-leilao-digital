@@ -1,6 +1,6 @@
-@extends('app.mapa.default-header', ['titulo' => "MAPA TOTAIS, MÉDIAS E PERCENTUAIS POR ESPÉCIE"])
+@extends('app.mapa.default-header', ['titulo' => "MAPA TOTAIS, MÉDIAS E PERCENTUAIS POR ESPÉCIE", 'identificador' => 'especie'])
 
-@section('content-mapa')
+@section('content-mapa-especie')
     <table style="width: 100%; margin-bottom: 35px;" class="report-table">
         <thead>
             <tr>

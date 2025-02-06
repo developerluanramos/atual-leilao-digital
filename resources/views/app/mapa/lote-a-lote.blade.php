@@ -1,6 +1,6 @@
-@extends('app.mapa.default-header', ['titulo' => "MAPA LOTE A LOTE"])
+@extends('app.mapa.default-header', ['titulo' => "MAPA LOTE A LOTE", 'identificador' => 'lote-a-lote'])
 
-@section('content-mapa')
+@section('content-mapa-lote-a-lote')
     <table style="width: 100%" class="report-table">
         <thead>
             <tr>
