@@ -42,9 +42,56 @@
          </div>
       </div>
    </div>
+   <div class="flex w-full mt-2">
+      <button id="multiLevelDropdownButton" data-dropdown-toggle="multi-dropdown" 
+         class="flex focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" type="button">Relatórios 
+         <svg class="w-2.5 h-2.5 ms-3 mt-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+         </svg>
+      </button>
+      
+      <!-- Dropdown menu -->
+      <div id="multi-dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="multiLevelDropdownButton">
+            <li style="text-align: start">
+               <button id="doubleDropdownButton" data-dropdown-toggle="doubleDropdown" data-dropdown-placement="right-start" type="button" 
+                  class="flex items-left justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  Clientes
+                  <svg class="w-2.5 h-2.5 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                  </svg>
+               </button>
+               <div id="doubleDropdown" class="z-10 content-left items-left hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                  <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="doubleDropdownButton">
+                     <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Overview</a>
+                     </li>
+                     <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">My downloads</a>
+                     </li>
+                     <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Billing</a>
+                     </li>
+                     <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rewards</a>
+                     </li>
+                  </ul>
+               </div>
+            </li>
+         </ul>
+      </div>
+
+      <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid])}}" type="button" class="px-2 ml-4 w-300 mb-2 text-center py-1.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+         <svg class="w-6 h-6 text-white mr-2 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
+          </svg>
+          
+         Novo lance
+      </a>
+   </div>
    <br>
    <div class="flex flex-wrap mb-2">
-      <div class="w-full md:w-12/12 mb-6 md:mb-0">
+      <div class="w-full md:w-12/12 md:mb-0">
          <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
                <li class="me-2" role="presentation">
@@ -62,25 +109,25 @@
                <li class="me-2" role="presentation">
                   <button 
                      class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
-                     id="dashboard-tab" 
-                     data-tabs-target="#dashboard" 
-                     type="button" 
-                     role="tab" 
-                     aria-controls="dashboard" 
-                     aria-selected="false">
-                     Gasto por cliente
-                  </button>
-               </li>
-               <li class="me-2" role="presentation">
-                  <button 
-                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
                      id="settings-tab" 
                      data-tabs-target="#settings" 
                      type="button" 
                      role="tab" 
                      aria-controls="settings" 
                      aria-selected="false">
-                     Clientes vencedores
+                     Vencedores por lote
+                  </button>
+               </li>
+               <li class="me-2" role="presentation">
+                  <button 
+                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
+                     id="dashboard-tab" 
+                     data-tabs-target="#dashboard" 
+                     type="button" 
+                     role="tab" 
+                     aria-controls="dashboard" 
+                     aria-selected="false">
+                     Gastos por cliente
                   </button>
                </li>
                <li class="me-2" role="presentation">
@@ -92,7 +139,19 @@
                      role="tab" 
                      aria-controls="clients-prelance" 
                      aria-selected="false">
-                     Clientes no pré-lance
+                     Todos os clientes
+                  </button>
+               </li>
+               <li role="presentation">
+                  <button 
+                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
+                     id="vendedores-tab" 
+                     data-tabs-target="#vendedores" 
+                     type="button" 
+                     role="tab" 
+                     aria-controls="vendedores" 
+                     aria-selected="false">
+                     Vendedores
                   </button>
                </li>
                {{-- <li role="presentation">
@@ -131,52 +190,6 @@
                      Configurações
                   </button>
                </li>
-               <li role="presentation">
-                  <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="w-full ml-2 mr-2 mt-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                     Mapas <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                     </svg>
-                  </button>
-                 
-                 <!-- Dropdown menu -->
-                  <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                           <li>
-                              <a target="_blank" href="{{route('leilao.mapa.lote-a-lote', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Lote a Lote</a>
-                           </li>
-                           <li>
-                              <a target="_blank" href="{{route('leilao.mapa.ranking-comprador', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ranking Compradores</a>
-                           </li>
-                           <li>
-                              <a target="_blank" href="{{route('leilao.mapa.ranking-vendedor', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ranking Vendedores</a>
-                           </li>
-                           <li>
-                              <a target="_blank" href="{{route('leilao.mapa.media-raca', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Médias por Raça</a>
-                           </li>
-                           <li>
-                              <a target="_blank" href="{{route('leilao.mapa.media-especie', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Médias por Espécie</a>
-                           </li>
-                           {{-- <li>
-                              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                           </li>
-                           <li>
-                              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                           </li>
-                           <li>
-                              <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
-                           </li> --}}
-                        </ul>
-                  </div>
-               </li>
-               <li role="presentation">
-                  <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid])}}" type="button" class="px-6 ml-4 w-full mb-2 text-center py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                     <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
-                        <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
-                        <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
-                     </svg>
-                     NOVO LANCE
-                  </a>
-               </li>
             </ul>
          </div>
          <div id="default-tab-content">
@@ -185,7 +198,7 @@
             LOTES
             ------------------------------------------
             -->
-            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="hidden p-2 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                <button onclick="copiarLotesGeralResumido({{json_encode($leilao->toArray())}}, {{json_encode($leilao->lotes->toArray())}})" type="button" class="mb-2 px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
                   <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                      <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
@@ -204,7 +217,8 @@
                <div class="space-y-2 lg:grid lg:grid-cols-6 pr-2 sm:gap-6 xl:gap-10 lg:space-y-0">
                   @foreach($leilao->lotes as $index => $lote)
                      <div data-modal-target="{{$lote->uuid}}" data-modal-toggle="{{$lote->uuid}}"
-                        style="background-color: {{ $lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc' }}" class="flex flex-col p-4 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow-2 dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                        style="cursor: pointer; background-color: {{ $lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc' }}" 
+                        class="flex flex-col p-4 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow-2 dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                            {{ $index + 1 }}
                         </h5>
@@ -219,14 +233,13 @@
                            :tamanho="4"
                            :identificador="$lote->uuid"
                            :sessao="$lote->uuid"
-                           :titulo="'Lote '.$lote->numero">
+                           :titulo="'Lote '.$lote->numero.' - ' . $lote->descricao">
                            @section($lote->uuid)
                            <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])}}" type="button" class="px-6 w-full mb-2 text-center py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                              <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
-                                 <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
-                                 <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
-                              </svg>
-                              REGISTRAR NOVO LANCE
+                              <svg class="w-6 h-6 text-white mr-2 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                 <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
+                               </svg>
+                              Novo lance
                            </a>
                            <small>
                               Valor atingido 
@@ -365,6 +378,11 @@
             -->
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                <div class="flow-root">
+                  <button type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                     <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
+                      </svg> Relatório geral                                    
+                  </button>
                   <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                      @foreach($clientesVencedores as $cliente)
                         <li class="py-3 sm:py-4">
@@ -376,21 +394,46 @@
                               </div>
                               <div class="flex-1 min-w-0 ms-4">
                                  <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    <a class="cursor-pointer" data-modal-target="{{$cliente->cliente_uuid}}" data-modal-toggle="{{$cliente->cliente_uuid}}">{{ $cliente->nome }}</a>
+                                    <a class="cursor-pointer" data-modal-target="{{$cliente->cliente_uuid}}" data-modal-toggle="{{$cliente->cliente_uuid}}">
+                                       <b>{{ $cliente->nome }}</b>
+                                    </a>
                                  </p>
                                  <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                    Lotes {{ $cliente->lotes_vencendo }}
+                                    @foreach (explode(',', $cliente->lotes_vencendo) as $lote)
+                                       <span class="inline-flex items-center justify-center w-6 h-6 me-2 text-sm font-semibold text-green-800 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-300">
+                                          {{$lote}}
+                                          <span class="sr-only">Icon description</span>
+                                       </span>
+                                    @endforeach
                                  </p>
                               </div>
                               <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white mr-2 me-2">
+                                 <b>
+                                    <x-layouts.badges.info-money
+                                       :convert="false"
+                                       :textLength="'sm'"
+                                       :value="number_format($cliente->total_gasto_real, 2, '', '.')"
+                                    />
+                                 </b>
+                                 &nbsp;
                                  <x-layouts.badges.info-money
                                     :convert="false"
-                                    :textLength="'lg'"
+                                    :textLength="'sm'"
                                     :value="number_format($cliente->total_gasto, 2, '', '.')"
                                     />
                                  <br>
                               </div>
                               <div class="inline-flex mr-2 me-2 items-center text-base font-semibold text-gray-900 dark:text-white">
+                                 <button type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                       <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
+                                     </svg>
+                                 </button>
+                                 <button type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                       <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
+                                     </svg>                                     
+                                 </button>
                                  <button onclick="copiarGastoPorCliente('{{$leilao->descricao}}', {{json_encode($cliente)}})" type="button" class="px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
                                     <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                        <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
@@ -428,11 +471,20 @@
                                  @if($lote->prelance_vencedor())
                                     @foreach($lote->prelance_vencedor()?->clientes()?->get() ?? [] as $index => $clienteVencedor)
                                        <p class="text-sm font-medium text-blue-900 truncate dark:text-white">
-                                          <a class="cursor-pointer" data-modal-target="{{$clienteVencedor->uuid}}" data-modal-toggle="{{$clienteVencedor->uuid}}">{{ $clienteVencedor->nome }}</a>
+                                          <a class="cursor-pointer" data-modal-target="{{$clienteVencedor->uuid}}" data-modal-toggle="{{$clienteVencedor->uuid}}"><b>{{ $clienteVencedor->nome }}</b></a>
                                        </p>
                                     @endforeach
                                     <p>
+                                       {{$lote->descricao}}
+                                    </p>
+                                    <p>
                                        <small>
+                                          total:
+                                          <x-layouts.badges.info-money
+                                             :convert="true"
+                                             :textLength="'sm'"
+                                             :value="$lote->valor_prelance ?? 0"
+                                          />&nbsp 
                                              c. compra:
                                              <x-layouts.badges.info-money
                                                 :convert="false"
@@ -461,9 +513,10 @@
                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                               <x-layouts.badges.info-money
                                  :convert="false"
-                                 :textLength="$lote->prelance_vencedor() ? 'lg' : 'sm'"
+                                 :textLength="'sm'"
                                  :value="$lote->prelance_vencedor()?->valor ?? 0"
                                  />
+                             
                               <br>
                            </div>
                         </div>
@@ -494,7 +547,7 @@
                            </div>
                            <div class="flex-1 min-w-0 ms-4">
                               <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                 <a class="cursor-pointer" data-modal-target="{{$cliente->uuid}}" data-modal-toggle="{{$cliente->uuid}}">{{ $cliente->nome }}</a>
+                                 <a class="cursor-pointer" data-modal-target="{{$cliente->uuid}}" data-modal-toggle="{{$cliente->uuid}}"><b>{{ $cliente->nome }}</b></a>
                               </p>
                               <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                  {{ $cliente->email }}
@@ -507,11 +560,10 @@
                               :titulo="$cliente->nome">
                               @section($cliente->uuid)
                               <a href="{{route('prelance.create', ['leilaoUuid' => $leilao->uuid, 'clienteUuid' => $cliente->uuid])}}" type="button" class="px-6 w-full mb-2 text-center py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                 <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
-                                    <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
-                                    <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
-                                 </svg>
-                                 REGISTRAR NOVO LANCE
+                                 <svg class="w-6 h-6 text-white mr-2 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
+                                  </svg>
+                                 Novo lance
                               </a>
                               <ul class="w-full divide-y divide-gray-200 dark:divide-gray-700">
                                  @foreach($cliente->prelances()->with('lote')->where('lance.leilao_uuid', $leilao->uuid)->groupBy('lance.id', 'lance_cliente.cliente_uuid')->get() as $lance)
@@ -557,6 +609,56 @@
             </div>
 
 
+            <!--
+            ------------------------------------------
+            VENDEDORES
+            ------------------------------------------
+            -->
+            <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="vendedores" role="tabpanel" aria-labelledby="vendedores-tab">
+               <h3>Vendedores</h3>
+               <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                  @foreach($vendedores as $vendedor)
+                     <li class="py-3 sm:py-4">
+                        <div class="flex items-center">
+                           <div class="flex-shrink-0">
+                              <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+                                 <span class="font-medium text-gray-600 dark:text-gray-300">{{mb_substr($vendedor->nome, 0, 2)}}</span>
+                              </div>
+                           </div>
+                           <div class="flex-1 min-w-0 ms-4">
+                              <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                 <a class="cursor-pointer">
+                                    <b>{{ $vendedor->nome }}</b>
+                                 </a>
+                              </p>
+                           </div>
+                           {{-- <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white mr-2 me-2">
+                              <x-layouts.badges.info-money
+                                 :convert="false"
+                                 :textLength="'lg'"
+                                 :value="number_format($cliente->total_gasto, 2, '', '.')"
+                                 />
+                              <br>
+                           </div> --}}
+                           <div class="inline-flex mr-2 me-2 items-center text-base font-semibold text-gray-900 dark:text-white">
+                              <button type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
+                                  </svg>                                     
+                              </button>
+                              <button type="button" class="px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
+                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
+                                    <path fill="currentColor" d="M16.735 13.492c-.038-.018-1.497-.736-1.756-.83a1.008 1.008 0 0 0-.34-.075c-.196 0-.362.098-.49.291-.146.217-.587.732-.723.886-.018.02-.042.045-.057.045-.013 0-.239-.093-.307-.123-1.564-.68-2.751-2.313-2.914-2.589-.023-.04-.024-.057-.024-.057.005-.021.058-.074.085-.101.08-.079.166-.182.249-.283l.117-.14c.121-.14.175-.25.237-.375l.033-.066a.68.68 0 0 0-.02-.64c-.034-.069-.65-1.555-.715-1.711-.158-.377-.366-.552-.655-.552-.027 0 0 0-.112.005-.137.005-.883.104-1.213.311-.35.22-.94.924-.94 2.16 0 1.112.705 2.162 1.008 2.561l.041.06c1.161 1.695 2.608 2.951 4.074 3.537 1.412.564 2.081.63 2.461.63.16 0 .288-.013.4-.024l.072-.007c.488-.043 1.56-.599 1.804-1.276.192-.534.243-1.117.115-1.329-.088-.144-.239-.216-.43-.308Z"/>
+                                 </svg>
+                              </button>
+                           </div>
+                        </div>
+                     </li>
+                  @endforeach
+               </ul>
+            </div>
+            </div>
 
 
             <!-- 

@@ -22,6 +22,7 @@ class Lote extends Model
         'plano_pagamento_uuid',
         'valor_estimado',
         'valor_minimo_prelance',
+        'valor_final_prelance',
         'status', // aberto / Fechado
         'quantidade', // -- desconsiderar
         'quantidade_macho', // -- desconsiderar

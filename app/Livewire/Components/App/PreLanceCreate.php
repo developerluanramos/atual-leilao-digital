@@ -33,6 +33,9 @@ class PreLanceCreate extends Component
     public function mount(Leilao $leilao, $lote = null, $cliente = null)
     {
         $this->leilao = $leilao;
+        if(is_null($this->leilao->config_prelance_atual)) {
+            return redirect()->to(route('prelance.index', ['leilaoUuid' => $leilao->uuid]));
+        }
         $this->lote = $lote;
         $this->hidden = "hidden";
         $this->searchClientes = "";
@@ -192,6 +195,7 @@ class PreLanceCreate extends Component
                 'prelance_config_uuid' => $this->leilao->config_prelance_atual->uuid,
                 'plano_pagamento_uuid' => $this->leilao->plano_pagamento_prelance->uuid,
                 'realizado_em' => Carbon::now()->toDateString(),
+                'valor_final_prelance' => $this->valorTotalLote,
                 'valor' => $this->valorLance,
                 'valor_comissao_compra' => $this->valorTotalComissaoComprador,
                 'valor_comissao_venda' => $this->valorTotalComissaoVendedor,

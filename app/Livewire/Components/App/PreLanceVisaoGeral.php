@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Components\App;
 
-use App\Enums\TipoLanceEnum;
 use App\Models\Leilao;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -13,14 +12,28 @@ class PreLanceVisaoGeral extends Component
     public $lotesLanceVencedor;
     public $clientesVencedores;
 
+    public $vendedores;
+
     public function mount(Leilao $leilao)
     {
+        set_time_limit(500);
+
         $this->leilao = $leilao;
+
+
+        $this->vendedores = $leilao->lotes()
+            ->with('vendedores')
+            ->get()
+            ->pluck('vendedores')
+            ->flatten()
+            ->unique('id');
 
         $this->clientesVencedores = DB::table('cliente')
             ->select(
+                'lote.valor_final_prelance',
                 'cliente.uuid as cliente_uuid',
                 'cliente.nome',
+                DB::raw('SUM(lote.valor_final_prelance / subquery.cliente_count) as total_gasto_real'),
                 DB::raw('SUM(lance.valor / subquery.cliente_count) as total_gasto'),
                 DB::raw('COUNT(DISTINCT lote.uuid) as total_lotes'),
                 DB::raw('GROUP_CONCAT(DISTINCT lote.numero ORDER BY lote.numero ASC) as lotes_vencendo'),
@@ -51,9 +64,9 @@ class PreLanceVisaoGeral extends Component
                 'lance.uuid'
             )
             ->where('leilao.uuid', $this->leilao->uuid)
-            ->groupBy('cliente.uuid', 'cliente.nome')
+            ->groupBy('cliente.uuid', 'cliente.nome', 'lote.valor_final_prelance')
+            ->orderBy('cliente.nome', 'asc')
             ->orderBy('total_gasto', 'desc')
-            ->orderBy('total_lotes', 'desc')
             ->get();
     }
 
