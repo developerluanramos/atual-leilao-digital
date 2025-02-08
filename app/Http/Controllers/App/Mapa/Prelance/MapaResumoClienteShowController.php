@@ -25,7 +25,7 @@ class MapaResumoClienteShowController extends Controller
             'enable-javascript' => true,
             'images' => true,
             'isRemoteEnabled' => true,
-            'orientation' => 'portrait'
+            'orientation' => 'landascape'
         ];
         
         $pdf = Pdf::setOptions($options);

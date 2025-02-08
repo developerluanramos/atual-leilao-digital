@@ -92,7 +92,7 @@
                 @php
                     $valorTotalComissaoComprador += $prelance->valor_comissao_compra; 
                     $valorTotalComissaoVendedor += $prelance->valor_comissao_venda; 
-                    $valorTotal += $prelance->lote->valor_final_prelance;
+                    $valorTotal += $prelance->lote->valor_prelance;
                 @endphp
                 <tr>
                     <td style="text-align: left !important; background-color:{{$prelance->prelance_config->cor}}; width: 50px;">
@@ -147,7 +147,7 @@
                             <x-layouts.badges.info-money
                             :convert="false"
                             :textLength="'sm'"
-                            :value="number_format($prelance->lote->valor_final_prelance, 2, '.', '')"
+                            :value="number_format($prelance->lote->valor_prelance, 2, '.', '')"
                             />
                         </strong>
                     </td>
@@ -156,10 +156,10 @@
                     </td>
                     <td class="money" style="float: right; text-align:right">
                         @if($prelance->uuid === $prelance->lote->prelance_vencedor()->uuid)
-                            <div style="width: 90%; padding: 3px; background-color: greenyellow;">Vencedor</div>
+                            <div style="width: 90%; padding: 3px; background-color: greenyellow;">Vencendo</div>
                         @else
                             <div style="width: 90%; padding: 3px; background-color: red;">
-                                Utrapassado
+                                Superado
                             </div>
                         @endif
                     </td>
@@ -246,10 +246,10 @@
                 </td>
                 <td class="money" style="float: right; text-align:right">
                     @if($prelance->uuid === $prelance->lote->prelance_vencedor()->uuid)
-                        <div style="width: 90%; padding: 3px; background-color: greenyellow;">Vencedor</div>
+                        <div style="width: 90%; padding: 3px; background-color: greenyellow;">Vencendo</div>
                     @else
                         <div style="width: 90%; padding: 3px; background-color: red;">
-                            Utrapassado
+                            Superado
                         </div>
                     @endif
                 </td>

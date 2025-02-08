@@ -98,7 +98,7 @@ class Leilao extends Model
     // -- clientes no pré-lance, depois é necessário renomear este método
     public function clientes()
     {
-        return $this->belongsToMany(Cliente::class, 'lance_cliente', 'leilao_uuid', 'cliente_uuid', 'uuid' /* lance.uuid */, 'uuid' /* cliente.uuid */)->distinct('cliente_uuid');
+        return $this->belongsToMany(Cliente::class, 'lance_cliente', 'leilao_uuid', 'cliente_uuid', 'uuid' /* lance.uuid */, 'uuid' /* cliente.uuid */)->distinct('cliente_uuid')->orderBy('nome');
     }
 
     public function compras()

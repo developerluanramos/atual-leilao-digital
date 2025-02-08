@@ -12,7 +12,8 @@ trait GeneratePdfTrait
         'defaultFont' => 'sans-serif',
         'enable-javascript' => true,
         'images' => true,
-        'isRemoteEnabled' => true
+        'isRemoteEnabled' => true,
+        'orientation' => 'landascape'
     ])
     {
         return PDF::setOptions($options);
