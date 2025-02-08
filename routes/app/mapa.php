@@ -8,3 +8,6 @@ Route::get('leilao/{uuid}/mapa/relacao-vendedor', [\App\Http\Controllers\App\Map
 Route::get('leilao/{uuid}/mapa/geral', [\App\Http\Controllers\App\Mapa\MapaGeralShowController::class, 'show'])->name('leilao.mapa.geral');
 Route::get('leilao/{uuid}/mapa/media-raca', [\App\Http\Controllers\App\Mapa\MapaMediaRacaShowController::class, 'show'])->name('leilao.mapa.media-raca');
 Route::get('leilao/{uuid}/mapa/media-especie', [\App\Http\Controllers\App\Mapa\MapaMediaEspecieShowController::class, 'show'])->name('leilao.mapa.media-especie');
+
+
+Route::get('leilao/{uuid}/mapa/prelance/resumo-cliente', [\App\Http\Controllers\App\Mapa\Prelance\MapaResumoClienteShowController::class, 'show'])->name('leilao.mapa.prelance.resumo-cliente');
