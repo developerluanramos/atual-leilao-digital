@@ -12,16 +12,18 @@ class LoteBarraProgresso extends Component
     public Lote $lote;
     public string $tipo;
     public $valorLote;
+    public $visualizacao;
 
     public function render()
     {
         return view('livewire.components.app.lote-barra-progresso');
     }
 
-    public function mount(Lote $lote, string $tipo = 'leilao')
+    public function mount(Lote $lote, string $tipo = 'leilao', string $visualizacao = 'all')
     {
         $this->lote = $lote;
         $this->tipo = $tipo;
+        $this->visualizacao = $visualizacao;
         $this->valorLote = $this->tipo == 'prelance' ? $this->lote->valor_prelance : $this->lote->valor_total;
     }
 

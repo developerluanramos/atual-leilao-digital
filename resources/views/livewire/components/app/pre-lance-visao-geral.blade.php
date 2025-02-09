@@ -250,6 +250,15 @@
             ------------------------------------------
             -->
             <div class="hidden p-2 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+               <div class="flex">
+                  <a style="width: 150px" target="_blank" href="{{route('leilao.mapa.prelance.resumo-lote', ['uuid' => $leilao->uuid])}}" type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                     <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
+                      </svg>
+                      Resumido                                     
+                  </a>
+               </div>
+               
                {{-- <button onclick="copiarLotesGeralResumido({{json_encode($leilao->toArray())}}, {{json_encode($leilao->lotes->toArray())}})" type="button" class="mb-2 px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
                   <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                      <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
@@ -265,7 +274,7 @@
                   Descritivo
                </button> --}}
                <br>
-               <div class="space-y-2 lg:grid lg:grid-cols-6 pr-2 sm:gap-6 xl:gap-10 lg:space-y-0">
+               <div class="space-y-2 lg:grid lg:grid-cols-6 pr-2 sm:gap-3 xl:gap-10 lg:space-y-0">
                   @foreach($leilao->lotes as $index => $lote)
                      <div data-modal-target="{{$lote->uuid}}" data-modal-toggle="{{$lote->uuid}}"
                         style="cursor: pointer; background-color: {{ $lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc' }}" 
@@ -367,6 +376,14 @@
                                  Compartilhar
                               </button>
                            </small> --}}
+                           <div class="flex">
+                              <a style="width: 150px" target="_blank" href="{{route('leilao.mapa.prelance.resumo-lote-unico', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])}}" type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
+                                  </svg>
+                                  Resumido                                     
+                              </a>
+                           </div>
                            <div class="relative overflow-x-auto">
                               <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -412,7 +429,8 @@
                                        <td class="px-3 py-2">
                                           <x-layouts.badges.info-money
                                           :convert="false"
-                                          :textLength="'sm'"
+                                          :textLength="'xs'"
+                                          :color="'purple'"
                                           :value="$lance->valor"
                                           />
                                        </td>
@@ -447,8 +465,9 @@
                                        <td class="px-3 py-2" style="text-align: right">
                                           <x-layouts.badges.info-money
                                              :convert="false"
-                                             :textLength="'xs'"
-                                             :value="number_format($lance->lote->valor_prelance, 2, '.', '')"
+                                             :color="'purple'"
+                                             :textLength="'sm'"
+                                             :value="number_format($lance->lote->valor_final_prelance, 2, '.', '')"
                                           />
                                        </td>
                                        <td class="px-3 py-2" style="text-align: right">
@@ -570,13 +589,14 @@
                                     <x-layouts.badges.info-money
                                        :convert="false"
                                        :textLength="'sm'"
+                                       :color="'purple'"
                                        :value="number_format($cliente->total_gasto_real, 2, '', '.')"
                                     />
                                  </b>
                                  &nbsp;
                                  <x-layouts.badges.info-money
                                     :convert="false"
-                                    :textLength="'sm'"
+                                    :textLength="'xs'"
                                     :value="number_format($cliente->total_gasto, 2, '', '.')"
                                     />
                                  <br>
@@ -641,6 +661,7 @@
                                        <small>
                                           total:
                                           <x-layouts.badges.info-money
+                                             :color="'purple'"
                                              :convert="true"
                                              :textLength="'sm'"
                                              :value="$lote->valor_prelance ?? 0"
@@ -659,11 +680,6 @@
                                                 />
                                        </small>
                                     </p>
-                                    <p>
-                                       <small>
-                                             {{$lote->prelance_vencedor()->created_at_for_humans}}
-                                       </small>
-                                    </p>
                                  @else
                                     <p class="text-sm font-medium text-red-900 truncate dark:text-white">
                                        Nenhum lance registrado 
@@ -671,14 +687,17 @@
                                  @endif
                            </div>
                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                              <x-layouts.badges.info-money
-                                 :convert="false"
-                                 :textLength="'sm'"
-                                 :value="$lote->prelance_vencedor()?->valor ?? 0"
+                                 <x-layouts.badges.info-money
+                                    :convert="false"
+                                    :color="'purple'"
+                                    :textLength="'sm'"
+                                    :value="$lote->prelance_vencedor()?->valor ?? 0"
                                  />
-                             
                               <br>
                            </div>
+                        </div>
+                        <div class="mt-2">
+                           @livewire('components.app.lote-barra-progresso', [$lote, 'prelance', 'bar-only']) 
                         </div>
                      </li>
                      @endforeach
@@ -707,7 +726,7 @@
                            </div>
                            <div class="flex-1 min-w-0 ms-4">
                               <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                 <a class="cursor-pointer text-blue-900" data-modal-target="{{$cliente->uuid}}" data-modal-toggle="{{$cliente->uuid}}"><b>{{ $cliente->nome }}</b></a>
+                                 <a class="cursor-pointer" data-modal-target="{{$cliente->uuid}}" data-modal-toggle="{{$cliente->uuid}}"><b>{{ $cliente->nome }}</b></a>
                               </p>
                               <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                  {{ $cliente->email }}
