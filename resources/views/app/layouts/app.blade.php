@@ -42,7 +42,7 @@
     <title>@yield('title') - {{config('app.name')}}</title>
 </head>
 <script>
-    // document.getElementById('htmlMainPage').classList.add('dark')
+    document.getElementById('htmlMainPage').classList.add('dark')
     function lighMode() {
         console.log('executou');
         
@@ -236,7 +236,7 @@ MENU PRINCIPAL
     </div>
 </div>
 
-<div data-dial-init class="fixed end-6 bottom-6 group">
+{{-- <div data-dial-init class="fixed end-6 bottom-6 group">
     <div id="speed-dial-menu-default" class="flex flex-col items-center hidden mb-4 space-y-2">
         <button type="button" data-tooltip-target="tooltip-share" data-tooltip-placement="left" class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
@@ -288,7 +288,7 @@ MENU PRINCIPAL
         </svg>
         <span class="sr-only">Open actions menu</span>
     </button>
-</div>
+</div> --}}
 
 @livewireChartsScripts
 @stack('scripts') 
