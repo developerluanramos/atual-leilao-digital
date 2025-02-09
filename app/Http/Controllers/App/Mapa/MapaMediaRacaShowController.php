@@ -40,25 +40,41 @@ class MapaMediaRacaShowController extends Controller
                 SUM(compra.valor) AS total_raca_value,
                 (SUM(compra.valor) / ?) * 100 AS percent,
                 COUNT(compra.id) AS quantidade,
+
                 AVG(CASE WHEN lote_item.genero = 1 THEN compra.valor ELSE NULL END) AS media_compra_macho,
+                AVG(CASE WHEN (lote_item.genero = 1 AND lote_item.castrado = 1) THEN compra.valor ELSE NULL END) AS media_compra_macho_castrado,
                 SUM(CASE WHEN lote_item.genero = 1 THEN compra.valor ELSE 0 END) AS total_raca_value_macho,
+                SUM(CASE WHEN (lote_item.genero = 1 AND lote_item.castrado = 1) THEN compra.valor ELSE 0 END) AS total_raca_value_macho_castrado,
                 (SUM(CASE WHEN lote_item.genero = 1 THEN compra.valor ELSE 0 END) / ?) * 100 AS percent_macho,
+                (SUM(CASE WHEN (lote_item.genero = 1 AND lote_item.castrado = 1)  THEN compra.valor ELSE 0 END) / ?) * 100 AS percent_macho_castrado,
                 COUNT(CASE WHEN lote_item.genero = 1 THEN 1 ELSE NULL END) AS quantidade_macho,
+                COUNT(CASE WHEN (lote_item.genero = 1 AND lote_item.castrado = 1)  THEN 1 ELSE NULL END) AS quantidade_macho_castrado,
+
                 AVG(CASE WHEN lote_item.genero = 2 THEN compra.valor ELSE NULL END) AS media_compra_femea,
                 SUM(CASE WHEN lote_item.genero = 2 THEN compra.valor ELSE 0 END) AS total_raca_value_femea,
                 (SUM(CASE WHEN lote_item.genero = 2 THEN compra.valor ELSE 0 END) / ?) * 100 AS percent_femea,
                 COUNT(CASE WHEN lote_item.genero = 2 THEN 1 ELSE NULL END) AS quantidade_femea,
+
                 AVG(CASE WHEN lote_item.genero = 3 THEN compra.valor ELSE NULL END) AS media_compra_outro,
                 SUM(CASE WHEN lote_item.genero = 3 THEN compra.valor ELSE 0 END) AS total_raca_value_outro,
                 (SUM(CASE WHEN lote_item.genero = 3 THEN compra.valor ELSE 0 END) / ?) * 100 AS percent_outro,
                 COUNT(CASE WHEN lote_item.genero = 3 THEN 1 ELSE NULL END) AS quantidade_outro
-            ', [$leilao->valor_total, $leilao->valor_total, $leilao->valor_total, $leilao->valor_total]) 
+            ', [
+                $leilao->valor_total, 
+                $leilao->valor_total, 
+                $leilao->valor_total, 
+                $leilao->valor_total,
+                $leilao->valor_total, 
+                // $leilao->valor_total, 
+                // $leilao->valor_total, 
+                // $leilao->valor_total
+                ]) 
             ->groupBy('raca.uuid', 'raca.nome')
             ->orderBy('raca.nome')
             ->where('compra.leilao_uuid', $leilaoUuid)
             ->get();
         
-        //  dd($medias);
+        //  dd($mediasRaca);
         $pdf->loadView('app.mapa.media-raca', ['mediasRaca' => $mediasRaca, 'leilao' => $leilao]);
         
         return $this->stream($pdf, 'media-raca.pdf');

@@ -32,7 +32,8 @@ class LoteItemFactory extends Factory
             'valor_estimado' => $this->faker->numerify('#####.##'),
             'observacoes' => $this->faker->text(100),
             'codigo_identificacao' => $this->faker->numerify('######'),
-            'cor' => 'Branco'
+            'cor' => 'Branco',
+            'castrado' => random_int(0, 1)
         ];
     }
 }

@@ -21,7 +21,8 @@ class LoteItem extends Model
         'valor_estimado',
         'observacoes',
         'codigo_identificacao',
-        'cor'
+        'cor',
+        'castrado'
     ];
 
     public function raca()

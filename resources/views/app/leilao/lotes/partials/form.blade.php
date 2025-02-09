@@ -26,19 +26,19 @@
         label="Múltiplicador"
         name="multiplicador"
         lenght="4/12"
-        :value="$lote->multiplicador ?? old('multiplicador')"
+        :value="$lote->multiplicador ?? old('multiplicador') ?? 1"
     />
     <x-layouts.inputs.input-normal-text
         label="Valor Estimado"
         name="valor_estimado"
         lenght="4/12"
-        :value="$lote->valor_estimado ?? old('valor_estimado')"
+        :value="$lote->valor_estimado ?? old('valor_estimado') ?? 10000"
     />
     <x-layouts.inputs.input-normal-text
         label="Valor Mínimo Pré-lance"
         name="valor_minimo_prelance"
         lenght="4/12"
-        :value="$lote->valor_minimo_prelance ?? old('valor_minimo_prelance')"
+        :value="$lote->valor_minimo_prelance ?? old('valor_minimo_prelance') ?? 10"
     />
 </div>
 <div class="flex flex-wrap -mx-3 mb-4">
@@ -46,19 +46,19 @@
         label="Qtd. Machos"
         name="quantidade_macho"
         lenght="4/12"
-        :value="$lote->quantidade_macho ?? old('quantidade_macho')"
+        :value="$lote->quantidade_macho ?? old('quantidade_macho') ?? 0"
     />
     <x-layouts.inputs.input-normal-text
         label="Qtd. Fêmeas"
         name="quantidade_femea"
         lenght="4/12"
-        :value="$lote->quantidade_femea ?? old('quantidade_femea')"
+        :value="$lote->quantidade_femea ?? old('quantidade_femea') ?? 0"
     />
     <x-layouts.inputs.input-normal-text
         label="Qtd. Outros"
         name="quantidade_outro"
         lenght="4/12"
-        :value="$lote->quantidade_outro ?? old('quantidade_outro')"
+        :value="$lote->quantidade_outro ?? old('quantidade_outro') ?? 0"
     />
 </div>
 <div class="flex flex-wrap -mx-3 mb-4">
