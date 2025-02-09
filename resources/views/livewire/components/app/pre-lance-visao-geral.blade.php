@@ -1,3 +1,161 @@
+
+<style>
+   .report-table {
+            font-size: 11px;
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #ffffff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .report-table th, .report-table td {
+            padding: 2px 4px;
+            border: 1px solid #ddd;
+            font-size: 10px;
+        }
+        .report-table th {
+            background-color: #f0f0f0;
+            color: #333;
+            font-weight: bold;
+        }
+        .report-table {
+            width: 100%;
+            margin: 12px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-table thead {
+            background-color: #007bff;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .report-table th,
+        .report-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .report-table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .report-table tbody tr:hover {
+            background-color: #d9edf7;
+            cursor: pointer;
+        }
+
+        .report-table tfoot {
+            background-color: #007bff;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .report-table {
+                font-size: 8px;
+            }
+
+            .report-table th,
+            .report-table td {
+                padding: 4px 5px;
+            }
+        }
+        /* Styling for Money Columns */
+        .report-table .money {
+            color: #152a57; /* Darker green for text */
+            font-weight: bold;
+        }
+
+        .report-table .money:hover {
+            background-color: #c3e6cb; /* Slightly darker green on hover */
+        }
+
+        .outer-table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        .inner-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .inner-table td {
+            /* border: 1px solid #000; */
+            padding: 2px;
+            text-align: center;
+        }
+
+
+        .money {
+            text-align: right;
+            font-weight: bold;
+            color: #004b87;
+        }
+
+        .date {
+            text-align: right;
+            color: #004b87;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .brasao {
+            width: 100px;
+            height: 100px;
+        }
+        /* Container for the grid layout */
+        .multi-column-table {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns */
+            gap: 1px;
+            border: 1px solid #333;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        /* Individual column styling */
+        .column {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        /* Each record/row styling */
+        .record {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Final row in each column */
+        .record:last-child {
+            border-bottom: none;
+        }
+
+        /* Styling for number, date, and amount */
+        .number {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .date,
+        .amount {
+            color: #555;
+        }
+</style>
 <div>
    <div class="flex w-full md:w-12/12 mb-6 md:mb-0">
       <div class="w-full space-y-12 lg:grid lg:grid-cols-4 sm:gap-6 xl:gap-10 lg:space-y-0">
@@ -252,7 +410,7 @@
                         </p>
                      </div>
                         <x-layouts.modals.simple-modal
-                           :tamanho="4"
+                           :tamanho="8"
                            :identificador="$lote->uuid"
                            :sessao="$lote->uuid"
                            :titulo="'Lote '.$lote->numero.' - ' . $lote->descricao">
@@ -278,7 +436,7 @@
                                  :textLength="'md'"
                                  :value="$lote->valor_estimado" />
                            </small>
-                           @livewire('components.app.lote-barra-progresso', [$lote]) 
+                           @livewire('components.app.lote-barra-progresso', [$lote, 'prelance']) 
                            <small>
                               <x-layouts.badges.info-percent
                                  :convert="false"
@@ -288,7 +446,7 @@
                            <div class="flex w-full md:w-12/12 mb-6 md:mb-0">
                               <div class="space-y-12 lg:grid lg:grid-cols-4 sm:gap-6 xl:gap-10 lg:space-y-0">
                                  <!-- Pricing Card -->
-                                 <div class="flex flex-col p-3 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+                                 <div class="flex flex-col p-3 w-full text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
                                     <h3 class="mb-4 text-2xl font-semibold">
                                        <x-layouts.badges.info-money
                                           :convert="false"
@@ -298,7 +456,7 @@
                                     <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Comissao Compra</p>
                                  </div>
                                  <!-- Pricing Card -->
-                                 <div class="flex flex-col p-3 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+                                 <div class="flex flex-col p-3 w-full text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
                                     <h3 class="mb-4 text-2xl font-semibold">
                                        <x-layouts.badges.info-money
                                           :convert="false"
@@ -308,7 +466,7 @@
                                     <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Comissao Venda</p>
                                  </div>
                                  <!-- Pricing Card -->
-                                 <div class="flex flex-col p-3 w-full max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+                                 <div class="flex flex-col p-3 w-full text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
                                     <h3 class="mb-4 text-2xl font-semibold">
                                        <x-layouts.badges.info-number
                                           :textLength="'xs'"
@@ -317,7 +475,7 @@
                                     <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Total prelances</p>
                                  </div>
                                  <!-- Pricing Card -->
-                                 <div class="flex flex-col p-3 w-full  max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
+                                 <div class="flex flex-col p-3 w-full text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-3 dark:bg-gray-800 dark:text-white">
                                     <h3 class="mb-4 text-2xl font-semibold">
                                        <x-layouts.badges.info-money
                                           :convert="true"
@@ -329,7 +487,7 @@
                               </div>
                            </div>
                            <br>
-                           <small class="mt-6">Histórico de prelances 
+                           {{-- <small class="mt-6">Histórico de prelances 
                               <button onclick="copiarLoteUnico('{{$leilao->descricao}}', {{json_encode($lote)}}, {{json_encode($lote->prelances()->get()->toArray())}})" type="button" class="ml-6 px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
                                  <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
@@ -337,8 +495,114 @@
                                  </svg>
                                  Compartilhar
                               </button>
-                           </small>
-                           <ol class="mt-6 relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mb-4 md:mb-5">
+                           </small> --}}
+                           <div class="relative overflow-x-auto">
+                              <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                       <th scope="col" class="px-6 py-3">
+                                          
+                                       </th>
+                                       <th scope="col" class="px-6 py-3">
+                                          Cliente
+                                       </th>
+                                       <th scope="col" class="px-6 py-3">
+                                          Data
+                                       </th>
+                                       <th scope="col" class="px-6 py-3">
+                                          Lance
+                                       </th>
+                                       <th scope="col" class="px-6 py-3">
+                                          Comissão C.
+                                       </th>
+                                       <th scope="col" class="px-6 py-3">
+                                          Comissão V.
+                                       </th>
+                                       <th scope="col" class="px-6 py-3">
+                                          Total
+                                       </th>
+                                       <th scope="col" class="px-6 py-3">
+                                          Status
+                                       </th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    @forelse($lote->prelances()->get()->reverse() as $index => $lance)
+                                    <tr>
+                                       <td class="px-3 py-2">
+                                          <span style="background-color: {{ $lance->prelance_config()->first()->cor }}" class="flex w-5 h-5 mt-1 me-3 rounded-full"></span>
+                                       </td>
+                                       <td class="px-3 py-2">
+                                          @foreach($lance->clientes()->get() as $index => $cliente)
+                                             <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$cliente->nome}}</h6>
+                                          @endforeach
+                                       </td>
+                                       <td class="px-3 py-2"><time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{ $lance->created_at }}</time></td>
+                                       <td class="px-3 py-2">
+                                          <x-layouts.badges.info-money
+                                          :convert="false"
+                                          :textLength="'sm'"
+                                          :value="$lance->valor"
+                                          />
+                                       </td>
+                                       <td class="px-3 py-2" style="text-align: right">
+                                             <x-layouts.badges.info-percent
+                                             :convert="false"
+                                             :textLength="'xs'"
+                                             :value="$lance->prelance_config->percentual_comissao_comprador"
+                                          />
+                                          <strong>
+                                             <x-layouts.badges.info-money
+                                                :convert="false"
+                                                :textLength="'xs'"
+                                                :value="number_format($lance->valor_comissao_compra, 2, '.', '')"
+                                             />
+                                          </strong>
+                                       </td>
+                                       <td class="px-3 py-2" style="text-align: right">
+                                          <x-layouts.badges.info-percent
+                                             :convert="false"
+                                             :textLength="'xs'"
+                                             :value="$lance->prelance_config->percentual_comissao_vendedor"
+                                          />
+                                          <strong>
+                                             <x-layouts.badges.info-money
+                                                :convert="false"
+                                                :textLength="'xs'"
+                                                :value="number_format($lance->valor_comissao_venda, 2, '.', '')"
+                                             />
+                                          </strong>
+                                       </td>
+                                       <td class="px-3 py-2" style="text-align: right">
+                                          <x-layouts.badges.info-money
+                                             :convert="false"
+                                             :textLength="'xs'"
+                                             :value="number_format($lance->lote->valor_prelance, 2, '.', '')"
+                                          />
+                                       </td>
+                                       <td class="px-3 py-2" style="text-align: right">
+                                          @if($lance->uuid === $lance->lote->prelance_vencedor()->uuid)
+                                             <span class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                                                <span class="w-2 h-2 me-1 bg-green-500 rounded-full"></span>
+                                                Vencendo
+                                             </span>
+                                          @else
+                                             <span class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                                                <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
+                                                Superado
+                                             </span>
+                                          @endif
+                                       </td>
+                                    </tr>
+                                    @empty
+                                       <tr>
+                                          Nenhum lance registrado até o momento
+                                       </tr>
+                                    @endforelse
+                                 </tbody>
+                              </table>
+                           </div>
+                           {{-- <ol class="mt-6 relative border-s border-gray-200 dark:border-gray-600 ms-3.5 mb-4 md:mb-5">
                               @foreach($lote->prelances()->get()->reverse() as $index => $lance)
                               @if($index === 0)
                               <li class="mb-10 ms-8">
@@ -383,7 +647,7 @@
                               </li>
                               @endif
                               @endforeach                
-                           </ol>
+                           </ol> --}}
                            @endsection
                         </x-layouts.modals.simple-modal>
                         @endforeach
@@ -486,8 +750,10 @@
                      <li class="py-3 sm:py-4">
                         <div class="flex items-center">
                            <div class="flex-shrink-0">
-                              <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-{{$lote->prelance_vencedor() ? 'green' : 'grey'}}-100 rounded-full dark:bg-gray-600">
-                                 <span class="font-medium text-gray-600 dark:text-gray-300">{{ $lote->numero }}</span>
+                              <div style="background-color: {{$lote->prelance_vencedor() ? $lote->prelance_vencedor()->prelance_config()->first()->cor : 'grey'}}" class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full">
+                                 <span class="font-medium text-black-600 dark:text-gray-300">
+                                    <b>{{ $lote->numero }}</b>
+                                 </span>
                               </div>
                            </div>
                            <div class="flex-1 min-w-0 ms-4">
@@ -595,7 +861,7 @@
                               </button>
                            </div>
                            <x-layouts.modals.simple-modal
-                              :tamanho="4"
+                              :tamanho="6"
                               :identificador="$cliente->uuid"
                               :sessao="$cliente->uuid"
                               :titulo="$cliente->nome">
@@ -606,7 +872,165 @@
                                   </svg>
                                  Novo lance
                               </a>
-                              <ul class="w-full divide-y divide-gray-200 dark:divide-gray-700">
+                                 <div class="relative overflow-x-auto">
+                                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                          <tr>
+                                                <th scope="col" class="px-6 py-3">
+                                                  
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                   Lote
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                   Data
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                   Lance
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                   Comissão C.
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                   Comissão V.
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                   Total
+                                                </th>
+                                                <th scope="col" class="px-6 py-3">
+                                                   Status
+                                                </th>
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                          @php
+                                             $valorTotalComissaoComprador = 0; 
+                                             $valorTotalComissaoVendedor = 0; 
+                                             $valorTotal = 0;
+                                          @endphp
+                                          @foreach($cliente->prelances()->with('lote', 'prelance_config')->where('lance.leilao_uuid', $leilao->uuid)->groupBy('lance.id', 'lance_cliente.cliente_uuid')->get() as $prelance)
+                                             @php
+                                             if($prelance->uuid === $prelance->lote->prelance_vencedor()->uuid) {
+                                                $valorTotalComissaoComprador += $prelance->valor_comissao_compra; 
+                                                $valorTotalComissaoVendedor += $prelance->valor_comissao_venda; 
+                                                $valorTotal += $prelance->lote->valor_prelance;
+                                             }
+                                             @endphp
+                                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                                <th scope="row" class="px-3 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                   <div class="shrink-0">
+                                                      <span style="background-color: {{$prelance->prelance_config->cor}}" class="h-5 w-5 inline-flex items-center font-medium px-2.5 py-0.5 rounded-full"> 
+                                                   </span>
+                                                   </div>
+                                                </th>
+                                                <td class="px-3 py-2">
+                                                   <b>
+                                                      {{$prelance->lote->numero}}
+                                                   </b>
+                                                </td>
+                                                <td class="px-3 py-2" style="font-size: 10px">
+                                                   <b>{{$prelance->created_at}}</b>
+                                                </td>
+                                                <td class="px-3 py-2" style="text-align: right">
+                                                   <strong>
+                                                      <x-layouts.badges.info-money
+                                                         :color="'purple'"
+                                                         :convert="false"
+                                                         :textLength="'xs'"
+                                                         :value="number_format($prelance->valor, 2, '.', '')"
+                                                      />
+                                                   </strong>
+                                                </td>
+                                                <td class="px-3 py-2" style="text-align: right">
+                                                      <x-layouts.badges.info-percent
+                                                      :convert="false"
+                                                      :textLength="'xs'"
+                                                      :value="$prelance->prelance_config->percentual_comissao_comprador"
+                                                   />
+                                                   <strong>
+                                                      <x-layouts.badges.info-money
+                                                         :convert="false"
+                                                         :textLength="'xs'"
+                                                         :value="number_format($prelance->valor_comissao_compra, 2, '.', '')"
+                                                      />
+                                                   </strong>
+                                                </td>
+                                                <td class="px-3 py-2" style="text-align: right">
+                                                   <x-layouts.badges.info-percent
+                                                      :convert="false"
+                                                      :textLength="'xs'"
+                                                      :value="$prelance->prelance_config->percentual_comissao_vendedor"
+                                                   />
+                                                   <strong>
+                                                      <x-layouts.badges.info-money
+                                                         :convert="false"
+                                                         :textLength="'xs'"
+                                                         :value="number_format($prelance->valor_comissao_venda, 2, '.', '')"
+                                                      />
+                                                   </strong>
+                                                </td>
+                                                <td class="px-3 py-2" style="text-align: right">
+                                                   <x-layouts.badges.info-money
+                                                      :convert="false"
+                                                      :textLength="'xs'"
+                                                      :value="number_format($prelance->lote->valor_prelance, 2, '.', '')"
+                                                   />
+                                                </td>
+                                                <td class="px-3 py-2" style="text-align: right">
+                                                   @if($prelance->uuid === $prelance->lote->prelance_vencedor()->uuid)
+                                                      <span class="inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                                                         <span class="w-2 h-2 me-1 bg-green-500 rounded-full"></span>
+                                                         Vencendo
+                                                      </span>
+                                                   @else
+                                                      <span class="inline-flex items-center bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                                                         <span class="w-2 h-2 me-1 bg-red-500 rounded-full"></span>
+                                                         Superado
+                                                      </span>
+                                                   @endif
+                                                </td>
+                                             </tr>
+                                          @endforeach
+                                          <tfoot>
+                                             <tr style="background-color: #c3e6cb">
+                                                 <td></td>
+                                                 <td></td>
+                                                 <td></td>
+                                                 <td></td>
+                                                 <td class="px-3 py-2" style="text-align: right">
+                                                     <strong>
+                                                         <x-layouts.badges.info-money
+                                                         :convert="false"
+                                                         :textLength="'xs'"
+                                                         :value="number_format($valorTotalComissaoComprador, 2, '.', '')"
+                                                         />
+                                                     </strong>
+                                                 </td>
+                                                 <td class="px-3 py-2" style="text-align: right">
+                                                     <strong>
+                                                         <x-layouts.badges.info-money
+                                                         :convert="false"
+                                                         :textLength="'xs'"
+                                                         :value="number_format($valorTotalComissaoVendedor, 2, '.', '')"
+                                                         />
+                                                     </strong>
+                                                 </td>
+                                                 <td class="px-3 py-2" style="text-align: right; color: white;">
+                                                     <strong>
+                                                         <x-layouts.badges.info-money
+                                                         :convert="false"
+                                                         :textLength="'xs'"
+                                                         :value="number_format($valorTotal, 2, '.', '')"
+                                                         />
+                                                     </strong>
+                                                 </td>
+                                                 <td></td>
+                                             </tr>
+                                         </tfoot>
+                                       </tbody>
+                                    </table>
+                                 </div>
+                              {{-- <ul class="w-full divide-y divide-gray-200 dark:divide-gray-700">
                                  @foreach($cliente->prelances()->with('lote')->where('lance.leilao_uuid', $leilao->uuid)->groupBy('lance.id', 'lance_cliente.cliente_uuid')->get() as $lance)
                                  <li class="pb-3 sm:pb-4" >
                                     <div class="flex items-center space-x-4 rtl:space-x-reverse" >
@@ -640,7 +1064,7 @@
                                     
                                  </li>
                                  @endforeach
-                              </ul>
+                              </ul> --}}
                               @endsection
                            </x-layouts.modals.simple-modal>
                         </div>

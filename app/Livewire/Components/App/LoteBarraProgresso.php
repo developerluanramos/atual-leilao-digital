@@ -10,34 +10,38 @@ use stdClass;
 class LoteBarraProgresso extends Component
 {
     public Lote $lote;
-    
+    public string $tipo;
+    public $valorLote;
+
     public function render()
     {
         return view('livewire.components.app.lote-barra-progresso');
     }
 
-    public function mount(Lote $lote)
+    public function mount(Lote $lote, string $tipo = 'leilao')
     {
         $this->lote = $lote;
+        $this->tipo = $tipo;
+        $this->valorLote = $this->tipo == 'prelance' ? $this->lote->valor_prelance : $this->lote->valor_total;
     }
 
     public function getPercentualValorTotalProperty()
     {
-        return $this->lote->valor_total * 100/$this->lote->valor_estimado;
+        return ($this->tipo == 'prelance' ? $this->lote->valor_prelance : $this->lote->valor_total) * 100/$this->lote->valor_estimado;
     }
 
     public function getPercentualValorEstimadoProperty()
     {
-        return $this->lote->valor_estimado * 100/$this->lote->valor_total;
+        return $this->lote->valor_estimado * 100 / ($this->tipo == 'prelance' ? $this->lote->valor_prelance : $this->lote->valor_total);
     }
 
     public function getPercentualValorExcedenteProperty()
     {
-        return $this->lote->valor_total * 100/$this->lote->valor_estimado - 100;
+        return ($this->tipo == 'prelance' ? $this->lote->valor_prelance : $this->lote->valor_total) * 100/$this->lote->valor_estimado - 100;
     }
 
     public function getValorExcedenteProperty()
     {
-        return $this->lote->valor_total - $this->lote->valor_estimado;
+        return ($this->tipo == 'prelance' ? $this->lote->valor_prelance : $this->lote->valor_total) - $this->lote->valor_estimado;
     }
 }
