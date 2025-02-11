@@ -13,3 +13,4 @@ Route::get('leilao/{uuid}/mapa/media-especie', [\App\Http\Controllers\App\Mapa\M
 Route::get('leilao/{uuid}/mapa/prelance/resumo-cliente', [\App\Http\Controllers\App\Mapa\Prelance\MapaResumoClienteShowController::class, 'show'])->name('leilao.mapa.prelance.resumo-cliente');
 Route::get('leilao/{uuid}/mapa/prelance/resumo-lote', [\App\Http\Controllers\App\Mapa\Prelance\MapaResumoLoteShowController::class, 'show'])->name('leilao.mapa.prelance.resumo-lote');
 Route::get('leilao/{uuid}/mapa/prelance/resumo-lote-unico', [\App\Http\Controllers\App\Mapa\Prelance\MapaResumoLoteUnicoShowController::class, 'show'])->name('leilao.mapa.prelance.resumo-lote-unico');
+Route::get('leilao/{uuid}/mapa/prelance/vendedor', [\App\Http\Controllers\App\Mapa\Prelance\MapaVendedorShowController::class, 'show'])->name('leilao.mapa.prelance.vendedor');
