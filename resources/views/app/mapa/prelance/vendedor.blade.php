@@ -85,7 +85,7 @@
                     <x-layouts.badges.info-money
                         :convert="false"
                         :textLength="'sm'"
-                        :value="$lote->prelance_vencedor()->valor"
+                        :value="$lote->prelance_vencedor()?->valor"
                     />
                 </td>
                 <td style="float: right; text-align:right">
