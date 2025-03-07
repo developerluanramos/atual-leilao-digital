@@ -4,7 +4,7 @@
     <table style="width: 100%; margin-bottom: 35px;" class="report-table">
         <thead>
             <tr>
-                <th colspan="5">
+                <th style="color:blue" colspan="5">
                     Totais
                 </th>
             </tr>
@@ -12,11 +12,9 @@
         <thead>
             <tr>
                 <th>Raça</th>
-                <th>
-                    <b style="color:blue">Total</b> Macho
-                </th>
-                <th><b style="color:blue">Total</b> Fêmea</th>
-                <th><b style="color:blue">Total</b> Outro</th>
+                <th><b>Total</b> Macho</th>
+                <th><b>Total</b> Fêmea</th>
+                <th><b>Total</b> Outro</th>
                 <th>R$ Total</th>
             </tr>
         </thead>
@@ -72,7 +70,7 @@
     <table style="width: 100%; margin-bottom: 35px;" class="report-table">
         <thead>
             <tr>
-                <th colspan="5">
+                <th style="color:blue" colspan="5">
                     Percentuais
                 </th>
             </tr>
@@ -80,9 +78,9 @@
         <thead>
             <tr>
                 <th>Raça</th>
-                <th><b style="color:blue">Percentual</b> Macho</th>
-                <th><b style="color:blue">Percentual</b> Fêmea</th>
-                <th><b style="color:blue">Percentual</b> Outro</th>
+                <th><b>Percentual</b> Macho</th>
+                <th><b>Percentual</b> Fêmea</th>
+                <th><b>Percentual</b> Outro</th>
                 <th>% Total</th>
             </tr>
         </thead>
@@ -138,7 +136,7 @@
     <table style="width: 100%; margin-bottom: 35px;" class="report-table">
         <thead>
             <tr>
-                <th colspan="5">
+                <th style="color:blue" colspan="5">
                     Médias
                 </th>
             </tr>
@@ -146,9 +144,9 @@
         <thead>
             <tr>
                 <th>Raça</th>
-                <th><b style="color:blue">Média</b> Macho</th>
-                <th><b style="color:blue">Média</b> Fêmea</th>
-                <th><b style="color:blue">Média</b> Outro</th>
+                <th><b>Média</b> Macho</th>
+                <th><b>Média</b> Fêmea</th>
+                <th><b>Média</b> Outro</th>
                 <th>M. Total</th>
             </tr>
         </thead>

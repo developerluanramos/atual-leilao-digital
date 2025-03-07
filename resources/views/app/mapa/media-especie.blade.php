@@ -4,7 +4,7 @@
     <table style="width: 100%; margin-bottom: 35px;" class="report-table">
         <thead>
             <tr>
-                <th colspan="5">
+                <th style="color:blue" colspan="5">
                     Totais
                 </th>
             </tr>
@@ -12,10 +12,10 @@
         <thead>
             <tr>
                 <th>Espécie</th>
-                <th>Valor Total Macho</th>
-                <th>Valor Total Fêmea</th>
-                <th>Valor Total Outro</th>
-                <th>Valor Total</th>
+                <th>Total Macho</th>
+                <th>Total Fêmea</th>
+                <th>Total Outro</th>
+                <th>Total</th>
             </tr>
         </thead>
         <tbody>
@@ -70,7 +70,7 @@
     <table style="width: 100%; margin-bottom: 35px;" class="report-table">
         <thead>
             <tr>
-                <th colspan="5">
+                <th style="color:blue" colspan="5">
                     Percentuais
                 </th>
             </tr>
@@ -136,7 +136,7 @@
     <table style="width: 100%; margin-bottom: 35px;" class="report-table">
         <thead>
             <tr>
-                <th colspan="5">
+                <th style="color:blue" colspan="5">
                     Médias
                 </th>
             </tr>

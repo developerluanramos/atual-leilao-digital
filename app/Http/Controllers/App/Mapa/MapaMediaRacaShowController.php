@@ -36,45 +36,62 @@ class MapaMediaRacaShowController extends Controller
             ->selectRaw('
                 raca.uuid AS raca_id,
                 raca.nome AS raca_nome,
+
                 AVG(compra.valor) AS media_compra,
                 SUM(compra.valor) AS total_raca_value,
                 (SUM(compra.valor) / ?) * 100 AS percent,
                 COUNT(compra.id) AS quantidade,
 
+                -- Macho
                 AVG(CASE WHEN lote_item.genero = 1 THEN compra.valor ELSE NULL END) AS media_compra_macho,
-                AVG(CASE WHEN (lote_item.genero = 1 AND lote_item.castrado = 1) THEN compra.valor ELSE NULL END) AS media_compra_macho_castrado,
                 SUM(CASE WHEN lote_item.genero = 1 THEN compra.valor ELSE 0 END) AS total_raca_value_macho,
-                SUM(CASE WHEN (lote_item.genero = 1 AND lote_item.castrado = 1) THEN compra.valor ELSE 0 END) AS total_raca_value_macho_castrado,
                 (SUM(CASE WHEN lote_item.genero = 1 THEN compra.valor ELSE 0 END) / ?) * 100 AS percent_macho,
-                (SUM(CASE WHEN (lote_item.genero = 1 AND lote_item.castrado = 1)  THEN compra.valor ELSE 0 END) / ?) * 100 AS percent_macho_castrado,
                 COUNT(CASE WHEN lote_item.genero = 1 THEN 1 ELSE NULL END) AS quantidade_macho,
-                COUNT(CASE WHEN (lote_item.genero = 1 AND lote_item.castrado = 1)  THEN 1 ELSE NULL END) AS quantidade_macho_castrado,
 
+                -- Macho Castrado
+                COALESCE(AVG(CASE WHEN lote_item.genero = 1 AND lote_item.castrado = 1 THEN compra.valor ELSE NULL END), 0) AS media_compra_macho_castrado,
+                SUM(CASE WHEN lote_item.genero = 1 AND lote_item.castrado = 1 THEN compra.valor ELSE 0 END) AS total_raca_value_macho_castrado,
+                (SUM(CASE WHEN lote_item.genero = 1 AND lote_item.castrado = 1 THEN compra.valor ELSE 0 END) / NULLIF(?, 0)) * 100 AS percent_macho_castrado,
+                COUNT(CASE WHEN lote_item.genero = 1 AND lote_item.castrado = 1 THEN 1 ELSE NULL END) AS quantidade_macho_castrado,
+
+                -- Fêmea
                 AVG(CASE WHEN lote_item.genero = 2 THEN compra.valor ELSE NULL END) AS media_compra_femea,
                 SUM(CASE WHEN lote_item.genero = 2 THEN compra.valor ELSE 0 END) AS total_raca_value_femea,
                 (SUM(CASE WHEN lote_item.genero = 2 THEN compra.valor ELSE 0 END) / ?) * 100 AS percent_femea,
                 COUNT(CASE WHEN lote_item.genero = 2 THEN 1 ELSE NULL END) AS quantidade_femea,
 
+                -- Fêmea Castrada
+                COALESCE(AVG(CASE WHEN lote_item.genero = 2 AND lote_item.castrado = 1 THEN compra.valor ELSE NULL END), 0) AS media_compra_femea_castrada,
+                SUM(CASE WHEN lote_item.genero = 2 AND lote_item.castrado = 1 THEN compra.valor ELSE 0 END) AS total_raca_value_femea_castrada,
+                (SUM(CASE WHEN lote_item.genero = 2 AND lote_item.castrado = 1 THEN compra.valor ELSE 0 END) / NULLIF(?, 0)) * 100 AS percent_femea_castrada,
+                COUNT(CASE WHEN lote_item.genero = 2 AND lote_item.castrado = 1 THEN 1 ELSE NULL END) AS quantidade_femea_castrada,
+
+                -- Outro
                 AVG(CASE WHEN lote_item.genero = 3 THEN compra.valor ELSE NULL END) AS media_compra_outro,
                 SUM(CASE WHEN lote_item.genero = 3 THEN compra.valor ELSE 0 END) AS total_raca_value_outro,
                 (SUM(CASE WHEN lote_item.genero = 3 THEN compra.valor ELSE 0 END) / ?) * 100 AS percent_outro,
-                COUNT(CASE WHEN lote_item.genero = 3 THEN 1 ELSE NULL END) AS quantidade_outro
+                COUNT(CASE WHEN lote_item.genero = 3 THEN 1 ELSE NULL END) AS quantidade_outro,
+
+                -- Outro Castrado
+                COALESCE(AVG(CASE WHEN lote_item.genero = 3 AND lote_item.castrado = 1 THEN compra.valor ELSE NULL END), 0) AS media_compra_outro_castrado,
+                SUM(CASE WHEN lote_item.genero = 3 AND lote_item.castrado = 1 THEN compra.valor ELSE 0 END) AS total_raca_value_outro_castrado,
+                (SUM(CASE WHEN lote_item.genero = 3 AND lote_item.castrado = 1 THEN compra.valor ELSE 0 END) / NULLIF(?, 0)) * 100 AS percent_outro_castrado,
+                COUNT(CASE WHEN lote_item.genero = 3 AND lote_item.castrado = 1 THEN 1 ELSE NULL END) AS quantidade_outro_castrado
             ', [
                 $leilao->valor_total, 
                 $leilao->valor_total, 
                 $leilao->valor_total, 
                 $leilao->valor_total,
-                $leilao->valor_total, 
-                // $leilao->valor_total, 
-                // $leilao->valor_total, 
-                // $leilao->valor_total
-                ]) 
+                $leilao->valor_total,
+                $leilao->valor_total,
+                $leilao->valor_total
+            ]) 
             ->groupBy('raca.uuid', 'raca.nome')
             ->orderBy('raca.nome')
             ->where('compra.leilao_uuid', $leilaoUuid)
             ->get();
         
-        //  dd($mediasRaca);
+        // dd($mediasRaca);
         $pdf->loadView('app.mapa.media-raca', ['mediasRaca' => $mediasRaca, 'leilao' => $leilao]);
         
         return $this->stream($pdf, 'media-raca.pdf');
