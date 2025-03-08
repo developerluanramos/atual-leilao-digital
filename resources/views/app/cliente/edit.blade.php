@@ -17,4 +17,8 @@
     @include('app.cliente.partials.form', ["cliente" => $cliente])
 </form>
 
+<div class="mt-4">
+    <livewire:components.inputs.multi-file-upload-component modelType="Cliente" modelUuid="{{ $cliente->uuid }}" />
+</div>
+
 @endsection
