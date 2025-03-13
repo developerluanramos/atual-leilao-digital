@@ -29,13 +29,15 @@ class PreLanceCreate extends Component
     public bool $incideComissaoCompra;
     public bool $incideComissaoVenda;
     public string $hidden;
+    public array $extraLotes;
+    public array $extraLotesSelecionados;
     
     public function mount(Leilao $leilao, $lote = null, $cliente = null)
     {
         $this->leilao = $leilao;
         if(is_null($this->leilao->config_prelance_atual)) {
             
-            session()->flash('message', 'Nenhum pré-lance ativo para esta data neste Leilão');
+            session()->flash('message', 'Nenhum pré-lance ativo para hoje '.date('d/m/Y').' neste Leilão');
             return redirect()
                 ->to(route('prelance.index', ['leilaoUuid' => $leilao->uuid]));
         }
@@ -56,6 +58,9 @@ class PreLanceCreate extends Component
         if(!empty($this->compradores)) {
             $this->updatedValorLance();
         }
+
+        $this->extraLotes = [];
+        $this->extraLotesSelecionados = [];
     }
 
     public function render()
@@ -112,6 +117,20 @@ class PreLanceCreate extends Component
                         'valor_comissao_comprador' => $valorComissaoComprador,
                         'valor_comissao_vendedor' => $valorComissaoVendedor
                     ];
+                }
+            }
+
+            // -- obtem os demais lotes elegíveis para este valor de pré-lance
+            $lotesExtras = $this->leilao->lotes()->get();
+            $this->extraLotes = [];
+            foreach($lotesExtras as $loteExtra) 
+            {
+                if(
+                    $loteExtra->valor_prelance_calculado <= $this->valorLance
+                    && $loteExtra->uuid != $this->lote->uuid    
+                ) 
+                {
+                    $this->extraLotes[] = $loteExtra;
                 }
             }
         }
@@ -188,6 +207,26 @@ class PreLanceCreate extends Component
         return count($this->compradores);
     }
 
+    public function selecionarExtraLote($loteUuid)
+    {
+        foreach ($this->extraLotes as $index => $lote) {
+            if ($lote['uuid'] == $loteUuid) {
+                $this->extraLotesSelecionados[$loteUuid] = $lote;
+                unset($this->extraLotes[$index]);
+                $this->extraLotes = array_values($this->extraLotes); // Reindexa o array
+                break;
+            }
+        }
+    }
+
+    public function desselecionarExtraLote($loteUuid)
+    {
+        if (isset($this->extraLotesSelecionados[$loteUuid])) {
+            $this->extraLotes[] = $this->extraLotesSelecionados[$loteUuid];
+            unset($this->extraLotesSelecionados[$loteUuid]);
+        }
+    }
+
     public function registrar()
     {
         try {
@@ -202,7 +241,8 @@ class PreLanceCreate extends Component
                 'valor' => $this->valorLance,
                 'valor_comissao_compra' => $this->valorTotalComissaoComprador,
                 'valor_comissao_venda' => $this->valorTotalComissaoVendedor,
-                'clientes' => $this->compradores      
+                'clientes' => $this->compradores,
+                'lotesExtras' => $this->extraLotesSelecionados      
             ]);
             
             $request->validate(PrelanceStoreRequest::rulesForLivewire());

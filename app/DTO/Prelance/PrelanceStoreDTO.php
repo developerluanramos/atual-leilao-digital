@@ -16,7 +16,8 @@ class PrelanceStoreDTO extends BaseDTO
         public string $valor,
         public string|null $valor_comissao_compra = null,
         public string|null $valor_comissao_venda = null,
-        public array $clientes
+        public array $clientes,
+        public array $lotesExtras
     ) { }
 
     public static function makeFromRequest(PrelanceStoreRequest $request)
@@ -31,6 +32,7 @@ class PrelanceStoreDTO extends BaseDTO
             $request->valor_comissao_compra,
             $request->valor_comissao_venda,
             $request->clientes,
+            $request->lotesExtras
         );
     }
 }

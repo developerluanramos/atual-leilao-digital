@@ -365,6 +365,56 @@
                 </button>
             </div>
         @else
+
+            @if(count($extraLotes) || count($extraLotesSelecionados))
+                <div class="mt-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+                    @if(count($extraLotes))
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                                Outros lotes disponíveis para este valor, selecione para inserir o pré-lance para eles também
+                            </h3>
+                            <ul class="bg-gray-100 dark:bg-gray-700 p-4 rounded-md shadow-md">
+                                @foreach($extraLotes as $lote)
+                                    <li class="flex justify-between items-center border-b border-gray-300 dark:border-gray-600 py-2 last:border-b-0">
+                                        <span class="text-gray-900 dark:text-gray-100">
+                                            {{ $lote['numero'] }} - {{ $lote['descricao'] }}
+                                        </span>
+                                        <button 
+                                            wire:click="selecionarExtraLote('{{ $lote['uuid'] }}')" 
+                                            class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition">
+                                            Selecionar
+                                        </button>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+            
+                    @if(count($extraLotesSelecionados))
+                        <div>
+                            <h3 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">
+                                Outros lotes selecionados
+                            </h3>
+                            <ul class="bg-gray-100 dark:bg-gray-700 p-4 rounded-md shadow-md">
+                                @foreach($extraLotesSelecionados as $lote)
+                                    <li class="flex justify-between items-center border-b border-gray-300 dark:border-gray-600 py-2 last:border-b-0">
+                                        <span class="text-gray-900 dark:text-gray-100">
+                                            {{ $lote['numero'] }} - {{ $lote['descricao'] }}
+                                        </span>
+                                        <button 
+                                            wire:click="desselecionarExtraLote('{{ $lote['uuid'] }}')" 
+                                            class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">
+                                            Remover
+                                        </button>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
+            @endif
+    
+        
             <button
                 wire:click="registrar"
                 type="button"
