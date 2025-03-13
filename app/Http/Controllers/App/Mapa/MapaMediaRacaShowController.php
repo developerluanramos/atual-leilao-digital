@@ -91,7 +91,7 @@ class MapaMediaRacaShowController extends Controller
             ->where('compra.leilao_uuid', $leilaoUuid)
             ->get();
         
-        // dd($mediasRaca);
+        // dd($mediasRaca->toArray());
         $pdf->loadView('app.mapa.media-raca', ['mediasRaca' => $mediasRaca, 'leilao' => $leilao]);
         
         return $this->stream($pdf, 'media-raca.pdf');

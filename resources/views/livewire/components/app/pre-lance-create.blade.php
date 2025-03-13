@@ -1,4 +1,10 @@
 <div class="mt-4">
+    @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
+
     @if(is_null($leilao->plano_pagamento_prelance))
         <p>Nenhum plano de pagamento encontrado para esta data no pré-lance</p>
         @php die; @endphp

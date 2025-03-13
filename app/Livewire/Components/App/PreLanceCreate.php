@@ -34,7 +34,10 @@ class PreLanceCreate extends Component
     {
         $this->leilao = $leilao;
         if(is_null($this->leilao->config_prelance_atual)) {
-            return redirect()->to(route('prelance.index', ['leilaoUuid' => $leilao->uuid]));
+            
+            session()->flash('message', 'Nenhum pré-lance ativo para esta data neste Leilão');
+            return redirect()
+                ->to(route('prelance.index', ['leilaoUuid' => $leilao->uuid]));
         }
         $this->lote = $lote;
         $this->hidden = "hidden";
