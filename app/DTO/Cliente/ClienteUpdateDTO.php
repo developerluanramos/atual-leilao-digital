@@ -19,8 +19,8 @@ class ClienteUpdateDTO
         public string $celular,
         public string $email,
         public string $site,
-        public array $propriedades,
-        public array $contatos
+        public array $propriedades = [],
+        public array $contatos = []
     ) { }
 
     public static function makeFromRequest(Request $request): self
