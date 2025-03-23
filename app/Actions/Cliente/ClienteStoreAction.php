@@ -13,8 +13,8 @@ class ClienteStoreAction
     {
         $cliente = Cliente::create((array) $dto);
 
-        $cliente->propriedades()->createMany($dto->propriedades);
-        $cliente->contatos()->createMany($dto->contatos);
+        !is_null($dto->propriedades) ? $cliente->propriedades()->createMany($dto->propriedades) : null;
+        !is_null($dto->contatos) ? $cliente->contatos()->createMany($dto->contatos) : null;
         
         return $cliente;
     }
