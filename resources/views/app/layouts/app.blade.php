@@ -57,7 +57,7 @@
         <div class="flex w-full flex-wrap items-center justify-between px-3">
             <!-- Collapsible navigation container -->
             <div
-                class="!visible hidden flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
+                class="flex flex-grow basis-[100%] items-center lg:!flex lg:basis-auto"
                 id="navbarSupportedContent1"
                 data-te-collapse-item>
                 <!-- Logo -->
