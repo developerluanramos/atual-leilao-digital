@@ -637,7 +637,7 @@
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="settings" role="tabpanel" aria-labelledby="settings-tab">
                <div class="flow-root">
                   <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                     @foreach($leilao->lotes as $lote)
+                     @foreach($leilao->lotes->sortBy('numero') as $lote)
                      <li class="py-3 sm:py-4">
                         <div class="flex items-center">
                            <div class="flex-shrink-0">

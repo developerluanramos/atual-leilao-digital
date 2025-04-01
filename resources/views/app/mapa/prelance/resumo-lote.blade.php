@@ -74,7 +74,7 @@
                     <x-layouts.badges.info-money
                         :convert="false"
                         :textLength="'sm'"
-                        :value="$lote->prelance_vencedor()->valor"
+                        :value="$lote->prelance_vencedor()?->valor ?? 0"
                     />
                 </td>
             </tr>
