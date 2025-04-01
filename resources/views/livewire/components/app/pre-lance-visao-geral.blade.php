@@ -275,12 +275,12 @@
                </button> --}}
                <br>
                <div class="space-y-2 lg:grid lg:grid-cols-6 pr-2 sm:gap-3 xl:gap-10 lg:space-y-0">
-                  @foreach($leilao->lotes as $index => $lote)
+                  @foreach($leilao->lotes->sortBy('numero') as $index => $lote)
                      <div data-modal-target="{{$lote->uuid}}" data-modal-toggle="{{$lote->uuid}}"
                         style="cursor: pointer; background-color: {{ $lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc' }}" 
                         class="flex flex-col p-4 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow-lg shadow-blue-500/50 hover:bg-gradient-to-br dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                           {{ $index + 1 }}
+                           {{ $lote->numero }}
                         </h5>
                         <p>
                            <x-layouts.badges.info-money
