@@ -89,7 +89,11 @@ class PreLanceCreate extends Component
         if(!empty($this->compradores) && !empty($this->lote)) {
             $carbonHoje = Carbon::now();
             $this->parcelas = [];
-            $condicoesPagamento = $this->leilao->plano_pagamento_prelance->condicoes_pagamento()->get();
+            if($this->lote->uuid == "f1a75847-4976-4737-a80d-4a061440edac") {
+                $condicoesPagamento = $this->lote->plano_pagamento()->first()->condicoes_pagamento()->get()->toArray();
+            } else {
+                $condicoesPagamento = $this->leilao->plano_pagamento_prelance->condicoes_pagamento()->get();
+            }
             
             if($this->valorLance == 0) {
                 $this->valorLance = $this->lote->valor_prelance_calculado;
@@ -229,13 +233,22 @@ class PreLanceCreate extends Component
 
     public function registrar()
     {
+        // dd($this->leilao->config_prelance_atual->uuid, $this->lote->uuid, $this->lote->plano_pagamento()->first()->uuid);
+        if($this->lote->uuid == 'f1a75847-4976-4737-a80d-4a061440edac') {
+            // $configPrelanceUuid = $this->leilao->config_prelance_atual->uuid;
+            $planoPagamentoUuid = $this->lote->plano_pagamento()->first()->uuid;
+        }else {
+            // $configPrelanceUuid = $this->leilao->config_prelance_atual->uuid;
+            $planoPagamentoUuid = $this->leilao->plano_pagamento_prelance->uuid;
+        }
+
         try {
             $request = PrelanceStoreRequest::create( route('prelance.store'), "POST", [
                 "_token" => csrf_token(),
                 'leilao_uuid' => $this->leilao->uuid,
                 'lote_uuid' => $this->lote->uuid,
                 'prelance_config_uuid' => $this->leilao->config_prelance_atual->uuid,
-                'plano_pagamento_uuid' => $this->leilao->plano_pagamento_prelance->uuid,
+                'plano_pagamento_uuid' => $planoPagamentoUuid,
                 'realizado_em' => Carbon::now()->toDateString(),
                 'valor_final_prelance' => $this->valorTotalLote,
                 'valor' => $this->valorLance,
@@ -253,7 +266,11 @@ class PreLanceCreate extends Component
                 'leilaoUuid' => $this->leilao->uuid
             ]));
         } catch (Exception $exception) {
-            return redirect()->back()->withErrors($exception);
+
+            session()->flash('message', 'Erro: '.$exception->getMessage());
+            return redirect()
+                ->to(route('prelance.index', ['leilaoUuid' => $this->leilao->uuid]));
+
         }
     }
 }

@@ -192,8 +192,14 @@ class Lote extends Model
         {
             $valorLanceOriginal = $this->prelance_vencedor()->valor;
             $quantidadeClientes = $this->prelance_vencedor()->clientes->count() ? $this->prelance_vencedor()->clientes->count() : 1;
-            $planoPagamento = $this->prelance_vencedor()->plano_pagamento;
-            $condicoesPagamento = $planoPagamento->condicoes_pagamento()->get();
+            if($this->uuid == "f1a75847-4976-4737-a80d-4a061440edac") {
+                $planoPagamento = $this->plano_pagamento()->first();
+                $condicoesPagamento = $this->plano_pagamento()->first()->condicoes_pagamento()->get()->toArray();
+            } else {
+                $planoPagamento = $this->prelance_vencedor()->plano_pagamento;
+                $condicoesPagamento = $planoPagamento->condicoes_pagamento()->get();
+            }
+            
             $valorLotePreLance = 0;
     
             foreach ($condicoesPagamento as $key => $condicaoPagamento)
