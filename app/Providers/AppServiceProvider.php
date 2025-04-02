@@ -213,7 +213,11 @@ class AppServiceProvider extends ServiceProvider
         CompraCliente::observe(CompraClienteObserver::class);
         Parcela::observe(ParcelaObserver::class);
         
+
+        \DB::statement("SET time_zone='-03:00'");
+
         \DB::enableQueryLog();
+        
         // -- validations
         Validator::extend('validarIdadeAdmissao', function ($attribute, $value, $parameters, $validator) {
             $dataNascimento = $validator->getData()['data_nascimento'];
