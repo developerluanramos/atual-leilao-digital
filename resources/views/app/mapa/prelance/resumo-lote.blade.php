@@ -1,7 +1,7 @@
 @extends('app.mapa.default-header', ['titulo' => "RESUMO LOTES", 'identificador' => 'prelance-resumo-lote'])
 
 @section('content-mapa-prelance-resumo-lote')
-
+{{-- <img src="{{$image}}" alt=""> --}}
 <h3>Configuração do pré-lance</h3>
 <table style="width: 100%" class="report-table">
     <thead>
@@ -60,7 +60,7 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($leilao->lotes as $lote)
+        @forelse ($leilao->lotes->sortBy('numero') as $lote)
             <tr>
                 <td style="text-align: left !important; background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}; width: 50px;">
                     <div class="flex-shrink-0">

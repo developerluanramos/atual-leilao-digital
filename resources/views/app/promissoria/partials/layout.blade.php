@@ -198,7 +198,7 @@ body {
 <body>
     <!-- Header -->
     <div class="header">
-        {{-- <img src="{{ asset("atual_leiloes_logo.png") }}" alt="" style="width: 150px; height: 150px;"> --}}
+        <img src="https://yt3.googleusercontent.com/lELF6Or3zPu6dSntk6SkG8kDOWd0E8FML27cz8dQi1hRiG0F6HymU8X1bL27rwMbGDTDpIJDvy4=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" alt="Logo da Empresa" style="width: 100%; height: 130px;">
         <h1 class="text-uppercase">{{$compra->leilao->descricao}}</h1>
         <h2>Nota de Leilão e Contrato de Compra e Venda com Reserva de Domínio</h2>
         <p>

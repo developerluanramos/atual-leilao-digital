@@ -248,7 +248,7 @@
 <body>
     <!-- Header -->
     <div class="header">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYl3aVkWky8GGlkFjXqJEYLw_LvKM082YxEw&s" alt="" style="width: 150px; height: 150px;">
+        <img src="https://yt3.googleusercontent.com/lELF6Or3zPu6dSntk6SkG8kDOWd0E8FML27cz8dQi1hRiG0F6HymU8X1bL27rwMbGDTDpIJDvy4=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" alt="Logo da Empresa" style="width: 100%; height: 130px;">
         <h1 class="text-uppercase">{{$leilao->descricao}}</h1>
         <br>
         <h1 style="color: #1e32ec">{{$titulo ?? 'RELATÓRIO SEM TÍTULO'}}</h1>
@@ -263,7 +263,7 @@
     
     <!-- Footer -->
     <div class="footer">
-        <p>Atual Leilões - powered by KOLARES TI - ENGENHARIA DE SOFTWARE ÁGIL</p>
+        <p>Atual Leilões - powered by Code First Consulting</p>
         <p>documento emitido por <b>{{Auth::user()->name}} </b> em <b>{{date('d/m/Y h:i:s')}}</b></p>
     </div>
 </body>

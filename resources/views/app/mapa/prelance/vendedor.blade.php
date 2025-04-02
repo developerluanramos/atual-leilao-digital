@@ -64,7 +64,7 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($lotes as $lote)
+        @forelse ($lotes->sortBy('numero') as $lote)
             <tr>
                 <td style="text-align: left !important; background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}; width: 50px;">
                     <div class="flex-shrink-0">
