@@ -38,7 +38,9 @@ class MapaResumoClienteShowController extends Controller
                     $query->where('uuid', $request->get('clienteUuid'));
                 });
             },  
-            'clientes.prelances.lote', 
+            'clientes.prelances.lote' => function($query) use ($request, $leilaoUuid) {
+                $query->where('leilao_uuid', $leilaoUuid);
+            }, 
             'clientes.prelances.prelance_config'
         ])->where('uuid', $leilaoUuid)->first();
         
