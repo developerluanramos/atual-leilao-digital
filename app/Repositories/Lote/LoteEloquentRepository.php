@@ -35,12 +35,7 @@ class LoteEloquentRepository implements LoteRepositoryInterface
     {
         $query = $this->model->query();
 
-//        if(!is_null($filter)) {
-//            $query->where("nome", "like", "%".$filter."%");
-//            $query->orWhere("situacao", "like", "%".$filter."%");
-//        }
-
-        $query->orderBy('updated_at', 'desc')->orderBy('id');
+        $query->orderBy('numero', 'asc');
 
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 
@@ -51,14 +46,8 @@ class LoteEloquentRepository implements LoteRepositoryInterface
     {
         $query = $this->model->query()->with('plano_pagamento');
 
-//        if(!is_null($filter)) {
-//            $query->where("nome", "like", "%".$filter."%");
-//            $query->orWhere("situacao", "like", "%".$filter."%");
-//        }
-
         $query->where('leilao_uuid', $leilaoUuid);
-        $query->orderBy('id', 'asc');
-        $query->orderBy('updated_at', 'desc');
+        $query->orderBy('numero', 'asc');
 
         $result = $query->paginate($totalPerPage, ['*'], 'page', $page);
 

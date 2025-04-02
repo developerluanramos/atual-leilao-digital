@@ -11,7 +11,7 @@ class LoteIndexController extends Controller
     {
         $dataCreate = $action->execute(
             $request->get('page', 1),
-            $request->get('totalPerPage', 15),
+            40,
             $request->get('filter', null),
             $leilaoUuid
         );
