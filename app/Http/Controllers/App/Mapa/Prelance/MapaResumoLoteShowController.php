@@ -34,7 +34,7 @@ class MapaResumoLoteShowController extends Controller
             'config_prelance',  
             'lotes', 
         ])->where('uuid', $leilaoUuid)->first();
-        
+
         $pdf->loadView('app.mapa.prelance.resumo-lote', ['leilao' => $leilao]);
         
         return $this->stream($pdf, 'resumo-prelance-resumo-lote.pdf');
