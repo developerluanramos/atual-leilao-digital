@@ -69,51 +69,40 @@
 <table style="width: 100%" class="report-table">
     <thead>
         <tr>
-            <th></th>
-            <th>Qtd</th>
             <th>Lote</th>
-            <th>Valor Prélance</th>
-            {{-- <th>Total C. Compra</th>
-            <th>Total C. Venda</th> --}}
-            <th>Total Lote</th>
+            <th>Qtd</th>
+            <th>Lance</th>
+            <th>Total</th>
+            {{-- <th>Config</th> --}}
+            <th>C. Compra</th>
+            {{-- <th>Total C. Venda</th>  --}}
             <th>Data</th>
             <th>Vencedor</th>
         </tr>
     </thead>
     <tbody>
         @php
-            // $valorTotalComissaoComprador = 0; 
+            $valorTotalComissaoComprador = 0; 
             // $valorTotalComissaoVendedor = 0;
             $totalMultiplicador = 0; 
             $valorTotal = 0;
+            $valorTotalParcela = 0;
         @endphp
         @forelse ($cliente->prelances as $prelance)
             @if($prelance->uuid === $prelance->lote->prelance_vencedor()->uuid)
                 @php
-                    // $valorTotalComissaoComprador += $prelance->valor_comissao_compra; 
+                    $valorTotalComissaoComprador += $prelance->valor_comissao_compra; 
                     // $valorTotalComissaoVendedor += $prelance->valor_comissao_venda; 
                     $totalMultiplicador += $prelance->lote->multiplicador;
                     $valorTotal += $prelance->lote->valor_prelance;
+                    $valorTotalParcela += $prelance->valor;
                 @endphp
                 <tr>
-                    <td style="text-align: left !important; background-color:{{$prelance->prelance_config->cor}}; width: 50px;">
-                        <div class="flex-shrink-0">
-                            <span style="background-color:{{$prelance->prelance_config->cor}}">
-                                <x-layouts.badges.info-percent
-                                    :convert="false"
-                                    :textLength="'sm'"
-                                    :value="$prelance->prelance_config->percentual_comissao_comprador"
-                                />
-                            </span>
-                        </div>
+                    <td style="text-align: left !important">
+                        <b>{{$prelance->lote->numero}} </b> - <small>{{$prelance->lote->descricao}}</small>
                     </td>
                     <td>
                         {{$prelance->lote->multiplicador}}
-                    </td>
-                    <td style="text-align: left !important">
-                        <small>
-                            {{$prelance->lote->numero}} - {{$prelance->lote->descricao}}
-                        </small>
                     </td>
                     <td class="money" style="float: right; text-align:right">
                         <strong>
@@ -124,21 +113,43 @@
                             />
                         </strong>
                     </td>
-                    {{-- <td class="money" style="float: right; text-align:right">
-                        <x-layouts.badges.info-percent
-                            :convert="false"
-                            :textLength="'sm'"
-                            :value="$prelance->prelance_config->percentual_comissao_comprador"
-                        />
+                    <td class="money" style="float: right; text-align:right">
                         <strong>
                             <x-layouts.badges.info-money
-                                :convert="false"
-                                :textLength="'sm'"
-                                :value="number_format($prelance->valor_comissao_compra, 2, '.', '')"
+                            :convert="false"
+                            :textLength="'sm'"
+                            :value="number_format($prelance->lote->valor_prelance, 2, '.', '')"
                             />
                         </strong>
                     </td>
-                    <td class="money" style="float: right; text-align:right">
+                    <td class="money" style="float: right; text-align:right; background-color:{{$prelance->prelance_config->cor}}">
+                        <span>
+                            <x-layouts.badges.info-percent
+                                :convert="false"
+                                :textLength="'sm'"
+                                :value="$prelance->prelance_config->percentual_comissao_comprador"
+                            />
+                            <strong>
+                                <x-layouts.badges.info-money
+                                    :convert="false"
+                                    :textLength="'sm'"
+                                    :value="number_format($prelance->valor_comissao_compra, 2, '.', '')"
+                                />
+                            </strong>
+                        </span>
+                    </td>
+                    {{-- <td style="text-align: left !important; background-color:{{$prelance->prelance_config->cor}}; width: 50px;">
+                        <div class="flex-shrink-0">
+                            <span style="background-color:{{$prelance->prelance_config->cor}}">
+                                <x-layouts.badges.info-percent
+                                    :convert="false"
+                                    :textLength="'sm'"
+                                    :value="$prelance->prelance_config->percentual_comissao_comprador"
+                                />
+                            </span>
+                        </div>
+                    </td> --}}
+                    {{-- <td class="money" style="float: right; text-align:right">
                         <x-layouts.badges.info-percent
                             :convert="false"
                             :textLength="'sm'"
@@ -151,18 +162,9 @@
                             :value="number_format($prelance->valor_comissao_venda, 2, '.', '')"
                             />
                         </strong>
-                    </td> --}}
-                    <td class="money" style="float: right; text-align:right">
-                        <strong>
-                            <x-layouts.badges.info-money
-                            :convert="false"
-                            :textLength="'sm'"
-                            :value="number_format($prelance->lote->valor_prelance, 2, '.', '')"
-                            />
-                        </strong>
-                    </td>
+                    </td>  --}}
                     <td>
-                        {{ $prelance->created_at }}
+                        {{ date('d/m/Y h:i:s', strtotime($prelance->created_at)) }}
                     </td>
                     <td class="money" style="float: right; text-align:right">
                         @if($prelance->uuid === $prelance->lote->prelance_vencedor()->uuid)
@@ -183,26 +185,15 @@
         <tr>
             <td></td>
             <td> {{$totalMultiplicador}}</td>
-            <td></td>
-            <td></td>
-            {{-- <td>
-                <strong>
-                    <x-layouts.badges.info-money
-                    :convert="false"
-                    :textLength="'lg'"
-                    :value="number_format($valorTotalComissaoComprador, 2, '.', '')"
-                    />
-                </strong>
-            </td>
             <td>
                 <strong>
                     <x-layouts.badges.info-money
                     :convert="false"
                     :textLength="'lg'"
-                    :value="number_format($valorTotalComissaoVendedor, 2, '.', '')"
+                    :value="number_format($valorTotalParcela, 2, '.', '')"
                     />
                 </strong>
-            </td> --}}
+            </td>
             <td>
                 <strong>
                     <x-layouts.badges.info-money
@@ -212,6 +203,24 @@
                     />
                 </strong>
             </td>
+            <td>
+                <strong>
+                    <x-layouts.badges.info-money
+                    :convert="false"
+                    :textLength="'lg'"
+                    :value="number_format($valorTotalComissaoComprador, 2, '.', '')"
+                    />
+                </strong>
+            </td>
+            {{-- <td> 
+                <strong>
+                    <x-layouts.badges.info-money
+                    :convert="false"
+                    :textLength="'lg'"
+                    :value="number_format($valorTotalComissaoVendedor, 2, '.', '')"
+                    />
+                </strong>
+            </td>  --}}
             <td></td>
             <td></td>
         </tr>
