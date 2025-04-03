@@ -85,6 +85,7 @@
             <th>Qtd</th>
             <th>Lote</th>
             <th>Lance</th>
+            <th>Comissão</th>
             <th>Total</th>
         </tr>
     </thead>
@@ -98,7 +99,7 @@
 
         @forelse ($lotesPorVendedor as $vendedor => $lotesDoVendedor)
             <tr style="background-color: #ab4bbe; color: white">
-                <td colspan="6" style="font-weight: bold; padding: 8px;">
+                <td colspan="7" style="font-weight: bold; padding: 8px;">
                     {{ $vendedor }}
                 </td>
             </tr>
@@ -136,6 +137,18 @@
                             :value="$lote->prelance_vencedor()?->valor"
                         />
                     </td>
+                    <td class="money" style="float: right; text-align:right">
+                        <x-layouts.badges.info-percent
+                            :convert="false"
+                            :textLength="'sm'"
+                            :value="$lote->prelance_vencedor()?->prelance_config()?->first()?->percentual_comissao_vendedor"
+                        />
+                        <x-layouts.badges.info-money
+                            :convert="false"
+                            :textLength="'sm'"
+                            :value="$lote->valor_prelance_comissao_venda"
+                        />
+                    </td>
                     <td class="money" style="float: right; text-align:right; color:blue">
                         <x-layouts.badges.info-money
                             :textLength="'sm'"
@@ -144,13 +157,19 @@
                     </td>
                 </tr>
             @endforeach
-            
+            {{-- @dd($lotesDoVendedor) --}}
             <!-- Linha de subtotal por vendedor -->
             <tr style="background-color: #f0f0f0;">
                 <td colspan="2"><strong>Subtotal</strong></td>
                 <td><strong>{{ $lotesDoVendedor->sum('multiplicador') }}</strong></td>
                 <td></td>
                 <td></td>
+                <td class="money" style="float: right; text-align:right; font-weight: bold;">
+                    <x-layouts.badges.info-money
+                        :textLength="'lg'"
+                        :value="$lotesDoVendedor->sum('valor_prelance_comissao_venda')"
+                    />
+                </td>
                 <td class="money" style="float: right; text-align:right; font-weight: bold;">
                     <x-layouts.badges.info-money
                         :textLength="'sm'"
@@ -168,9 +187,15 @@
         <tr>
             <td><strong>Total Geral</strong></td>
             <td></td>
+            <td></td>
             <td><strong>{{ $lotes->sum('multiplicador') }}</strong></td>
             <td></td>
-            <td></td>
+            <td style="font-size: 14px; font-weight: bold;">
+                <x-layouts.badges.info-money
+                    :textLength="'lg'"
+                    :value="$lotes->sum('valor_prelance_comissao_venda')"
+                />
+            </td>
             <td style="font-size: 14px; font-weight: bold;">
                 <x-layouts.badges.info-money
                     :textLength="'lg'"
