@@ -42,7 +42,11 @@ class MapaResumoClienteShowController extends Controller
             'clientes.prelances' => function($query) use ($leilaoUuid) {
                 $query->whereHas('lote', function($q) use ($leilaoUuid) {
                     $q->where('leilao_uuid', $leilaoUuid);
-                });
+                })
+                ->orderBy(
+                    \DB::raw('(SELECT numero FROM lote WHERE lote.uuid = lance.lote_uuid)'),
+                    'asc'
+                );
             },
             'clientes.prelances.lote',
             'clientes.prelances.prelance_config'

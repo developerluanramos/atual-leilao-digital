@@ -2,7 +2,7 @@
 
 @section('content-mapa-prelance-resumo-cliente')
 
-<h3>Configuração do pré-lance</h3>
+{{-- <h3>Configuração do pré-lance</h3>
 <table style="width: 100%" class="report-table">
     <thead>
         <tr>
@@ -28,8 +28,6 @@
                     {{ $config->plano_pagamento->descricao }}
                 </td>
                 <td>
-                   
-                    {{-- {{$config->precentual_comissao_comprador}} --}}
                     <x-layouts.badges.info-percent
                         :convert="false"
                         :textLength="'sm'"
@@ -48,7 +46,7 @@
             <b>Nenhuma compra registrada neste leilão</b>
         @endforelse
     </tbody>
-</table>
+</table> --}}
     
 @forelse ($leilao->clientes as $cliente)
 <h3>Dados comprador</h3>
@@ -72,10 +70,11 @@
     <thead>
         <tr>
             <th></th>
+            <th>Qtd</th>
             <th>Lote</th>
             <th>Valor Prélance</th>
-            <th>Total C. Compra</th>
-            <th>Total C. Venda</th>
+            {{-- <th>Total C. Compra</th>
+            <th>Total C. Venda</th> --}}
             <th>Total Lote</th>
             <th>Data</th>
             <th>Vencedor</th>
@@ -83,22 +82,33 @@
     </thead>
     <tbody>
         @php
-            $valorTotalComissaoComprador = 0; 
-            $valorTotalComissaoVendedor = 0; 
+            // $valorTotalComissaoComprador = 0; 
+            // $valorTotalComissaoVendedor = 0;
+            $totalMultiplicador = 0; 
             $valorTotal = 0;
         @endphp
         @forelse ($cliente->prelances as $prelance)
             @if($prelance->uuid === $prelance->lote->prelance_vencedor()->uuid)
                 @php
-                    $valorTotalComissaoComprador += $prelance->valor_comissao_compra; 
-                    $valorTotalComissaoVendedor += $prelance->valor_comissao_venda; 
+                    // $valorTotalComissaoComprador += $prelance->valor_comissao_compra; 
+                    // $valorTotalComissaoVendedor += $prelance->valor_comissao_venda; 
+                    $totalMultiplicador += $prelance->lote->multiplicador;
                     $valorTotal += $prelance->lote->valor_prelance;
                 @endphp
                 <tr>
                     <td style="text-align: left !important; background-color:{{$prelance->prelance_config->cor}}; width: 50px;">
                         <div class="flex-shrink-0">
-                            <span style="background-color:{{$prelance->prelance_config->cor}}"></span>
+                            <span style="background-color:{{$prelance->prelance_config->cor}}">
+                                <x-layouts.badges.info-percent
+                                    :convert="false"
+                                    :textLength="'sm'"
+                                    :value="$prelance->prelance_config->percentual_comissao_comprador"
+                                />
+                            </span>
                         </div>
+                    </td>
+                    <td>
+                        {{$prelance->lote->multiplicador}}
                     </td>
                     <td style="text-align: left !important">
                         <small>
@@ -114,7 +124,7 @@
                             />
                         </strong>
                     </td>
-                    <td class="money" style="float: right; text-align:right">
+                    {{-- <td class="money" style="float: right; text-align:right">
                         <x-layouts.badges.info-percent
                             :convert="false"
                             :textLength="'sm'"
@@ -141,7 +151,7 @@
                             :value="number_format($prelance->valor_comissao_venda, 2, '.', '')"
                             />
                         </strong>
-                    </td>
+                    </td> --}}
                     <td class="money" style="float: right; text-align:right">
                         <strong>
                             <x-layouts.badges.info-money
@@ -172,9 +182,10 @@
     <tfoot>
         <tr>
             <td></td>
+            <td> {{$totalMultiplicador}}</td>
             <td></td>
             <td></td>
-            <td>
+            {{-- <td>
                 <strong>
                     <x-layouts.badges.info-money
                     :convert="false"
@@ -191,7 +202,7 @@
                     :value="number_format($valorTotalComissaoVendedor, 2, '.', '')"
                     />
                 </strong>
-            </td>
+            </td> --}}
             <td>
                 <strong>
                     <x-layouts.badges.info-money
@@ -208,11 +219,12 @@
 </table>
 
 
-<h3>Pré-lances realizados</h3>
+<h3>Histórico</h3>
 <table style="width: 100%" class="report-table">
     <thead>
         <tr>
             <th></th>
+            <th>Qtd</th>
             <th>Lote</th>
             <th>Valor</th>
             <th>Vencedor</th>
@@ -224,8 +236,17 @@
             <tr>
                 <td style="text-align: left !important; background-color:{{$prelance->prelance_config->cor}}; width: 50px;">
                     <div class="flex-shrink-0">
-                        <span style="background-color:{{$prelance->prelance_config->cor}}"></span>
+                        <span style="background-color:{{$prelance->prelance_config->cor}}">
+                            <x-layouts.badges.info-percent
+                                :convert="false"
+                                :textLength="'sm'"
+                                :value="$prelance->prelance_config->percentual_comissao_comprador"
+                            />
+                        </span>
                     </div>
+                </td>
+                <td>
+                    {{$prelance->lote->multiplicador}}
                 </td>
                 <td style="text-align: left !important">
                     <small>
