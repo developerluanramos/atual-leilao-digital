@@ -1,62 +1,15 @@
 @extends('app.mapa.default-header', ['titulo' => "RESUMO LOTES", 'identificador' => 'prelance-resumo-lote'])
 
 @section('content-mapa-prelance-resumo-lote')
-{{-- <img src="{{$image}}" alt=""> --}}
-<h3>Configuração do pré-lance</h3>
-<table style="width: 100%" class="report-table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Data</th>
-            <th>Parcelamento</th>
-            <th>C. Comprador</th>
-            <th>C. Vendedor</th>
-        </tr>
-    </thead>
-    <tbody>
-        @forelse ($leilao->config_prelance as $config)
-            <tr>
-                <td style="text-align: left !important; background-color:{{$config->cor}}; width: 50px;">
-                    <div class="flex-shrink-0">
-                        <span style="background-color:{{$config->cor}}"></span>
-                    </div>
-                </td>
-                <td class="money" style="float: right; text-align:right">
-                    <b>{{ $config->data }}</b>
-                </td>
-                <td class="money" style="float: right; text-align:right">
-                    {{ $config->plano_pagamento->descricao }}
-                </td>
-                <td>
-                   
-                    {{-- {{$config->precentual_comissao_comprador}} --}}
-                    <x-layouts.badges.info-percent
-                        :convert="false"
-                        :textLength="'sm'"
-                        :value="$config->percentual_comissao_comprador"
-                    />
-                </td>
-                <td>
-                    <x-layouts.badges.info-percent
-                        :convert="false"
-                        :textLength="'sm'"
-                        :value="$config->percentual_comissao_vendedor"
-                    />
-                </td>
-            </tr>
-        @empty
-            <b>Nenhuma compra registrada neste leilão</b>
-        @endforelse
-    </tbody>
-</table>
 
-<h3>Lotes</h3>
 <table style="width: 100%" class="report-table">
     <thead>
         <tr>
             <th></th>
+            <th>Quantidade</th>
             <th>Lote</th>
-            <th>Valor</th>
+            <th>Lance</th>
+            <th>Total</th>
         </tr>
     </thead>
     <tbody>
@@ -64,8 +17,17 @@
             <tr>
                 <td style="text-align: left !important; background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}; width: 50px;">
                     <div class="flex-shrink-0">
-                        <span style="background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}"></span>
+                        <span style="background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}">
+                            <x-layouts.badges.info-percent
+                                :convert="false"
+                                :textLength="'sm'"
+                                :value="$lote->prelance_vencedor()?->prelance_config()?->first()?->percentual_comissao_comprador"
+                            />
+                        </span>
                     </div>
+                </td>
+                <td class="money" style="float: left; text-align:left">
+                    <b>{{ $lote->multiplicador }}</b>
                 </td>
                 <td class="money" style="float: left; text-align:left">
                     <b>{{ $lote->numero }} - {{ $lote->descricao }}</b>
@@ -77,10 +39,31 @@
                         :value="$lote->prelance_vencedor()?->valor ?? 0"
                     />
                 </td>
+                <td class="money" style="float: right; text-align:right; color: blue;">
+                    <x-layouts.badges.info-money
+                        :convert="false"
+                        :textLength="'sm'"
+                        :value="$lote->valor_final_prelance ?? 0"
+                    />
+                </td>
             </tr>
         @empty
             <b>Nenhuma compra registrada neste leilão</b>
         @endforelse
     </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td><b>{{ $leilao->lotes->sum('multiplicador') }}</b></td>
+            <td></td>
+            <td></td>
+            <td style="font-size: 11px">
+                <x-layouts.badges.info-money
+                    :textLength="'lg'"
+                    :value="$leilao->lotes->sum('valor_prelance')"
+                />
+            </td>
+        </tr>
+    </tfoot>
 </table>
 @endsection
