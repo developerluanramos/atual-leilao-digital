@@ -7,7 +7,7 @@
         <tr>
             <th>Lote</th>
             <th>Quantidade</th>
-            <th></th>
+            <th>Comissão</th>
             <th>Lance</th>
             <th>Total</th>
         </tr>

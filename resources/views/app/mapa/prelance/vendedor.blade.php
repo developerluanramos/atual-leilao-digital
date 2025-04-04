@@ -2,8 +2,6 @@
 
 @section('content-mapa-prelance-vendedor')
 
-<h3>Lotes por Vendedor</h3>
-
 {{-- <table style="width: 100%" class="report-table">
     <thead>
         <tr>
@@ -80,10 +78,10 @@
 <table style="width: 100%" class="report-table">
     <thead>
         <tr>
-            <th>Vendedor</th>
+            <th>Lote</th>
             <th>Cota</th>
             <th>Qtd</th>
-            <th>Lote</th>
+            <th></th>
             <th>Lance</th>
             <th>Comissão</th>
             <th>Total</th>
@@ -106,16 +104,8 @@
             
             @foreach ($lotesDoVendedor as $lote)
                 <tr>
-                    <td style="text-align: left !important; background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}; width: 50px;">
-                        <div class="flex-shrink-0">
-                            <span style="background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}; text-align:center">
-                                <x-layouts.badges.info-percent
-                                    :convert="false"
-                                    :textLength="'sm'"
-                                    :value="$lote->prelance_vencedor()?->prelance_config()?->first()?->percentual_comissao_comprador"
-                                />
-                            </span>
-                        </div>
+                    <td style="float: left; text-align:left">
+                        <b>{{ $lote->numero }} - {{ $lote->descricao }}</b>
                     </td>
                     <td>
                         <x-layouts.badges.info-percent
@@ -127,8 +117,16 @@
                     <td>
                         <b>{{ $lote->multiplicador }}</b>
                     </td>
-                    <td style="float: left; text-align:left">
-                        <b>{{ $lote->numero }} - {{ $lote->descricao }}</b>
+                    <td style="text-align: center !important; background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}; width: 50px;">
+                        <div class="flex-shrink-0">
+                            <span style="background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}; text-align:center">
+                                <x-layouts.badges.info-percent
+                                    :convert="false"
+                                    :textLength="'sm'"
+                                    :value="$lote->prelance_vencedor()?->prelance_config()?->first()?->percentual_comissao_comprador"
+                                />
+                            </span>
+                        </div>
                     </td>
                     <td class="money" style="float: right; text-align:right">
                         <x-layouts.badges.info-money
@@ -137,6 +135,7 @@
                             :value="$lote->prelance_vencedor()?->valor"
                         />
                     </td>
+                    
                     <td class="money" style="float: right; text-align:right">
                         <x-layouts.badges.info-percent
                             :convert="false"
@@ -187,8 +186,8 @@
         <tr>
             <td><strong>Total Geral</strong></td>
             <td></td>
-            <td></td>
             <td><strong>{{ $lotes->sum('multiplicador') }}</strong></td>
+            <td></td>
             <td></td>
             <td style="font-size: 14px; font-weight: bold;">
                 <x-layouts.badges.info-money
