@@ -5,9 +5,9 @@
 <table style="width: 100%" class="report-table">
     <thead>
         <tr>
-            <th></th>
-            <th>Quantidade</th>
             <th>Lote</th>
+            <th>Quantidade</th>
+            <th></th>
             <th>Lance</th>
             <th>Total</th>
         </tr>
@@ -15,7 +15,13 @@
     <tbody>
         @forelse ($leilao->lotes->sortBy('numero') as $lote)
             <tr>
-                <td style="text-align: left !important; background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}; width: 50px;">
+                <td style="float: left; text-align:left">
+                    <b style="font-size: 13px">{{ $lote->numero }}</b> - {{ $lote->descricao }}
+                </td>
+                <td class="money" style="text-align:center">
+                    <b>{{ $lote->multiplicador }}</b>
+                </td>
+                <td style="text-align: center !important; background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}; width: 50px;">
                     <div class="flex-shrink-0">
                         <span style="background-color:{{$lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc'}}">
                             <x-layouts.badges.info-percent
@@ -25,12 +31,6 @@
                             />
                         </span>
                     </div>
-                </td>
-                <td class="money" style="float: left; text-align:left">
-                    <b>{{ $lote->multiplicador }}</b>
-                </td>
-                <td class="money" style="float: left; text-align:left">
-                    <b>{{ $lote->numero }} - {{ $lote->descricao }}</b>
                 </td>
                 <td class="money" style="float: right; text-align:right">
                     <x-layouts.badges.info-money
