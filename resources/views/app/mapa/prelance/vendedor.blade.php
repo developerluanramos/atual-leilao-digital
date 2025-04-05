@@ -159,7 +159,25 @@
             {{-- @dd($lotesDoVendedor) --}}
             <!-- Linha de subtotal por vendedor -->
             <tr style="background-color: #f0f0f0;">
-                <td colspan="2"><strong>Subtotal</strong></td>
+                <td colspan="2" style="float: left; text-align:left;"><strong>Média por animal</strong></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="float: right; text-align:right;">
+                    {{-- <x-layouts.badges.info-money
+                        :textLength="'sm'"
+                        :value="$lotesDoVendedor->sum('valor_prelance_comissao_venda') / $lotesDoVendedor->sum('multiplicador')"
+                    /> --}}
+                </td>
+                <td style="float: right; text-align:right;">
+                    <x-layouts.badges.info-money
+                        :textLength="'sm'"
+                        :value="$lotesDoVendedor->sum('valor_prelance') / $lotesDoVendedor->sum('multiplicador')"
+                    />
+                </td>
+            </tr>
+            <tr style="background-color: #f0f0f0;">
+                <td colspan="2" style="float: left; text-align:left;"><strong>Subtotal</strong></td>
                 <td><strong>{{ $lotesDoVendedor->sum('multiplicador') }}</strong></td>
                 <td></td>
                 <td></td>
@@ -183,6 +201,25 @@
         @endforelse
     </tbody>
     <tfoot>
+        <tr>
+            <td><strong>Média geral por animal</strong></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                {{-- <x-layouts.badges.info-money
+                    :textLength="'lg'"
+                    :value="$lotes->sum('valor_prelance_comissao_venda') / $lotes->sum('multiplicador')"
+                /> --}}
+            </td>
+            <td style="float: right; text-align:right;">
+                <x-layouts.badges.info-money
+                    :textLength="'lg'"
+                    :value="$lotes->sum('valor_prelance') / $lotes->sum('multiplicador')"
+                />
+            </td>
+        </tr>
         <tr>
             <td><strong>Total Geral</strong></td>
             <td></td>
