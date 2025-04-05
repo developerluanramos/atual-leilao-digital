@@ -98,7 +98,7 @@
                     $valorTotalParcela += $prelance->valor;
                 @endphp
                 <tr>
-                    <td style="text-align: left !important">
+                    <td style="text-align: left !important; width: 30%;">
                         <b>{{$prelance->lote->numero}} </b> - <small>{{$prelance->lote->descricao}}</small>
                     </td>
                     <td>
@@ -122,8 +122,8 @@
                             />
                         </strong>
                     </td>
-                    <td class="money" style="float: right; text-align:right; background-color:{{$prelance->prelance_config->cor}}">
-                        <span>
+                    <td class="money" style="background-color:{{$prelance->prelance_config->cor}}">
+                        {{-- <span> --}}
                             <x-layouts.badges.info-percent
                                 :convert="false"
                                 :textLength="'sm'"
@@ -136,7 +136,7 @@
                                     :value="number_format($prelance->valor_comissao_compra, 2, '.', '')"
                                 />
                             </strong>
-                        </span>
+                        {{-- </span> --}}
                     </td>
                     {{-- <td style="text-align: left !important; background-color:{{$prelance->prelance_config->cor}}; width: 50px;">
                         <div class="flex-shrink-0">
