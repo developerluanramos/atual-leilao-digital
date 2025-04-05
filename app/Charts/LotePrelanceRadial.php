@@ -24,8 +24,11 @@ class LotePrelanceRadial
         return $this->chart->radarChart()
             ->addData('Quantidade de lances', $lotes->pluck('quantidade_prelances')->toArray())
             ->setToolbar(true, true)
+            ->setHeight(750)
+            ->setWidth(750)
             ->setXAxis($labels)
             ->setTitle('valor estimado x Valor atingido')
+            ->setLabels($labels)
             ->setMarkers(['#303F9F'], 7, 10);
     }
 }
