@@ -11,7 +11,11 @@
     @section('table-content')
         @foreach($leiloes->items() as $index => $leilao)
             <tr>
-                <td>{{ $leilao->descricao }}</td>
+                <td>
+                    <a href="{{route('leilao.show', $leilao->uuid)}}">
+                        {{ $leilao->descricao }}
+                    </a>
+                </td>
                 <td>{{ (new \App\Models\Leilao((array)$leilao))->lotes()->count() }}</td>
                 <td>{{ $leilao->local }}</td>
                 <td class="text-right">

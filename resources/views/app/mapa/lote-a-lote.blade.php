@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             @forelse ($leilao->lotes()->get() as $lote)
-                <tr>
+                <tr style="background-color: #a7a8d8">
                     <td style="text-align: left !important">
                         0{{$lote->numero}} - <small><b>{{$lote->descricao}}</b></small><br>
                         <small>{{$lote->observacoes}}</small>
@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <td colspan="6">
-                        <table style="width: 100%;">
+                        <table style="width: 100%;" class="report-table">
                             <thead>
                                 <tr>
                                     <th>Comprador</th>
@@ -67,59 +67,58 @@
                             </thead>
                             <tbody>
                                 @foreach ($lote->compras()->with(['cliente', 'vendedor'])->get() as $compra)
-                                    
+                                    <tr style="border: solid 1px black;">
+                                        <td style="width: 35%">
+                                            <x-layouts.badges.info-percent
+                                                :convert="false"
+                                                :value="$compra->percentual_cota"
+                                            ></x-layouts.badges.info-percent>
+                                            <small>{{$compra->cliente->nome}}</small>
+                                        </td>
+                                        <td style="width: 35%">
+                                            <x-layouts.badges.info-percent
+                                                :convert="false"
+                                                :value="$compra->percentual_cota_vendedor"
+                                            ></x-layouts.badges.info-percent>
+                                            <small>{{$compra->vendedor->nome}}</small>
+                                        </td>
+                                        <td class="money" style="float: right; text-align:right; width: 10%">
+                                            <strong>
+                                                <x-layouts.badges.info-percent
+                                                    :convert="false"
+                                                    :value="8"
+                                                ></x-layouts.badges.info-percent>
+                                                <x-layouts.badges.info-money
+                                                    :convert="false"
+                                                    :textLength="'sm'"
+                                                    :value="$compra->valor_comissao_comprador"
+                                                />
+                                            </strong>
+                                        </td>
+                                        <td class="money" style="float: right; text-align:right; width: 10%">
+                                            <strong>
+                                                <x-layouts.badges.info-percent
+                                                    :convert="false"
+                                                    :value="10"
+                                                ></x-layouts.badges.info-percent>
+                                                <x-layouts.badges.info-money
+                                                    :convert="false"
+                                                    :textLength="'sm'"
+                                                    :value="$compra->valor_comissao_vendedor"
+                                                />
+                                            </strong>
+                                        </td>
+                                        <td class="money" style="float: right; text-align:right; width: 10%">
+                                            <strong>
+                                                <x-layouts.badges.info-money
+                                                    :convert="false"
+                                                    :textLength="'lg'"
+                                                    :value="$compra->valor"
+                                                />
+                                            </strong>
+                                        </td>
+                                    </tr>
                                 @endforeach
-                                <tr>
-                                    <td>
-                                        <x-layouts.badges.info-percent
-                                            :convert="false"
-                                            :value="$compra->percentual_cota"
-                                        ></x-layouts.badges.info-percent>
-                                        <small>{{$compra->cliente->nome}}</small>
-                                    </td>
-                                    <td>
-                                        <x-layouts.badges.info-percent
-                                            :convert="false"
-                                            :value="$compra->percentual_cota_vendedor"
-                                        ></x-layouts.badges.info-percent>
-                                        <small>{{$compra->vendedor->nome}}</small>
-                                    </td>
-                                    <td class="money" style="float: right; text-align:right">
-                                        <strong>
-                                            <x-layouts.badges.info-percent
-                                            :convert="false"
-                                            :value="8"
-                                            ></x-layouts.badges.info-percent>
-                                            <x-layouts.badges.info-money
-                                            :convert="false"
-                                            :textLength="'sm'"
-                                            :value="$compra->valor_comissao_comprador"
-                                            />
-                                        </strong>
-                                    </td>
-                                    <td class="money" style="float: right; text-align:right">
-                                        <strong>
-                                            <x-layouts.badges.info-percent
-                                            :convert="false"
-                                            :value="10"
-                                            ></x-layouts.badges.info-percent>
-                                            <x-layouts.badges.info-money
-                                            :convert="false"
-                                            :textLength="'sm'"
-                                            :value="$compra->valor_comissao_vendedor"
-                                            />
-                                        </strong>
-                                    </td>
-                                    <td class="money" style="float: right; text-align:right">
-                                        <strong>
-                                            <x-layouts.badges.info-money
-                                            :convert="false"
-                                            :textLength="'lg'"
-                                            :value="$compra->valor"
-                                            />
-                                        </strong>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </td>

@@ -1,13 +1,8 @@
 @extends('app.layouts.app')
 
-@section('breadcrumb')
-    {{ Breadcrumbs::render('setor') }}
-@endsection
-
 @section('title', 'Leilões')
 
 @section('content')
-
 <x-layouts.headers.list-header :count="$leiloes->total()" :title="'Leilões'" :route="'leilao/create'"/>
 
 @include('components.alerts.form-success')
