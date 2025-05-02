@@ -28,29 +28,32 @@
 
                         <div class="flex-1 min-w-0 ms-4">
                             <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                {{ $comprador->cliente->nome }}
+                                <b>{{ $comprador->cliente->nome }}</b>
                             </p>
                             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                {{ $comprador->cliente->documento }}
+                                {{ $comprador->cliente->cpf_cnpj }} - {{ $comprador->cliente->endereco }}
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                             <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-200">
                                 {{ $comprador->total_compras }} {{ $comprador->total_compras > 1 ? 'lotes' : 'lote' }}
                             </span>&nbsp;
+
+                            </p>
+                        </div>
+
+                        <div class="inline-flex items-center gap-2">
+                            <span class="text-base font-semibold text-red-600 dark:text-red-500">
                                 <x-layouts.badges.info-money
                                     :color="'purple'"
                                     :convert="false"
                                     :textLength="'sm'"
                                     :value="$comprador->valor_total"
                                 />
-                            </p>
-                        </div>
-
-                        <div class="inline-flex flex-col items-end">
+                            </span>
                             <!-- Botão do dropdown -->
                             <button id="dropdownMenuIconButton{{ $comprador->cliente->uuid }}"
                                     data-dropdown-toggle="dropdownDots{{ $comprador->cliente->uuid }}"
-                                    class="inline-flex items-center p-1 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                                    class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                     type="button">
                                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
                                     <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
@@ -66,7 +69,7 @@
                                     <li>
                                         <a href="#"
                                            class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                                            <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <svg class="w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h6m-6 4h6m-6 4h6M6 3v18l4-2 4 2 4-2 4 2V3l-4 2-4-2-4 2-4-2Z"/>
                                             </svg>
                                             Extrato

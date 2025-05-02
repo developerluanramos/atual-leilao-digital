@@ -35,6 +35,5 @@ class CompradorIndexController
             'total_geral' => $total_geral,
             'total_lotes' => $total_lotes
         ]);
-
     }
 }
