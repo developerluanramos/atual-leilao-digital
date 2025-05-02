@@ -1,10 +1,13 @@
 @section('title', 'Visualiza Lote')
 
-<h2 class="tittle-2 mb-3">Lote: {{$lote->descricao}} <x-layouts.badges.status-lote 
-    :status="(int)$lote->status">
-</x-layouts.badges.status-lote> </h2>   
-{{-- @dd($lote) --}}
-@livewire('components.app.lote-barra-progresso', [$lote]) 
+<h2 class="tittle-2 mb-3">
+    <b>{{$lote->numero}} - {{$lote->descricao}}</b>
+    <x-layouts.badges.status-lote
+        :status="(int)$lote->status">
+    </x-layouts.badges.status-lote>
+</h2>
+
+{{--@livewire('components.app.lote-barra-progresso', [$lote])--}}
 {{-- <div class="space-y-8 lg:grid lg:grid-cols-6 pr-8 sm:gap-6 xl:gap-10 lg:space-y-0"> --}}
 {{-- <div class="flex w-full mb-6 md:mb-0"> --}}
     <div class="space-y-12 mt-2  mb-lg lg:grid lg:grid-cols-4 sm:gap-4 xl:gap-4 lg:space-y-0">
@@ -128,7 +131,7 @@
                 :sessao="$compra->uuid"
                 :titulo="$compra->cliente->nome">
                 @section($compra->uuid)
-                
+
                 <span class="content-end text-right mr-lg">
                     <x-layouts.badges.info-money
                     :convert="false"
@@ -147,14 +150,14 @@
                         Via Interna
                     </a>
                 </div>
-                
+
                 {{-- <button id="{{$compra->uuid}}" data-dropdown-toggle="{{$compra->uuid}}" class="ml-lg text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                     Promissórias
                     <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                     </svg>
                 </button>
-                    
+
                 <!-- Dropdown menu -->
                 <div id="{{$compra->uuid}}" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="{{$compra->uuid}}">
@@ -169,7 +172,7 @@
                     </li>
                     </ul>
                 </div> --}}
-    
+
                 <table class="table-bordered w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -237,5 +240,5 @@
         @endforelse
     </ul>
 </div>
-  
+
 {{-- @dump($lote) --}}

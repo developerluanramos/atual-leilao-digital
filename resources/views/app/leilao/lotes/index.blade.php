@@ -2,7 +2,7 @@
     <div class="flow-root">
         <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
             @foreach($lotes->items() as $index => $lote)
-                <li class="py-3 sm:py-4 cursor-pointer pointer">
+                <li class="py-3 sm:py-4 cursor-pointer pointer" href="{{ route('leilao.lote.show', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid]) }}">
                     {{-- @livewire('components.app.lote-barra-progresso', [new App\Models\Lote((array)$lote)]) --}}
                     <div class="flex items-center w-full mt-2">
                         <div class="flex-shrink-0">
@@ -12,13 +12,15 @@
                         </div>
                         <div class="flex-1 min-w-0 ms-4">
                             <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                <b>{{$lote->descricao}}</b>
+                                <b>
+                                    <a href="{{ route('leilao.lote.show', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid]) }}">{{$lote->descricao}}</a>
+                                </b>
                             </p>
                             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
                                 {{$lote->plano_pagamento['descricao']}}
                             </p>
                             <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                <x-layouts.badges.status-lote 
+                                <x-layouts.badges.status-lote
                                     :status="(int)$lote->status">
                                 </x-layouts.badges.status-lote>
                             </p>
@@ -44,12 +46,12 @@
                                 text="Ver"
                                 action="ver"
                                 color="secondary"
-                                :route="route('leilao.lote.show', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/>
+                                :route="route('leilao.lote.show', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/> &nbsp;
                             <x-layouts.buttons.action-button
                                 text="Editar"
                                 action="editar"
                                 color="primary"
-                                :route="route('leilao.lote.edit', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/>
+                                :route="route('leilao.lote.edit', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/> &nbsp;
                             <x-layouts.buttons.action-button
                                 text="Excluir"
                                 action="excluir"
@@ -57,7 +59,7 @@
                                 :identificador="'drawer-delete-confirmacao'"
                                 :route="route('leilao.lote.delete', [
                                     'uuid' => $leilao->uuid,
-                                    'loteUuid' => $lote->uuid 
+                                    'loteUuid' => $lote->uuid
                                 ])"
                             />
                         </div>
