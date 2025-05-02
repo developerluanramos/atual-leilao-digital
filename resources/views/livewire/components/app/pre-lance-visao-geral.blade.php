@@ -6,7 +6,7 @@
                <x-layouts.badges.info-money
                   :convert="true"
                   :textLength="'sm'"
-                  :value="$leilao->valor_prelance_comissao_compra" 
+                  :value="$leilao->valor_prelance_comissao_compra"
                />
             </h3>
             <p class="font-light text-gray-500 dark:text-gray-400">C. Comprador</p>
@@ -16,7 +16,7 @@
                <x-layouts.badges.info-money
                   :convert="true"
                   :textLength="'sm'"
-                  :value="$leilao->valor_prelance_comissao_venda" 
+                  :value="$leilao->valor_prelance_comissao_venda"
                />
             </h3>
             <p class="font-light text-gray-500 dark:text-gray-400">C. Vendedor</p>
@@ -26,7 +26,7 @@
                <x-layouts.badges.info-money
                   :convert="true"
                   :textLength="'sm'"
-                  :value="$leilao->valor_prelance_comissao_total" 
+                  :value="$leilao->valor_prelance_comissao_total"
                />
             </h3>
             <p class="font-light text-gray-500 dark:text-gray-400">Total Comissão</p>
@@ -35,7 +35,7 @@
             <h3 class="mb-4 text-2xl font-semibold">
                <x-layouts.badges.info-number
                   :textLength="'sm'"
-                  :value="$leilao->lotes->count()" 
+                  :value="$leilao->lotes->count()"
                />
             </h3>
             <p class="font-light text-gray-500 dark:text-gray-400">Lotes</p>
@@ -44,7 +44,7 @@
             <h3 class="mb-4 text-2xl font-semibold">
                <x-layouts.badges.info-number
                   :textLength="'sm'"
-                  :value="count($vendedores)" 
+                  :value="count($vendedores)"
                />
             </h3>
             <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Vendedores</p>
@@ -55,98 +55,98 @@
                   :convert="true"
                   :color="'purple'"
                   :textLength="'lg'"
-                  :value="$leilao->lotes->sum('valor_prelance')" 
+                  :value="$leilao->lotes->sum('valor_prelance')"
                />
             </h3>
             <p class="font-light text-gray-500 sm:text-lg dark:text-gray-400">Total</p>
          </div>
       </div>
    </div>
-   
+
    <div class="flex flex-wrap mb-2">
       <div class="w-full md:w-12/12 md:mb-0">
          <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
                <li class="me-2" role="presentation">
-                  <button 
-                     class="inline-flex items-center p-4 border-b-2 rounded-t-lg dark:text-blue-500" 
-                     id="profile-tab" 
-                     data-tabs-target="#profile" 
-                     type="button" 
-                     role="tab" 
-                     aria-controls="profile" 
+                  <button
+                     class="inline-flex items-center p-4 border-b-2 rounded-t-lg dark:text-blue-500"
+                     id="profile-tab"
+                     data-tabs-target="#profile"
+                     type="button"
+                     role="tab"
+                     aria-controls="profile"
                      aria-selected="false">
                      Painel principal
                   </button>
                </li>
                {{-- <li class="me-2" role="presentation">
-                  <button 
-                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
-                     id="settings-tab" 
-                     data-tabs-target="#settings" 
-                     type="button" 
-                     role="tab" 
-                     aria-controls="settings" 
+                  <button
+                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                     id="settings-tab"
+                     data-tabs-target="#settings"
+                     type="button"
+                     role="tab"
+                     aria-controls="settings"
                      aria-selected="false">
                      Lotes
                   </button>
                </li> --}}
                {{-- <li class="me-2" role="presentation">
-                  <button 
-                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
-                     id="dashboard-tab" 
-                     data-tabs-target="#dashboard" 
-                     type="button" 
-                     role="tab" 
-                     aria-controls="dashboard" 
+                  <button
+                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                     id="dashboard-tab"
+                     data-tabs-target="#dashboard"
+                     type="button"
+                     role="tab"
+                     aria-controls="dashboard"
                      aria-selected="false">
                      Gastos por cliente
                   </button>
                </li> --}}
                <li class="me-2" role="presentation">
-                  <button 
-                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
-                     id="clients-prelance-tab" 
-                     data-tabs-target="#clients-prelance" 
-                     type="button" 
-                     role="tab" 
-                     aria-controls="clients-prelance" 
+                  <button
+                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                     id="clients-prelance-tab"
+                     data-tabs-target="#clients-prelance"
+                     type="button"
+                     role="tab"
+                     aria-controls="clients-prelance"
                      aria-selected="false">
                      Todos os clientes
                   </button>
                </li>
                <li role="presentation">
-                  <button 
-                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
-                     id="vendedores-tab" 
-                     data-tabs-target="#vendedores" 
-                     type="button" 
-                     role="tab" 
-                     aria-controls="vendedores" 
+                  <button
+                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                     id="vendedores-tab"
+                     data-tabs-target="#vendedores"
+                     type="button"
+                     role="tab"
+                     aria-controls="vendedores"
                      aria-selected="false">
                      Vendedores
                   </button>
                </li>
                <li role="presentation">
-                  <button 
-                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
-                     id="graficos-tab" 
-                     data-tabs-target="#graficos" 
-                     type="button" 
-                     role="tab" 
-                     aria-controls="graficos" 
+                  <button
+                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                     id="graficos-tab"
+                     data-tabs-target="#graficos"
+                     type="button"
+                     role="tab"
+                     aria-controls="graficos"
                      aria-selected="false">
                      Gráficos
                   </button>
                </li>
                <li role="presentation">
-                  <button 
-                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
-                     id="configuracoes-prelance-tab" 
-                     data-tabs-target="#configuracoes-prelance" 
-                     type="button" 
-                     role="tab" 
-                     aria-controls="configuracoes-prelance" 
+                  <button
+                     class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                     id="configuracoes-prelance-tab"
+                     data-tabs-target="#configuracoes-prelance"
+                     type="button"
+                     role="tab"
+                     aria-controls="configuracoes-prelance"
                      aria-selected="false">
                      Configurações
                   </button>
@@ -156,14 +156,14 @@
                      <svg class="w-6 h-6 text-white mr-2 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
                      </svg>
-                      
+
                      Novo lance
                   </a>
               </li>
             </ul>
          </div>
          <div id="default-tab-content">
-            <!-- 
+            <!--
             ------------------------------------------
             LOTES
             ------------------------------------------
@@ -174,7 +174,7 @@
                      <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
                       </svg>
-                      Resumido                                     
+                      Resumido
                   </a>
                   {{-- <button onclick="copiarLotesGeralResumido({{json_encode($leilao->toArray())}}, {{json_encode($leilao->lotes->toArray())}})" type="button" class="mb-2 px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
                      <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -195,7 +195,7 @@
                <div class="space-y-2 lg:grid lg:grid-cols-6 pr-2 sm:gap-3 xl:gap-10 lg:space-y-0">
                   @foreach($leilao->lotes->sortBy('numero') as $index => $lote)
                      <div data-modal-target="{{$lote->uuid}}" data-modal-toggle="{{$lote->uuid}}"
-                        style="cursor: pointer; background-color: {{ $lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc' }}" 
+                        style="cursor: pointer; background-color: {{ $lote->prelance_vencedor()?->prelance_config()?->first()?->cor ?? '#ccc' }}"
                         class="flex flex-col p-4 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow-lg shadow-blue-500/50 hover:bg-gradient-to-br dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                            {{ $lote->numero }}
@@ -220,21 +220,21 @@
                               Novo lance
                            </a>
                            <small>
-                              Valor atingido 
+                              Valor atingido
                               <x-layouts.badges.info-money
                                  :convert="true"
                                  :textLength="'md'"
                                  :value="$lote->valor_prelance" />
-                              &nbsp 
+                              &nbsp
                               x
-                              &nbsp 
+                              &nbsp
                               Valor estimado
                               <x-layouts.badges.info-money
                                  :convert="false"
                                  :textLength="'md'"
                                  :value="$lote->valor_estimado" />
                            </small>
-                           @livewire('components.app.lote-barra-progresso', [$lote, 'prelance']) 
+                           @livewire('components.app.lote-barra-progresso', [$lote, 'prelance'])
                            <small>
                               <x-layouts.badges.info-percent
                                  :convert="false"
@@ -285,7 +285,7 @@
                               </div>
                            </div>
                            <br>
-                           {{-- <small class="mt-6">Histórico de prelances 
+                           {{-- <small class="mt-6">Histórico de prelances
                               <button onclick="copiarLoteUnico('{{$leilao->descricao}}', {{json_encode($lote)}}, {{json_encode($lote->prelances()->get()->toArray())}})" type="button" class="ml-6 px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
                                  <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
@@ -299,7 +299,7 @@
                                  <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
                                   </svg>
-                                  Resumido                                     
+                                  Resumido
                               </a>
                            </div>
                            <div class="relative overflow-x-auto">
@@ -307,7 +307,7 @@
                                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                     <tr>
                                        <th scope="col" class="px-6 py-3">
-                                          
+
                                        </th>
                                        <th scope="col" class="px-6 py-3">
                                           Cliente
@@ -419,7 +419,7 @@
 
 
 
-            <!-- 
+            <!--
             ------------------------------------------
             RESUMO GASTO POR CLIENTE
             ------------------------------------------
@@ -430,7 +430,7 @@
                      <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
                       </svg>
-                      Relatório geral                                     
+                      Relatório geral
                   </a>
                   <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                      @foreach($clientesVencedores as $cliente)
@@ -482,7 +482,7 @@
                                  <a title="IMPRIMIR RESUMO DESTE CLIENTE" target="_blank" href="{{route('leilao.mapa.prelance.resumo-cliente', ['uuid' => $leilao->uuid, 'clienteUuid' => $cliente->cliente_uuid])}}" type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
                                     <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                        <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
-                                     </svg>                                     
+                                     </svg>
                                  </a>
                                  <button title="COPIAR RAPIDAMENTE UM RESUMO PARA ENCAMINHAR NO WAHTSAPP"  onclick="copiarGastoPorCliente('{{$leilao->descricao}}', {{json_encode($cliente)}})" type="button" class="px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
                                     <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -501,7 +501,7 @@
 
 
 
-            <!-- 
+            <!--
             ------------------------------------------
             CLIENTES VENCEDORES POR LOTE
             ------------------------------------------
@@ -537,7 +537,7 @@
                                              :convert="true"
                                              :textLength="'sm'"
                                              :value="$lote->valor_prelance ?? 0"
-                                          />&nbsp 
+                                          />&nbsp
                                              c. compra:
                                              <x-layouts.badges.info-money
                                                 :convert="false"
@@ -554,7 +554,7 @@
                                     </p>
                                  @else
                                     <p class="text-sm font-medium text-red-900 truncate dark:text-white">
-                                       Nenhum lance registrado 
+                                       Nenhum lance registrado
                                     </p>
                                  @endif
                            </div>
@@ -569,7 +569,7 @@
                            </div>
                         </div>
                         <div class="mt-2">
-                           @livewire('components.app.lote-barra-progresso', [$lote, 'prelance', 'bar-only']) 
+                           @livewire('components.app.lote-barra-progresso', [$lote, 'prelance', 'bar-only'])
                         </div>
                      </li>
                      @endforeach
@@ -580,7 +580,7 @@
 
 
 
-            <!-- 
+            <!--
             ------------------------------------------
             CLIENTES NO PRÉ-LANCE
             ------------------------------------------
@@ -591,7 +591,7 @@
                      <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
                       </svg>
-                      Relatório geral                                     
+                      Relatório geral
                   </a>
                   <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                      @foreach($leilao->clientes()->get() as $cliente)
@@ -619,7 +619,7 @@
                               <a title="IMPRIMIR RESUMO DESTE CLIENTE" target="_blank" href="{{route('leilao.mapa.prelance.resumo-cliente', ['uuid' => $leilao->uuid, 'clienteUuid' => $cliente->uuid])}}" type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
                                  <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
-                                  </svg>                                     
+                                  </svg>
                               </a>
                               <button title="COPIAR RAPIDAMENTE UM RESUMO PARA ENCAMINHAR NO WAHTSAPP"  onclick="copiarGastoPorCliente('{{$leilao->descricao}}', {{json_encode($cliente)}})" type="button" class="px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
                                  <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -645,7 +645,7 @@
                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                           <tr>
                                                 <th scope="col" class="px-6 py-3">
-                                                  
+
                                                 </th>
                                                 <th scope="col" class="px-6 py-3">
                                                    Lote
@@ -672,22 +672,22 @@
                                        </thead>
                                        <tbody>
                                           @php
-                                             $valorTotalComissaoComprador = 0; 
-                                             $valorTotalComissaoVendedor = 0; 
+                                             $valorTotalComissaoComprador = 0;
+                                             $valorTotalComissaoVendedor = 0;
                                              $valorTotal = 0;
                                           @endphp
                                           @foreach($cliente->prelances()->with('lote', 'prelance_config')->where('lance.leilao_uuid', $leilao->uuid)->groupBy('lance.id', 'lance_cliente.cliente_uuid')->get() as $prelance)
                                              @php
                                              if($prelance->uuid === $prelance->lote->prelance_vencedor()->uuid) {
-                                                $valorTotalComissaoComprador += $prelance->valor_comissao_compra; 
-                                                $valorTotalComissaoVendedor += $prelance->valor_comissao_venda; 
+                                                $valorTotalComissaoComprador += $prelance->valor_comissao_compra;
+                                                $valorTotalComissaoVendedor += $prelance->valor_comissao_venda;
                                                 $valorTotal += $prelance->lote->valor_prelance;
                                              }
                                              @endphp
                                              <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                                                 <th scope="row" class="px-3 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                                    <div class="shrink-0">
-                                                      <span style="background-color: {{$prelance->prelance_config->cor}}" class="h-5 w-5 inline-flex items-center font-medium px-2.5 py-0.5 rounded-full"> 
+                                                      <span style="background-color: {{$prelance->prelance_config->cor}}" class="h-5 w-5 inline-flex items-center font-medium px-2.5 py-0.5 rounded-full">
                                                    </span>
                                                    </div>
                                                 </th>
@@ -829,7 +829,7 @@
                                              ></x-layouts.badges.info-money>
                                        </div>
                                     </div>
-                                    
+
                                  </li>
                                  @endforeach
                               </ul> --}}
@@ -852,8 +852,8 @@
                <a style="width: 150px" target="_blank" href="{{route('leilao.mapa.prelance.vendedor', ['uuid' => $leilao->uuid, 'vendedores' => json_encode($vendedores->pluck('uuid'))])}}" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
                   <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                      <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
-                   </svg>   
-                   Relatório geral                                  
+                   </svg>
+                   Relatório geral
                </a>
                <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                   @foreach($vendedores as $vendedor)
@@ -875,7 +875,7 @@
                               <a target="_blank" href="{{route('leilao.mapa.prelance.vendedor', ['uuid' => $leilao->uuid, 'vendedores' => json_encode([$vendedor->uuid])])}}" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
                                  <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
-                                  </svg>                                     
+                                  </svg>
                               </a>
                               <a target="_blank" class="px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
                                  <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -892,7 +892,7 @@
             </div>
 
 
-            <!-- 
+            <!--
             ------------------------------------------
             HISTÓRICO GERAL
             ------------------------------------------
@@ -908,9 +908,9 @@
                            <h6 class="flex items-start mb-1 text-sm font-semibold text-gray-900 dark:text-white">{{$lote->descricao}}</h6>
                            <time class="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">{{$lote->created_at}} - {{$lote->prelances()->count() }} prelances</time>
                            <div class="w-full bg-gray-200 dark:bg-gray-700 mt-2">
-                              <div 
-                              class="text-center bg-{{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 'green' : 'blue' }}-600 text-xs text-{{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 'green' : 'blue' }} font-medium text-{{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 'green' : 'blue' }}-100 text-center p-1.5 leading-none" 
-                              style="width: {{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 100 : $lote->valor_prelance_percentual_valor_estimado }}%"> 
+                              <div
+                              class="text-center bg-{{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 'green' : 'blue' }}-600 text-xs text-{{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 'green' : 'blue' }} font-medium text-{{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 'green' : 'blue' }}-100 text-center p-1.5 leading-none"
+                              style="width: {{ $lote->valor_prelance_percentual_valor_estimado > 100 ? 100 : $lote->valor_prelance_percentual_valor_estimado }}%">
                               </div>
                            </div>
                            <x-layouts.badges.info-percent
@@ -963,10 +963,10 @@
                                        </small>
                                     </li>
                                  @endif
-                              @endforeach                
+                              @endforeach
                            </ol>
                         </li>
-                     @endforeach                
+                     @endforeach
                   </ol>
                </div>
             </div> --}}
@@ -998,7 +998,7 @@
 
 
 
-            <!-- 
+            <!--
             ------------------------------------------
             CONFIGURAÇÕES PRÉ-LANCE
             ------------------------------------------
@@ -1046,13 +1046,13 @@
    </div>
  </div>
  <script>
-   
+
    function copiarLotesGeralAnalitico(leilao, lotes)
    {
       let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
       tabela += "🔨 *"+leilao.descricao+"* 🔨\n\n";
       tabela += "✍️ Lotes e valores disponíveis para pré-lance e suas condições de pagamento ✍️ \n"
-      
+
       lotes.forEach(item => {
          console.log(item);
          tabela += `- ${'*Lote ' + item.numero + '*'} \n`;
@@ -1079,7 +1079,7 @@
 
       tabela += "======================\n";
       navigator.clipboard.writeText(tabela);
-      
+
       toastr.info("COPIADO para a área de transferência. Use CTRL + V para colar em campos de texto.")
    }
 
@@ -1101,7 +1101,7 @@
       });
 
       navigator.clipboard.writeText(tabela);
-      
+
       toastr.info("COPIADO para a área de transferência. Use CTRL + V para colar em campos de texto.")
    }
 
@@ -1112,7 +1112,7 @@
       tabela += "*👔 Cliente: "+clienteVencedor.nome+"*\n";
 
       navigator.clipboard.writeText(tabela);
-      
+
       toastr.info("COPIADO para a área de transferência. Use CTRL + V para colar em campos de texto.")
    }
 
@@ -1133,7 +1133,7 @@
 
       tabela += "===================";
       navigator.clipboard.writeText(tabela);
-      
+
       toastr.info("COPIADO para a área de transferência. Use CTRL + V para colar em campos de texto.")
    }
  </script>

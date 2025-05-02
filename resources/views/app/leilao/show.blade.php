@@ -72,7 +72,7 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                     </svg>
                 </button>
-                
+
                 <!-- Dropdown menu -->
                 <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
@@ -103,7 +103,11 @@
                     </ul>
                 </div>
             </li>
+            <li class="me-2 mt-4 float-end">
+
+            </li>
         </ul>
+
     </div>
     <br>
     @if($aba === 'dados-gerais')
@@ -129,7 +133,7 @@
                 </div>
             </div>
         </div> --}}
-        
+
         <div class="flex flex-wrap -mx-3 mb-2">
             <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
                 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -143,7 +147,7 @@
                 </div>
             </div>
             <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
-                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">                     
+                <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
                         C. Comprador
                     </h5>
@@ -155,9 +159,9 @@
             </div>
             <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
                 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                                         
+
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                        C. Vendedor 
+                        C. Vendedor
                     </h5>
                     <x-layouts.badges.info-money
                         :convert="true"
@@ -167,7 +171,7 @@
             </div>
             <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
                 <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    
+
                     <a href="#">
                         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">T. Comissão</h5>
                     </a>
@@ -178,7 +182,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div id="chart-leilao-valor-atingido" class="p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             @livewire('components.app.charts.leilao-valor-atingido', [$leilao])
         </div>
@@ -210,7 +214,7 @@
             </ul>
         </div>
     @endif
-        
+
     @if($aba === 'lotes')
         @if($action == 'index')
             <div class="">

@@ -96,12 +96,12 @@
         @endphp
 
         @forelse ($lotesPorVendedor as $vendedor => $lotesDoVendedor)
-            <tr style="background-color: #ab4bbe; color: white">
+            <tr style="background-color: #090b85; color: white">
                 <td colspan="7" style="font-weight: bold; padding: 8px;">
                     {{ $vendedor }}
                 </td>
             </tr>
-            
+
             @foreach ($lotesDoVendedor as $lote)
                 <tr>
                     <td style="float: left; text-align:left">
@@ -135,7 +135,7 @@
                             :value="$lote->prelance_vencedor()?->valor"
                         />
                     </td>
-                    
+
                     <td class="money" style="float: right; text-align:right">
                         <x-layouts.badges.info-percent
                             :convert="false"

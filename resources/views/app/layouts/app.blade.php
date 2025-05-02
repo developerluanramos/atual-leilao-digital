@@ -42,7 +42,7 @@
     <title>@yield('title') - {{config('app.name')}}</title>
 </head>
 <script>
-    document.getElementById('htmlMainPage').classList.add('dark')
+    // document.getElementById('htmlMainPage').classList.add('dark')
     function lighMode() {
         console.log('executou');
 

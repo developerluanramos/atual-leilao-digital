@@ -98,8 +98,8 @@
             font-size: 10px;
         }
         .report-table th {
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: #931128;
+            color: #ddd5d5;
             font-weight: bold;
         }
         .report-table {
@@ -253,14 +253,14 @@
         <br>
         <h1 style="color: #1e32ec">{{$titulo ?? 'RELATÓRIO SEM TÍTULO'}}</h1>
         <p>
-            <b>Leiloeiro:</b> {{$leilao->leiloeiro->nome}} 
-            | <b>Data:</b> {{date('d/m/Y', strtotime($leilao->fechado_em))}} 
+            <b>Leiloeiro:</b> {{$leilao->leiloeiro->nome}}
+            | <b>Data:</b> {{date('d/m/Y', strtotime($leilao->fechado_em))}}
             | <b>Local:</b> {{$leilao->local}}
         </p>
     </div>
 
     @yield('content-mapa-'.$identificador)
-    
+
     <!-- Footer -->
     <div class="footer">
         <p>Atual Leilões - powered by Code First Consulting</p>
