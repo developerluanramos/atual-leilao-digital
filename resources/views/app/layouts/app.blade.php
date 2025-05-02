@@ -45,14 +45,14 @@
     document.getElementById('htmlMainPage').classList.add('dark')
     function lighMode() {
         console.log('executou');
-        
+
     }
 </script>
 <body class="antialiased">
 <header>
     <!-- Main navigation container -->
     <nav
-        class="flex-no-wrap relative flex w-full items-center justify-between bg-[#FBFBFB] py-2 shadow-md shadow-black/5 dark:bg-neutral-600 dark:shadow-black/10 lg:flex-wrap lg:justify-start lg:py-4"
+        class="flex-no-wrap relative flex w-full items-center justify-between bg-[#FBFBFB] py-2 shadow-md shadow-red/20 dark:bg-neutral-600 dark:shadow-red/20 lg:flex-wrap lg:justify-start lg:py-4"
         data-te-navbar-ref>
         <div class="flex w-full flex-wrap items-center justify-between px-3">
             <!-- Collapsible navigation container -->
@@ -68,8 +68,8 @@
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-                    </svg> &nbsp; 
-                    {{-- <img style="width: 70px; height: 30px;" src="{{asset('atual_leiloes_logo.png')}}" alt=""> --}}
+                    </svg> &nbsp;
+                    <img style="width: 70px; height: 30px; float:right" src="{{asset('atual_leiloes_logo.png')}}" alt="">
                 </a>
                 <!-- Left navigation links -->
 
@@ -127,7 +127,7 @@ MENU PRINCIPAL
 <!-- drawer component -->
 <div style="width: 400px" id="drawer-navigation" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-64 dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-navigation-label">
     <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase dark:text-gray-400">
-        Atual Leilões 
+        Atual Leilões
     </h5>
     <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white" >
         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -291,6 +291,6 @@ MENU PRINCIPAL
 </div> --}}
 
 @livewireChartsScripts
-@stack('scripts') 
+@stack('scripts')
 </body>
 </html>
