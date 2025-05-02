@@ -4,6 +4,7 @@
         <div class="text-sm font-medium text-blue-600 dark:text-blue-500">
             Total Vendido: <span class="text-red-600 dark:text-red-500">
                 <x-layouts.badges.info-money
+                    :color="'purple'"
                     :convert="true"
                     :textLength="'lg'"
                     :value="$total_geral"
@@ -20,7 +21,7 @@
                         <div class="flex-shrink-0">
                             <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-green-100 rounded-full dark:bg-green-900">
                             <span class="font-medium text-green-800 dark:text-green-200">
-                                {{ substr($vendedor->vendedor_nome, 0, 1) }}
+                                {{ substr($vendedor->vendedor_nome, 0, 2) }}
                             </span>
                             </div>
                         </div>
@@ -36,8 +37,9 @@
                                 <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-200">
                                     {{ $vendedor->total_lotes }} {{ $vendedor->total_lotes > 1 ? 'lotes' : 'lote' }}
                                 </span>
+                                &nbsp;
                                 <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-200">
-                                    {{ $vendedor->total_itens }} {{ $vendedor->total_itens > 1 ? 'itens' : 'item' }}
+                                    {{ (int)$vendedor->total_itens }} {{ $vendedor->total_itens > 1 ? 'itens' : 'item' }}
                                 </span>
                             </p>
 
