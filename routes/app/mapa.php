@@ -1,5 +1,5 @@
 <?php
-
+// -- leilão
 Route::get('leilao/{uuid}/mapa/lote-a-lote', [\App\Http\Controllers\App\Mapa\MapaLoteALoteShowController::class, 'show'])->name('leilao.mapa.lote-a-lote');
 Route::get('leilao/{uuid}/mapa/ranking-comprador', [\App\Http\Controllers\App\Mapa\MapaRankingCompradorShowController::class, 'show'])->name('leilao.mapa.ranking-comprador');
 Route::get('leilao/{uuid}/mapa/ranking-vendedor', [\App\Http\Controllers\App\Mapa\MapaRankingVendedorShowController::class, 'show'])->name('leilao.mapa.ranking-vendedor');
@@ -8,8 +8,11 @@ Route::get('leilao/{uuid}/mapa/relacao-vendedor', [\App\Http\Controllers\App\Map
 Route::get('leilao/{uuid}/mapa/geral', [\App\Http\Controllers\App\Mapa\MapaGeralShowController::class, 'show'])->name('leilao.mapa.geral');
 Route::get('leilao/{uuid}/mapa/media-raca', [\App\Http\Controllers\App\Mapa\MapaMediaRacaShowController::class, 'show'])->name('leilao.mapa.media-raca');
 Route::get('leilao/{uuid}/mapa/media-especie', [\App\Http\Controllers\App\Mapa\MapaMediaEspecieShowController::class, 'show'])->name('leilao.mapa.media-especie');
+Route::get('leilao/{uuid}/mapa/media-especie', [\App\Http\Controllers\App\Mapa\MapaMediaEspecieShowController::class, 'show'])->name('leilao.mapa.media-especie');
+Route::get('leilao/{uuid}/mapa/acerto-comprador', [\App\Http\Controllers\App\Mapa\MapaAcertoCompradorShowController::class, 'show'])->name('leilao.mapa.acerto-comprador');
+//Route::get('leilao/{uuid}/mapa/acerto-vendedor', [\App\Http\Controllers\App\Mapa\MapaAcertoVendedorShowController::class, 'show'])->name('leilao.mapa.acerto-vendedor');
 
-
+// -- prelance
 Route::get('leilao/{uuid}/mapa/prelance/resumo-cliente', [\App\Http\Controllers\App\Mapa\Prelance\MapaResumoClienteShowController::class, 'show'])->name('leilao.mapa.prelance.resumo-cliente');
 Route::get('leilao/{uuid}/mapa/prelance/resumo-lote', [\App\Http\Controllers\App\Mapa\Prelance\MapaResumoLoteShowController::class, 'show'])->name('leilao.mapa.prelance.resumo-lote');
 Route::get('leilao/{uuid}/mapa/prelance/resumo-lote-unico', [\App\Http\Controllers\App\Mapa\Prelance\MapaResumoLoteUnicoShowController::class, 'show'])->name('leilao.mapa.prelance.resumo-lote-unico');

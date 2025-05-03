@@ -216,33 +216,33 @@
         <div id="chart-leilao-valor-atingido" class="p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             @livewire('components.app.charts.leilao-valor-atingido', [$leilao])
         </div>
-        <div class="p-3 mt-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <h3>Médias por comprador</h3>
-            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                @forelse ($mediaCompras as $media)
-                    <li class="py-3 sm:py-4 cursor-pointer pointer">
-                        <div class="flex items-center w-full">
-                            <div class="flex-shrink-0">
-                                <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                                    <span class="font-medium text-gray-600 dark:text-gray-300">{{mb_substr($media->nome, 0, 2)}}</span>
-                                </div>
-                            </div>
-                            <div class="flex-1 min-w-0 ms-4">
-                                {{$media->nome}}
-                            </div>
-                            <div class="inline-flex items-right items-end text-base font-semibold text-gray-900 dark:text-white">
-                                <x-layouts.badges.info-money
-                                    :convert="false"
-                                    :value="number_format($media->media_compras, 2, '.', '')"
-                                ></x-layouts.badges.info-money>
-                            </div>
-                        </div>
-                    </li>
-                @empty
-                    <small>Nenhuma compra realizada pra renderizar as médias por cliente</small>
-                @endforelse
-            </ul>
-        </div>
+{{--        <div class="p-3 mt-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">--}}
+{{--            <h3>Médias por comprador</h3>--}}
+{{--            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">--}}
+{{--                @forelse ($mediaCompras as $media)--}}
+{{--                    <li class="py-3 sm:py-4 cursor-pointer pointer">--}}
+{{--                        <div class="flex items-center w-full">--}}
+{{--                            <div class="flex-shrink-0">--}}
+{{--                                <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">--}}
+{{--                                    <span class="font-medium text-gray-600 dark:text-gray-300">{{mb_substr($media->nome, 0, 2)}}</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="flex-1 min-w-0 ms-4">--}}
+{{--                                {{$media->nome}}--}}
+{{--                            </div>--}}
+{{--                            <div class="inline-flex items-right items-end text-base font-semibold text-gray-900 dark:text-white">--}}
+{{--                                <x-layouts.badges.info-money--}}
+{{--                                    :convert="false"--}}
+{{--                                    :value="number_format($media->media_compras, 2, '.', '')"--}}
+{{--                                ></x-layouts.badges.info-money>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
+{{--                @empty--}}
+{{--                    <small>Nenhuma compra realizada pra renderizar as médias por cliente</small>--}}
+{{--                @endforelse--}}
+{{--            </ul>--}}
+{{--        </div>--}}
     @endif
 
     @if($aba === 'lotes')

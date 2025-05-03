@@ -26,17 +26,22 @@ class Compra extends Model
         'percentual_cota_vendedor'
     ];
 
+    protected $appends = [
+        'valor_sinal_comprador',
+        'valor_sinal_vendedor'
+    ];
+
     public function plano_pagamento()
     {
         return $this->hasOne(PlanoPagamento::class, 'uuid', 'plano_pagamento_uuid');
     }
 
-    public function leilao() 
+    public function leilao()
     {
         return $this->hasOne(Leilao::class, 'uuid', 'leilao_uuid');
     }
 
-    public function lote() 
+    public function lote()
     {
         return $this->hasOne(Lote::class, 'uuid', 'lote_uuid');
     }
@@ -54,5 +59,15 @@ class Compra extends Model
     public function parcelas()
     {
         return $this->hasMany(Parcela::class, 'compra_uuid', 'uuid');
+    }
+
+    public function getValorSinalCompradorAttribute()
+    {
+        return isset($this->parcelas[0]) ? $this->parcelas[0]->valor : 0;
+    }
+
+    public function getValorSinalVendedorAttribute()
+    {
+        return isset($this->parcelas[0]) ? $this->parcelas[0]->valor : 0;
     }
 }
