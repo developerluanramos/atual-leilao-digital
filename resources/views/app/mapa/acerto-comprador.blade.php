@@ -3,9 +3,7 @@
 @section('content-mapa-acerto-comprador')
     <p>A,</p>
     <p><b>{{$cliente->nome}}</b></p>
-    <p>{{$cliente->endereco}}</p>
-    <p>{{$cliente->cidade}} {{$cliente->uf}}</p>
-    <p></p>
+    <p>{{$cliente->endereco}}, {{$cliente->cidade}} / {{$cliente->uf}}</p>
     <p>{{$leilao->cidade}} / {{$leilao->uf}} , {{date('d/m/Y', strtotime($leilao->fechado_em))}}</p>
     <p>Prezado(a) Senhor(a),</p>
     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Apresentamos a seguir, demonstrativo financeiro, referente aos seus negócios realizados no dia {{date('d/m/Y', strtotime($leilao->fechado_em))}} no leilão <b>{{$leilao->descricao}}</b> no município de {{$leilao->cidade}} / {{$leilao->uf}}.</p>

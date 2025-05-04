@@ -71,7 +71,7 @@
             text-align: left;
         }
         .lot-details th {
-            background-color: #4a90e2;
+            background-color: #354c9c;
             color: #fff;
         }
         .footer {
@@ -98,8 +98,8 @@
             font-size: 10px;
         }
         .report-table th {
-            background-color: #931128;
-            color: #ddd5d5;
+            background-color: #d3d2d2;
+            color: #0c0c0c;
             font-weight: bold;
         }
         .report-table {
@@ -113,7 +113,7 @@
         }
 
         .report-table thead {
-            background-color: #007bff;
+            background-color: #354c9c;
             color: #ffffff;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -136,7 +136,7 @@
         }
 
         .report-table tfoot {
-            background-color: #007bff;
+            background-color: #354c9c;
             color: #ffffff;
             font-weight: bold;
         }
