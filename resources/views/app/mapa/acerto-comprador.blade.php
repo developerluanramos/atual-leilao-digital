@@ -221,4 +221,12 @@
             </tfoot>
         </table>
     </div>
+    <br>
+    <div style="border:solid 1px black; padding: 10px; margin-top: 20px; text-align: center;">
+        <p>Recebemos a importância de <b><x-layouts.badges.info-money :value="$total" /></b> referente ao crédito conforme demonstrativo acima</p>
+        <br>
+        <br>
+        <hr style="width: 65%">
+        <p><b>{{$leilao->promotor->nome}}</b></p>
+    </div>
 @endsection
