@@ -13,11 +13,13 @@ class LeilaoIndexController extends Controller
 
     public function index(Request $leilaoIndexRequest, LeilaoIndexAction $action)
     {
-        $leiloes = $action->exec(
-            $leilaoIndexRequest->get('page') ?? 1,
-            $leilaoIndexRequest->get('totalPerPage') ?? 20,
-            []
-        );
+        $leiloes = Cache::rememberForever('leiloes', function () use ($leilaoIndexRequest, $action) {
+            return $action->exec(
+                $leilaoIndexRequest->get('page') ?? 1,
+                $leilaoIndexRequest->get('totalPerPage') ?? 20,
+                []
+            );
+        });
 
 
         return view('app.leilao.index', [

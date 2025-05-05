@@ -6,6 +6,7 @@ use App\Actions\Leilao\Lote\LoteUpdateAction;
 use App\DTO\Leilao\Lote\LoteUpdateDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\App\Leilao\Lote\LoteUpdateRequest;
+use Illuminate\Support\Facades\Cache;
 
 class LoteUpdateController extends Controller
 {
@@ -17,10 +18,13 @@ class LoteUpdateController extends Controller
     {
         $request->merge([
             'uuid' => $loteUuid,
-            'leilao_uuid' => $uuid 
+            'leilao_uuid' => $uuid
         ]);
 
         $this->updateAction->execute(LoteUpdateDTO::makeFromRequest($request));
+
+        Cache::forget('leilao_lotes_index_'. $uuid);
+        Cache::forget('leilao_show_'. $uuid);
 
         return redirect()->route('leilao.lote.index', [
             'uuid' => $uuid,

@@ -6,6 +6,7 @@ use App\Actions\Leilao\Lote\LoteDeleteAction;
 use App\DTO\Leilao\Lote\LoteDeleteDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\App\Leilao\Lote\LoteDeleteRequest;
+use Illuminate\Support\Facades\Cache;
 
 class LoteDeleteController extends Controller
 {
@@ -20,6 +21,9 @@ class LoteDeleteController extends Controller
         ]);
 
         $this->deleteAction->exec(LoteDeleteDTO::makeFromRequest($request));
+
+        Cache::forget('leilao_lotes_index_'. $uuid);
+        Cache::forget('leilao_show_'. $uuid);
 
         return redirect()->back();
     }
