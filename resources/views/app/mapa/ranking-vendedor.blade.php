@@ -1,4 +1,4 @@
-@extends('app.mapa.default-header', ['titulo' => "RANKING DE COMPRADORES", 'identificador' => "ranking-vendedor"])
+@extends('app.mapa.default-header', ['titulo' => "RANKING DE VENDEDORES", 'identificador' => "ranking-vendedor"])
 
 @section('content-mapa-ranking-vendedor')
     <table style="width: 100%" class="report-table">

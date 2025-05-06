@@ -24,6 +24,7 @@ class LoteDeleteController extends Controller
 
         Cache::forget('leilao_lotes_index_'. $uuid);
         Cache::forget('leilao_show_'. $uuid);
+        Cache::forget('leilao_lote_show.'.$loteUuid);
 
         return redirect()->back();
     }
