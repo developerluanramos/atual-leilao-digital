@@ -31,6 +31,7 @@ class LeilaoRaca
             ->addData("", array_column($racaQuantities, "quantidade"))
             ->setHeight(200)
             ->setToolbar(true, true)
+            ->setXAxis(array_column($racaQuantities, "nome"))
             ->setLabels(array_column($racaQuantities, "nome"));
     }
 }

@@ -25,6 +25,7 @@ class LeilaoGenero
             ->addData("", [(int)$quantidadeMacho, (int)$quantidadeFemea, (int)$quantidadeOutro])
             ->setHeight(200)
             ->setToolbar(true, true)
+            ->setXAxis(['Machos', 'Fêmeas', 'Outros'])
             ->setLabels(['Machos', 'Fêmeas', 'Outros']);
     }
 }

@@ -31,6 +31,7 @@ class LeilaoLoteConclusao
             ->setSubtitle('')
             ->setToolbar(true, true)
             // '->setTheme('light')
+            ->setXAxis(['Lotes Fechados', 'Lotes Abertos'])
             ->setHeight(200);
     }
 }
