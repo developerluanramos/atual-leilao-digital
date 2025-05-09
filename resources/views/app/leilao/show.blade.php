@@ -141,7 +141,7 @@
     </div>
     <br>
     @if($aba === 'dados-gerais')
-        {{-- <div class="flex flex-wrap -mx-3 mb-2">
+         <div class="flex flex-wrap -mx-3 mb-2">
             <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">
                 <div id="chart-leilao-lote-conclusao" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                     @livewire('components.app.charts.leilao-lote-conclusao', [$leilao])
@@ -162,7 +162,7 @@
                     @livewire('components.app.charts.leilao-raca', [$leilao])
                 </div>
             </div>
-        </div> --}}
+        </div>
 
         <div class="flex flex-wrap -mx-3 mb-2">
             <div class="w-full md:w-3/12 px-3 mb-6 md:mb-0">

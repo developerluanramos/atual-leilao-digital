@@ -17,14 +17,14 @@ class LeilaoLoteConclusao
         $this->chart = $chart;
     }
 
-    public function build(Leilao $leilao): \ArielMejiaDev\LarapexCharts\DonutChart
+    public function build(Leilao $leilao): \ArielMejiaDev\LarapexCharts\BarChart
     {
         $lotes = $leilao->lotes()->get();
         $qtdLotesFechados = $lotes->where('status', (string)StatusLoteEnum::FECHADO)->count();
         $qtdLotesAbertos = $lotes->where('status', (string)StatusLoteEnum::ABERTO)->count();
 
-        return $this->chart->donutChart()
-            ->addData([$qtdLotesFechados, $qtdLotesAbertos])
+        return $this->chart->barChart()
+            ->addData("name", [$qtdLotesFechados, $qtdLotesAbertos])
             ->setLabels(['Lotes Fechados', 'Lotes Abertos'])
             ->setTitle('Lotes fechados x abertos')
             ->setColors(['#58d68d', '#c0392b'])

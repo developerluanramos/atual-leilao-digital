@@ -15,7 +15,7 @@ class LeilaoRaca
         $this->chart = $chart;
     }
 
-    public function build(Leilao $leilao): \ArielMejiaDev\LarapexCharts\PieChart
+    public function build(Leilao $leilao): \ArielMejiaDev\LarapexCharts\BarChart
     {
         $racaQuantities = LoteItem::join('lote', 'lote_item.lote_uuid', '=', 'lote.uuid')
             ->join('leilao', 'lote.leilao_uuid', '=', 'leilao.uuid')
@@ -26,10 +26,10 @@ class LeilaoRaca
             ->where('leilao_uuid', $leilao->uuid)
             ->get()->toArray();
 
-        return $this->chart->pieChart()
+        return $this->chart->barChart()
             ->setTitle('Raças')
-            ->addData(array_column($racaQuantities, "quantidade"))
-            ->setHeight(195)
+            ->addData("", array_column($racaQuantities, "quantidade"))
+            ->setHeight(200)
             ->setToolbar(true, true)
             ->setLabels(array_column($racaQuantities, "nome"));
     }
