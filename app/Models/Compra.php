@@ -28,7 +28,8 @@ class Compra extends Model
 
     protected $appends = [
         'valor_sinal_comprador',
-        'valor_sinal_vendedor'
+        'valor_sinal_vendedor',
+        'quantidade_itens'
     ];
 
     public function plano_pagamento()
@@ -69,5 +70,10 @@ class Compra extends Model
     public function getValorSinalVendedorAttribute()
     {
         return isset($this->parcelas[0]) ? $this->parcelas[0]->valor : 0;
+    }
+
+    public function getQuantidadeItensAttribute()
+    {
+        return $this->lote()?->first()?->multiplicador;
     }
 }
