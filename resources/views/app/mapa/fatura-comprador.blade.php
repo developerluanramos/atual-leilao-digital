@@ -64,27 +64,33 @@
                             <td colspan="8">
                                 <table style="width: 100%;">
                                     @php
-                                        $parcelas = $compra->parcelas->chunk(5); // Divide as parcelas em grupos de 5
+                                    if($compra->parcelas->count() <= 20) {
+                                        $parcelas = $compra->parcelas->chunk(4);
+                                    } else if($compra->parcelas->count() > 20 && $compra->parcelas->count() <= 40) {
+                                        $parcelas = $compra->parcelas->chunk(8);
+                                    } else if($compra->parcelas->count() > 40) {
+                                        $parcelas = $compra->parcelas->chunk(12);
+                                    }
                                     @endphp
-
-                                    @forelse($parcelas as $grupo)
-                                        <tr>
-                                            @foreach($grupo as $index => $parcela)
-                                                <td style="width: 20%; padding: 2px; box-sizing: border-box;">
+                                    <tr>
+                                        @forelse($parcelas as $grupo)
+                                            <td style="width: 20%; padding: 2px; box-sizing: border-box; text-align: right">
+                                                @foreach($grupo as $index => $parcela)
                                                     <small>
-                                                        <b>{{ $parcela->numero }}</b> -
-                                                        {{ date('d/m/Y', strtotime($parcela->vencimento_em)) }} -
+                                                        <b>{{ $parcela->numero }}</b>
+                                                        {{ date('d/m/Y', strtotime($parcela->vencimento_em)) }}
                                                         <x-layouts.badges.info-money :convert="false" :value="$parcela->valor" />
                                                     </small>
-                                                </td>
-                                            @endforeach
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="6">
-                                                <p style="font-size: 0.8em;">Nenhuma parcela cadastrada</p>
+                                                    <hr>
+                                                @endforeach
                                             </td>
-                                        </tr>
+                                        @empty
+                                    </tr>
+                                    <tr>
+                                        <td colspan="8">
+                                            <p style="font-size: 0.8em;">Nenhuma parcela cadastrada</p>
+                                        </td>
+                                    </tr>
                                     @endforelse
                                 </table>
                             </td>

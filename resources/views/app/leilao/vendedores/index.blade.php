@@ -71,7 +71,7 @@
                                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="dropdownVendedorButton{{ $vendedor->vendedor_uuid }}">
                                     <li>
-                                        <a href="#"
+                                        <a target="_blank" href="{{route('leilao.mapa.fatura-vendedor', ['uuid' => $leilao->uuid, 'clienteUuid' => $vendedor->vendedor_uuid])}}"
                                            class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                             <svg class="w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 8h6m-6 4h6m-6 4h6M6 3v18l4-2 4 2 4-2 4 2V3l-4 2-4-2-4 2-4-2Z"/>

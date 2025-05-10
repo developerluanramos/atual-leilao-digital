@@ -26,6 +26,7 @@ class LeilaoGenero
             ->setHeight(200)
             ->setToolbar(true, true)
             ->setXAxis(['Machos', 'Fêmeas', 'Outros'])
+            ->setColors(['#354c9c', '#58d68d', "#CCCCCC"])
             ->setLabels(['Machos', 'Fêmeas', 'Outros']);
     }
 }
