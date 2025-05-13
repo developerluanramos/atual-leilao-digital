@@ -263,8 +263,11 @@
 
     <!-- Footer -->
     <div class="footer">
-        <p>Atual Leilões - powered by Code First Consulting</p>
+        <p>{{$leilao->promotor->nome}}</p>
         <p>documento emitido por <b>{{Auth::user()->name}} </b> em <b>{{date('d/m/Y h:i:s')}}</b></p>
+        <small>
+            Sistema desenvolvido e mantido por CODE FIRST - ENGENHARIA DE SOFTWARE ÁGIL
+        </small>
     </div>
 </body>
 

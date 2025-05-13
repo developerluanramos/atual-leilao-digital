@@ -74,7 +74,7 @@
                                     @endphp
                                     <tr>
                                         @forelse($parcelas as $grupo)
-                                            <td style="width: 20%; padding: 2px; box-sizing: border-box; text-align: right">
+                                            <td style="margin-top: 0; width: 20%; padding: 2px; box-sizing: border-box; text-align: right">
                                                 @foreach($grupo as $index => $parcela)
                                                     <small>
                                                         <b>{{ $parcela->numero }}</b>
