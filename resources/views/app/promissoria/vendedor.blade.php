@@ -51,15 +51,15 @@
         <img class="brasao" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/1200px-Coat_of_arms_of_Brazil.svg.png" alt="">
     </p>
     <p>
-        No vencimento acima, pagarei(emos) por esta única via de Nota Promissória a 
-        <strong class="text-uppercase">{{$compra->vendedor->nome}}</strong> CPF/CNPJ:<strong class="text-uppercase">{{$compra->vendedor->cpf_cnpj}}</strong> 
-        ou a sua ordem a quantia supra de 
+        No vencimento acima, pagarei(emos) por esta única via de Nota Promissória a
+        <strong class="text-uppercase">{{$compra->vendedor->nome}}</strong> CPF/CNPJ:<strong class="text-uppercase">{{$compra->vendedor->cpf_cnpj}}</strong>
+        ou a sua ordem a quantia supra de
         <strong><x-layouts.badges.info-money
             :convert="false"
             :textLength="'lg'"
             :value="$compra->valor"
         /></strong>
-        em moeda corrente do país, na praça de <strong class="text-uppercase">{{$compra->leilao->local}}</strong> pela compra que lhe fizemos no <strong class="text-uppercase">{{$compra->leilao->descricao}}</strong>
+        em moeda corrente do país, na praça de <strong class="text-uppercase">{{$compra->leilao->cidade}}</strong> pela compra que lhe fizemos no <strong class="text-uppercase">{{$compra->leilao->descricao}}</strong>
     </p>
     <table style="width:100%">
         <tbody>
@@ -146,4 +146,3 @@
     </li>
 </ul>
 @endsection
-    

@@ -86,7 +86,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#"
+                                        <a target="_blank" href="{{route('leilao.mapa.contratos-comprador', ['uuid' => $leilao->uuid, 'clienteUuid' => $comprador->cliente->uuid])}}"
                                            class="flex items-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                             <svg class="w-5 h-5 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                                 <path fill-rule="evenodd" d="M18 3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1V9a4 4 0 0 0-4-4h-3a1.99 1.99 0 0 0-1 .267V5a2 2 0 0 1 2-2h7Z" clip-rule="evenodd"/>

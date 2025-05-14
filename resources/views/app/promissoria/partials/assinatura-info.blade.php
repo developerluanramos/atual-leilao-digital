@@ -2,7 +2,7 @@
     Após assinatura deste instrumento, ficam as partes de acordo com as disposições gerais que se
     encontram no verso, e que passam a ser parte integrante do mesmo
     <br><br>
-    {{$compra->leilao->local}}, {{date('d/m/Y', strtotime($compra->leilao->fechado_em))}}
+    {{$compra->leilao->cidade}}, {{date('d/m/Y', strtotime($compra->leilao->fechado_em))}}
 </div>
 <table style="width: 100%; text-align: center; margin-top: 20px;">
     <tr>

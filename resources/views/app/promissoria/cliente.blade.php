@@ -22,15 +22,15 @@
         <img class="brasao" src="https://cartoriopiracaia.com.br/wp-content/uploads/2020/01/republica-federativa-do-brazil-logo-3F0D3FD72F-seeklogo.com_.png" alt="">
     </p>
     <p>
-        No vencimento acima, pagarei(emos) por esta única via de Nota Promissória a 
-        <strong class="text-uppercase">{{$compra->vendedor->nome}}</strong> CPF/CNPJ:<strong class="text-uppercase">{{$compra->vendedor->cpf_cnpj}}</strong> 
-        ou a sua ordem a quantia supra de 
+        No vencimento acima, pagarei(emos) por esta única via de Nota Promissória a
+        <strong class="text-uppercase">{{$compra->vendedor->nome}}</strong> CPF/CNPJ:<strong class="text-uppercase">{{$compra->vendedor->cpf_cnpj}}</strong>
+        ou a sua ordem a quantia supra de
         <strong><x-layouts.badges.info-money
             :convert="false"
             :textLength="'lg'"
             :value="$compra->valor"
         /></strong>
-        em moeda corrente do país, na praça de <strong class="text-uppercase">{{$compra->leilao->local}}</strong> pela compra que lhe fizemos no <strong class="text-uppercase">{{$compra->leilao->descricao}}</strong>
+        em moeda corrente do país, na praça de <strong class="text-uppercase">{{$compra->leilao->cidade}}</strong> pela compra que lhe fizemos no <strong class="text-uppercase">{{$compra->leilao->descricao}}</strong>
     </p>
     <div style="text-align: center; position: absolute; top: 220px; left: 50%; transform: translateX(-50%);
             font-size: 5em; font-weight: bold; color: rgba(7, 7, 7, 0.253); white-space: nowrap;">
@@ -68,4 +68,3 @@
 </div>
 
 @endsection
-    
