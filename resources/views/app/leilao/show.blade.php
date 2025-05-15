@@ -255,6 +255,9 @@
                     color="success"
                     :route="route('leilao.lote.create', ['uuid' => $leilao->uuid])"/>
             </div>
+            <div>
+                @livewire('components.app.leilao-ordem-entrada', ['leilao' => $leilao, 'lotes' => $lotes])
+            </div>
             @include('app.leilao.lotes.index', ['leilao' => $leilao, 'lotes' => $lotes])
         @elseif($action == 'create')
             @include('app.leilao.lotes.create', ['leilao' => $leilao, 'formData' => $formData])

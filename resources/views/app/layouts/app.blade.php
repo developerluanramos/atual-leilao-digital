@@ -327,8 +327,9 @@ MENU PRINCIPAL
         <span class="sr-only">Open actions menu</span>
     </button>
 </div> --}}
-
+@livewireScripts
 @livewireChartsScripts
 @stack('scripts')
+{{--<script src="https://cdn.jsdelivr.net/gh/livewire/sortable@0.x.x/dist/livewire-sortable.js"></script>--}}
 </body>
 </html>

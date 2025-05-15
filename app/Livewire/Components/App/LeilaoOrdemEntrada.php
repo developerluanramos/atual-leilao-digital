@@ -12,8 +12,12 @@ class LeilaoOrdemEntrada extends Component
 
     public function mount($leilao, $lotes)
     {
-        $this->lotes = $lotes;
+        $this->lotes = $this->leilao->lotes()
+            ->orderBy('ordem_entrada')
+            ->orderBy('numero')
+            ->get();
         $this->leilao = $leilao;
+//        dd($this->lotes);
     }
 
     public function reorderLotes()

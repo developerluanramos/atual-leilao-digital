@@ -23,15 +23,15 @@ class LoteIndexAction
     {
         $leilao = $this->leilaoRepository->find($leilaoUuid, []);
         $lotes = $this->loteRepository->paginateByLeilaoUuid(
-            $page, 
-            $totalPerPage, 
-            $filter, 
+            $page,
+            $totalPerPage,
+            $filter,
             $leilaoUuid
         );
 
         return [
             'leilao' => $leilao,
-            'lotes' => $lotes
+            'lotes' => $lotes,
         ];
     }
 }

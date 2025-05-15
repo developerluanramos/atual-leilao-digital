@@ -1,3 +1,4 @@
+
 <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
 {{--    @livewire('components.app.leilao-ordem-entrada', ['leilao' => $leilao->uuid, 'lotes' => $lotes->items()])--}}
     <div class="flow-root">
@@ -28,11 +29,11 @@
                                 </x-layouts.badges.status-lote>
                             </p>
                         </div>
-                         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white mr-lg">
-                            <p class="text-sm text-gray-500 truncate dark:text-gray-400 p-2">
-                                {{$lote->updated_at_for_humans}}
-                            </p>
-                        </div>
+{{--                         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white mr-lg">--}}
+{{--                            <p class="text-sm text-gray-500 truncate dark:text-gray-400 p-2">--}}
+{{--                                {{$lote->updated_at_for_humans}}--}}
+{{--                            </p>--}}
+{{--                        </div>--}}
                         <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                             @if ($lote->status == App\Enums\StatusLoteEnum::ABERTO)
                                 <a class="inline-flex mt-sm text-blue-700 mt-2 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" title="REALIZAR VENDA DO LOTE" href="{{route('compra.create', ['loteUuid' => $lote->uuid])}}">
@@ -43,26 +44,26 @@
                                     Vender
                                 </a>
                             @endif
-                            <x-layouts.buttons.action-button
-                                text="Abrir"
-                                action="ver"
-                                color="secondary"
-                                :route="route('leilao.lote.show', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/> &nbsp;
-                            <x-layouts.buttons.action-button
-                                text="Editar"
-                                action="editar"
-                                color="primary"
-                                :route="route('leilao.lote.edit', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/> &nbsp;
-                            <x-layouts.buttons.action-button
-                                text="Excluir"
-                                action="excluir"
-                                color="danger"
-                                :identificador="'drawer-delete-confirmacao'.$lote->uuid"
-                                :route="route('leilao.lote.delete', [
-                                    'uuid' => $leilao->uuid,
-                                    'loteUuid' => $lote->uuid
-                                ])"
-                            />
+{{--                            <x-layouts.buttons.action-button--}}
+{{--                                text="Abrir"--}}
+{{--                                action="ver"--}}
+{{--                                color="secondary"--}}
+{{--                                :route="route('leilao.lote.show', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/> &nbsp;--}}
+{{--                            <x-layouts.buttons.action-button--}}
+{{--                                text="Editar"--}}
+{{--                                action="editar"--}}
+{{--                                color="primary"--}}
+{{--                                :route="route('leilao.lote.edit', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/> &nbsp;--}}
+{{--                            <x-layouts.buttons.action-button--}}
+{{--                                text="Excluir"--}}
+{{--                                action="excluir"--}}
+{{--                                color="danger"--}}
+{{--                                :identificador="'drawer-delete-confirmacao'.$lote->uuid"--}}
+{{--                                :route="route('leilao.lote.delete', [--}}
+{{--                                    'uuid' => $leilao->uuid,--}}
+{{--                                    'loteUuid' => $lote->uuid--}}
+{{--                                ])"--}}
+{{--                            />--}}
                         </div>
                     </div>
                 </li>
