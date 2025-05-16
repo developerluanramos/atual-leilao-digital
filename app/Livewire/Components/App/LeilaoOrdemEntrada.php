@@ -14,7 +14,6 @@ class LeilaoOrdemEntrada extends Component
 {
     public $lotes = [];
     public $leilao;
-    public $reordering = false;
 
     public function mount($leilao, $lotes)
     {
@@ -27,7 +26,7 @@ class LeilaoOrdemEntrada extends Component
 
     public function updateTaskOrder($lotesOrdenados)
     {
-        $this->reordering = true;
+        usleep(500000);
         foreach ($lotesOrdenados as $lote)
         {
             Lote::find($lote['value'])->update(['ordem_entrada' => $lote['order']]);
@@ -37,7 +36,6 @@ class LeilaoOrdemEntrada extends Component
             ->orderBy('ordem_entrada')
             ->orderBy('numero')
             ->get();
-        $this->reordering = false;
     }
 
     public function imprimirOrdemEntrada()

@@ -17,15 +17,15 @@
             text-align: center;
             background-color: white;
             color: #111010;
-            padding: 5px;
+            padding: 1px;
         }
         .header h1 {
-            font-size: 14px;
+            font-size: 12px;
             margin: 0;
         }
         .header h2 {
             font-size: 11px;
-            margin: 5px 0 0;
+            margin: 2px 0 0;
         }
         .section {
             background-color: #ffffff;
@@ -248,15 +248,14 @@
 <body>
     <!-- Header -->
     <div class="header">
-        <img src="https://yt3.googleusercontent.com/lELF6Or3zPu6dSntk6SkG8kDOWd0E8FML27cz8dQi1hRiG0F6HymU8X1bL27rwMbGDTDpIJDvy4=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" alt="Logo da Empresa" style="width: 30%; height: 40px;">
+        <img src="https://yt3.googleusercontent.com/lELF6Or3zPu6dSntk6SkG8kDOWd0E8FML27cz8dQi1hRiG0F6HymU8X1bL27rwMbGDTDpIJDvy4=w1707-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" alt="Logo da Empresa" style="width: 35%; height: 40px;">
         <h1 class="text-uppercase">{{$leilao->descricao}}</h1>
-        <br>
-        <h1 style="color: #1e32ec">{{$titulo ?? 'RELATÓRIO SEM TÍTULO'}}</h1>
         <p>
             <b>Leiloeiro:</b> {{$leilao->leiloeiro->nome}}
             | <b>Data:</b> {{date('d/m/Y', strtotime($leilao->fechado_em))}}
             | <b>Local:</b> {{$leilao->local}}
         </p>
+        <h1 style="color: #1e32ec">{{$titulo ?? 'RELATÓRIO SEM TÍTULO'}}</h1>
     </div>
 
     @yield('content-mapa-'.$identificador)
