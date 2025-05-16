@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\App\Mapa;
 
 use App\Http\Traits\App\GeneratePdfTrait;
-use App\Models\Cliente;
-use App\Models\Compra;
 use App\Models\Leilao;
 use App\Models\Lote;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
-class MapaOrdemEntradaShowController
+class MapaBoletaShowController
 {
     use GeneratePdfTrait;
 
@@ -37,11 +35,11 @@ class MapaOrdemEntradaShowController
             ->orderBy('numero')->get();
 
         $pdf = Pdf::setOptions($options)
-            ->loadView('app.mapa.ordem-entrada', [
+            ->loadView('app.mapa.boleta', [
                 'leilao' => $leilao,
                 'lotes' => $lotes,
             ]);
 
-        return $pdf->stream('ordem-entrada.pdf');
+        return $pdf->stream('boleta.pdf');
     }
 }

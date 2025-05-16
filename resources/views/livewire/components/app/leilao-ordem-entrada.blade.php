@@ -66,11 +66,10 @@
                 <li wire:sortable.handle
                     class="flex-shrink-0 cursor-move"
                     wire:sortable.item="{{ $lote->id }}"
-                    wire:key="task-{{ $lote->id }}"
-                    wire:loading.class="opacity-20">
-                    <div class="relative me-2" wire:loading.class="opacity-20">
+                    wire:key="task-{{ $lote->id }}">
+                    <div class="relative me-2">
                         <!-- Main circle -->
-                        <div class="w-14 h-14 bg-{{$lote->status == 0? 'green': 'gray'}}-200 dark:bg-{{$lote->status == 0? 'green': 'gray'}}-900 rounded-full flex items-center justify-center transition-colors duration-200">
+                        <div wire:loading.class="opacity-40" class="w-14 h-14 bg-{{$lote->status == 0? 'green': 'gray'}}-200 dark:bg-{{$lote->status == 0? 'green': 'gray'}}-900 rounded-full flex items-center justify-center transition-colors duration-200">
                             <b wire:loading.remove class="text-blue-800 dark:text-blue-200">{{$lote->numero}}</b>
                             <div role="status" wire:loading.delay style="display: none;" wire:target="updateTaskOrder">
                                 <svg aria-hidden="true" class="inline w-4 h-4 text-white-200 animate-spin dark:text-white-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
