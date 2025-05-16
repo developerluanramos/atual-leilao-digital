@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" id="htmlMainPage">
 <head>
     <meta charset="UTF-8">
@@ -42,7 +42,6 @@
     <title>@yield('title') - {{config('app.name')}}</title>
 </head>
 <script>
-    console.log(localStorage.getItem('atual-leiloes-darkMode'));
     window.onload = function() {
         if (localStorage.getItem('atual-leiloes-darkMode') == 'true') {
             darkMode();
@@ -50,16 +49,6 @@
             lightMode();
         }
     }
-    // document.ready(function() {
-    //     if (localStorage.getItem('atual-leiloes-darkMode') == 'true') {
-    //         darkMode();
-    //     } else {
-    //         lightMode();
-    //     }
-    // });
-    // localStorage.getItem('atual-leiloes-darkMode') == 'true' ?
-    //     darkMode()
-    //     : lightMode()
 
     function lightMode() {
         document.getElementById('btnLightMode').style.setProperty('display', 'none');
@@ -330,6 +319,7 @@ MENU PRINCIPAL
 @livewireScripts
 @livewireChartsScripts
 @stack('scripts')
-{{--<script src="https://cdn.jsdelivr.net/gh/livewire/sortable@0.x.x/dist/livewire-sortable.js"></script>--}}
+<script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v1.x.x/dist/livewire-sortable.js"></script>
 </body>
 </html>
+

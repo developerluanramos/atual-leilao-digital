@@ -44,26 +44,26 @@
                                     Vender
                                 </a>
                             @endif
-{{--                            <x-layouts.buttons.action-button--}}
-{{--                                text="Abrir"--}}
-{{--                                action="ver"--}}
-{{--                                color="secondary"--}}
-{{--                                :route="route('leilao.lote.show', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/> &nbsp;--}}
-{{--                            <x-layouts.buttons.action-button--}}
-{{--                                text="Editar"--}}
-{{--                                action="editar"--}}
-{{--                                color="primary"--}}
-{{--                                :route="route('leilao.lote.edit', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/> &nbsp;--}}
-{{--                            <x-layouts.buttons.action-button--}}
-{{--                                text="Excluir"--}}
-{{--                                action="excluir"--}}
-{{--                                color="danger"--}}
-{{--                                :identificador="'drawer-delete-confirmacao'.$lote->uuid"--}}
-{{--                                :route="route('leilao.lote.delete', [--}}
-{{--                                    'uuid' => $leilao->uuid,--}}
-{{--                                    'loteUuid' => $lote->uuid--}}
-{{--                                ])"--}}
-{{--                            />--}}
+                            <x-layouts.buttons.action-button
+                                text="Abrir"
+                                action="ver"
+                                color="secondary"
+                                :route="route('leilao.lote.show', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/> &nbsp;
+                            <x-layouts.buttons.action-button
+                                text="Editar"
+                                action="editar"
+                                color="primary"
+                                :route="route('leilao.lote.edit', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])"/> &nbsp;
+                            <x-layouts.buttons.action-button
+                                text="Excluir"
+                                action="excluir"
+                                color="danger"
+                                :identificador="'drawer-delete-confirmacao'.$lote->uuid"
+                                :route="route('leilao.lote.delete', [
+                                    'uuid' => $leilao->uuid,
+                                    'loteUuid' => $lote->uuid
+                                ])"
+                            />
                         </div>
                     </div>
                 </li>

@@ -13,6 +13,7 @@ Route::get('leilao/{uuid}/mapa/acerto-comprador', [\App\Http\Controllers\App\Map
 Route::get('leilao/{uuid}/mapa/fatura-comprador', [\App\Http\Controllers\App\Mapa\MapaFaturaCompradorShowController::class, 'show'])->name('leilao.mapa.fatura-comprador');
 Route::get('leilao/{uuid}/mapa/fatura-vendedor', [\App\Http\Controllers\App\Mapa\MapaFaturaVendedorShowController::class, 'show'])->name('leilao.mapa.fatura-vendedor');
 Route::get('leilao/{uuid}/mapa/contratos-comprador', [\App\Http\Controllers\App\Mapa\MapaContratoCompradorShowController::class, 'show'])->name('leilao.mapa.contratos-comprador');
+Route::get('leilao/{uuid}/mapa/ordem-entrada', [\App\Http\Controllers\App\Mapa\MapaOrdemEntradaShowController::class, 'show'])->name('leilao.mapa.ordem-entrada');
 // -- prelance
 Route::get('leilao/{uuid}/mapa/prelance/resumo-cliente', [\App\Http\Controllers\App\Mapa\Prelance\MapaResumoClienteShowController::class, 'show'])->name('leilao.mapa.prelance.resumo-cliente');
 Route::get('leilao/{uuid}/mapa/prelance/resumo-lote', [\App\Http\Controllers\App\Mapa\Prelance\MapaResumoLoteShowController::class, 'show'])->name('leilao.mapa.prelance.resumo-lote');
