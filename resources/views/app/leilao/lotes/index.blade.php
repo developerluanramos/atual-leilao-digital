@@ -8,7 +8,7 @@
 {{--                     @livewire('components.app.lote-barra-progresso', [new App\Models\Lote((array)$lote)])--}}
                     <div class="flex items-center w-full mt-2">
                         <div class="flex-shrink-0">
-                            <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-blue-100 rounded-full dark:bg-blue-900">
+                            <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-{{$lote->status == 0? 'green': 'gray'}}-100 rounded-full dark:bg-{{$lote->status == 0? 'green': 'gray'}}-900">
                             <span class="font-medium text-blue-800 dark:text-blue-200">
                                 {{$lote->numero}}
                             </span>

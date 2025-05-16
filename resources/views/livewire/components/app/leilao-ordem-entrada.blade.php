@@ -54,7 +54,7 @@
                 <a target="_blank" href="{{route('leilao.mapa.ordem-entrada', ['uuid' => $leilao->uuid])}}">
                     <div class="relative me-4">
                         <!-- Main circle -->
-                        <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center transition-colors duration-200">
+                        <div class="border-2 border-purple-500 w-14 h-14 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center transition-colors duration-200">
                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M16.444 18H19a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h2.556M17 11V5a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v6h10ZM7 15h10v4a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-4Z"/>
                             </svg>
@@ -69,12 +69,12 @@
                     wire:key="task-{{ $lote->id }}">
                     <div class="relative me-2">
                         <!-- Main circle -->
-                        <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center transition-colors duration-200">
+                        <div class="w-14 h-14 bg-{{$lote->status == 0? 'green': 'gray'}}-200 dark:bg-{{$lote->status == 0? 'green': 'gray'}}-900 rounded-full flex items-center justify-center transition-colors duration-200">
                             <b class="text-blue-800 dark:text-blue-200">{{$lote->numero}}</b>
                         </div>
 
                         <!-- Badge with dark mode support -->
-                        <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 dark:bg-red-600 border-2 border-white dark:border-gray-800 rounded-full -top-2 -end-2 transition-colors duration-200">
+                        <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-blue-500 dark:bg-blue-600 border-2 border-white dark:border-white rounded-full -top-2 -end-2 transition-colors duration-200">
                             {{$index+1}}
                         </div>
                     </div>

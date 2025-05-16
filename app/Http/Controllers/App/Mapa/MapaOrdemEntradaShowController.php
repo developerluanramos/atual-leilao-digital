@@ -33,7 +33,8 @@ class MapaOrdemEntradaShowController
             ->where('uuid', $leilaoUuid)
             ->first();
 
-        $lotes = Lote::where('leilao_uuid', $leilaoUuid)->orderBy('ordem_entrada')->get();
+        $lotes = Lote::where('leilao_uuid', $leilaoUuid)->orderBy('ordem_entrada')
+            ->orderBy('numero')->get();
 
         $pdf = Pdf::setOptions($options)
             ->loadView('app.mapa.ordem-entrada', [

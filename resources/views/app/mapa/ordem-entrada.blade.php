@@ -16,7 +16,7 @@
             @foreach($lotes as $lote)
                 <tr>
                     <td>{{ $lote->ordem_entrada }}ª</td>
-                    <td>{{ $lote->numero }}</td>
+                    <td><b>{{ $lote->numero }}</b></td>
                     <td>{{ $lote->descricao }}</td>
                     <td>{{ $lote->multiplicador }}</td>
                     <td>
