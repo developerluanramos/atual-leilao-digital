@@ -1,54 +1,6 @@
-{{--<div class="mb-2 break-inside-auto justify-center w-full">--}}
-{{--    <p><b>Ordem de entrada</b></p>--}}
-{{--    <ul class="inline-flex" wire:sortable="updateTaskOrder">--}}
-{{--        @forelse($lotes as $lote)--}}
-{{--            <li wire:sortable.handle class="cursor-pointer" wire:sortable.item="{{ $lote->id }}" wire:key="task-{{ $lote->id }}">--}}
-{{--                <div wire:sortable.handle class="relative mr-2 inline-flex items-center justify-center w-14 h-14 overflow-hidden bg-blue-100 rounded-full dark:bg-blue-900">--}}
-{{--                    <span class="font-medium text-blue-800 dark:text-blue-200">--}}
-{{--                        {{$lote->numero}}--}}
-{{--                    </span>--}}
-{{--                </div>--}}
-{{--            </li>--}}
-{{--        @empty--}}
-{{--            <li>Nenhum lote cadastrado.</li>--}}
-{{--        @endforelse--}}
-{{--    </ul>--}}
-{{--    <br>--}}
-{{--</div>--}}
-
-
-{{--<div class="mb-2 w-full">--}}
-{{--    <p class="font-bold mb-2">Ordem de entrada</p>--}}
-{{--    <div class="w-full overflow-x-auto pb-2"> <!-- Added overflow container -->--}}
-{{--        <ul class="inline-flex flex-nowrap space-x-2 mt-2" wire:sortable="updateTaskOrder">--}}
-{{--            @forelse($lotes as $index => $lote)--}}
-{{--                <li wire:sortable.handle--}}
-{{--                    class="flex-shrink-0 cursor-pointer"--}}
-{{--                    wire:sortable.item="{{ $lote->id }}"--}}
-{{--                    wire:key="task-{{ $lote->id }}">--}}
-{{--                    <div class="relative me-4">--}}
-{{--                        <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">--}}
-{{--                            <b>{{$lote->numero}}</b>--}}
-{{--                        </div>--}}
-{{--                        <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">--}}
-{{--                            {{$index+1}}--}}
-{{--                            <div wire:loading>--}}
-{{--                                ...--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
-{{--            @empty--}}
-{{--                <li>Nenhum lote cadastrado.</li>--}}
-{{--            @endforelse--}}
-{{--        </ul>--}}
-{{--    </div>--}}
-{{--</div>--}}
-
-
 <div class="mb-2 w-full">
     <p class="font-bold mb-2">Ordem de entrada</p>
-    <div class="w-full overflow-x-auto pb-2">
+    <div class="w-full overflow-x-auto pb-2 sortable-dropzone">
         <ul class="inline-flex flex-nowrap space-x-2 mt-2" wire:sortable="updateTaskOrder">
             <li>
                 <a target="_blank" href="{{route('leilao.mapa.ordem-entrada', ['uuid' => $leilao->uuid])}}">
@@ -69,7 +21,7 @@
                     wire:key="task-{{ $lote->id }}">
                     <div class="relative me-2">
                         <!-- Main circle -->
-                        <div wire:loading.class="opacity-40" class="w-14 h-14 bg-{{$lote->status == 0? 'green': 'gray'}}-200 dark:bg-{{$lote->status == 0? 'green': 'gray'}}-900 rounded-full flex items-center justify-center transition-colors duration-200">
+                        <div wire:loading.class="opacity-40" class="border-2 border-green-500 w-14 h-14 bg-{{$lote->status == 0? 'green': 'gray'}}-200 dark:bg-{{$lote->status == 0? 'green': 'gray'}}-900 rounded-full flex items-center justify-center transition-colors duration-200">
                             <b wire:loading.remove class="text-blue-800 dark:text-blue-200">{{$lote->numero}}</b>
                             <div role="status" wire:loading.delay style="display: none;" wire:target="updateTaskOrder">
                                 <svg aria-hidden="true" class="inline w-4 h-4 text-white-200 animate-spin dark:text-white-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,5 +50,65 @@
             @endforelse
         </ul>
     </div>
-{{--    <pre>{{ print_r($this, true) }}</pre>--}}
+    <style>
+        /* Dragging state */
+        .dragging {
+            opacity: 0.5;
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background-color: #f3f4f6;
+        }
+
+        /* Drop zone highlight when dragging over */
+        .sortable-dropzone {
+            background-color: #f0fdf4;
+            border: 2px dashed #86efac;
+        }
+
+        /* Handle/grab cursor */
+        .cursor-move {
+            cursor: grab;
+        }
+
+        .cursor-move:active {
+            cursor: grabbing;
+        }
+
+        /* Smooth transitions */
+        .transition-all {
+            transition-property: all;
+        }
+
+        .duration-200 {
+            transition-duration: 200ms;
+        }
+
+        .ease-in-out {
+            transition-timing-function: ease-in-out;
+        }
+    </style>
+    <script>
+        document.addEventListener('livewire:load', function() {
+            Livewire.hook('element.initialized', (el, component) => {
+                if (el.hasAttribute('wire:sortable.item')) {
+                    el.addEventListener('dragstart', () => {
+                        el.classList.add('dragging');
+                    });
+
+                    el.addEventListener('dragend', () => {
+                        el.classList.remove('dragging');
+                    });
+                }
+            });
+
+            Livewire.hook('element.updating', (fromEl, toEl, component) => {
+                if (fromEl.hasAttribute('wire:sortable.item')) {
+                    fromEl.classList.add('sortable-dropzone');
+                    setTimeout(() => {
+                        fromEl.classList.remove('sortable-dropzone');
+                    }, 200);
+                }
+            });
+        });
+    </script>
 </div>

@@ -14,11 +14,11 @@ class LeilaoLoteVendedor extends Component
     public array $resultadoBuscaVendedor;
     public array $vendedores;
 
-    public function mount($lote = null) 
+    public function mount($lote = null)
     {
         if($lote)
         {
-            foreach($lote->vendedores()->get()->toArray() as $index => $vendedor) 
+            foreach($lote->vendedores()->get()->toArray() as $index => $vendedor)
             {
                 $this->addVendedor((array)$vendedor, $vendedor['pivot']['percentual_cota']);
             }
@@ -40,10 +40,15 @@ class LeilaoLoteVendedor extends Component
         }
     }
 
-    public function addVendedor($vendedor, $percentualCota = 0) 
+    public function addVendedor($vendedor, $percentualCota = 0)
     {
         $vendedor['percentual_cota'] = $percentualCota;
         $this->vendedores[] = $vendedor;
+        foreach ($this->vendedores as $index => $vendedor)
+        {
+            $this->vendedores[$index]['percentual_cota'] = number_format(100 / count($this->vendedores) ?? 1, '2');
+        }
+
         $this->textoBuscaVendedor = "";
         $this->resultadoBuscaVendedor = [];
 
@@ -52,5 +57,9 @@ class LeilaoLoteVendedor extends Component
     public function removerVendedor($index)
     {
         array_splice($this->vendedores, $index, 1);
+        foreach ($this->vendedores as $index => $vendedor)
+        {
+            $this->vendedores[$index]['percentual_cota'] = number_format(100 / count($this->vendedores) ?? 1, '2');
+        }
     }
 }

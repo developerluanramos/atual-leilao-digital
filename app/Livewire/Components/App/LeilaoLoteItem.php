@@ -69,7 +69,7 @@ class LeilaoLoteItem extends Component
             $this->errorMessage = 'Preencha o formulário corretamente para continuar';
             return false;
         }
-        
+
         $this->itens[] = [
             'descricao' => $this->item->descricao,
             'especie_uuid' => $this->item->especie_uuid,
@@ -85,6 +85,7 @@ class LeilaoLoteItem extends Component
         ];
         // dd($this->itens);
         $this->item = new LoteItem();
+        $this->item->valor_estimado = 0;
         $this->imagens = [];
         $this->uploadedImages = [];
         $this->videos = [];
@@ -113,7 +114,7 @@ class LeilaoLoteItem extends Component
             ];
         }
     }
-    
+
     function removeVideo(int $index)
     {
         array_splice($this->videos, $index, 1);

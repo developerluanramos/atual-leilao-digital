@@ -30,11 +30,8 @@ class CompraStoreAction
         DB::beginTransaction();
 
         $this->loteRepository = $this->loteRepository::with('vendedores')->where('uuid', $compraStoreDTO->lote_uuid)->first();
-        $this->loteRepository->update([
-            'status' => (string)StatusLoteEnum::FECHADO
-        ]);
 
-        foreach($this->loteRepository->vendedores as $indexVendedor => $vendedor) 
+        foreach($this->loteRepository->vendedores as $indexVendedor => $vendedor)
         {
             foreach ($compraStoreDTO->clientes as $index => $cliente)
             {
@@ -43,17 +40,24 @@ class CompraStoreAction
                 $compraStoreDTO->percentual_cota = (1 / count($compraStoreDTO->clientes)) * 100;
                 $compraStoreDTO->percentual_cota_vendedor = $vendedor->pivot->percentual_cota;
                 $compraStoreDTO->valor = array_sum(array_column($compraStoreDTO->parcelas[$indexVendedor], 'valor'));
+                $compraStoreDTO->valor_comissao_comprador = array_sum(array_column($compraStoreDTO->parcelas[$indexVendedor], 'valor_comissao_comprador'));
+                $compraStoreDTO->valor_comissao_vendedor = array_sum(array_column($compraStoreDTO->parcelas[$indexVendedor], 'valor_comissao_vendedor'));
+//                dd($compraStoreDTO);
                 $this->compraRepository = $this->compraRepository::create((array)$compraStoreDTO);
-    
+
                 foreach($compraStoreDTO->parcelas[$indexVendedor] as $index => $parcela) {
                     $parcela['numero'] = $index + 1;
                     $parcela['compra_uuid'] = $this->compraRepository->uuid;
                     $parcela['cliente_uuid'] = $cliente['uuid'];
-    
+
                     $this->parcelaRepository::create($parcela);
                 }
             }
         }
+
+        $this->loteRepository->update([
+            'status' => (string)StatusLoteEnum::FECHADO
+        ]);
 
         DB::commit();
 

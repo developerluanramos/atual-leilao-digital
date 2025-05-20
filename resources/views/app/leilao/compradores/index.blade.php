@@ -35,7 +35,7 @@
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                             <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-200">
-                                {{ $comprador->total_compras }} {{ $comprador->total_compras > 1 ? 'lotes' : 'lote' }}
+                                {{ $comprador->total_compras }} {{ $comprador->total_compras > 1 ? 'compras' : 'compra' }}
                             </span>&nbsp;
 
                             </p>

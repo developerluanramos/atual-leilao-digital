@@ -259,7 +259,9 @@
                     :route="route('leilao.lote.create', ['uuid' => $leilao->uuid])"/>
             </div>
             <div>
+                @if($lotes->total())
                 @livewire('components.app.leilao-ordem-entrada', ['leilao' => $leilao, 'lotes' => $lotes])
+                @endif
             </div>
             @include('app.leilao.lotes.index', ['leilao' => $leilao, 'lotes' => $lotes])
         @elseif($action == 'create')

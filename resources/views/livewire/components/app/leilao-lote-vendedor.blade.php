@@ -18,7 +18,7 @@
                 placeholder="Pesquisar vendedor"
                 name="textoBuscaVendedor">
         </div>
-        <div wire:loading>
+        <div wire:loading style="display: none" >
             Processando...
         </div>
         <br>
@@ -48,7 +48,7 @@
         @forelse($vendedores as $index => $vendedor)
             <div class="mt-2">
                 <p>
-                <b>{{$vendedor['nome']}} <span class="text-blue-400">({{$vendedor['percentual_cota']}}%)</span></b>
+                    <b>{{$vendedor['nome']}} <span class="text-blue-400">({{$vendedor['percentual_cota']}}%)</span></b>
                 <p>
                     <small>
                         {{$vendedor['email']}}
