@@ -122,11 +122,14 @@
                         <li>
                             <a target="_blank" href="{{route('leilao.mapa.ranking-vendedor', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ranking Vendedores</a>
                         </li>
+{{--                        <li>--}}
+{{--                            <a target="_blank" href="{{route('leilao.mapa.media-raca', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Médias por Raça</a>--}}
+{{--                        </li>--}}
+{{--                        <li>--}}
+{{--                            <a target="_blank" href="{{route('leilao.mapa.media-especie', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Médias por Espécie</a>--}}
+{{--                        </li>--}}
                         <li>
-                            <a target="_blank" href="{{route('leilao.mapa.media-raca', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Médias por Raça</a>
-                        </li>
-                        <li>
-                            <a target="_blank" href="{{route('leilao.mapa.media-especie', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Médias por Espécie</a>
+                            <a target="_blank" href="{{route('leilao.mapa.media-geral', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Médias gerais</a>
                         </li>
                         <li>
                             <a target="_blank" href="{{route('leilao.mapa.relacao-comprador', ['uuid' => $leilao->uuid])}}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Relação de Compradores</a>

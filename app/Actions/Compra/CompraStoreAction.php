@@ -42,7 +42,6 @@ class CompraStoreAction
                 $compraStoreDTO->valor = array_sum(array_column($compraStoreDTO->parcelas[$indexVendedor], 'valor'));
                 $compraStoreDTO->valor_comissao_comprador = array_sum(array_column($compraStoreDTO->parcelas[$indexVendedor], 'valor_comissao_comprador'));
                 $compraStoreDTO->valor_comissao_vendedor = array_sum(array_column($compraStoreDTO->parcelas[$indexVendedor], 'valor_comissao_vendedor'));
-//                dd($compraStoreDTO);
                 $this->compraRepository = $this->compraRepository::create((array)$compraStoreDTO);
 
                 foreach($compraStoreDTO->parcelas[$indexVendedor] as $index => $parcela) {

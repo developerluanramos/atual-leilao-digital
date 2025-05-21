@@ -8,7 +8,7 @@ Route::get('leilao/{uuid}/mapa/relacao-vendedor', [\App\Http\Controllers\App\Map
 Route::get('leilao/{uuid}/mapa/geral', [\App\Http\Controllers\App\Mapa\MapaGeralShowController::class, 'show'])->name('leilao.mapa.geral');
 Route::get('leilao/{uuid}/mapa/media-raca', [\App\Http\Controllers\App\Mapa\MapaMediaRacaShowController::class, 'show'])->name('leilao.mapa.media-raca');
 Route::get('leilao/{uuid}/mapa/media-especie', [\App\Http\Controllers\App\Mapa\MapaMediaEspecieShowController::class, 'show'])->name('leilao.mapa.media-especie');
-Route::get('leilao/{uuid}/mapa/media-especie', [\App\Http\Controllers\App\Mapa\MapaMediaEspecieShowController::class, 'show'])->name('leilao.mapa.media-especie');
+Route::get('leilao/{uuid}/mapa/media-geral', [\App\Http\Controllers\App\Mapa\MapaMediaGeralShowController::class, 'show'])->name('leilao.mapa.media-geral');
 Route::get('leilao/{uuid}/mapa/acerto-comprador', [\App\Http\Controllers\App\Mapa\MapaAcertoCompradorShowController::class, 'show'])->name('leilao.mapa.acerto-comprador');
 Route::get('leilao/{uuid}/mapa/fatura-comprador', [\App\Http\Controllers\App\Mapa\MapaFaturaCompradorShowController::class, 'show'])->name('leilao.mapa.fatura-comprador');
 Route::get('leilao/{uuid}/mapa/fatura-vendedor', [\App\Http\Controllers\App\Mapa\MapaFaturaVendedorShowController::class, 'show'])->name('leilao.mapa.fatura-vendedor');
