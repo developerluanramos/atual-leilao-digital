@@ -19,7 +19,19 @@ class MapaMediaGeralShowController
 
     public function show(string $leilaoUuid, Request $request)
     {
-        $mediasPorVendedor = DB::table('lote_vendedor')
+        $options = [
+            'defaultFont' => 'sans-serif',
+            'enable-javascript' => true,
+            'images' => true,
+            'isRemoteEnabled' => true,
+            'orientation' => 'portrait',
+            'tempDir' => public_path(),
+            'chroot' => public_path()
+        ];
+
+        $pdf = Pdf::setOptions($options);
+
+        $vendasPorVendedor = DB::table('lote_vendedor')
             ->select([
                 'cliente.uuid as vendedor_uuid',
                 'cliente.nome as vendedor_nome',
@@ -50,7 +62,67 @@ class MapaMediaGeralShowController
             ->orderBy('cliente.nome')
             ->get();
 
+        $vendasPorRaca = Compra::with(['lote.itens.raca'])
+            ->where('leilao_uuid', $leilaoUuid)
+            ->get()
+            ->groupBy(function($compra) {
+                return $compra->lote->itens->first()->raca->uuid;
+            })
+            ->map(function ($compras, $racaUuid) {
+                $raca = $compras->first()->lote->itens->first()->raca;
+                $lotes = $compras->pluck('lote')->unique();
 
-        dd($mediasPorVendedor);
+                // Cálculo dos valores por gênero
+                $valoresGenero = $compras->map(function ($compra) {
+                    $lote = $compra->lote;
+                    $totalItensLote = max(1, $lote->quantidade_macho + $lote->quantidade_femea + $lote->quantidade_outro);
+
+                    return [
+                        'valor_macho' => $compra->valor * ($lote->quantidade_macho / $totalItensLote),
+                        'valor_femea' => $compra->valor * ($lote->quantidade_femea / $totalItensLote),
+                        'valor_outro' => $compra->valor * ($lote->quantidade_outro / $totalItensLote)
+                    ];
+                })->reduce(function ($carry, $item) {
+                    $carry['total_valor_macho'] = ($carry['total_valor_macho'] ?? 0) + $item['valor_macho'];
+                    $carry['total_valor_femea'] = ($carry['total_valor_femea'] ?? 0) + $item['valor_femea'];
+                    $carry['total_valor_outro'] = ($carry['total_valor_outro'] ?? 0) + $item['valor_outro'];
+                    return $carry;
+                }, []);
+
+                $qtdTotal = $lotes->sum('quantidade_macho') + $lotes->sum('quantidade_femea') + $lotes->sum('quantidade_outro');
+                return [
+                    'raca_uuid' => $racaUuid,
+                    'raca_nome' => $raca->nome,
+                    'total_vendas' => $compras->count(),
+                    'valor_total' => $compras->sum('valor'),
+                    'valor_medio_total' => $compras->sum('valor') / $qtdTotal,
+                    'qtd_macho' => $lotes->sum('quantidade_macho'),
+                    'qtd_femea' => $lotes->sum('quantidade_femea'),
+                    'qtd_outro' => $lotes->sum('quantidade_outro'),
+                    'qtd_total' => $qtdTotal,
+                    'valor_macho' => $valoresGenero['total_valor_macho'] ?? 0,
+                    'valor_femea' => $valoresGenero['total_valor_femea'] ?? 0,
+                    'valor_outro' => $valoresGenero['total_valor_outro'] ?? 0,
+                    'media_macho' => $valoresGenero['total_valor_macho'] / $lotes->sum('quantidade_macho'),
+                    'media_femea' => $valoresGenero['total_valor_femea'] / $lotes->sum('quantidade_femea'),
+                    'media_outro' => $lotes->sum('quantidade_outro') > 0
+                        ? $valoresGenero['total_valor_outro'] / $lotes->sum('quantidade_outro')
+                        : 0,
+                    'media_total' => ($valoresGenero['total_valor_macho'] / $lotes->sum('quantidade_macho')) + ($valoresGenero['total_valor_femea'] / $lotes->sum('quantidade_femea')) + ($valoresGenero['total_valor_outro'] / $qtdTotal)
+                ];
+            })
+            ->sortByDesc('valor_total')
+            ->values();
+
+        $leilao = Leilao::where('uuid', $leilaoUuid)->first();
+
+        $pdf->loadView('app.mapa.media-geral', [
+            'leilao' => $leilao,
+            'vendasPorVendedor' => $vendasPorVendedor,
+            'vendasPorRaca' => $vendasPorRaca
+        ])->setPaper('a4', 'landscape');
+
+        return $this->stream($pdf, 'media-geral.pdf');
+
     }
 }
