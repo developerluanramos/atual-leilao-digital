@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\App\Mapa;
 
+use App\Charts\LeilaoGenero;
 use App\Http\Traits\App\GeneratePdfTrait;
 use App\Models\Compra;
 use App\Models\Leilao;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
@@ -58,12 +60,14 @@ class MapaMediaGeralShowController
             ->join('lote', 'lote_vendedor.lote_uuid', '=', 'lote.uuid')
             ->join('compra', 'compra.lote_uuid', '=', 'lote.uuid')
             ->where('lote.leilao_uuid', $leilaoUuid)
+//            ->where('compra.cliente_uuid', '0266b0a8-6fe1-40d3-912b-c96f64b4a8a9')
             ->groupBy('cliente.uuid', 'cliente.nome')
             ->orderBy('cliente.nome')
             ->get();
 
         $vendasPorRaca = Compra::with(['lote.itens.raca'])
             ->where('leilao_uuid', $leilaoUuid)
+//            ->where('cliente_uuid', '0266b0a8-6fe1-40d3-912b-c96f64b4a8a9')
             ->get()
             ->groupBy(function($compra) {
                 return $compra->lote->itens->first()->raca->uuid;
@@ -90,12 +94,14 @@ class MapaMediaGeralShowController
                 }, []);
 
                 $qtdTotal = $lotes->sum('quantidade_macho') + $lotes->sum('quantidade_femea') + $lotes->sum('quantidade_outro');
+
+                // TODO criar variáveis para os totais abaixo pra facilitar o tratamento das divisões por zeros
+
                 return [
                     'raca_uuid' => $racaUuid,
                     'raca_nome' => $raca->nome,
                     'total_vendas' => $compras->count(),
                     'valor_total' => $compras->sum('valor'),
-                    'valor_medio_total' => $compras->sum('valor') / $qtdTotal,
                     'qtd_macho' => $lotes->sum('quantidade_macho'),
                     'qtd_femea' => $lotes->sum('quantidade_femea'),
                     'qtd_outro' => $lotes->sum('quantidade_outro'),
@@ -103,12 +109,10 @@ class MapaMediaGeralShowController
                     'valor_macho' => $valoresGenero['total_valor_macho'] ?? 0,
                     'valor_femea' => $valoresGenero['total_valor_femea'] ?? 0,
                     'valor_outro' => $valoresGenero['total_valor_outro'] ?? 0,
-                    'media_macho' => $valoresGenero['total_valor_macho'] / $lotes->sum('quantidade_macho'),
-                    'media_femea' => $valoresGenero['total_valor_femea'] / $lotes->sum('quantidade_femea'),
-                    'media_outro' => $lotes->sum('quantidade_outro') > 0
-                        ? $valoresGenero['total_valor_outro'] / $lotes->sum('quantidade_outro')
-                        : 0,
-                    'media_total' => ($valoresGenero['total_valor_macho'] / $lotes->sum('quantidade_macho')) + ($valoresGenero['total_valor_femea'] / $lotes->sum('quantidade_femea')) + ($valoresGenero['total_valor_outro'] / $qtdTotal)
+                    'media_macho' => $valoresGenero['total_valor_macho'] / ($lotes->sum('quantidade_macho') > 0 ? $lotes->sum('quantidade_macho'): 1),
+                    'media_femea' => $valoresGenero['total_valor_femea'] / ($lotes->sum('quantidade_femea') > 0 ? $lotes->sum('quantidade_femea'): 1),
+                    'media_outro' => $valoresGenero['total_valor_outro'] / ($lotes->sum('quantidade_outro') > 0 ? $lotes->sum('quantidade_outro'): 1),
+                    'media_total' => $compras->sum('valor') / $qtdTotal,
                 ];
             })
             ->sortByDesc('valor_total')
@@ -116,13 +120,90 @@ class MapaMediaGeralShowController
 
         $leilao = Leilao::where('uuid', $leilaoUuid)->first();
 
+        $chartVendasPorGenero = [
+            "type" => 'pie',
+            "data" => [
+                "labels" => [
+                    'Macho ' .  \Akaunting\Money\Money::BRL($vendasPorRaca->sum('valor_macho'), true),
+                    'Femea ' .  \Akaunting\Money\Money::BRL($vendasPorRaca->sum('valor_femea'), true),
+                    'Outro ' .  \Akaunting\Money\Money::BRL($vendasPorRaca->sum('valor_outro'), true)
+                ],
+                "datasets" => [
+                    [
+                        "label" => "Valor Total (R$)",
+                        "data" => [
+                            $vendasPorRaca->sum('valor_macho'),
+                            $vendasPorRaca->sum('valor_femea'),
+                            $vendasPorRaca->sum('valor_outro')
+                        ],
+                        "backgroundColor" => ['#3b82f6', '#ec4899', '#78716c'],
+                        "borderWidth" => 2
+                    ],
+                ],
+            ],
+        ];
+        $chartVendasPorGenero = "https://quickchart.io/chart?c=".urlencode(json_encode($chartVendasPorGenero));
+
+        $chartMediasPorGenero = [
+            "type" => 'pie',
+            "data" => [
+                "labels" => [
+                    'Macho ' .  $vendasPorRaca->sum('qtd_macho'),
+                    'Femea ' .  $vendasPorRaca->sum('qtd_femea'),
+                    'Outro ' .  $vendasPorRaca->sum('qtd_outro')
+                ],
+                "datasets" => [
+                    [
+                        "label" => "Valor Total (R$)",
+                        "data" => [
+                            $vendasPorRaca->sum('qtd_macho'),
+                            $vendasPorRaca->sum('qtd_femea'),
+                            $vendasPorRaca->sum('qtd_outro')
+                        ],
+                        "backgroundColor" => ['#3b82f6', '#ec4899', '#78716c'],
+                        "borderWidth" => 2
+                    ],
+                ],
+            ],
+        ];
+        $chartMediasPorGenero = "https://quickchart.io/chart?c=".urlencode(json_encode($chartMediasPorGenero));
+
+        $chartVendasPorRaca = [
+            "type" => 'pie',
+            "data" => [
+                "labels" => $vendasPorRaca->pluck('raca_nome'),
+                "datasets" => [
+                    [
+                        "label" => "Valor Total (R$)",
+                        "data" => $vendasPorRaca->pluck('qtd_total'),
+                        "backgroundColor" => [
+                            '#2F4F4F', // Verde água
+                            '#556B2F', // Roxo
+                            '#DAA520', // Amarelo dourado
+                            '#D2691E', // Azul céu
+                            '#4B0082', // Vermelho alaranjado
+                            '#A52A2A', // Verde claro
+                            '#3357FF', // Azul
+                            '#F033FF', // Rosa
+                            '#33FFF0', // Ciano
+                            '#FF33A1', // Rosa choque
+                        ],
+                        "borderWidth" => 2
+                    ],
+                ],
+            ],
+        ];
+        $chartVendasPorRaca = "https://quickchart.io/chart?c=".urlencode(json_encode($chartVendasPorRaca));
+
         $pdf->loadView('app.mapa.media-geral', [
             'leilao' => $leilao,
             'vendasPorVendedor' => $vendasPorVendedor,
-            'vendasPorRaca' => $vendasPorRaca
+            'vendasPorRaca' => $vendasPorRaca,
+            'chartVendasPorGenero' => $chartVendasPorGenero,
+            'chartMediasPorGenero' => $chartMediasPorGenero,
+            'chartVendasPorRaca' => $chartVendasPorRaca
         ])->setPaper('a4', 'landscape');
 
         return $this->stream($pdf, 'media-geral.pdf');
-
     }
 }

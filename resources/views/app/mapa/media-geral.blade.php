@@ -1,13 +1,24 @@
 @extends('app.mapa.default-header', ['titulo' => "MAPA MÉDIAS TOTAIS", 'identificador' => 'media_geral'])
 
 @section('content-mapa-media_geral')
+    <script src="https://www.google.com/jsapi"></script>
+    <style>
+        .pie-chart {
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        .text-center{
+            text-align: center;
+        }
+    </style>
     <!-- Relatório 1: Vendas por Raça -->
     <div>
         <h3>Vendas por Raça</h3>
         <table class="report-table">
             <thead>
             <tr>
-                <th></th>
+                <th style="background-color: transparent"></th>
                 <th colspan="4">TOTAIS</th>
                 <th colspan="4">QUANTITATIVOS</th>
                 <th colspan="4">MÉDIAS</th>
@@ -31,29 +42,29 @@
             <tbody>
             @foreach($vendasPorRaca as $raca)
                 <tr>
-                    <td>{{ $raca['raca_nome'] }}</td>
-                    <td class="text-right">
+                    <td style="text-align: left">{{ $raca['raca_nome'] }}</td>
+                    <td class="text-right" style="text-align: right">
                         <x-layouts.badges.info-money
                             :convert="true"
                             :textLength="'sm'"
                             :value="$raca['valor_macho']"
                         />
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" style="text-align: right">
                         <x-layouts.badges.info-money
                             :convert="true"
                             :textLength="'sm'"
                             :value="$raca['valor_femea']"
                         />
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" style="text-align: right">
                         <x-layouts.badges.info-money
                             :convert="true"
                             :textLength="'sm'"
                             :value="$raca['valor_outro']"
                         />
                     </td>
-                    <td class="text-right">
+                    <td class="text-right money" style="text-align: right">
                         <x-layouts.badges.info-money
                             :convert="true"
                             :textLength="'sm'"
@@ -64,28 +75,28 @@
                     <td class="text-center">{{ $raca['qtd_femea'] }}</td>
                     <td class="text-center">{{ $raca['qtd_outro'] }}</td>
                     <td class="text-center">{{ $raca['qtd_total'] }}</td>
-                    <td class="text-right">
+                    <td class="text-right" style="text-align: right">
                         <x-layouts.badges.info-money
                             :convert="true"
                             :textLength="'sm'"
                             :value="$raca['media_macho']"
                         />
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" style="text-align: right">
                         <x-layouts.badges.info-money
                             :convert="true"
                             :textLength="'sm'"
                             :value="$raca['media_femea']"
                         />
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" style="text-align: right">
                         <x-layouts.badges.info-money
                             :convert="true"
                             :textLength="'sm'"
                             :value="$raca['media_outro']"
                         />
                     </td>
-                    <td class="text-right">
+                    <td class="text-right money" style="text-align: right">
                         <x-layouts.badges.info-money
                             :convert="true"
                             :textLength="'sm'"
@@ -98,28 +109,28 @@
             <tfoot>
             <tr style="font-weight: bold;">
                 <td>TOTAL</td>
-                <td class="text-right">
+                <td class="text-right" style="text-align: right">
                     <x-layouts.badges.info-money
                         :convert="true"
                         :textLength="'sm'"
                         :value="$vendasPorRaca->sum('valor_macho')"
                     />
                 </td>
-                <td class="text-right">
+                <td class="text-right" style="text-align: right">
                     <x-layouts.badges.info-money
                         :convert="true"
                         :textLength="'sm'"
                         :value="$vendasPorRaca->sum('valor_femea')"
                     />
                 </td>
-                <td class="text-right">
+                <td class="text-right" style="text-align: right">
                     <x-layouts.badges.info-money
                         :convert="true"
                         :textLength="'sm'"
                         :value="$vendasPorRaca->sum('valor_outro')"
                     />
                 </td>
-                <td class="text-right">
+                <td class="text-right" style="text-align: right">
                     <x-layouts.badges.info-money
                         :convert="true"
                         :textLength="'sm'"
@@ -130,39 +141,64 @@
                 <td class="text-center">{{ $vendasPorRaca->sum('qtd_femea') }}</td>
                 <td class="text-center">{{ $vendasPorRaca->sum('qtd_outro') }}</td>
                 <td class="text-center">{{ $vendasPorRaca->sum('qtd_total') }}</td>
-                <td class="text-right">
+                <td class="text-right" style="text-align: right">
                     <x-layouts.badges.info-money
                         :convert="true"
                         :textLength="'sm'"
-                        :value="$vendasPorRaca->sum('media_macho')"
+                        :value="$vendasPorRaca->sum('valor_macho') / ($vendasPorRaca->sum('valor_macho') ? $vendasPorRaca->sum('qtd_macho'): 1)"
                     />
                 </td>
-                <td class="text-right">
+                <td class="text-right" style="text-align: right">
                     <x-layouts.badges.info-money
                         :convert="true"
                         :textLength="'sm'"
-                        :value="$vendasPorRaca->sum('media_femea')"
+                        :value="$vendasPorRaca->sum('valor_femea') / ($vendasPorRaca->sum('valor_femea') ? $vendasPorRaca->sum('qtd_femea'): 1)"
                     />
                 </td>
-                <td class="text-right">
+                <td class="text-right" style="text-align: right">
                     <x-layouts.badges.info-money
                         :convert="true"
                         :textLength="'sm'"
-                        :value="$vendasPorRaca->sum('media_outro')"
+                        :value="$vendasPorRaca->sum('valor_outro') / ($vendasPorRaca->sum('valor_outro') ? $vendasPorRaca->sum('qtd_outro'): 1)"
                     />
                 </td>
-                <td class="text-right">
+                <td class="text-right" style="text-align: right">
                     <x-layouts.badges.info-money
                         :convert="true"
                         :textLength="'sm'"
-                        :value="$vendasPorRaca->sum('media_total')"
+                        :value="$vendasPorRaca->sum('valor_total') / $vendasPorRaca->sum('qtd_total')"
                     />
                 </td>
             </tr>
             </tfoot>
         </table>
+
+        <div style="display: flex; justify-content: center; margin-top: 30px;  width: 100%;">
+            <div style="display: flex; width: 32%; float: left; margin-right: 1%; text-align: center">
+                <h3>Gráfico de Totais</h3>
+                <small>Totais de vendas por Gzênero</small>
+                <img src="{{ $chartVendasPorGenero }}"
+                     style="width: 100%; height: 190px; object-fit: contain;"
+                     alt="Gráfico de Vendas">
+            </div>
+            <div style="display: flex; width: 32%; float: left; text-align: center">
+                <h3>Gráfico quantitativo por Gênero</h3>
+                <small>Quantidade de vendas por gênero</small>
+                <img src="{{ $chartMediasPorGenero }}"
+                     style="width: 100%; height: 190px; object-fit: contain;"
+                     alt="Gráfico de Vendas">
+            </div>
+            <div style="display: flex; width: 32%; float:right; text-align: center">
+                <h3>Gráfico quantitativo por Raça</h3>
+                <small>Quantidade de animais vendidos por Raça</small>
+                <img src="{{ $chartVendasPorRaca }}"
+                     style="width: 100%; height: 190px; object-fit: contain;"
+                     alt="Gráfico de Vendas">
+            </div>
+        </div>
     </div>
 
+    <div class="page-break"></div>
     <!-- Relatório 2: Vendas por Vendedor e Gênero -->
     <div>
         <h3>Vendas por Vendedor e Gênero</h3>
