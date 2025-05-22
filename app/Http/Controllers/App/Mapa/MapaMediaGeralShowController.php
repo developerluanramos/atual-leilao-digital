@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\App\Mapa;
 
+use App\Charts\LeilaoGenero;
 use App\Http\Traits\App\GeneratePdfTrait;
 use App\Models\Compra;
 use App\Models\Leilao;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
@@ -90,12 +92,14 @@ class MapaMediaGeralShowController
                 }, []);
 
                 $qtdTotal = $lotes->sum('quantidade_macho') + $lotes->sum('quantidade_femea') + $lotes->sum('quantidade_outro');
+
+                // TODO criar variáveis para os totais abaixo pra facilitar o tratamento das divisões por zeros
+
                 return [
                     'raca_uuid' => $racaUuid,
                     'raca_nome' => $raca->nome,
                     'total_vendas' => $compras->count(),
                     'valor_total' => $compras->sum('valor'),
-                    'valor_medio_total' => $compras->sum('valor') / $qtdTotal,
                     'qtd_macho' => $lotes->sum('quantidade_macho'),
                     'qtd_femea' => $lotes->sum('quantidade_femea'),
                     'qtd_outro' => $lotes->sum('quantidade_outro'),
@@ -103,12 +107,10 @@ class MapaMediaGeralShowController
                     'valor_macho' => $valoresGenero['total_valor_macho'] ?? 0,
                     'valor_femea' => $valoresGenero['total_valor_femea'] ?? 0,
                     'valor_outro' => $valoresGenero['total_valor_outro'] ?? 0,
-                    'media_macho' => $valoresGenero['total_valor_macho'] / $lotes->sum('quantidade_macho'),
-                    'media_femea' => $valoresGenero['total_valor_femea'] / $lotes->sum('quantidade_femea'),
-                    'media_outro' => $lotes->sum('quantidade_outro') > 0
-                        ? $valoresGenero['total_valor_outro'] / $lotes->sum('quantidade_outro')
-                        : 0,
-                    'media_total' => ($valoresGenero['total_valor_macho'] / $lotes->sum('quantidade_macho')) + ($valoresGenero['total_valor_femea'] / $lotes->sum('quantidade_femea')) + ($valoresGenero['total_valor_outro'] / $qtdTotal)
+                    'media_macho' => $valoresGenero['total_valor_macho'] / ($lotes->sum('quantidade_macho') > 0 ? $lotes->sum('quantidade_macho'): 1),
+                    'media_femea' => $valoresGenero['total_valor_femea'] / ($lotes->sum('quantidade_femea') > 0 ? $lotes->sum('quantidade_femea'): 1),
+                    'media_outro' => $valoresGenero['total_valor_outro'] / ($lotes->sum('quantidade_outro') > 0 ? $lotes->sum('quantidade_outro'): 1),
+                    'media_total' => $compras->sum('valor') / $qtdTotal,
                 ];
             })
             ->sortByDesc('valor_total')
@@ -116,10 +118,59 @@ class MapaMediaGeralShowController
 
         $leilao = Leilao::where('uuid', $leilaoUuid)->first();
 
+        $chartVendasPorGenero = [
+            "type" => 'bar',
+            "data" => [
+                "labels" => [
+                    'Macho ' .  \Akaunting\Money\Money::BRL($vendasPorRaca->sum('valor_macho')),
+                    'Femea ' .  \Akaunting\Money\Money::BRL($vendasPorRaca->sum('valor_femea')),
+                    'Outro ' .  \Akaunting\Money\Money::BRL($vendasPorRaca->sum('valor_outro'))
+                ],
+                "datasets" => [
+                    [
+                        "label" => "Valor Total (R$)",
+                        "data" => [
+                            $vendasPorRaca->sum('valor_macho'),
+                            $vendasPorRaca->sum('valor_femea'),
+                            $vendasPorRaca->sum('valor_outro')
+                        ],
+                        "backgroundColor" => ['#3b82f6', '#ec4899', '#78716c'],
+                        "borderWidth" => 2
+                    ],
+                ],
+            ],
+        ];
+        $chartVendasPorGenero = "https://quickchart.io/chart?c=".urlencode(json_encode($chartVendasPorGenero));
+
+        $chartMediasPorGenero = [
+            "type" => 'pie',
+            "data" => [
+                "labels" => [
+                    'Macho ' .  \Akaunting\Money\Money::BRL($vendasPorRaca->sum('media_macho'), true),
+                    'Femea ' .  \Akaunting\Money\Money::BRL($vendasPorRaca->sum('media_femea'), true),
+                    'Outro ' .  \Akaunting\Money\Money::BRL($vendasPorRaca->sum('media_outro'), true)
+                ],
+                "datasets" => [
+                    [
+                        "label" => "Valor Total (R$)",
+                        "data" => [
+                            $vendasPorRaca->sum('media_macho'),
+                            $vendasPorRaca->sum('media_femea'),
+                            $vendasPorRaca->sum('media_outro')
+                        ],
+                        "backgroundColor" => ['#3b82f6', '#ec4899', '#78716c'],
+                        "borderWidth" => 2
+                    ],
+                ],
+            ],
+        ];
+        $chartMediasPorGenero = "https://quickchart.io/chart?c=".urlencode(json_encode($chartMediasPorGenero));
         $pdf->loadView('app.mapa.media-geral', [
             'leilao' => $leilao,
             'vendasPorVendedor' => $vendasPorVendedor,
-            'vendasPorRaca' => $vendasPorRaca
+            'vendasPorRaca' => $vendasPorRaca,
+            'chartVendasPorGenero' => $chartVendasPorGenero,
+            'chartMediasPorGenero' => $chartMediasPorGenero
         ])->setPaper('a4', 'landscape');
 
         return $this->stream($pdf, 'media-geral.pdf');
