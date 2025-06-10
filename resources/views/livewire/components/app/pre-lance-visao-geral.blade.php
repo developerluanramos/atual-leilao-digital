@@ -1067,23 +1067,26 @@
       toastr.info("COPIADO para a área de transferência. Use CTRL + V para colar em campos de texto.")
    }
 
-   function copiarLotesGeralResumido(leilao, lotes)
-   {
-      let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
-      tabela += "======================\n";
-      tabela += "🔨 *"+leilao.descricao+"* 🔨\n";
-      tabela += "======================\n";
-      tabela += "✍️ Resumo de lotes ✍️ \n";
-      tabela += "======================\n";
+   function copiarLotesGeralResumido(leilao, lotes) {
+       let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
+       tabela += "======================\n";
+       tabela += "🔨 *" + leilao.descricao + "* 🔨\n";
+       tabela += "======================\n";
+       tabela += "✍️ Resumo de lotes ✍️ \n";
+       tabela += "======================\n";
+        console.log(leilao);
+       lotes.forEach(item => {
+           const temVencedor = item.prelance_vencedor && item.prelance_vencedor.valor !== undefined;
+           const numeroLote = String('Lote ' + item.numero).padEnd(5);
+           const valor = temVencedor ? parseFloat(item.prelance_vencedor.valor).toFixed(2).replace('.', ',') : '0,00';
+           const percentual = temVencedor ? `(${parseInt(item.prelance_vencedor.prelance_config.percentual_comissao_comprador)} %)` : `(${parseInt(leilao.config_prelance_atual.percentual_comissao_comprador)} %)`;
 
-      lotes.forEach(item => {
-         tabela += `🐮${String('Lote ' + item.numero).padEnd(5)}💰${String('*R$'+item.prelance_vencedor?.valor+'*').padStart(10)} ${'('+parseInt(item.prelance_vencedor?.prelance_config?.percentual_comissao_comprador)+' %)'} \n`;
-      });
+           tabela += `🐮 ${numeroLote}💰 ${String('*R$ ' + valor + '*').padStart(12)} ${percentual}\n`;
+       });
 
-      tabela += "======================\n";
-      navigator.clipboard.writeText(tabela);
-
-      toastr.info("COPIADO para a área de transferência. Use CTRL + V para colar em campos de texto.")
+       tabela += "======================\n";
+       navigator.clipboard.writeText(tabela);
+       toastr.info("COPIADO para a área de transferência. Use CTRL + V para colar em campos de texto.");
    }
 
    function copiarLoteUnico(descricaoLeilao, lote, lances) {

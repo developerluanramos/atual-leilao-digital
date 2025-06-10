@@ -16,7 +16,7 @@ class MapaVendedorShowController extends Controller
     use GeneratePdfTrait;
 
     public function __construct(
-        
+
     ) {}
 
     public function show(string $leilaoUuid, Request $request)
@@ -28,22 +28,22 @@ class MapaVendedorShowController extends Controller
             'isRemoteEnabled' => true,
             'orientation' => 'landascape'
         ];
-        
+
         $pdf = Pdf::setOptions($options);
-        
+
         $cliente = Cliente::where('uuid', $request->get('clienteUuid'))->first();
         $vendedoresSelecionados = json_decode($request->input('vendedores'));
         $leilao = Leilao::with([
             'config_prelance'
         ])->where('uuid', $leilaoUuid)->first();
-        
+
         $lotes = Lote::with('vendedores')->whereHas('vendedores', function ($query) use ($vendedoresSelecionados) {
             $query->whereIn('uuid', $vendedoresSelecionados);
-        })->get();
+        })->where('leilao_uuid', $leilaoUuid)->get();
 
         // dd($lotes);
         $pdf->loadView('app.mapa.prelance.vendedor', ['leilao' => $leilao, 'lotes' => $lotes]);
-        
+
         return $this->stream($pdf, 'resumo-prelance-cliente-'. $cliente?->nome.'.pdf');
     }
 }
