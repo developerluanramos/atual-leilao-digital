@@ -1077,7 +1077,7 @@
       tabela += "======================\n";
 
       lotes.forEach(item => {
-         tabela += `🐮${String('Lote ' + item.numero).padEnd(5)}💰${String('*R$'+item.prelance_vencedor.valor+'*').padStart(10)} ${'('+parseInt(item.prelance_vencedor.prelance_config.percentual_comissao_comprador)+' %)'} \n`;
+         tabela += `🐮${String('Lote ' + item.numero).padEnd(5)}💰${String('*R$'+item.prelance_vencedor?.valor+'*').padStart(10)} ${'('+parseInt(item.prelance_vencedor?.prelance_config?.percentual_comissao_comprador)+' %)'} \n`;
       });
 
       tabela += "======================\n";
