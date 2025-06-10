@@ -119,13 +119,13 @@
                      </svg>
                      Resumido
                    </button>
-{{--                  <button onclick="copiarLotesGeralAnalitico({{json_encode($leilao->toArray())}}, {{json_encode($leilao->lotes->toArray())}})" type="button" class="mb-2 ml-6 px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">--}}
-{{--                     <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">--}}
-{{--                        <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>--}}
-{{--                        <path fill="currentColor" d="M16.735 13.492c-.038-.018-1.497-.736-1.756-.83a1.008 1.008 0 0 0-.34-.075c-.196 0-.362.098-.49.291-.146.217-.587.732-.723.886-.018.02-.042.045-.057.045-.013 0-.239-.093-.307-.123-1.564-.68-2.751-2.313-2.914-2.589-.023-.04-.024-.057-.024-.057.005-.021.058-.074.085-.101.08-.079.166-.182.249-.283l.117-.14c.121-.14.175-.25.237-.375l.033-.066a.68.68 0 0 0-.02-.64c-.034-.069-.65-1.555-.715-1.711-.158-.377-.366-.552-.655-.552-.027 0 0 0-.112.005-.137.005-.883.104-1.213.311-.35.22-.94.924-.94 2.16 0 1.112.705 2.162 1.008 2.561l.041.06c1.161 1.695 2.608 2.951 4.074 3.537 1.412.564 2.081.63 2.461.63.16 0 .288-.013.4-.024l.072-.007c.488-.043 1.56-.599 1.804-1.276.192-.534.243-1.117.115-1.329-.088-.144-.239-.216-.43-.308Z"/>--}}
-{{--                     </svg>--}}
-{{--                     Descritivo--}}
-{{--                  </button>--}}
+                  <button onclick="copiarLotesGeralAnalitico({{json_encode($leilao->toArray())}}, {{json_encode($leilao->lotes->toArray())}})" type="button" class="mr-2 px-3 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
+                     <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
+                        <path fill="currentColor" d="M16.735 13.492c-.038-.018-1.497-.736-1.756-.83a1.008 1.008 0 0 0-.34-.075c-.196 0-.362.098-.49.291-.146.217-.587.732-.723.886-.018.02-.042.045-.057.045-.013 0-.239-.093-.307-.123-1.564-.68-2.751-2.313-2.914-2.589-.023-.04-.024-.057-.024-.057.005-.021.058-.074.085-.101.08-.079.166-.182.249-.283l.117-.14c.121-.14.175-.25.237-.375l.033-.066a.68.68 0 0 0-.02-.64c-.034-.069-.65-1.555-.715-1.711-.158-.377-.366-.552-.655-.552-.027 0 0 0-.112.005-.137.005-.883.104-1.213.311-.35.22-.94.924-.94 2.16 0 1.112.705 2.162 1.008 2.561l.041.06c1.161 1.695 2.608 2.951 4.074 3.537 1.412.564 2.081.63 2.461.63.16 0 .288-.013.4-.024l.072-.007c.488-.043 1.56-.599 1.804-1.276.192-.534.243-1.117.115-1.329-.088-.144-.239-.216-.43-.308Z"/>
+                     </svg>
+                     Descritivo
+                  </button>
                </div>
                <br>
                <div class="space-y-2 lg:grid lg:grid-cols-6 pr-2 sm:gap-3 xl:gap-10 lg:space-y-0">
@@ -221,15 +221,6 @@
                               </div>
                            </div>
                            <br>
-                           {{-- <small class="mt-6">Histórico de prelances
-                              <button onclick="copiarLoteUnico('{{$leilao->descricao}}', {{json_encode($lote)}}, {{json_encode($lote->prelances()->get()->toArray())}})" type="button" class="ml-6 px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
-                                 <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
-                                    <path fill="currentColor" d="M16.735 13.492c-.038-.018-1.497-.736-1.756-.83a1.008 1.008 0 0 0-.34-.075c-.196 0-.362.098-.49.291-.146.217-.587.732-.723.886-.018.02-.042.045-.057.045-.013 0-.239-.093-.307-.123-1.564-.68-2.751-2.313-2.914-2.589-.023-.04-.024-.057-.024-.057.005-.021.058-.074.085-.101.08-.079.166-.182.249-.283l.117-.14c.121-.14.175-.25.237-.375l.033-.066a.68.68 0 0 0-.02-.64c-.034-.069-.65-1.555-.715-1.711-.158-.377-.366-.552-.655-.552-.027 0 0 0-.112.005-.137.005-.883.104-1.213.311-.35.22-.94.924-.94 2.16 0 1.112.705 2.162 1.008 2.561l.041.06c1.161 1.695 2.608 2.951 4.074 3.537 1.412.564 2.081.63 2.461.63.16 0 .288-.013.4-.024l.072-.007c.488-.043 1.56-.599 1.804-1.276.192-.534.243-1.117.115-1.329-.088-.144-.239-.216-.43-.308Z"/>
-                                 </svg>
-                                 Compartilhar
-                              </button>
-                           </small> --}}
                            <div class="flex">
                               <a style="width: 150px" target="_blank" href="{{route('leilao.mapa.prelance.resumo-lote-unico', ['uuid' => $leilao->uuid, 'loteUuid' => $lote->uuid])}}" type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
                                  <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -237,6 +228,13 @@
                                   </svg>
                                   Resumido
                               </a>
+                               <button onclick="copiarLoteUnico('{{$leilao->descricao}}', {{json_encode($lote)}}, {{json_encode($lote->prelances()?->get()?->toArray())}})" type="button" class="ml-2 px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
+                                   <svg class="w-4 h-4 text-white me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                       <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
+                                       <path fill="currentColor" d="M16.735 13.492c-.038-.018-1.497-.736-1.756-.83a1.008 1.008 0 0 0-.34-.075c-.196 0-.362.098-.49.291-.146.217-.587.732-.723.886-.018.02-.042.045-.057.045-.013 0-.239-.093-.307-.123-1.564-.68-2.751-2.313-2.914-2.589-.023-.04-.024-.057-.024-.057.005-.021.058-.074.085-.101.08-.079.166-.182.249-.283l.117-.14c.121-.14.175-.25.237-.375l.033-.066a.68.68 0 0 0-.02-.64c-.034-.069-.65-1.555-.715-1.711-.158-.377-.366-.552-.655-.552-.027 0 0 0-.112.005-.137.005-.883.104-1.213.311-.35.22-.94.924-.94 2.16 0 1.112.705 2.162 1.008 2.561l.041.06c1.161 1.695 2.608 2.951 4.074 3.537 1.412.564 2.081.63 2.461.63.16 0 .288-.013.4-.024l.072-.007c.488-.043 1.56-.599 1.804-1.276.192-.534.243-1.117.115-1.329-.088-.144-.239-.216-.43-.308Z"/>
+                                   </svg>
+                                   Resumido
+                               </button>
                            </div>
                            <div class="relative overflow-x-auto">
                               <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -557,7 +555,7 @@
                                     <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
                                   </svg>
                               </a>
-                              <button title="COPIAR RAPIDAMENTE UM RESUMO PARA ENCAMINHAR NO WAHTSAPP"  onclick="copiarGastoPorCliente('{{$leilao->descricao}}', {{json_encode($cliente)}})" type="button" class="px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
+                              <button title="COPIAR RAPIDAMENTE UM RESUMO PARA ENCAMINHAR NO WAHTSAPP"  onclick="copiarGastoPorCliente('{{$leilao->descricao}}', {{json_encode($cliente)}}, {{json_encode($cliente->prelances()->with('lote', 'prelance_config')->where('lance.leilao_uuid', $leilao->uuid)->groupBy('lance.id', 'lance_cliente.cliente_uuid')->get())}})" type="button" class="px-2 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 rounded-lg text-sm">
                                  <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
                                     <path fill="currentColor" d="M16.735 13.492c-.038-.018-1.497-.736-1.756-.83a1.008 1.008 0 0 0-.34-.075c-.196 0-.362.098-.49.291-.146.217-.587.732-.723.886-.018.02-.042.045-.057.045-.013 0-.239-.093-.307-.123-1.564-.68-2.751-2.313-2.914-2.589-.023-.04-.024-.057-.024-.057.005-.021.058-.074.085-.101.08-.079.166-.182.249-.283l.117-.14c.121-.14.175-.25.237-.375l.033-.066a.68.68 0 0 0-.02-.64c-.034-.069-.65-1.555-.715-1.711-.158-.377-.366-.552-.655-.552-.027 0 0 0-.112.005-.137.005-.883.104-1.213.311-.35.22-.94.924-.94 2.16 0 1.112.705 2.162 1.008 2.561l.041.06c1.161 1.695 2.608 2.951 4.074 3.537 1.412.564 2.081.63 2.461.63.16 0 .288-.013.4-.024l.072-.007c.488-.043 1.56-.599 1.804-1.276.192-.534.243-1.117.115-1.329-.088-.144-.239-.216-.43-.308Z"/>
@@ -939,6 +937,7 @@
             CONFIGURAÇÕES PRÉ-LANCE
             ------------------------------------------
             -->
+{{--          @dd($leilao->config_prelance)--}}
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="configuracoes-prelance" role="tabpanel" aria-labelledby="configuracoes-prelance-tab">
                <div class="flow-root">
                   <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -961,8 +960,8 @@
                                     <p>
                                        <small>Parcelas: <b>{{$condicaoPagamento['qtd_parcelas']}}</b></small> |
                                        <small>Repetições: <b>{{$condicaoPagamento['repeticoes']}}</b></small> |
-                                       <small>Comissão Venda: <b>{{$condicaoPagamento['percentual_comissao_vendedor']}} %</b></small> |
-                                       <small>Comissão Compra: <b>{{$condicaoPagamento['percentual_comissao_comprador']}} %</b></small>
+                                       <small>Comissão Vendedor: <b>{{$config->percentual_comissao_vendedor}} %</b></small> |
+                                       <small>Comissão Comprador: <b>{{$config->percentual_comissao_comprador}} %</b></small>
                                     </p>
                                  </li>
                                  @endforeach
@@ -1055,10 +1054,11 @@
       tabela += "✍️ Lotes e valores disponíveis para pré-lance e suas condições de pagamento ✍️ \n"
 
       lotes.forEach(item => {
-         tabela += `- ${'*Lote ' + item.numero + '*'} \n`;
-         tabela += `🐮 ${item.descricao} \n`;
-         tabela += `✍️ ${'Obs: ' + item.observacoes} \n`;
-         tabela += `💰 ${'*R$'+item.prelance_vencedor.valor+'*'} \n`;
+         tabela += `${'*Lote ' + item.numero + '*'} \n`;
+         tabela += `🐮 *${item.descricao+ '*'} \n`;
+         tabela += `✍️ ${item.observacoes} \n`;
+         tabela += `💰 Valor lance: ${'*R$'+item.prelance_vencedor.valor+'*'} \n`;
+         tabela += `💰 Valor Total: ${'*R$'+item.valor_prelance?.toFixed(2).replace('.', ',')+'*'}\n`;
          tabela += "-----------------------\n";
       });
 
@@ -1070,11 +1070,14 @@
    function copiarLotesGeralResumido(leilao, lotes)
    {
       let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
-      tabela += "🔨 *"+leilao.descricao+"* 🔨\n\n";
+      tabela += "======================\n";
+      tabela += "🔨 *"+leilao.descricao+"* 🔨\n";
+      tabela += "======================\n";
       tabela += "✍️ Resumo de lotes ✍️ \n";
-      console.log('LOTES', lotes);
+      tabela += "======================\n";
+
       lotes.forEach(item => {
-         tabela += `- 🐮 ${String('Lote ' + item.numero).padEnd(5)} 💰 ${String('*R$'+item.prelance_vencedor.valor+'*').padStart(10)} - ${'('+parseInt(item.prelance_vencedor.prelance_config.percentual_comissao_comprador)+' %)'} \n`;
+         tabela += `🐮${String('Lote ' + item.numero).padEnd(5)}💰${String('*R$'+item.prelance_vencedor.valor+'*').padStart(10)} ${'('+parseInt(item.prelance_vencedor.prelance_config.percentual_comissao_comprador)+' %)'} \n`;
       });
 
       tabela += "======================\n";
@@ -1083,37 +1086,96 @@
       toastr.info("COPIADO para a área de transferência. Use CTRL + V para colar em campos de texto.")
    }
 
-   function copiarLoteUnico(descricaoLeilao, lote, lances)
-   {
-      tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
-      tabela += "🔨 *"+descricaoLeilao+"* 🔨\n\n";
-      tabela += "*🐮 Lote "+lote.numero+"*\n";
-      tabela += "✍️ "+lote.descricao+"\n\n";
-      tabela += "===================\n";
-      tabela += "Pré-lances\n";
-      tabela += "===================\n";
-      lances.forEach(item => {
-         let data = new Date(item.prelance_config.data).toLocaleDateString('pt-BR');
-         tabela += `🗓️ ${String(data).padEnd(5)} 💰 *${'R$'+item.valor.padStart(7)}* \n`;
-         tabela +=  `C. comprador: *${item.prelance_config.percentual_comissao_comprador}*% \n`;
-         tabela +=  `C. vendedor: *${item.prelance_config.percentual_comissao_vendedor}*% \n`;
-         tabela += "----------------------\n";
-      });
+   function copiarLoteUnico(descricaoLeilao, lote, lances) {
+       // Ordena os lances por valor (do maior para o menor)
+       // lances.sort((a, b) => parseFloat(b.valor) - parseFloat(a.valor));
 
-      navigator.clipboard.writeText(tabela);
+       // Formatação da tabela
+       let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
+       tabela += `🔨 *${descricaoLeilao.toUpperCase()}* 🔨\n\n`;
+       tabela += "═════════════\n";
+       tabela += `*📌 LOTE 0${lote.numero} - ${lote.descricao}*\n`;
+       tabela += "═════════════\n\n";
 
-      toastr.info("COPIADO para a área de transferência. Use CTRL + V para colar em campos de texto.")
+       // Cabeçalho de pré-lances
+       tabela += "═════════════\n";
+       tabela += "*📊 PRÉ-LANCES*\n";
+       tabela += "═════════════\n\n";
+
+       // Adiciona cada lance formatado
+       lances.forEach((item, index) => {
+           const data = new Date(item.prelance_config.data).toLocaleDateString('pt-BR');
+           const valor = parseFloat(item.valor).toFixed(2).replace('.', ',');
+           const comissaoComprador = item.prelance_config.percentual_comissao_comprador;
+           const comissaoVendedor = item.prelance_config.percentual_comissao_vendedor;
+
+           tabela += `*🎯 ${index + 1}º LANCE*\n`;
+           tabela += `🗓️ Data: *${data}*\n`;
+           tabela += `💰 Valor: *R$${valor.padStart(8)}*\n`;
+           tabela += `📊 C. Comprador: *${comissaoComprador}%*\n`;
+           tabela += "──────────────\n\n";
+       });
+
+       // Resumo final
+       const maiorLance = lances[lances.length - 1];
+       const valorMaiorLance = parseFloat(maiorLance.valor).toFixed(2).replace('.', ',');
+
+       tabela += "═════════════\n";
+       tabela += "*📌 RESUMO FINAL*\n";
+       tabela += `🔝 Maior lance: *R$ ${valorMaiorLance}*\n`;
+       tabela += `📅 Data: ${new Date(maiorLance.prelance_config.data).toLocaleDateString('pt-BR')}\n`;
+       tabela += `🧮 Total de lances: ${lances.length}\n`;
+       tabela += `💰 Valor Total: ${lote.valor_prelance?.toFixed(2).replace('.', ',')}\n`;
+       tabela += "═════════════\n";
+
+       // Copia para a área de transferência
+       navigator.clipboard.writeText(tabela);
+       toastr.info("Conteúdo copiado para a área de transferência. Use CTRL + V para colar.");
    }
 
-   function copiarGastoPorCliente(descricaoLeilao, clienteVencedor)
-   {
-      tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
-      tabela += "🔨 *"+descricaoLeilao+"* 🔨\n\n";
-      tabela += "*👔 Cliente: "+clienteVencedor.nome+"*\n";
+   function copiarGastoPorCliente(descricaoLeilao, cliente, prelances) {
+       let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
+       tabela += "🔨 *" + descricaoLeilao + "* 🔨\n\n";
+       tabela += "*👔 Cliente: " + cliente.nome + "*\n\n";
 
-      navigator.clipboard.writeText(tabela);
+       // Filtra apenas os lances vencedores deste cliente
+       const lancesVencedores = prelances.filter(item =>
+           item.uuid === item.lote.prelance_vencedor.uuid
+       );
 
-      toastr.info("COPIADO para a área de transferência. Use CTRL + V para colar em campos de texto.")
+       prelances.forEach((item, index) => {
+           const data = new Date(item.created_at).toLocaleDateString('pt-BR');
+           const hora = new Date(item.created_at).toLocaleTimeString('pt-BR');
+           const valor = parseFloat(item.valor).toFixed(2).replace('.', ',');
+           const valorComissaoCompra = parseFloat(item.valor_comissao_compra).toFixed(2).replace('.', ',');
+           const valorComissaoVenda = parseFloat(item.valor_comissao_venda).toFixed(2).replace('.', ',');
+           const valorPrelance = parseFloat(item.lote.valor_prelance).toFixed(2).replace('.', ',');
+           const status = item.uuid === item.lote.prelance_vencedor.uuid ? "✅ Vencendo" : "❌ Superado";
+
+           tabela += `*🎯 LOTE ${item.lote.numero}*\n`;
+           tabela += `🗓️ Data/Hora: *${data} - ${hora}*\n`;
+           tabela += `💰 Valor Lance: *R$ ${valor.padStart(9)}*\n`;
+           tabela += `📊 Comissão: *${item.prelance_config.percentual_comissao_comprador}%*  *R$ ${valorComissaoCompra.padStart(8)}*\n`;
+           tabela += `🏷️ Lance: *R$ ${valorPrelance.padStart(6)}*\n`;
+           tabela += `📌 Status: *${status}*\n`;
+           tabela += "────────────────────────\n\n";
+       });
+
+       // Calculando totais APENAS para lances vencedores
+       const totalLances = lancesVencedores.reduce((sum, p) => sum + parseFloat(p.valor), 0).toFixed(2).replace('.', ',');
+       const totalComissaoCompra = lancesVencedores.reduce((sum, p) => sum + parseFloat(p.valor_comissao_compra), 0).toFixed(2).replace('.', ',');
+       const totalComissaoVenda = lancesVencedores.reduce((sum, p) => sum + parseFloat(p.valor_comissao_venda), 0).toFixed(2).replace('.', ',');
+
+       tabela += "*📊 RESUMO FINAL (APENAS LANCES VENCEDORES)*\n";
+       tabela += `💰 Total Lances: *R$ ${totalLances.padStart(12)}*\n`;
+       tabela += `💸 Total Comissão Compra: *R$ ${totalComissaoCompra.padStart(8)}*\n`;
+
+       // Adiciona contagem de lances
+       tabela += `\n*📈 Total de Lances: ${prelances.length}*\n`;
+       tabela += `*🏆 Lances Vencedores: ${lancesVencedores.length}*\n`;
+
+       navigator.clipboard.writeText(tabela);
+       toastr.info("COPIADO para a área de transferência. Use CTRL + V para colar em campos de texto.");
    }
 
    function copiarConfiguracaoPrelance(descricaoLeilao, lote, lances)

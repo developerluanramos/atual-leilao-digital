@@ -176,7 +176,7 @@
         <div style="display: flex; justify-content: center; margin-top: 30px;  width: 100%;">
             <div style="display: flex; width: 32%; float: left; margin-right: 1%; text-align: center">
                 <h3>Gráfico de Totais</h3>
-                <small>Totais de vendas por Gzênero</small>
+                <small>Totais de vendas por Gênero</small>
                 <img src="{{ $chartVendasPorGenero }}"
                      style="width: 100%; height: 190px; object-fit: contain;"
                      alt="Gráfico de Vendas">
@@ -225,29 +225,64 @@
                     <td class="text-center">{{ $vendedor->qtd_macho }}</td>
                     <td class="text-center">{{ $vendedor->qtd_femea }}</td>
                     <td class="text-center">{{ $vendedor->qtd_outro }}</td>
-                    <td class="text-right">{{ number_format($vendedor->valor_macho, 2, ',', '.') }}</td>
-                    <td class="text-right">{{ number_format($vendedor->valor_femea, 2, ',', '.') }}</td>
-                    <td class="text-right">{{ number_format($vendedor->valor_outro, 2, ',', '.') }}</td>
+                    <td class="text-right money">R${{ number_format($vendedor->valor_macho, 2, ',', '.') }}</td>
+                    <td class="text-right money">R${{ number_format($vendedor->valor_femea, 2, ',', '.') }}</td>
+                    <td class="text-right money">R${{ number_format($vendedor->valor_outro, 2, ',', '.') }}</td>
                     <td class="text-right">{{ number_format($vendedor->perc_macho, 2, ',', '.') }}%</td>
                     <td class="text-right">{{ number_format($vendedor->perc_femea, 2, ',', '.') }}%</td>
                     <td class="text-right">{{ number_format($vendedor->perc_outro, 2, ',', '.') }}%</td>
-                    <td class="text-right">{{ number_format($vendedor->valor_total, 2, ',', '.') }}</td>
+                    <td class="text-right money">R${{ number_format($vendedor->valor_total, 2, ',', '.') }}</td>
                 </tr>
             @endforeach
-{{--            <tr style="font-weight: bold; background-color: #f8f9fa;">--}}
-{{--                <td>TOTAL</td>--}}
-{{--                <td class="text-center">{{ $vendasPorVendedor->sum('qtd_macho') }}</td>--}}
-{{--                <td class="text-center">{{ $vendasPorVendedor->sum('qtd_femea') }}</td>--}}
-{{--                <td class="text-center">{{ $vendasPorVendedor->sum('qtd_outro') }}</td>--}}
-{{--                <td class="text-right">{{ number_format($vendasPorVendedor->sum('valor_macho'), 2, ',', '.') }}</td>--}}
-{{--                <td class="text-right">{{ number_format($vendasPorVendedor->sum('valor_femea'), 2, ',', '.') }}</td>--}}
-{{--                <td class="text-right">{{ number_format($vendasPorVendedor->sum('valor_outro'), 2, ',', '.' }}</td>--}}
-{{--                <td class="text-right">{{ number_format($vendasPorVendedor->avg('perc_macho'), 2, ',', '.' }}%</td>--}}
-{{--                <td class="text-right">{{ number_format($vendasPorVendedor->avg('perc_femea'), 2, ',', '.' }}%</td>--}}
-{{--                <td class="text-right">{{ number_format($vendasPorVendedor->avg('perc_outro'), 2, ',', '.' }}%</td>--}}
-{{--                <td class="text-right">{{ number_format($vendasPorVendedor->sum('valor_total'), 2, ',', '.' }}</td>--}}
-{{--            </tr>--}}
             </tbody>
+            <tfoot>
+            <tr style="font-weight: bold;">
+                <td>TOTAL</td>
+                <td class="text-center">
+                    {{ $vendasPorVendedor->sum('qtd_macho') }}
+                </td>
+                <td class="text-center">
+                    {{ $vendasPorVendedor->sum('qtd_femea') }}
+                </td>
+                <td class="text-center">
+                    {{ $vendasPorVendedor->sum('qtd_outro') }}
+                </td>
+                <td class="text-right">
+                    <x-layouts.badges.info-money
+                        :convert="true"
+                        :textLength="'sm'"
+                        :value="$vendasPorVendedor->sum('valor_macho')"
+                    />
+                </td>
+                <td class="text-right">
+                    <x-layouts.badges.info-money
+                        :convert="true"
+                        :textLength="'sm'"
+                        :value="$vendasPorVendedor->sum('valor_femea')"
+                    />
+                </td>
+                <td class="text-right">
+                    <x-layouts.badges.info-money
+                        :convert="true"
+                        :textLength="'sm'"
+                        :value="$vendasPorVendedor->sum('valor_outro')"
+                    />
+                </td>
+                <td class="text-right">
+                </td>
+                <td class="text-right">
+                </td>
+                <td class="text-right">
+                </td>
+                <td class="text-right">
+                    <x-layouts.badges.info-money
+                        :convert="true"
+                        :textLength="'sm'"
+                        :value="$vendasPorVendedor->sum('valor_total')"
+                    />
+                </td>
+            </tr>
+            </tfoot>
         </table>
     </div>
 @endsection
