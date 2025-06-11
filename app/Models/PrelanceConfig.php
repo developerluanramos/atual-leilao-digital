@@ -25,6 +25,7 @@ class PrelanceConfig extends Model
         'percentual_comissao_comprador',
         'incide_comissao_vendedor',
         'incide_comissao_comprador',
+        'icone_whatsapp'
     ];
 
     public function plano_pagamento()
