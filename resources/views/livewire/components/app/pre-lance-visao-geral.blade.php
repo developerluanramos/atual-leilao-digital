@@ -1086,7 +1086,7 @@
        tabela += "✍️ Resumo do Pré-lance ✍️ \n";
        tabela += "======================\n";
        tabela += `Comissão do dia: ${leilao.config_prelance_atual.percentual_comissao_comprador}%\n`;
-       tabela += "======================\n";
+       tabela += "======================\n\n";
 
        lotes.sort((a, b) => a.numero - b.numero);
        lotes.forEach(item => {
