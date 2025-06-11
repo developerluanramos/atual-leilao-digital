@@ -1092,7 +1092,7 @@
        lotes.forEach(item => {
            const temVencedor = item.prelance_vencedor && item.prelance_vencedor.valor !== undefined;
            const numeroLote = String('Lote ' + item.numero).padEnd(5);
-           const valor = temVencedor ? item.prelance_vencedor.prelance_config.icone_whatsapp + ' *R$' + parseFloat(item.prelance_vencedor.valor).toFixed(2).replace('.', ',')+'*' : '0,00';
+           const valor = temVencedor ? item.prelance_vencedor.prelance_config.icone_whatsapp + ' *R$' + parseFloat(item.prelance_vencedor.valor).toFixed(2).replace('.', ',')+'*' : 'R$0,00';
            const percentual = temVencedor ? `(${parseInt(item.prelance_vencedor.prelance_config.percentual_comissao_comprador)} %)` : ``;
 
            tabela += `${numeroLote} ${valor.padStart(10)} ${percentual}\n`;
