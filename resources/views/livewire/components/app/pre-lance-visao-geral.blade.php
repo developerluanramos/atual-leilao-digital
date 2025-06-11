@@ -1050,7 +1050,9 @@
      function copiarLotesGeralAnalitico(leilao, lotes) {
          let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
          tabela += "🔨 *" + leilao.descricao + "* 🔨\n\n";
-         tabela += "✍️ Lotes e valores disponíveis para pré-lance e suas condições de pagamento ✍️ \n\n";
+         tabela += "======================\n";
+         tabela += "✍️ Resumo de Lotes ✍️ \n";
+         tabela += "======================\n";
          lotes.sort((a, b) => a.numero - b.numero);
          lotes.forEach(item => {
              const temVencedor = item.prelance_vencedor && item.prelance_vencedor.valor !== undefined;
@@ -1081,7 +1083,7 @@
        tabela += "======================\n";
        tabela += "🔨 *" + leilao.descricao + "* 🔨\n";
        tabela += "======================\n";
-       tabela += "✍️ Resumo de lotes ✍️ \n";
+       tabela += "✍️ Resumo do Pré-lance ✍️ \n";
        tabela += "======================\n";
        tabela += `Comissão do dia: ${leilao.config_prelance_atual.percentual_comissao_comprador}%\n`;
        tabela += "======================\n";
@@ -1094,6 +1096,8 @@
            const percentual = temVencedor ? `(${parseInt(item.prelance_vencedor.prelance_config.percentual_comissao_comprador)} %)` : ``;
 
            tabela += `${numeroLote} ${valor.padStart(10)} ${percentual}\n`;
+           tabela += `${item.descricao}\n`
+           tabela += `-------------\n`
        });
 
        tabela += "======================\n";
@@ -1112,6 +1116,9 @@
        // Formatação da tabela
        let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
        tabela += `🔨 *${descricaoLeilao.toUpperCase()}* 🔨\n\n`;
+       tabela += "======================\n";
+       tabela += "✍️ Resumo do Lote ✍️ \n";
+       tabela += "======================\n";
        tabela += "═════════════\n";
        tabela += `*📌 LOTE 0${lote.numero} - ${lote.descricao}*\n`;
        tabela += "═════════════\n\n";
@@ -1155,6 +1162,9 @@
    function copiarGastoPorCliente(descricaoLeilao, cliente, prelances) {
        let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
        tabela += "🔨 *" + descricaoLeilao + "* 🔨\n\n";
+       tabela += "======================\n";
+       tabela += "✍️ Resumo do Cliente ✍️ \n";
+       tabela += "======================\n";
        tabela += "*👔 Cliente: " + cliente.nome + "*\n\n";
 
        // Filtra apenas os lances vencedores deste cliente
@@ -1171,11 +1181,11 @@
            const valorPrelance = parseFloat(item.lote.valor_prelance).toFixed(2).replace('.', ',');
            const status = item.uuid === item.lote.prelance_vencedor.uuid ? "✅ Vencendo" : "❌ Superado";
 
-           tabela += `*🎯 LOTE ${item.lote.numero}*\n`;
+           tabela += `*🎯 LOTE ${item.lote.numero} - ${item.lote.descricao}*\n`;
            tabela += `🗓️ Data/Hora: *${data} - ${hora}*\n`;
            tabela += `💰 Valor Lance: *R$ ${valor.padStart(9)}*\n`;
            tabela += `📊 Comissão: *${item.prelance_config.percentual_comissao_comprador}%*  *R$ ${valorComissaoCompra.padStart(8)}*\n`;
-           tabela += `🏷️ Lance: *R$ ${valorPrelance.padStart(6)}*\n`;
+           tabela += `🏷️ Valor Total: *R$ ${valorPrelance.padStart(6)}*\n`;
            tabela += `📌 Status: *${status}*\n`;
            tabela += "────────────────────────\n\n";
        });
@@ -1186,11 +1196,11 @@
        const totalComissaoVenda = lancesVencedores.reduce((sum, p) => sum + parseFloat(p.valor_comissao_venda), 0).toFixed(2).replace('.', ',');
 
        tabela += "*📊 RESUMO FINAL (APENAS LANCES VENCEDORES)*\n";
-       tabela += `💰 Total Lances: *R$ ${totalLances.padStart(12)}*\n`;
+       tabela += `💰 Valor total: *R$ ${totalLances.padStart(12)}*\n`;
        tabela += `💸 Total Comissão Compra: *R$ ${totalComissaoCompra.padStart(8)}*\n`;
 
        // Adiciona contagem de lances
-       tabela += `\n*📈 Total de Lances: ${prelances.length}*\n`;
+       tabela += `\n*📈 Qtd de Lances: ${prelances.length}*\n`;
        tabela += `*🏆 Lances Vencedores: ${lancesVencedores.length}*\n`;
 
        navigator.clipboard.writeText(tabela);
