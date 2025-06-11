@@ -1151,7 +1151,7 @@
        tabela += `🔝 Maior lance: *R$ ${valorMaiorLance}*\n`;
        tabela += `📅 Data: ${new Date(maiorLance.prelance_config.data).toLocaleDateString('pt-BR')}\n`;
        tabela += `🧮 Total de lances: ${lances.length}\n`;
-       tabela += `💰 Valor Lote: ${lote.valor_prelance?.toFixed(2).replace('.', ',')}\n`;
+       tabela += `💰 Valor Lote: *R$ ${lote.valor_prelance?.toFixed(2).replace('.', ',')}*\n`;
        tabela += "═════════════\n";
 
        // Copia para a área de transferência
