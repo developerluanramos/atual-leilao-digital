@@ -1063,7 +1063,7 @@
              tabela += `🐮 *${item.descricao}*\n`;
              tabela += `✍️ ${item.observacoes || 'Sem observações'}\n`;
              tabela += `💰 Valor lance: *R$ ${valorVencedor.padStart(6)}*\n`;
-             tabela += `💰 Valor Total: *R$ ${valorPrelance.padStart(6)}*\n`;
+             tabela += `💰 Valor Lote: *R$ ${valorPrelance.padStart(6)}*\n`;
 
              // Adiciona informações do vencedor se existir
              if (temVencedor) {
@@ -1151,7 +1151,7 @@
        tabela += `🔝 Maior lance: *R$ ${valorMaiorLance}*\n`;
        tabela += `📅 Data: ${new Date(maiorLance.prelance_config.data).toLocaleDateString('pt-BR')}\n`;
        tabela += `🧮 Total de lances: ${lances.length}\n`;
-       tabela += `💰 Valor Total: ${lote.valor_prelance?.toFixed(2).replace('.', ',')}\n`;
+       tabela += `💰 Valor Lote: ${lote.valor_prelance?.toFixed(2).replace('.', ',')}\n`;
        tabela += "═════════════\n";
 
        // Copia para a área de transferência
@@ -1185,7 +1185,7 @@
            tabela += `🗓️ Data/Hora: *${data} - ${hora}*\n`;
            tabela += `💰 Valor Lance: *R$ ${valor.padStart(9)}*\n`;
            tabela += `📊 Comissão: *${item.prelance_config.percentual_comissao_comprador}%*  *R$ ${valorComissaoCompra.padStart(8)}*\n`;
-           tabela += `🏷️ Valor Total: *R$ ${valorPrelance.padStart(6)}*\n`;
+           tabela += `🏷️ Valor Lote: *R$ ${valorPrelance.padStart(6)}*\n`;
            tabela += `📌 Status: *${status}*\n`;
            tabela += "────────────────────────\n\n";
        });
