@@ -521,12 +521,22 @@
             -->
             <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="clients-prelance" role="tabpanel" aria-labelledby="clients-prelance-tab">
                <div class="flow-root">
-                  <a style="width: 150px" target="_blank" href="{{route('leilao.mapa.prelance.resumo-cliente', ['uuid' => $leilao->uuid])}}" type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
-                     <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
-                      </svg>
-                      Relatório geral
-                  </a>
+                   <div class="flex">
+                       <a style="width: 150px" target="_blank" href="{{route('leilao.mapa.prelance.resumo-cliente', ['uuid' => $leilao->uuid])}}" type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                           <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                               <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
+                           </svg>
+                           Relatório geral
+                       </a>
+
+                       <a style="width: 150px" target="_blank" href="{{route('leilao.mapa.prelance.participantes', ['uuid' => $leilao->uuid])}}" type="button" class="flex mr-2 px-3 py-2 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                           <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                               <path fill-rule="evenodd" d="M9 2.221V7H4.221a2 2 0 0 1 .365-.5L8.5 2.586A2 2 0 0 1 9 2.22ZM11 2v5a2 2 0 0 1-2 2H4v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-7ZM8 16a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1Zm1-5a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2H9Z" clip-rule="evenodd"/>
+                           </svg>
+                           Resumido
+                       </a>
+                   </div>
+
                   <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                      @foreach($leilao->clientes()->get() as $cliente)
                      <li class="py-3 sm:py-4">
@@ -1103,86 +1113,82 @@
          toastr.info("Informações copiadas com sucesso");
      }
 
-   function copiarLotesGeralResumido(leilao, lotes) {
-       let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
-       tabela += "======================\n";
-       tabela += "🔨 *" + leilao.descricao + "* 🔨\n";
-       tabela += "======================\n";
-       tabela += "✍️ Resumo do Pré-lance ✍️ \n";
-       tabela += "======================\n";
-       tabela += `Comissão do dia: ${leilao.config_prelance_atual.percentual_comissao_comprador}%\n`;
-       tabela += "======================\n\n";
+     function copiarLotesGeralResumido(leilao, lotes) {
+         let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
+         tabela += "======================\n";
+         tabela += "🔨 *" + leilao.descricao + "* 🔨\n";
+         tabela += "======================\n";
+         tabela += "✍️ Resumo do Pré-lance ✍️ \n";
+         tabela += "======================\n";
+         tabela += `Comissão do dia: ${leilao.config_prelance_atual.percentual_comissao_comprador}%\n`;
+         tabela += "======================\n\n";
 
-       lotes.sort((a, b) => a.numero - b.numero);
-       lotes.forEach(item => {
-           const temVencedor = item.prelance_vencedor && item.prelance_vencedor.valor !== undefined;
-           const numeroLote = String('Lote ' + item.numero).padEnd(5);
-           const valor = temVencedor ? item.prelance_vencedor.prelance_config.icone_whatsapp + ' *R$' + parseFloat(item.prelance_vencedor.valor).toFixed(2).replace('.', ',')+'*' : 'R$0,00';
-           const percentual = temVencedor ? `(${parseInt(item.prelance_vencedor.prelance_config.percentual_comissao_comprador)} %)` : ``;
+         lotes.sort((a, b) => a.numero - b.numero);
+         lotes.forEach(item => {
+             const temVencedor = item.prelance_vencedor && item.prelance_vencedor.valor !== undefined;
+             const numeroLote = String('Lote ' + item.numero).padEnd(5);
+             const valorFormatado = temVencedor ?
+                 formatarMoedaBrasileira(item.prelance_vencedor.valor).replace('R$', '*R$') + '*' :
+                 'R$ 0,00';
+             const percentual = temVencedor ? `(${parseInt(item.prelance_vencedor.prelance_config.percentual_comissao_comprador)} %)` : ``;
 
-           tabela += `${numeroLote} ${valor.padStart(10)} ${percentual}\n`;
-           tabela += `${item.descricao}\n`
-           tabela += `-------------\n`
-       });
+             tabela += `${numeroLote} ${temVencedor ? item.prelance_vencedor.prelance_config.icone_whatsapp : ''} ${valorFormatado.padStart(10)} ${percentual}\n`;
+             tabela += `${item.descricao}\n`
+             tabela += `-------------\n`
+         });
 
-       tabela += "======================\n";
-       navigator.clipboard.writeText(tabela);
-       toastr.info("Informações copiadas com sucesso");
-   }
+         tabela += "======================\n";
+         navigator.clipboard.writeText(tabela);
+         toastr.info("Informações copiadas com sucesso");
+     }
 
-   function copiarLoteUnico(descricaoLeilao, lote, lances) {
-       // Ordena os lances por valor (do maior para o menor)
-       // lances.sort((a, b) => parseFloat(b.valor) - parseFloat(a.valor));
-       if(lances.length === 0)
-       {
-           toastr.error("Nenhum lance regitrado para este lote");
-           return;
-       }
-       // Formatação da tabela
-       let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
-       tabela += `🔨 *${descricaoLeilao.toUpperCase()}* 🔨\n\n`;
-       tabela += "======================\n";
-       tabela += "✍️ Resumo do Lote ✍️ \n";
-       tabela += "======================\n";
-       tabela += "═════════════\n";
-       tabela += `*📌 LOTE 0${lote.numero} - ${lote.descricao}*\n`;
-       tabela += "═════════════\n\n";
+     function copiarLoteUnico(descricaoLeilao, lote, lances) {
+         if(lances.length === 0) {
+             toastr.error("Nenhum lance registrado para este lote");
+             return;
+         }
 
-       // Cabeçalho de pré-lances
-       tabela += "═════════════\n";
-       tabela += "*📊 PRÉ-LANCES*\n";
-       tabela += "═════════════\n\n";
+         let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
+         tabela += `🔨 *${descricaoLeilao.toUpperCase()}* 🔨\n\n`;
+         tabela += "======================\n";
+         tabela += "✍️ Resumo do Lote ✍️ \n";
+         tabela += "======================\n";
+         tabela += "═════════════\n";
+         tabela += `*📌 LOTE 0${lote.numero} - ${lote.descricao}*\n`;
+         tabela += `${lote.observacoes}\n`;
+         tabela += "═════════════\n\n";
 
-       // Adiciona cada lance formatado
-       lances.forEach((item, index) => {
-           const data = new Date(item.prelance_config.data).toLocaleDateString('pt-BR');
-           const valor = parseFloat(item.valor).toFixed(2).replace('.', ',');
-           const comissaoComprador = item.prelance_config.percentual_comissao_comprador;
-           const comissaoVendedor = item.prelance_config.percentual_comissao_vendedor;
+         tabela += "═════════════\n";
+         tabela += "*📊 PRÉ-LANCES*\n";
+         tabela += "═════════════\n\n";
 
-           tabela += `*🎯 ${index + 1}º LANCE*\n`;
-           tabela += `🗓️ Data: *${data}*\n`;
-           tabela += `💰 Valor: *R$${valor.padStart(8)}*\n`;
-           tabela += `📊 C. Comprador: *${comissaoComprador}%*\n`;
-           tabela += "──────────────\n\n";
-       });
+         lances.forEach((item, index) => {
+             const data = new Date(item.prelance_config.data).toLocaleDateString('pt-BR');
+             const valorFormatado = formatarMoedaBrasileira(item.valor).replace('R$', '*R$') + '*';
+             const comissaoComprador = item.prelance_config.percentual_comissao_comprador;
 
-       // Resumo final
-       const maiorLance = lances[lances.length - 1];
-       const valorMaiorLance = parseFloat(maiorLance.valor).toFixed(2).replace('.', ',');
+             tabela += `*🎯 ${index + 1}º LANCE*\n`;
+             tabela += `🗓️ Data: *${data}*\n`;
+             tabela += `💰 Valor lance: ${valorFormatado}\n`;
+             tabela += `📊 C. Comprador: *${comissaoComprador}%*\n`;
+             tabela += "──────────────\n\n";
+         });
 
-       tabela += "═════════════\n";
-       tabela += "*📌 RESUMO FINAL*\n";
-       tabela += `🔝 Maior lance: *R$ ${valorMaiorLance}*\n`;
-       tabela += `📅 Data: ${new Date(maiorLance.prelance_config.data).toLocaleDateString('pt-BR')}\n`;
-       tabela += `🧮 Total de lances: ${lances.length}\n`;
-       tabela += `💰 Valor Lote: *R$ ${lote.valor_prelance?.toFixed(2).replace('.', ',')}*\n`;
-       tabela += "═════════════\n";
+         const maiorLance = lances[lances.length - 1];
+         const valorMaiorLance = formatarMoedaBrasileira(maiorLance.valor).replace('R$', '*R$') + '*';
+         const valorLoteFormatado = formatarMoedaBrasileira(lote.valor_prelance).replace('R$', '*R$') + '*';
 
-       // Copia para a área de transferência
-       navigator.clipboard.writeText(tabela);
-       toastr.info("Informações copiadas com sucesso");
-   }
+         tabela += "═════════════\n";
+         tabela += "*📌 RESUMO FINAL*\n";
+         tabela += `🔝 Maior lance: ${valorMaiorLance}\n`;
+         tabela += `📅 Data: ${new Date(maiorLance.prelance_config.data).toLocaleDateString('pt-BR')}\n`;
+         tabela += `🧮 Total de lances: ${lances.length}\n`;
+         tabela += `💰 Valor Lote: ${valorLoteFormatado}\n`;
+         tabela += "═════════════\n";
+
+         navigator.clipboard.writeText(tabela);
+         toastr.info("Informações copiadas com sucesso");
+     }
 
    function copiarGastoPorCliente(descricaoLeilao, cliente, prelances) {
        let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
