@@ -31,7 +31,7 @@ class PrelanceIndexAction
     public function exec(string $leilaoUuid)
     {
         return [
-            'leilao' => $this->leilaoRepository->find($leilaoUuid),
+            'leilao' => $this->leilaoRepository->find($leilaoUuid, ['config_prelance']),
             // 'vendedores' => $this->clienteRepository->vendedoresByLeilaoUuid($leilaoUuid),
             // 'compradores' => $this->clienteRepository->compradoresByLeilaoUuid($leilaoUuid),
             // 'comissoes' => [],

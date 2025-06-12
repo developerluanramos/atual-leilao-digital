@@ -1049,10 +1049,24 @@
 
      function copiarLotesGeralAnalitico(leilao, lotes) {
          let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
-         tabela += "*" + leilao.descricao + "* 🔨\n\n";
+         tabela += "*" + leilao.descricao + "*\n\n";
          tabela += "======================\n";
          tabela += "✍️ PRÉ-LANCE ✍️ \n";
          tabela += "======================\n\n";
+
+         leilao.config_prelance.forEach(item => {
+             const dataFormatada = new Date(item.data).toLocaleDateString('pt-BR');
+             const isAtual = leilao.config_prelance_atual && (item.id === leilao.config_prelance_atual.id);
+
+             tabela += (isAtual ? "*👉" : "") + // Abre negrito se for o dia
+                 item.icone_whatsapp + " Dia: " + dataFormatada +
+                 " Comissão: " + item.percentual_comissao_comprador + "%" +
+                 (isAtual ? "👈*" : "") + // Fecha negrito se for o dia
+                 "\n"; // Quebra de linha
+         });
+
+         tabela += "-----------------------\n\n";
+
          lotes.sort((a, b) => a.numero - b.numero);
          lotes.forEach(item => {
              const temVencedor = item.prelance_vencedor && item.prelance_vencedor.valor !== undefined;
