@@ -1051,8 +1051,8 @@
          let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
          tabela += "🔨 *" + leilao.descricao + "* 🔨\n\n";
          tabela += "======================\n";
-         tabela += "✍️ Resumo de Lotes ✍️ \n";
-         tabela += "======================\n";
+         tabela += "✍️ PRÉ-LANCE ✍️ \n";
+         tabela += "======================\n\n";
          lotes.sort((a, b) => a.numero - b.numero);
          lotes.forEach(item => {
              const temVencedor = item.prelance_vencedor && item.prelance_vencedor.valor !== undefined;
@@ -1060,15 +1060,15 @@
              const valorPrelance = item.valor_prelance ? parseFloat(item.valor_prelance).toFixed(2).replace('.', ',') : '0,00';
 
              tabela += `*Lote ${item.numero}*\n`;
-             tabela += `🐮 *${item.descricao}*\n`;
-             tabela += `✍️ ${item.observacoes || 'Sem observações'}\n`;
-             tabela += `💰 Valor lance: *R$ ${valorVencedor.padStart(6)}*\n`;
-             tabela += `💰 Valor Lote: *R$ ${valorPrelance.padStart(6)}*\n`;
+             tabela += `*${item.descricao}*\n`;
+             tabela += `${item.observacoes || 'Sem observações'}\n`;
+             tabela += `Valor lance: *R$ ${valorVencedor.padStart(6)}*\n`;
+             tabela += `Valor Lote: *R$ ${valorPrelance.padStart(6)}*\n`;
 
              // Adiciona informações do vencedor se existir
              if (temVencedor) {
                  // tabela += `👤 Comprador: ${item.prelance_vencedor.cliente.nome}\n`;
-                 tabela += `📊 Comissão: ${item.prelance_vencedor.prelance_config.percentual_comissao_comprador}%\n`;
+                 tabela += `Comissão: ${item.prelance_vencedor.prelance_config.icone_whatsapp +  item.prelance_vencedor.prelance_config.percentual_comissao_comprador}%\n`;
              }
 
              tabela += "-----------------------\n\n";
@@ -1192,11 +1192,13 @@
 
        // Calculando totais APENAS para lances vencedores
        const totalLances = lancesVencedores.reduce((sum, p) => sum + parseFloat(p.valor), 0).toFixed(2).replace('.', ',');
+       const totalPrelance = lancesVencedores.reduce((sum, p) => sum + parseFloat(p.lote.valor_prelance), 0).toFixed(2).replace('.', ',');
        const totalComissaoCompra = lancesVencedores.reduce((sum, p) => sum + parseFloat(p.valor_comissao_compra), 0).toFixed(2).replace('.', ',');
        const totalComissaoVenda = lancesVencedores.reduce((sum, p) => sum + parseFloat(p.valor_comissao_venda), 0).toFixed(2).replace('.', ',');
 
        tabela += "*📊 RESUMO FINAL (APENAS LANCES VENCEDORES)*\n";
-       tabela += `💰 Valor total: *R$ ${totalLances.padStart(12)}*\n`;
+       tabela += `💰 Total: *R$ ${totalPrelance.padStart(12)}*\n`;
+       tabela += `💰 Total Lances: *R$ ${totalLances.padStart(12)}*\n`;
        tabela += `💸 Total Comissão Compra: *R$ ${totalComissaoCompra.padStart(8)}*\n`;
 
        // Adiciona contagem de lances
