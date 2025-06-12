@@ -1047,6 +1047,18 @@
 
  <script>
 
+     function formatarMoedaBrasileira(valor) {
+         // Converte para número, trata casos undefined/null/string vazia
+         const numero = valor ? Number(valor) : 0;
+
+         return numero.toLocaleString('pt-BR', {
+             style: 'currency',
+             currency: 'BRL',
+             minimumFractionDigits: 2,
+             maximumFractionDigits: 2
+         });
+     }
+
      function copiarLotesGeralAnalitico(leilao, lotes) {
          let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
          tabela += "*" + leilao.descricao + "*\n\n";
@@ -1058,31 +1070,30 @@
              const dataFormatada = new Date(item.data).toLocaleDateString('pt-BR');
              const isAtual = leilao.config_prelance_atual && (item.id === leilao.config_prelance_atual.id);
 
-             tabela += (isAtual ? "*👉" : "") + // Abre negrito se for o dia
+             tabela += (isAtual ? "*👉" : "") +
                  item.icone_whatsapp + " Dia: " + dataFormatada +
                  " Comissão: " + item.percentual_comissao_comprador + "%" +
-                 (isAtual ? "👈*" : "") + // Fecha negrito se for o dia
-                 "\n"; // Quebra de linha
+                 (isAtual ? "👈*" : "") +
+                 "\n";
          });
 
-         tabela += "-----------------------\n\n";
+         tabela += "\n\n";
 
          lotes.sort((a, b) => a.numero - b.numero);
          lotes.forEach(item => {
              const temVencedor = item.prelance_vencedor && item.prelance_vencedor.valor !== undefined;
-             const valorVencedor = temVencedor ? parseFloat(item.prelance_vencedor.valor).toFixed(2).replace('.', ',') : '0,00';
-             const valorPrelance = item.valor_prelance ? parseFloat(item.valor_prelance).toFixed(2).replace('.', ',') : '0,00';
+             const valorVencedor = formatarMoedaBrasileira(temVencedor ? item.prelance_vencedor.valor : 0);
+             const valorPrelance = formatarMoedaBrasileira(item.valor_prelance || 0);
 
              tabela += `*Lote ${item.numero}*\n`;
              tabela += `*${item.descricao}*\n`;
              tabela += `${item.observacoes || 'Sem observações'}\n`;
-             tabela += `Valor lance: *R$ ${valorVencedor.padStart(6)}*\n`;
-             tabela += `Valor Lote: *R$ ${valorPrelance.padStart(6)}*\n`;
+             tabela += `Valor lance: ${valorVencedor.replace('R$', '*R$')}*\n`; // Mantém o negrito
+             tabela += `Valor Lote: ${valorPrelance.replace('R$', '*R$')}*\n`; // Mantém o negrito
 
-             // Adiciona informações do vencedor se existir
              if (temVencedor) {
-                 // tabela += `👤 Comprador: ${item.prelance_vencedor.cliente.nome}\n`;
-                 tabela += `Comissão: ${item.prelance_vencedor.prelance_config.icone_whatsapp +  item.prelance_vencedor.prelance_config.percentual_comissao_comprador}%\n`;
+                 tabela += `Comissão: ${item.prelance_vencedor.prelance_config.icone_whatsapp +
+                 item.prelance_vencedor.prelance_config.percentual_comissao_comprador}%\n`;
              }
 
              tabela += "-----------------------\n\n";
