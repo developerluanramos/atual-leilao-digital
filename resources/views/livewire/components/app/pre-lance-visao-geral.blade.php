@@ -1049,7 +1049,7 @@
 
      function copiarLotesGeralAnalitico(leilao, lotes) {
          let tabela = "🅰️ *ATUAL LEILÕES E EVENTOS*\n";
-         tabela += "🔨 *" + leilao.descricao + "* 🔨\n\n";
+         tabela += "*" + leilao.descricao + "* 🔨\n\n";
          tabela += "======================\n";
          tabela += "✍️ PRÉ-LANCE ✍️ \n";
          tabela += "======================\n\n";
