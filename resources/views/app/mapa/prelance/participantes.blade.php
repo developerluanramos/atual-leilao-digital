@@ -5,31 +5,28 @@
     <table style="width: 100%" class="report-table">
         <thead>
             <tr>
-                <th></th>
                 <th>Nome</th>
                 <th>CPF/CNPJ</th>
-                <th>Contatos</th>
-                <th>Localidade</th>
+                <th>CEP/UF</th>
+{{--                <th>Contatos</th>--}}
+{{--                <th>Localidade</th>--}}
             </tr>
         </thead>
         <tbody>
         @forelse ($participantes as $index => $participante)
             <tr>
-                <td style="font-weight: bold; font-size: 16px;">
-                    {{$index+1}}
-                </td>
-                <td style="text-align:left; width: 30%; font-weight: bold; padding: 8px; text-transform: uppercase">
+                <td style="text-align:left; width: 50%; font-weight: bold; padding: 8px; text-transform: uppercase">
                     {{ $participante->nome }}
                 </td>
                 <td style="width: 20%">
                     {{ $participante->cpf_cnpj }}
                 </td>
-                <td style="padding: 8px; text-transform: uppercase">
-                    {{ $participante->email }} <br>
-                    {{ $participante->celular }}
-                </td>
-                <td style="font-weight: bold; padding: 8px; text-transform: uppercase">
-                    {{ $participante->cidade }} - {{ $participante->uf }}
+{{--                <td style="padding: 8px; text-transform: uppercase">--}}
+{{--                    {{ $participante->email }} <br>--}}
+{{--                    {{ $participante->celular }}--}}
+{{--                </td>--}}
+                <td style="">
+                    {{ $participante->cep }} - {{ $participante->uf }}
                 </td>
             </tr>
         @empty
