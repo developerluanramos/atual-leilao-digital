@@ -32,7 +32,7 @@ class MapaParticipantesShowController extends Controller
         $pdf = Pdf::setOptions($options);
 
         $leilao = Leilao::where('uuid', $leilaoUuid)->firstOrFail();
-        $participantes = $leilao->clientes()->get();
+        $participantes = $leilao->clientes()->orderBy('nome')->get();
 
         $pdf->loadView('app.mapa.prelance.participantes', ['leilao' => $leilao, 'participantes' => $participantes]);
 
