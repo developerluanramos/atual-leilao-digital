@@ -6,8 +6,8 @@
         <thead>
             <tr>
                 <th></th>
-                <th>CPF/CNPJ</th>
                 <th>Nome</th>
+                <th>CPF/CNPJ</th>
                 <th>Contatos</th>
                 <th>Localidade</th>
             </tr>
@@ -15,14 +15,14 @@
         <tbody>
         @forelse ($participantes as $index => $participante)
             <tr>
-                <td>
+                <td style="font-weight: bold; font-size: 16px;">
                     {{$index+1}}
+                </td>
+                <td style="text-align:left; width: 30%; font-weight: bold; padding: 8px; text-transform: uppercase">
+                    {{ $participante->nome }}
                 </td>
                 <td style="width: 20%">
                     {{ $participante->cpf_cnpj }}
-                </td>
-                <td style="width: 30%; font-weight: bold; padding: 8px; text-transform: uppercase">
-                    {{ $participante->nome }}
                 </td>
                 <td style="padding: 8px; text-transform: uppercase">
                     {{ $participante->email }} <br>
