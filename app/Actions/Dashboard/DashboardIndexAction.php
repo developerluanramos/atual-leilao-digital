@@ -2,26 +2,27 @@
 
 namespace App\Actions\Dashboard;
 
-use App\Repositories\Cargo\CargoRepositoryInterface;
-use App\Repositories\Fornecedor\FornecedorRepositoryInterface;
-use App\Repositories\Servidor\ServidorRepositoryInterface;
-use App\Repositories\Usuario\UsuarioRepositoryInterface;
+use App\Models\Cliente;
+use App\Models\Compra;
+use App\Models\Leilao;
+use App\Models\Lote;
+use App\Models\LoteItem;
 
 class DashboardIndexAction
 {
     public function __construct(
-        protected CargoRepositoryInterface     $cargoRepositoryInterface,
-        protected UsuarioRepositoryInterface    $usuarioRepositoryInterface,
-        protected FornecedorRepositoryInterface $fornecedorRepositoryInterface
+
     ) { }
 
     public function exec(): array
     {
         return [
             'quantitativos' => [
-                'fornecedores' => $this->fornecedorRepositoryInterface->totalQuantity(),
-                'usuarios' => $this->usuarioRepositoryInterface->totalQuantity(),
-                'cargos' => $this->cargoRepositoryInterface->totalQuantity(),
+                'leilao' => Leilao::count(),
+                'lote' => Lote::count(),
+                'item' => LoteItem::count(),
+                'cliente' => Cliente::count(),
+                'vendido' => Compra::sum('valor'),
             ]
         ];
     }
