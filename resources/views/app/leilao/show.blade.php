@@ -144,18 +144,24 @@
                 </div>
             </li>
             <li class="me-2 mt-2">
-                <a title="ACESSAR PRÉ-LANCE" class="" href="{{route('prelance.index', ['leilaoUuid' => $leilao->uuid])}}">
-                    <button class="px-5 py-2.5  text-xs font-medium text-center inline-flex items-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"
-                            type="button"
-                            data-te-ripple-init
-                            data-te-ripple-color="light">
-                        <svg class="w-4 h-4 text-white-800 dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1M3 18v-7a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-                        </svg>
-                        Pré-lance
-                    </button>
-
+                <a href="{{route('prelance.index', ['leilaoUuid' => $leilao->uuid])}}" style="float: right" class="flex mr-2 px-3 py-2 text-xs font-medium">
+                    <svg class="w-4 h-4 text-white-800 dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1M3 18v-7a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
+                    </svg>
+                    Ir para o Pré-lance
                 </a>
+{{--                <a title="ACESSAR PRÉ-LANCE" class="" href="{{route('prelance.index', ['leilaoUuid' => $leilao->uuid])}}">--}}
+{{--                    <button class="px-5 py-2.5  text-xs font-medium text-center inline-flex items-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800"--}}
+{{--                            type="button"--}}
+{{--                            data-te-ripple-init--}}
+{{--                            data-te-ripple-color="light">--}}
+{{--                        <svg class="w-4 h-4 text-white-800 dark:text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">--}}
+{{--                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1M3 18v-7a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>--}}
+{{--                        </svg>--}}
+{{--                        Pré-lance--}}
+{{--                    </button>--}}
+
+{{--                </a>--}}
             </li>
         </ul>
     </div>
