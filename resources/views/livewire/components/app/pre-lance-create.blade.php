@@ -9,41 +9,64 @@
         <p>Nenhum plano de pagamento encontrado para esta data no pré-lance</p>
         @php die; @endphp
     @else
-        <div class="mb-3">
-            <ul class="flex flex-wrap items-center justify-center text-gray-900 dark:text-white">
-                @foreach($leilao->config_prelance()->get() as $config)
-                    <li class="text-center content-center items-center">
-                        <a href="#" class="me-4 {{$leilao->config_prelance_atual->uuid == $config->uuid ? 'underline' : ''}} md:me-6 ">
-                            <span style="background-color: {{ $config->cor }}" class="flex w-3 h-3 mt-1 me-3 rounded-full"></span>
-                            {{ $config->data }}
-                        </a>
-                    </li>
-                    {{-- <div style="{{$leilao->config_prelance_atual->uuid == $config->uuid ? 'background-color: #1c9b17' : '#ccc'}}" class="flex cursor-pointer items-center flex-col p-4 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
-                        <h5>
+            <div class="mb-8">
+                <ul class="flex flex-wrap items-center justify-center gap-4">
+                    @foreach($leilao->config_prelance()->get() as $config)
+                        @php
+                            $data = \Carbon\Carbon::parse($config->data);
+                            $diaSemana = $data->locale('pt_BR')->translatedFormat('D');
+                            $diaMes = $data->format('d/m');
+                        @endphp
 
-                        </h5>
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            {{ $config->data }}
-                        </h5>
-                    </div> --}}
-                @endforeach
-            </ul>
-        </div>
-        <div class="p-4 mb-2 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
-            <small>Plano Pagamento: <b>{{ $leilao->plano_pagamento_prelance->descricao }}</b></small>
-            <ul>
-                @foreach($leilao->plano_pagamento_prelance->condicoes_pagamento()->get() as $condicaoPagamento)
-                    <li>
-                        <p>
-                            <small>Parcelas: <b>{{$condicaoPagamento['qtd_parcelas']}}</b></small> |
-                            <small>Repetições: <b>{{$condicaoPagamento['repeticoes']}}</b></small>
-                            {{-- <small>Comissão Venda: <b>{{$condicaoPagamento['percentual_comissao_vendedor']}} %</b></small> |
-                            <small>Comissão Compra: <b>{{$condicaoPagamento['percentual_comissao_comprador']}} %</b></small> --}}
-                        </p>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
+                        <li>
+                            <a href="#" class="relative group flex flex-col items-center p-4 rounded-xl transition-all duration-200
+                                {{ $leilao->config_prelance_atual->uuid == $config->uuid
+                                    ? 'bg-gradient-to-r from-indigo-500 to-purple-600 shadow-lg text-white'
+                                    : 'bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 shadow-md hover:shadow-lg' }}">
+
+                                <!-- Indicador de cor com animação -->
+                                <span class="absolute -top-1 -right-1 flex h-5 w-5">
+                                    <span style="background-color: {{ $config->cor }}"
+                                          class="{{ $leilao->config_prelance_atual->uuid == $config->uuid ? 'animate-ping' : null }} absolute inline-flex h-full w-full rounded-full opacity-75"></span>
+                                    <span style="background-color: {{ $config->cor }}"
+                                          class="relative inline-flex rounded-full h-4 w-4"></span>
+                                </span>
+
+                                <!-- Dia da semana em português -->
+                                <span class="text-xs font-medium uppercase tracking-wider">
+                                    {{ $diaSemana }}
+                                </span>
+
+                                <!-- Data formatada -->
+                                <span class="text-lg font-bold mt-1">
+                                    {{ $diaMes }}
+                                </span>
+
+                                <!-- Efeito hover sutil -->
+                                @if($leilao->config_prelance_atual->uuid == $config->uuid)
+                                    <span class="absolute bottom-0 left-0 w-full h-1 bg-current opacity-0 group-hover:opacity-20 transition-opacity"></span>
+                                @endif
+
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+{{--        <div class="p-4 mb-2 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">--}}
+{{--            <small>Plano Pagamento: <b>{{ $leilao->plano_pagamento_prelance->descricao }}</b></small>--}}
+{{--            <ul>--}}
+{{--                @foreach($leilao->plano_pagamento_prelance->condicoes_pagamento()->get() as $condicaoPagamento)--}}
+{{--                    <li>--}}
+{{--                        <p>--}}
+{{--                            <small>Parcelas: <b>{{$condicaoPagamento['qtd_parcelas']}}</b></small> |--}}
+{{--                            <small>Repetições: <b>{{$condicaoPagamento['repeticoes']}}</b></small>--}}
+{{--                            --}}{{-- <small>Comissão Venda: <b>{{$condicaoPagamento['percentual_comissao_vendedor']}} %</b></small> |--}}
+{{--                            <small>Comissão Compra: <b>{{$condicaoPagamento['percentual_comissao_comprador']}} %</b></small> --}}
+{{--                        </p>--}}
+{{--                    </li>--}}
+{{--                @endforeach--}}
+{{--            </ul>--}}
+{{--        </div>--}}
     @endif
     @if(isset($this->lote->uuid))
     <div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
@@ -95,11 +118,11 @@
     </div>
     @else
     <div class="lg:grid lg:grid-cols-6">
-        @foreach($leilao->lotes as $index => $lote)
+        @foreach($leilao->lotes->sortBy('numero') as $index => $lote)
             <div wire:click="selecionarLote({{$lote}})"
-                style="background-color: #ccc" class="flex cursor-pointer flex-col p-4 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
+                style="background-color: #ccc" class="flex cursor-pointer flex-col p-4 w-full text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 dark:bg-gray-800 dark:text-white">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {{ $index + 1 }}
+                    {{$lote->numero}}
                 </h5>
                 <p><x-layouts.badges.info-money
                     :convert="false"
