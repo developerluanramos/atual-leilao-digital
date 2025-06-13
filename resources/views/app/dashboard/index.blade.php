@@ -152,6 +152,15 @@
             </div>
         </div>
     </div>
+
+    <div class="grid grid-cols-1 p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div class="p-5">
+                @livewire('components.app.charts.leilao-geral')
+            </div>
+        </div>
+    </div>
+
     <div class="min-h-screen flex items-center justify-center p-2">
         <div class="max-w-4xl w-full">
             <img

@@ -47,8 +47,8 @@ class Leilao extends Model
     //     'fechado_em',
     //     'prelance_aberto_em',
     //     'prelance_fechado_em',
-    // ]; 
-    
+    // ];
+
     // protected $casts = [
     //     'aberto_em' => "date:Y-m-d",
     //     'fechado_em' => "date:Y-m-d",
@@ -149,7 +149,7 @@ class Leilao extends Model
     {
         $carbonHoje = Carbon::now();
         $dataHoje = $carbonHoje->toDateString();
-        
+
         $configPrelance = $this->config_prelance()->where('data', $dataHoje)->first();
 
         if(!empty($configPrelance)) {
@@ -163,7 +163,7 @@ class Leilao extends Model
     {
         $carbonHoje = Carbon::now();
         $dataHoje = $carbonHoje->toDateString();
-        
+
         $configPrelance = $this->config_prelance()->where('data', $dataHoje)->first();
 
         if(!empty($configPrelance)) {
