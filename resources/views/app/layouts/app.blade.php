@@ -64,6 +64,65 @@
         localStorage.setItem('atual-leiloes-darkMode', true);
     }
 </script>
+<script>
+    // Função para formatar o valor monetário
+    function formatCurrency(value) {
+        return parseFloat(value).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+            minimumFractionDigits: 4,
+            maximumFractionDigits: 4
+        });
+    }
+
+    // Função para buscar as cotações
+    async function fetchCurrencyQuotes() {
+        try {
+            // Mostrar loaders
+            document.getElementById('usd-loader').classList.remove('hidden');
+            document.getElementById('eur-loader').classList.remove('hidden');
+            document.getElementById('usd-value').classList.add('hidden');
+            document.getElementById('eur-value').classList.add('hidden');
+            const response = await fetch('https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL');
+            const data = await response.json();
+
+            // Atualizar valores
+            if (data.USDBRL) {
+                document.getElementById('usd-value').textContent = formatCurrency(data.USDBRL.bid);
+            }
+            if (data.EURBRL) {
+                document.getElementById('eur-value').textContent = formatCurrency(data.EURBRL.bid);
+            }
+        } catch (error) {
+            console.error('Erro ao buscar cotações:', error);
+            document.getElementById('usd-value').textContent = 'erro';
+            document.getElementById('eur-value').textContent = 'erro';
+        } finally {
+            // Esconder loaders
+            setTimeout(() => {
+                document.getElementById('usd-loader').classList.add('hidden');
+                document.getElementById('eur-loader').classList.add('hidden');
+                document.getElementById('usd-value').classList.remove('hidden');
+                document.getElementById('eur-value').classList.remove('hidden');
+            }, 2000)
+        }
+    }
+
+    // Buscar cotações imediatamente e a cada minuto
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchCurrencyQuotes();
+        setInterval(fetchCurrencyQuotes, 30000); // 60 segundos
+    });
+</script>
+<style>
+    .animate-spin {
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+</style>
 <body class="antialiased">
 <header>
     <!-- Main navigation container -->
@@ -111,6 +170,35 @@
                     >
                   </li>
                 </ul> --}}
+            </div>
+            <!-- Adicione isto logo após os botões de dark/light mode -->
+            <div id="currency-quotes" class="flex items-center mr-2">
+                <div class="flex text-xs text-gray-600 dark:text-gray-300 mr-3">
+                    <div class="moeda-icon mr-1" style="background-image: url('https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.5.0/flags/1x1/us.svg'); width: 20px; height: 20px;"></div>
+                    <span id="usd-quote" class="flex items-center">
+                        <span class="mr-1">USD:</span>
+                        <span style="font-weight: bold" id="usd-value">--</span>
+                        <span id="usd-loader" class="hidden ml-1">
+                            <svg class="w-3 h-3 text-gray-400 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </div>
+                <div class=" flex text-xs text-gray-600 dark:text-gray-300">
+                    <div class="moeda-icon mr-1" style="background-image: url('https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.5.0/flags/1x1/eu.svg'); width: 20px; height: 20px;"></div>
+                    <span id="eur-quote" class="flex items-center">
+                        <span class="mr-1">EUR:</span>
+                        <span style="font-weight: bold" id="eur-value">--</span>
+                        <span id="eur-loader" class="hidden ml-1">
+                            <svg class="w-3 h-3 text-gray-400 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </span>
+                    </span>
+                </div>
             </div>
             <button id="btnLightMode" class="flex items-center p-1.5 text-sm text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" type="button" onclick="lightMode()">
                 <svg class="w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
