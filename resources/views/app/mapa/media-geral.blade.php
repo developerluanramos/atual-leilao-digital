@@ -163,10 +163,11 @@
                     />
                 </td>
                 <td class="text-right" style="text-align: right">
+{{--                    @dd($vendasPorRaca->sum('valor_total'), $vendasPorRaca->sum('qtd_total'))--}}
                     <x-layouts.badges.info-money
                         :convert="true"
                         :textLength="'sm'"
-                        :value="$vendasPorRaca->sum('valor_total') / $vendasPorRaca->sum('qtd_total')"
+                        :value="optional($vendasPorRaca)->sum('qtd_total') ? ($vendasPorRaca->sum('valor_total') / $vendasPorRaca->sum('qtd_total')) : 0"
                     />
                 </td>
             </tr>
